@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Getting started
 
+### Prerequisites
+
+* NodeJS 18.16.0 or later
+* NPM 9.5.1 or later
+* React 18.2.0 or later
+
+## Command lines
+
 In the project directory, you can run:
 
 ### `npm start`

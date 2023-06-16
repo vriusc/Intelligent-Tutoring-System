@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+.Login-logo {
+  height: 40vmin;
+  pointer-events: none;
+  margin-left: 100px;
+  margin-bottom: 65px;
+}
+
+.Login-body {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.Login-form {
+  background-color: #7C735F;
+  max-width: 350px;
+  width: 80%;
+  padding: 13px;
+  border-radius: 10px;
+}
+
+.Login-form input, .Login-form button {
+  margin-top: 15px;
+}

@@ -1,6 +1,6 @@
 package com.example.IntelligentTutorSystem.controller;
 
-import com.example.IntelligentTutorSystem.mode.User;
+import com.example.IntelligentTutorSystem.model.User;
 import com.example.IntelligentTutorSystem.repository.UserRepository;
 import com.example.IntelligentTutorSystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class UserController {
-
 
     @Autowired
     private UserRepository userRepository;
@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-   /* @PostMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User newUser) {
         String status = userService.register(newUser);
         if(status.equals("Exists")){
@@ -30,7 +30,8 @@ public class UserController {
         }
     }
 
-    */
+
+
 
    /* @PostMapping("/login")
     public ResponseEntity<User> loginUser(@RequestBody String identifier, @RequestBody String password) {
@@ -44,9 +45,18 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     } */
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public List<User> getUsers() {
+
+       /* List<User> list = new ArrayList<>();
+        User user = new User();
+        list.add(user);
+        return list;*/
         return (List<User>) this.userRepository.findAll();
 
     }
+
+
+
+
 }

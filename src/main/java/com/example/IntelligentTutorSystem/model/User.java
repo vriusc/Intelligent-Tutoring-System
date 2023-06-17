@@ -1,6 +1,8 @@
-package com.example.IntelligentTutorSystem.mode;
+package com.example.IntelligentTutorSystem.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+
 
 @Entity
 @Table(name = "users")
@@ -15,6 +17,11 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Override
+    public String toString() {
+        return "username:" + username + " ,password:" +password;
+    }
 
     @Column(nullable = false, unique = true)
     private String email;

@@ -1,12 +1,14 @@
 package com.example.IntelligentTutorSystem.service;
 
-import com.example.IntelligentTutorSystem.model.User;
+import com.example.IntelligentTutorSystem.pojo.User;
 import com.example.IntelligentTutorSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -17,9 +19,9 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     // @Autowired
-   // private BCryptPasswordEncoder bCryptPasswordEncoder;
+    // private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-     /* public String register(User user){
+/*      public String register(User user){
         if(userRepository.findByUsername(user.getUsername()) != null || userRepository.findByEmail(user.getEmail()) != null){
             return "Exists";
         }
@@ -28,10 +30,10 @@ public class UserService {
         return "Success";
     } */
 
-    public User findUserByUsernameOrEmail(String identifier){
-        User user = userRepository.findByUsername(identifier);
+    public User findUserByUsernameOrEmail(String username, String email){
+        User user = userRepository.findByUsername(username);
         if(user == null){
-            user = userRepository.findByEmail(identifier);
+            user = userRepository.findByEmail(email);
         }
         return user;
     }
@@ -43,10 +45,12 @@ public class UserService {
     public String register(User user) {
         String username = user.getUsername();
         String password = user.getPassword();
+        String email = user.getEmail();
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             return "Exists";
         }
-        User user1 = userRepository.findByUsername(username);
+        User user1 = this.findUserByUsernameOrEmail(username, email);
+
         if (user1 != null) {
             return "Exists";
         }
@@ -54,5 +58,11 @@ public class UserService {
         user.setPassword(password);
         userRepository.save(user);
         return "sucess";
+    }
+
+
+    public List<User> getAllUser() {
+        List<User> users = userRepository.findAll();
+        return  users;
     }
 }

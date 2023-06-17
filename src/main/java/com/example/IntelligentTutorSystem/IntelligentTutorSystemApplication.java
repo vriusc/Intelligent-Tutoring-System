@@ -2,10 +2,6 @@ package com.example.IntelligentTutorSystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.example.IntelligentTutorSystem.model.User;
-import com.example.IntelligentTutorSystem.repository.UserRepository;
 import org.springframework.context.annotation.ComponentScan;
 
 

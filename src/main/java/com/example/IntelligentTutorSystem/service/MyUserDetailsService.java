@@ -1,6 +1,6 @@
 package com.example.IntelligentTutorSystem.service;
 
-import com.example.IntelligentTutorSystem.model.User;
+import com.example.IntelligentTutorSystem.pojo.User;
 import com.example.IntelligentTutorSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,14 +23,15 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 在这个例子中，我们只创建一个固定的用户
         // 在实际应用中，你应该在这里查询你的用户数据
+        System.out.println("username: "+ username);
         User user = userRepository.findByUsername(username);
         System.out.println(user);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
-
     }
 
-}
 
+
+}

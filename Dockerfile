@@ -1,7 +1,7 @@
 FROM maven:3.8.4-openjdk-17 AS build
 RUN git clone https://github.com/vriusc/Intelligent-Tutoring-System.git
-RUN cd Intelligent-Tutoring-System && git checkout Back---End && mvn install
-
+RUN cd Intelligent-Tutoring-System && git checkout Back---End && mvn install -DskipTests
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
 FROM tomcat:9-jre11
 
 RUN rm -rf /usr/local/tomcat/webapps/*

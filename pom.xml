@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.1</version>
+		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -15,7 +15,7 @@
 	<name>IntelligentTutorSystem</name>
 	<description>IntelligentTutorSystem for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<spring-security.version>5.3.0</spring-security.version>
 	</properties>
 
@@ -72,7 +72,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<!--suppress UnresolvedMavenProperty -->
-				<version>2.7.1</version>
+				<version>3.1.0</version>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomatoback
+  labels: 
+    app: tomatoback
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomatoback
+  template:
+    metadata:
+      labels:
+        app: tomatoback
+    spec:
+      containers:
+      - name: tomatoback
+        image: xiaochili123/tomato-front:V1
+        ports:
+        - name: tomatoback-port
+          containerPort: 8080
+

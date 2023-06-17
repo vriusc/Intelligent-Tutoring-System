@@ -8,5 +8,5 @@ spec:
     targetPort: tfront-port
     protocol: TCP
   selector:
-    app: tomatofront
+    app: tfront
   type: LoadBalancer

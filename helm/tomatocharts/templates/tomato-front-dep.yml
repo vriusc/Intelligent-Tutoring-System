@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tomatofront
+  name: tfront
   labels: 
-    app: tomatofront
+    app: tfront
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tomatofront
+      app: tfront
   template:
     metadata:
       labels:
-        app: tomatofront
+        app: tfront
     spec:
       containers:
-      - name: tomatofront
+      - name: tfront
         image: xiaochili123/tomato-front:V1
         ports:
-        - name: tomatofront-port
+        - name: tfront-port
           containerPort: 3000

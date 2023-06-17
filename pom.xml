@@ -15,7 +15,7 @@
 	<name>IntelligentTutorSystem</name>
 	<description>IntelligentTutorSystem for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 		<spring-security.version>6.1.0</spring-security.version>
 	</properties>
 

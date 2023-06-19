@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;  
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -37,16 +37,6 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping("/myLogin1")
-    public ResponseEntity<User> loginUser(@RequestBody User loginUser) {
-
-        Authentication authentication =  authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        return new ResponseEntity<>(HttpStatus.OK); // Return status 200 if success
-    }
 
     @PostMapping("/myLogin")
     public Msg doLogin(@RequestBody User loginUser,

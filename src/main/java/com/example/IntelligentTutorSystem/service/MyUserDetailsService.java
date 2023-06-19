@@ -21,6 +21,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        
         // 在这个例子中，我们只创建一个固定的用户
         // 在实际应用中，你应该在这里查询你的用户数据
         System.out.println("username: "+ username);

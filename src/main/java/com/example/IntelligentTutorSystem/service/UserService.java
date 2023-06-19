@@ -18,17 +18,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // @Autowired
-    // private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-/*      public String register(User user){
-        if(userRepository.findByUsername(user.getUsername()) != null || userRepository.findByEmail(user.getEmail()) != null){
-            return "Exists";
-        }
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return "Success";
-    } */
 
     public User findUserByUsernameOrEmail(String username, String email){
         User user = userRepository.findByUsername(username);

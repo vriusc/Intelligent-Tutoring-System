@@ -24,7 +24,8 @@ public class Profile {
     private int completedCourses;
     private double averageScore;
 
-    @OneToOne
+    @OneToOne 
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     private String profilePictureUrl;

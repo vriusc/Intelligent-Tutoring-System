@@ -67,7 +67,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User newUser) {
+
         String status = userService.register(newUser);
+
         if(status.equals("Exists")){
             return new ResponseEntity<>("User Already Exists", HttpStatus.CONFLICT);
         } else {

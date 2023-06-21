@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ListeningJudgementByPictureDao">
+
+    <resultMap type="com.example.demo.entity.ListeningJudgementByPicture" id="ListeningJudgementByPictureMap">
+        <result property="listeningJudgementByPictureId" column="listening_judgement_by_picture_id" jdbcType="INTEGER"/>
+        <result property="question" column="question" jdbcType="VARCHAR"/>
+        <result property="pictureFilePath" column="picture_file_path" jdbcType="INTEGER"/>
+        <result property="audioFilePath" column="audio_file_path" jdbcType="INTEGER"/>
+        <result property="answer" column="answer" jdbcType="VARCHAR"/>
+        <result property="date" column="date" jdbcType="TIMESTAMP"/>
+        <association property="pictureMaterial" javaType="com.example.demo.entity.Materials">
+            <id property="materialsId" column="picture_file_path"/>
+            <result property="filePath" column="picture_file_path_1" />
+        </association>
+        <association property="audioMaterial" javaType="com.example.demo.entity.Materials">
+            <id property="materialsId" column="audio_file_path"/>
+            <result property="filePath" column="audio_file_path_1"/>
+        </association>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ListeningJudgementByPictureMap">
+        select
+            ljp.listening_judgement_by_picture_id,
+            ljp.question,
+            ljp.picture_file_path,
+            ljp.audio_file_path,
+            ljp.answer,
+            ljp.date,
+            m1.materials_id as picture_materials_id,
+            m1.file_path as picture_file_path_1,
+            m2.materials_id as audio_materials_id,
+            m2.file_path as audio_file_path_1
+        from Listening_Judgement_By_Picture ljp
+                 left join Materials m1 on ljp.picture_file_path = m1.materials_id
+                 left join Materials m2 on ljp.audio_file_path = m2.materials_id
+        where ljp.listening_judgement_by_picture_id = #{listeningJudgementByPictureId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ListeningJudgementByPictureMap">
+        select
+          listening_judgement_by_picture_id, question, picture_file_path, audio_file_path, answer, date
+        from Listening_Judgement_By_Picture
+        <where>
+            <if test="listeningJudgementByPictureId != null">
+                and listening_judgement_by_picture_id = #{listeningJudgementByPictureId}
+            </if>
+            <if test="question != null and question != ''">
+                and question = #{question}
+            </if>
+            <if test="pictureFilePath != null">
+                and picture_file_path = #{pictureFilePath}
+            </if>
+            <if test="audioFilePath != null">
+                and audio_file_path = #{audioFilePath}
+            </if>
+            <if test="answer != null and answer != ''">
+                and answer = #{answer}
+            </if>
+            <if test="date != null">
+                and date = #{date}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from Listening_Judgement_By_Picture
+        <where>
+            <if test="listeningJudgementByPictureId != null">
+                and listening_judgement_by_picture_id = #{listeningJudgementByPictureId}
+            </if>
+            <if test="question != null and question != ''">
+                and question = #{question}
+            </if>
+            <if test="pictureFilePath != null">
+                and picture_file_path = #{pictureFilePath}
+            </if>
+            <if test="audioFilePath != null">
+                and audio_file_path = #{audioFilePath}
+            </if>
+            <if test="answer != null and answer != ''">
+                and answer = #{answer}
+            </if>
+            <if test="date != null">
+                and date = #{date}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="listeningJudgementByPictureId" useGeneratedKeys="true">
+        insert into Listening_Judgement_By_Picture(question, picture_file_path, audio_file_path, answer, date)
+        values (#{question}, #{pictureFilePath}, #{audioFilePath}, #{answer}, #{date})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="listeningJudgementByPictureId" useGeneratedKeys="true">
+        insert into Listening_Judgement_By_Picture(question, picture_file_path, audio_file_path, answer, date)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.question}, #{entity.pictureFilePath}, #{entity.audioFilePath}, #{entity.answer}, #{entity.date})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="listeningJudgementByPictureId" useGeneratedKeys="true">
+        insert into Listening_Judgement_By_Picture(question, picture_file_path, audio_file_path, answer, date)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.question}, #{entity.pictureFilePath}, #{entity.audioFilePath}, #{entity.answer}, #{entity.date})
+        </foreach>
+        on duplicate key update
+        question = values(question),
+        picture_file_path = values(picture_file_path),
+        audio_file_path = values(audio_file_path),
+        answer = values(answer),
+        date = values(date)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update Listening_Judgement_By_Picture
+        <set>
+            <if test="question != null and question != ''">
+                question = #{question},
+            </if>
+            <if test="pictureFilePath != null">
+                picture_file_path = #{pictureFilePath},
+            </if>
+            <if test="audioFilePath != null">
+                audio_file_path = #{audioFilePath},
+            </if>
+            <if test="answer != null and answer != ''">
+                answer = #{answer},
+            </if>
+            <if test="date != null">
+                date = #{date},
+            </if>
+        </set>
+        where listening_judgement_by_picture_id = #{listeningJudgementByPictureId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from Listening_Judgement_By_Picture where listening_judgement_by_picture_id = #{listeningJudgementByPictureId}
+    </delete>
+
+</mapper>
+

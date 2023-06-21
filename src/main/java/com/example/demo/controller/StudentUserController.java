@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.LoginRequestDTO;
-import com.example.demo.entity.LoginResponseDTO;
-import com.example.demo.entity.RegisterResponseDTO;
-import com.example.demo.entity.StudentUser;
+import com.example.demo.entity.*;
 import com.example.demo.service.StudentUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -97,6 +94,23 @@ public class StudentUserController {
         }
     }
 
+    /**
+     * 修改密码
+     *
+     *
+     * @param request 修改密码请求
+     * @return 修改结果
+     */
+
+    @PostMapping("/password")
+    public ResponseEntity<String> updatePassword(@RequestBody UpdatePasswordRequestDTO request) {
+        try {
+            studentUserService.updatePassword(request.getUsername(), request.getEmail(), request.getCurrentPassword(), request.getNewPassword());
+            return ResponseEntity.ok("Password updated successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     /**
      * 编辑数据

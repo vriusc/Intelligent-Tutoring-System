@@ -71,10 +71,6 @@
         where email = #{email}
     </select>
 
-
-
-
-
     <!--通过主键修改数据-->
     <update id="update">
         update student_user

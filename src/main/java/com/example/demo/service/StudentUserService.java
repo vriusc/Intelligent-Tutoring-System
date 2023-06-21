@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.StudentUser;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 
 /**
  * (StudentUser)表服务接口
@@ -46,6 +45,15 @@ public interface StudentUserService {
      */
     StudentUser update(StudentUser studentUser);
 
+    /**
+     * 更新密码
+     *
+     * @param username 用户名
+     * @param email 邮箱
+     * @param currentPassword 当前密码
+     * @param newPassword 新密码
+     */
+    public void updatePassword(String username, String email, String currentPassword, String newPassword);
     /**
      * 通过主键删除数据
      *

@@ -82,6 +82,25 @@ public class StudentUserServiceImpl implements StudentUserService {
         throw new RuntimeException("Invalid credentials");
     }
 
+    public void updatePassword(String username, String email, String currentPassword, String newPassword) {
+        StudentUser user = studentUserDao.findByUsername(username);
+        if (user != null && user.getEmail().equals(email)) {
+            // 使用BCryptPasswordEncoder对当前密码进行验证
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            if (passwordEncoder.matches(currentPassword, user.getPassword())) {
+                // 验证成功，使用BCryptPasswordEncoder对新密码进行加密
+                String hashedPassword = passwordEncoder.encode(newPassword);
+
+                // 更新用户密码
+                user.setPassword(hashedPassword);
+                studentUserDao.update(user);
+            } else {
+                throw new RuntimeException("Invalid current password");
+            }
+        } else {
+            throw new RuntimeException("Invalid username or email");
+        }
+    }
 
     /**
      * 修改数据

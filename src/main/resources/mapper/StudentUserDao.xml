@@ -7,22 +7,26 @@
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
-        <result property="level" column="level" jdbcType="VARCHAR"/>
-        <result property="studyTime" column="study_time" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="StudentUserMap">
         select
-          id, username, password, email, level, study_time
+          id, username, password, email
         from test.student_user
         where id = #{id}
     </select>
 
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into test.student_user(username, password, email)
+        values (#{username}, #{password}, #{email})
+    </insert>
+
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="StudentUserMap">
         select
-          id, username, password, email, level, study_time
+          id, username, password, email
         from test.student_user
         <where>
             <if test="id != null">
@@ -36,41 +40,9 @@
             </if>
             <if test="email != null and email != ''">
                 and email = #{email}
-            </if>
-            <if test="level != null and level != ''">
-                and level = #{level}
-            </if>
-            <if test="studyTime != null">
-                and study_time = #{studyTime}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}
-    </select>
-
-    <!--统计总行数-->
-    <select id="count" resultType="java.lang.Long">
-        select count(1)
-        from test.student_user
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
-            </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
-            </if>
-            <if test="email != null and email != ''">
-                and email = #{email}
-            </if>
-            <if test="level != null and level != ''">
-                and level = #{level}
-            </if>
-            <if test="studyTime != null">
-                and study_time = #{studyTime}
-            </if>
-        </where>
     </select>
 
     <select id="queryByUsername" resultType="java.lang.String">
@@ -85,33 +57,23 @@
         where email = #{email}
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into test.student_user(username, password, email, level, study_time)
-        values (#{username}, #{password}, #{email}, #{level}, #{studyTime})
-    </insert>
+    <select id="findByUsername" resultType="com.example.demo.entity.StudentUser">
+        select
+          id, username, password, email
+        from test.student_user
+        where username = #{username}
+    </select>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_user(username, password, email, level, study_time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-        (#{entity.username}, #{entity.password}, #{entity.email}, #{entity.level}, #{entity.studyTime})
-        </foreach>
-    </insert>
+    <select id="findByEmail" resultType="com.example.demo.entity.StudentUser">
+        select
+          id, username, password, email
+        from test.student_user
+        where email = #{email}
+    </select>
 
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_user(username, password, email, level, study_time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.username}, #{entity.password}, #{entity.email}, #{entity.level}, #{entity.studyTime})
-        </foreach>
-        on duplicate key update
-        username = values(username),
-        password = values(password),
-        email = values(email),
-        level = values(level),
-        study_time = values(study_time)
-    </insert>
+
+
+
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -125,12 +87,6 @@
             </if>
             <if test="email != null and email != ''">
                 email = #{email},
-            </if>
-            <if test="level != null and level != ''">
-                level = #{level},
-            </if>
-            <if test="studyTime != null">
-                study_time = #{studyTime},
             </if>
         </set>
         where id = #{id}

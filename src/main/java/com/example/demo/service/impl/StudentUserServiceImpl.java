@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.StudentUser;
 import com.example.demo.dao.StudentUserDao;
 import com.example.demo.service.StudentUserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -32,21 +33,9 @@ public class StudentUserServiceImpl implements StudentUserService {
         return this.studentUserDao.queryById(id);
     }
 
-    /**
-     * 分页查询
-     *
-     * @param studentUser 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
-     */
-    @Override
-    public Page<StudentUser> queryByPage(StudentUser studentUser, PageRequest pageRequest) {
-        long total = this.studentUserDao.count(studentUser);
-        return new PageImpl<>(this.studentUserDao.queryAllByLimit(studentUser, pageRequest), pageRequest, total);
-    }
 
     /**
-     * 新增数据
+     * 用户注册
      *
      * @param studentUser 实例对象
      * @return 实例对象
@@ -59,13 +48,40 @@ public class StudentUserServiceImpl implements StudentUserService {
         if(studentUserDao.queryByEmail(studentUser.getEmail()) != null) {
             throw new RuntimeException("Email already exists");
         }
+
         int result = studentUserDao.insert(studentUser);
+
         if(result == 1) {
             return studentUser;
         } else {
             throw new RuntimeException("Insert failed");
         }
     }
+
+    /**
+     * 用户登陆
+     *
+     * @param usernameOrEmail 用户名或邮箱
+     * @param password        密码
+     * @return 实例对象
+     */
+    @Override
+    public StudentUser login(String usernameOrEmail, String password) {
+        StudentUser user = studentUserDao.findByUsername(usernameOrEmail);
+        if (user == null) {
+            user = studentUserDao.findByEmail(usernameOrEmail);
+        }
+
+        if (user != null) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return user;
+            }
+        }
+
+        throw new RuntimeException("Invalid credentials");
+    }
+
 
     /**
      * 修改数据

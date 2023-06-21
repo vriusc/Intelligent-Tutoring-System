@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2023-06-21 15:21:27
  */
+@Mapper
 public class Test implements Serializable {
     private static final long serialVersionUID = -78882894393667671L;
     

@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2023-06-21 14:08:45
  */
+@Mapper
 public class ListeningJudgementByPicture implements Serializable {
     private static final long serialVersionUID = 861604753680562053L;
     
@@ -24,25 +27,6 @@ public class ListeningJudgementByPicture implements Serializable {
     
     private Date date;
 
-    private Materials pictureMaterial;
-
-    private Materials audioMaterial;
-
-    public Materials getPictureMaterial() {
-        return pictureMaterial;
-    }
-
-    public void setPictureMaterial(Materials pictureMaterial) {
-        this.pictureMaterial = pictureMaterial;
-    }
-
-    public Materials getAudioMaterial() {
-        return audioMaterial;
-    }
-
-    public void setAudioMaterial(Materials audioMaterial) {
-        this.audioMaterial = audioMaterial;
-    }
 
     public Integer getListeningJudgementByPictureId() {
         return listeningJudgementByPictureId;

@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2023-06-21 16:13:02
  */
+@Mapper
 public class TestListeningJudgementByPicture implements Serializable {
     private static final long serialVersionUID = 841312388095691608L;
     
@@ -17,6 +20,28 @@ public class TestListeningJudgementByPicture implements Serializable {
     
     private Integer listeningJudgementByPictureId;
 
+    private Test test;
+
+    private ListeningJudgementByPicture listeningJudgementByPicture;
+
+    public TestListeningJudgementByPicture() {
+    }
+
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
+    public ListeningJudgementByPicture getListeningJudgementByPicture() {
+        return listeningJudgementByPicture;
+    }
+
+    public void setListeningJudgementByPicture(ListeningJudgementByPicture listeningJudgementByPicture) {
+        this.listeningJudgementByPicture = listeningJudgementByPicture;
+    }
 
     public Integer getTestListeningJudgementByPictureId() {
         return testListeningJudgementByPictureId;

@@ -21,21 +21,22 @@ public interface StudentUserService {
     StudentUser queryById(Integer id);
 
     /**
-     * 分页查询
-     *
-     * @param studentUser 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
-     */
-    Page<StudentUser> queryByPage(StudentUser studentUser, PageRequest pageRequest);
-
-    /**
      * 新增数据
      *
      * @param studentUser 实例对象
      * @return 实例对象
      */
     StudentUser insert(StudentUser studentUser);
+
+    /**
+     * 用户登陆
+     *
+     * @param usernameOrEmail 用户名或邮箱
+     * @param password 密码
+     * @return 实例对象
+     */
+
+    StudentUser login(String usernameOrEmail, String password);
 
     /**
      * 修改数据

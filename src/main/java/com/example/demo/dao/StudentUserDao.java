@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Mapper
 public interface StudentUserDao {
-
     /**
      * 通过ID查询单条数据
      *
@@ -24,6 +23,15 @@ public interface StudentUserDao {
     StudentUser queryById(Integer id);
 
     /**
+     * 新增数据
+     *
+     * @param studentUser 实例对象
+     * @return 影响行数
+     */
+
+    int insert(StudentUser studentUser);
+
+    /**
      * 查询指定行数据
      *
      * @param studentUser 查询条件
@@ -31,39 +39,6 @@ public interface StudentUserDao {
      * @return 对象列表
      */
     List<StudentUser> queryAllByLimit(StudentUser studentUser, @Param("pageable") Pageable pageable);
-
-    /**
-     * 统计总行数
-     *
-     * @param studentUser 查询条件
-     * @return 总行数
-     */
-    long count(StudentUser studentUser);
-
-    /**
-     * 新增数据
-     *
-     * @param studentUser 实例对象
-     * @return 影响行数
-     */
-    int insert(StudentUser studentUser);
-
-    /**
-     * 批量新增数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<StudentUser> 实例对象列表
-     * @return 影响行数
-     */
-    int insertBatch(@Param("entities") List<StudentUser> entities);
-
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<StudentUser> 实例对象列表
-     * @return 影响行数
-     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
-     */
-    int insertOrUpdateBatch(@Param("entities") List<StudentUser> entities);
 
     /**
      * 修改数据
@@ -98,5 +73,17 @@ public interface StudentUserDao {
     String queryByEmail(String email);
 
 
+    /**
+     * @param username 用户名
+     * @return 用户对象
+     */
+    StudentUser findByUsername(String username);
+
+    /**
+     * @param email 邮箱
+     * @return 用户对象
+     */
+
+    StudentUser findByEmail(String email);
 }
 

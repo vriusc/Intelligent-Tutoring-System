@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.TestListeningJudgementByPicture;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2023-06-21 16:13:02
  */
+@Mapper
 public interface TestListeningJudgementByPictureDao {
 
     /**

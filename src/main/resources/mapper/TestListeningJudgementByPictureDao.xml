@@ -6,14 +6,41 @@
         <result property="testListeningJudgementByPictureId" column="test_listening_judgement_by_picture_id" jdbcType="INTEGER"/>
         <result property="testId" column="test_id" jdbcType="INTEGER"/>
         <result property="listeningJudgementByPictureId" column="listening_judgement_by_picture_id" jdbcType="INTEGER"/>
+        <association property="test" column="test_id" javaType="com.example.demo.entity.Test">
+            <id property="testId" column="test_id" />
+            <result property="title" column="title" />
+            <!-- Add more properties as needed -->
+        </association>
+
+        <!-- Association with Listening_Judgement_By_Picture entity -->
+        <association property="listeningJudgementByPicture" column="listening_judgement_by_picture_id" javaType="com.example.demo.entity.ListeningJudgementByPicture">
+            <id property="listeningJudgementByPictureId" column="listening_judgement_by_picture_id" />
+            <result property="question" column="question" />
+            <result property="pictureFilePath" column="picture_file_path" />
+            <result property="audioFilePath" column="audio_file_path" />
+            <result property="answer" column="answer" />
+            <result property="date" column="date" />
+        </association>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="TestListeningJudgementByPictureMap">
-        select
-          test_listening_judgement_by_picture_id, test_id, listening_judgement_by_picture_id
-        from Test_Listening_Judgement_By_Picture
-        where test_listening_judgement_by_picture_id = #{testListeningJudgementByPictureId}
+        SELECT
+            tljbp.test_listening_judgement_by_picture_id,
+            tljbp.test_id,
+            tljbp.listening_judgement_by_picture_id,
+            t.title , -- Alias added for Test's title
+            ljp.question,
+            ljp.picture_file_path,
+            ljp.audio_file_path,
+            ljp.answer,
+            ljp.date
+        FROM
+            Test_Listening_Judgement_By_Picture tljbp
+                JOIN Listening_Judgement_By_Picture ljp ON tljbp.listening_judgement_by_picture_id = ljp.listening_judgement_by_picture_id
+                JOIN Test t ON tljbp.test_id = t.test_id
+        WHERE
+                tljbp.test_listening_judgement_by_picture_id = #{testListeningJudgementByPictureId}
     </select>
 
     <!--查询指定行数据-->

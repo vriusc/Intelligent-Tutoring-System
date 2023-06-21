@@ -1,4 +1,4 @@
-package com.example.IntelligentTutorSystem.pojo;
+package com.example.IntelligentTutorSystem.pojo.Enum;
 
 public enum DifficultyLevel {
     BEGINNER,

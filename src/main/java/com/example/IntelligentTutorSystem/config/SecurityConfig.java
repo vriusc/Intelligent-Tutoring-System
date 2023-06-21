@@ -39,16 +39,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().requestMatchers("/register").permitAll()
-//                .requestMatchers("/login").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin().and()
-//                .httpBasic();
+
         http.authorizeRequests(authorize -> authorize
+
                         .requestMatchers("/myLogin").permitAll()
                         .requestMatchers("/register").permitAll()
-                        .requestMatchers("/profile/**").permitAll()
+                        .requestMatchers("/test").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -61,6 +57,7 @@ public class SecurityConfig {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

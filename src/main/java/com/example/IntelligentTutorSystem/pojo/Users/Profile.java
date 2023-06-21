@@ -1,9 +1,14 @@
-package com.example.IntelligentTutorSystem.pojo;
+package com.example.IntelligentTutorSystem.pojo.Users;
 
+import com.example.IntelligentTutorSystem.pojo.Enum.DifficultyLevel;
+import com.example.IntelligentTutorSystem.pojo.Enum.LearningStyle;
+import com.example.IntelligentTutorSystem.pojo.Enum.Subject;
+import com.example.IntelligentTutorSystem.pojo.Users.User;
 import jakarta.persistence.*;
 
 
 @Entity
+@Table(name = "profile")
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,9 +29,11 @@ public class Profile {
     private int completedCourses;
     private double averageScore;
 
-    @OneToOne 
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+
 
     private String profilePictureUrl;
 

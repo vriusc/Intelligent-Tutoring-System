@@ -1,13 +1,16 @@
 package com.example.IntelligentTutorSystem.service;
 
-import com.example.IntelligentTutorSystem.pojo.*;
+import com.example.IntelligentTutorSystem.pojo.Enum.DifficultyLevel;
+import com.example.IntelligentTutorSystem.pojo.Enum.LearningStyle;
+import com.example.IntelligentTutorSystem.pojo.Enum.Subject;
+import com.example.IntelligentTutorSystem.pojo.Users.Profile;
 import com.example.IntelligentTutorSystem.repository.ProfileRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-
+// 处理业务逻辑
 @Service
 public class ProfileService {
     @Autowired

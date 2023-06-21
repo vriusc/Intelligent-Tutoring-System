@@ -1,4 +1,4 @@
-package com.example.IntelligentTutorSystem.pojo;
+package com.example.IntelligentTutorSystem.pojo.Users;
 
 import jakarta.persistence.*;
 

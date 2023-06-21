@@ -1,10 +1,14 @@
 package com.example.IntelligentTutorSystem.controller;
 
-import com.example.IntelligentTutorSystem.pojo.*;
+import com.example.IntelligentTutorSystem.pojo.Enum.DifficultyLevel;
+import com.example.IntelligentTutorSystem.pojo.Enum.LearningStyle;
+import com.example.IntelligentTutorSystem.pojo.Enum.Subject;
+import com.example.IntelligentTutorSystem.pojo.Users.Profile;
 import com.example.IntelligentTutorSystem.service.ProfileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/profile")

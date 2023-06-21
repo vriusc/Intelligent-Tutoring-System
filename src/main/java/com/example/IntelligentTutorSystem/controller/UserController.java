@@ -1,6 +1,6 @@
 package com.example.IntelligentTutorSystem.controller;
 
-import com.example.IntelligentTutorSystem.pojo.User;
+import com.example.IntelligentTutorSystem.pojo.Users.User;
 import com.example.IntelligentTutorSystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

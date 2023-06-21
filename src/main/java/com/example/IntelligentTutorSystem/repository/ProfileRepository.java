@@ -1,5 +1,5 @@
 package com.example.IntelligentTutorSystem.repository;
-import com.example.IntelligentTutorSystem.pojo.Profile;
+import com.example.IntelligentTutorSystem.pojo.Users.Profile;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

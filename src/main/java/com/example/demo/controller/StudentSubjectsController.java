@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * (StudentSubjects)表控制层
@@ -57,6 +59,7 @@ public class StudentSubjectsController {
     public ResponseEntity<Page<StudentSubjects>> queryByPage(StudentSubjects studentSubjects, PageRequest pageRequest) {
         return ResponseEntity.ok(this.studentSubjectsService.queryByPage(studentSubjects, pageRequest));
     }
+
 
     /**
      * 通过主键查询单条数据
@@ -123,6 +126,13 @@ public class StudentSubjectsController {
     public ResponseEntity<Boolean> deleteById(Integer id) {
         return ResponseEntity.ok(this.studentSubjectsService.deleteById(id));
     }
+
+    @GetMapping("/queryByStudentId/{studentId}")
+    public List<StudentSubjects> queryByStudentId(@PathVariable Integer studentId) {
+        return studentSubjectsService.queryByStudentId(studentId);
+    }
+
+
 
 }
 

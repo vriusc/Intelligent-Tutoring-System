@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UnitsDao">
+
+    <resultMap type="com.example.demo.entity.Units" id="UnitsMap">
+        <result property="unitId" column="unit_id" jdbcType="INTEGER"/>
+        <result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
+        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+
+        <!-- 关联Subjects对象 -->
+        <association property="subject" javaType="com.example.demo.entity.Subjects">
+            <id property="subjectId" column="subject_id"/>
+            <result property="subjectName" column="subject_name"/>
+            <result property="level" column="level"/>
+            <result property="description" column="description"/>
+        </association>
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UnitsMap">
+        select
+          unit_id, unit_name, subject_id, description
+        from Units
+        where unit_id = #{unitId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UnitsMap">
+        select
+          unit_id, unit_name, subject_id, description
+        from Units
+        <where>
+            <if test="unitId != null">
+                and unit_id = #{unitId}
+            </if>
+            <if test="unitName != null and unitName != ''">
+                and unit_name = #{unitName}
+            </if>
+            <if test="subjectId != null">
+                and subject_id = #{subjectId}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from Units
+        <where>
+            <if test="unitId != null">
+                and unit_id = #{unitId}
+            </if>
+            <if test="unitName != null and unitName != ''">
+                and unit_name = #{unitName}
+            </if>
+            <if test="subjectId != null">
+                and subject_id = #{subjectId}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+        </where>
+    </select>
+    <!--根据subjectId查询-->
+    <select id="queryBySubjectId" resultType="com.example.demo.entity.Units">
+        select
+            u.unit_id as unitId,
+            u.unit_name as unitName,
+            u.subject_id as subjectId,
+            u.description as description,
+            s.subject_id as "subject.subjectId",
+            s.subject_name as "subject.subjectName",
+            s.level as "subject.level",
+            s.description as "subject.description"
+        from Units u
+        left join Subjects S on S.subject_id = u.subject_id
+        where u.subject_id = #{subjectId}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="unitId" useGeneratedKeys="true">
+        insert into Units(unit_name, subject_id, description)
+        values (#{unitName}, #{subjectId}, #{description})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="unitId" useGeneratedKeys="true">
+        insert into Units(unit_name, subject_id, description)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.unitName}, #{entity.subjectId}, #{entity.description})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="unitId" useGeneratedKeys="true">
+        insert into Units(unit_name, subject_id, description)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.unitName}, #{entity.subjectId}, #{entity.description})
+        </foreach>
+        on duplicate key update
+        unit_name = values(unit_name),
+        subject_id = values(subject_id),
+        description = values(description)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update Units
+        <set>
+            <if test="unitName != null and unitName != ''">
+                unit_name = #{unitName},
+            </if>
+            <if test="subjectId != null">
+                subject_id = #{subjectId},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+        </set>
+        where unit_id = #{unitId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from Units where unit_id = #{unitId}
+    </delete>
+
+
+
+
+
+</mapper>
+

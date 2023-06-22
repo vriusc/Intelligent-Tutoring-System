@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (StudentSubjects)表服务实现类
@@ -79,4 +80,17 @@ public class StudentSubjectsServiceImpl implements StudentSubjectsService {
     public boolean deleteById(Integer studentSubjectId) {
         return this.studentSubjectsDao.deleteById(studentSubjectId) > 0;
     }
+
+    /**
+     * 通过学生id查询
+     *
+     * @param studentId 学生id
+     * @return 实例对象
+     */
+    @Override
+    public List<StudentSubjects> queryByStudentId(Integer studentId) {
+        return this.studentSubjectsDao.queryByStudentId(studentId);  // 实现的方法
+    }
+
+
 }

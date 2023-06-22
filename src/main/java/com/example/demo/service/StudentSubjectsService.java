@@ -4,6 +4,8 @@ import com.example.demo.entity.StudentSubjects;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
+
 /**
  * (StudentSubjects)表服务接口
  *
@@ -29,6 +31,7 @@ public interface StudentSubjectsService {
      */
     Page<StudentSubjects> queryByPage(StudentSubjects studentSubjects, PageRequest pageRequest);
 
+
     /**
      * 新增数据
      *
@@ -52,5 +55,16 @@ public interface StudentSubjectsService {
      * @return 是否成功
      */
     boolean deleteById(Integer studentSubjectId);
+
+
+    /**
+     * 通过学生id查询
+     *
+     * @param studentId 学生id
+     * @return 实例对象
+     */
+
+    List<StudentSubjects> queryByStudentId(Integer studentId);
+
 
 }

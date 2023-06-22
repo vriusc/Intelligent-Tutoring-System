@@ -27,3 +27,13 @@ CREATE TABLE  student_subjects
     FOREIGN KEY (student_id) REFERENCES student_user (id),
     FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id)
 );
+
+
+CREATE TABLE  Units (
+unit_id         INT AUTO_INCREMENT PRIMARY KEY,
+unit_name       VARCHAR(50) NOT NULL,
+subject_id      INT NOT NULL,
+description     VARCHAR(255) NOT NULL,
+FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id)
+);
+

@@ -7,6 +7,8 @@
         <result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
         <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="unitOrder" column="units_order" jdbcType="INTEGER"/>  <!-- 2020-12-28 16:00:00 -->
+        <result property="materials_path" column="materials_path" jdbcType="VARCHAR"/>
 
         <!-- 关联Subjects对象 -->
         <association property="subject" javaType="com.example.demo.entity.Subjects">
@@ -21,7 +23,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="UnitsMap">
         select
-          unit_id, unit_name, subject_id, description
+          unit_id, unit_name, subject_id, description, units_order, materials_path
         from Units
         where unit_id = #{unitId}
     </select>
@@ -29,7 +31,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UnitsMap">
         select
-          unit_id, unit_name, subject_id, description
+          unit_id, unit_name, subject_id, description, units_order, materials_path
         from Units
         <where>
             <if test="unitId != null">
@@ -43,6 +45,12 @@
             </if>
             <if test="description != null and description != ''">
                 and description = #{description}
+            </if>
+            <if test="units_order != null and units_order != ''">
+                  and units_order = #{units_order}
+            </if>
+            <if test="materials_path != null and materials_path != ''">
+                  and materials_path = #{materials_path}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}
@@ -65,6 +73,12 @@
             <if test="description != null and description != ''">
                 and description = #{description}
             </if>
+            <if test="units_order != null and units_order != ''">
+                  and units_order = #{units_order}
+            </if>
+            <if test="materials_path != null and materials_path != ''">
+                  and materials_path = #{materials_path}
+            </if>
         </where>
     </select>
     <!--根据subjectId查询-->
@@ -74,6 +88,8 @@
             u.unit_name as unitName,
             u.subject_id as subjectId,
             u.description as description,
+            u.units_order as unitOrder,
+            u.materials_path as materials_path,
             s.subject_id as "subject.subjectId",
             s.subject_name as "subject.subjectName",
             s.level as "subject.level",
@@ -85,29 +101,11 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="unitId" useGeneratedKeys="true">
-        insert into Units(unit_name, subject_id, description)
-        values (#{unitName}, #{subjectId}, #{description})
+        insert into Units(unit_name, subject_id, description, units_order, materials_path)
+        values (#{unitName}, #{subjectId}, #{description}, #{units_order}, #{materials_path})
     </insert>
 
-    <insert id="insertBatch" keyProperty="unitId" useGeneratedKeys="true">
-        insert into Units(unit_name, subject_id, description)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-        (#{entity.unitName}, #{entity.subjectId}, #{entity.description})
-        </foreach>
-    </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="unitId" useGeneratedKeys="true">
-        insert into Units(unit_name, subject_id, description)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.unitName}, #{entity.subjectId}, #{entity.description})
-        </foreach>
-        on duplicate key update
-        unit_name = values(unit_name),
-        subject_id = values(subject_id),
-        description = values(description)
-    </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -121,6 +119,12 @@
             </if>
             <if test="description != null and description != ''">
                 description = #{description},
+            </if>
+            <if test="units_order != null and units_order != ''">
+                units_order = #{units_order},
+            </if>
+            <if test="materials_path != null and materials_path != ''">
+                materials_path = #{materials_path},
             </if>
         </set>
         where unit_id = #{unitId}

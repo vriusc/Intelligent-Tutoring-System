@@ -19,6 +19,10 @@ public class Units implements Serializable {
     private String unitName;
     
     private Integer subjectId;
+
+    private Integer unitOrder;
+
+    private String materials_path;
     
     private String description;
 

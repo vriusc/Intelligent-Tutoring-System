@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.SubjectsDao">
+
+    <resultMap type="com.example.demo.entity.Subjects" id="SubjectsMap">
+        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
+        <result property="subjectName" column="subject_name" jdbcType="VARCHAR"/>
+        <result property="level" column="level" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SubjectsMap">
+        select
+          subject_id, subject_name, level, description
+        from Subjects
+        where subject_id = #{subjectId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SubjectsMap">
+        select
+        subject_id, subject_name, level, description
+        from Subjects
+        <where>
+            <if test="subjects.subjectId != null">
+                and subject_id = #{subjects.subjectId}
+            </if>
+            <if test="subjects.subjectName != null and subjects.subjectName != ''">
+                and subject_name = #{subjects.subjectName}
+            </if>
+            <if test="subjects.level != null and subjects.level != ''">
+                and level = #{subjects.level}
+            </if>
+            <if test="subjects.description != null and subjects.description != ''">
+                and description = #{subjects.description}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from Subjects
+        <where>
+            <if test="subjectId != null">
+                and subject_id = #{subjectId}
+            </if>
+            <if test="subjectName != null and subjectName != ''">
+                and subject_name = #{subjectName}
+            </if>
+            <if test="level != null and level != ''">
+                and level = #{level}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="subjectId" useGeneratedKeys="true">
+        insert into Subjects(subject_name, level, description)
+        values (#{subjectName}, #{level}, #{description})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="subjectId" useGeneratedKeys="true">
+        insert into Subjects(subject_name, level, description)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.subjectName}, #{entity.level}, #{entity.description})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="subjectId" useGeneratedKeys="true">
+        insert into Subjects(subject_name, level, description)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.subjectName}, #{entity.level}, #{entity.description})
+        </foreach>
+        on duplicate key update
+        subject_name = values(subject_name),
+        level = values(level),
+        description = values(description)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update Subjects
+        <set>
+            <if test="subjectName != null and subjectName != ''">
+                subject_name = #{subjectName},
+            </if>
+            <if test="level != null and level != ''">
+                level = #{level},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+        </set>
+        where subject_id = #{subjectId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from Subjects where subject_id = #{subjectId}
+    </delete>
+
+</mapper>
+

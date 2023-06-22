@@ -74,10 +74,12 @@ public class StudentUserController {
 
         // 调用登录服务进行身份验证和生成令牌等操作
         try {
-            studentUserService.login(usernameOrEmail, password);
+            StudentUser user=studentUserService.login(usernameOrEmail, password);
+            Integer studentId=user.getId();
 
             // 登录成功，创建登录响应对象
             LoginResponseDTO responseDTO = new LoginResponseDTO();
+            responseDTO.setStudentId(studentId);
             responseDTO.setToken("generated_token");
             responseDTO.setMessage("Login successful");
 
@@ -133,6 +135,7 @@ public class StudentUserController {
     public ResponseEntity<Boolean> deleteById(Integer id) {
         return ResponseEntity.ok(this.studentUserService.deleteById(id));
     }
+
 
 }
 

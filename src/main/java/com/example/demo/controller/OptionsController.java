@@ -15,6 +15,7 @@ import javax.annotation.Resource;
  * @author makejava
  * @since 2023-06-23 10:58:28
  */
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("options")
 public class OptionsController {

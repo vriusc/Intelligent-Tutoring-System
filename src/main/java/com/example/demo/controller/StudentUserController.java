@@ -16,6 +16,7 @@ import javax.annotation.Resource;
  * @author makejava
  * @since 2023-06-21 06:36:40
  */
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("studentUser")
 public class StudentUserController {
@@ -42,7 +43,6 @@ public class StudentUserController {
      * @param studentUser 实体
      * @return 注册
      */
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
     public ResponseEntity<RegisterResponseDTO> add(@RequestBody StudentUser studentUser) {
 
@@ -99,7 +99,6 @@ public class StudentUserController {
 
     /**
      * 修改密码
-     *
      *
      * @param request 修改密码请求
      * @return 修改结果

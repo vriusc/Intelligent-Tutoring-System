@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +18,7 @@ import java.util.List;
  * @author makejava
  * @since 2023-06-22 06:25:52
  */
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("studentSubjects")
 public class StudentSubjectsController {

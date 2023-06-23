@@ -4,6 +4,7 @@ import logo from '../assets/logo-no-background.png'
 import { useState } from 'react'
 import { loginStudent } from '../lib/tutoring-client'
 import { useNavigate } from 'react-router-dom'
+import RegisterBtn from './Register'
 
 const Login = () => {
   const [loginForm, setLoginForm] = useState({ usernameOrEmail: '', password: '' })
@@ -19,13 +20,9 @@ const Login = () => {
         navigate('/')
       })
       .catch((error) => {
-        console.error('error', error.message)
+        console.error(error.message)
         setErrorMessage(error.response.data.message || error.message || 'Error')
       })
-  }
-
-  const registerStudent = () => {
-    localStorage.clear()
   }
 
   return (
@@ -61,9 +58,7 @@ const Login = () => {
           LOG IN
         </Button>
         <Label style={{ marginTop: '20px' }}>Or</Label>
-        <Button color="secondary" block onClick={registerStudent}>
-          REGISTER
-        </Button>
+        <RegisterBtn />
       </div>
     </div>
   )

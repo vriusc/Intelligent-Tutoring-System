@@ -2,7 +2,7 @@ import './Login.css'
 import { Alert, Button, Input, Label } from 'reactstrap'
 import logo from '../assets/logo-no-background.png'
 import { useState } from 'react'
-import { loginUser } from '../lib/tutoring-client'
+import { loginStudent } from '../lib/tutoring-client'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -11,8 +11,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   const handleLogIn = () => {
-    // console.log('Login with', loginForm)
-    const result = loginUser(loginForm)
+    const result = loginStudent(loginForm)
     result
       .then((response) => {
         console.log('result', response.data)

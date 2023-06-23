@@ -5,14 +5,11 @@ import com.example.demo.service.SubjectsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.security.auth.Subject;
+
 
 /**
  * (Subjects)表控制层
@@ -29,17 +26,6 @@ public class SubjectsController {
     @Resource
     private SubjectsService subjectsService;
 
-    /**
-     * 分页查询
-     *
-     * @param subjects 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
-     */
-    @GetMapping
-    public ResponseEntity<Page<Subjects>> queryByPage(Subjects subjects, PageRequest pageRequest) {
-        return ResponseEntity.ok(this.subjectsService.queryByPage(subjects, pageRequest));
-    }
 
     /**
      * 分页查询所有可科目
@@ -57,6 +43,20 @@ public class SubjectsController {
         PageRequest pageRequest = PageRequest.of(page, size);
         return this.subjectsService.queryByPage(subjects, pageRequest);
     }
+
+    /**
+     * 分页查询
+     *
+     * @param subjects 筛选条件
+     * @param pageRequest      分页对象
+     * @return 查询结果
+     */
+    @GetMapping
+    public ResponseEntity<Page<Subjects>> queryByPage(Subjects subjects, Pageable pageRequest) {
+        return ResponseEntity.ok(this.subjectsService.queryByPage(subjects, pageRequest));
+    }
+
+
 
     /**
      * 通过主键查询单条数据

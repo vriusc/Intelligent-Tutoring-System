@@ -2,7 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Subjects;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
+import org.springframework.data.domain.Pageable;
 
 /**
  * (Subjects)表服务接口
@@ -27,7 +28,7 @@ public interface SubjectsService {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<Subjects> queryByPage(Subjects subjects, PageRequest pageRequest);
+    Page<Subjects> queryByPage(Subjects subjects, Pageable pageRequest);
 
     /**
      * 新增数据

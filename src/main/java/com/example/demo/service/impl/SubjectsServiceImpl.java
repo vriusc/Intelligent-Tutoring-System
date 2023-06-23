@@ -3,10 +3,10 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Subjects;
 import com.example.demo.dao.SubjectsDao;
 import com.example.demo.service.SubjectsService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 
 import javax.annotation.Resource;
 
@@ -40,7 +40,7 @@ public class SubjectsServiceImpl implements SubjectsService {
      * @return 查询结果
      */
     @Override
-    public Page<Subjects> queryByPage(Subjects subjects, PageRequest pageRequest) {
+    public Page<Subjects> queryByPage(Subjects subjects, Pageable pageRequest) {
         long total = this.subjectsDao.count(subjects);
         return new PageImpl<>(this.subjectsDao.queryAllByLimit(subjects, pageRequest), pageRequest, total);
     }

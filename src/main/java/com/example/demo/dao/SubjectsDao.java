@@ -30,7 +30,7 @@ public interface SubjectsDao {
      * @param pageable         分页对象
      * @return 对象列表
      */
-    List<Subjects> queryAllByLimit(Subjects subjects, @Param("pageable") Pageable pageable);
+    List<Subjects> queryAllByLimit(@Param("subjects") Subjects subjects, @Param("pageable") Pageable pageable);
 
     /**
      * 统计总行数

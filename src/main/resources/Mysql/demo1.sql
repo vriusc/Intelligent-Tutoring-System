@@ -40,7 +40,7 @@ FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id)
 );
 
 -- 创建题目类型表
-CREATE TABLE questionTypes (
+CREATE TABLE question_types (
 question_type_id INT PRIMARY KEY,
 question_type VARCHAR(255)
 );
@@ -54,7 +54,7 @@ video_path          VARCHAR(255),
 audio_path          VARCHAR(255),
 question_order      INT NOT NULL,
 explanation         VARCHAR(255) NOT NULL,
-FOREIGN KEY (question_type_id) REFERENCES questionTypes (question_type_id)
+FOREIGN KEY (question_type_id) REFERENCES question_types (question_type_id)
 );
 
 CREATE TABLE question_units (

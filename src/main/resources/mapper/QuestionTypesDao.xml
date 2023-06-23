@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.QuestionTypesDao">
+
+    <resultMap type="com.example.demo.entity.QuestionTypes" id="QuestionTypesMap">
+        <result property="questionTypeId" column="question_type_id" jdbcType="INTEGER"/>
+        <result property="questionType" column="question_type" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="QuestionTypesMap">
+        select
+          question_type_id, question_type
+        from question_types
+        where question_type_id = #{questionTypeId}
+    </select>
+
+    <select id="queryAllByLimit" resultMap="QuestionTypesMap">
+        select
+        question_type_id, question_type
+        from question_types
+        <where>
+            <if test="questionTypes.questionTypeId != null">
+                and question_type_id = #{questionTypes.questionTypeId}
+            </if>
+            <if test="questionTypes.questionType != null and questionTypes.questionType != ''">
+                and question_type = #{questionTypes.questionType}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from question_types
+        <where>
+            <if test="questionTypeId != null">
+                and question_type_id = #{questionTypeId}
+            </if>
+            <if test="questionType != null and questionType != ''">
+                and question_type = #{questionType}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="questionTypeId" useGeneratedKeys="true">
+        insert into question_types(question_type)
+        values (#{questionType})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="questionTypeId" useGeneratedKeys="true">
+        insert into question_types(question_type)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.questionType})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="questionTypeId" useGeneratedKeys="true">
+        insert into question_types(question_type)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.questionType})
+        </foreach>
+        on duplicate key update
+        question_type = values(question_type)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update question_types
+        <set>
+            <if test="questionType != null and questionType != ''">
+                question_type = #{questionType},
+            </if>
+        </set>
+        where question_type_id = #{questionTypeId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from question_types where question_type_id = #{questionTypeId}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.QuestionsDao">
+
+    <resultMap type="com.example.demo.entity.Questions" id="QuestionsMap">
+        <result property="questionId" column="question_id" jdbcType="INTEGER"/>
+        <result property="question" column="question" jdbcType="VARCHAR"/>
+        <result property="questionTypeId" column="question_type_id" jdbcType="INTEGER"/>
+        <result property="picturePath" column="picture_path" jdbcType="VARCHAR"/>
+        <result property="videoPath" column="video_path" jdbcType="VARCHAR"/>
+        <result property="audioPath" column="audio_path" jdbcType="VARCHAR"/>
+        <result property="questionOrder" column="question_order" jdbcType="INTEGER"/>
+        <result property="explanation" column="explanation" jdbcType="VARCHAR"/>
+
+    <association property="questionTypes" javaType="com.example.demo.entity.QuestionTypes">
+        <result property="questionTypeId" column="question_type_id" jdbcType="INTEGER"/>
+        <result property="questionType" column="question_type" jdbcType="VARCHAR"/>
+    </association>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="QuestionsMap">
+        select
+            q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,
+            qt.question_type_id, qt.question_type
+        from questions q
+                 inner join question_types qt on q.question_type_id = qt.question_type_id
+        where q.question_id = #{questionId}
+    </select>
+
+    <!--查询所有并分页-->
+    <select id="queryAllByLimit" resultMap="QuestionsMap">
+        select
+        q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,
+        qt.question_type_id , qt.question_type
+        from questions q
+        left join question_types qt on q.question_type_id = qt.question_type_id
+        <where>
+            <if test="Questions.questionId != null">
+                and q.question_id = #{Questions.questionId}
+            </if>
+            <if test="Questions.question != null and Questions.question != ''">
+                and q.question = #{Questions.question}
+            </if>
+            <if test="Questions.questionTypeId != null">
+                and q.question_type_id = #{Questions.questionTypeId}
+            </if>
+            <if test="Questions.picturePath != null and Questions.picturePath != ''">
+                and q.picture_path = #{Questions.picturePath}
+            </if>
+            <if test="Questions.videoPath != null and Questions.videoPath != ''">
+                and q.video_path = #{Questions.videoPath}
+            </if>
+            <if test="Questions.audioPath != null and Questions.audioPath != ''">
+                and q.audio_path = #{Questions.audioPath}
+            </if>
+            <if test="Questions.questionOrder != null">
+                and q.question_order = #{Questions.questionOrder}
+            </if>
+            <if test="Questions.explanation != null and Questions.explanation != ''">
+                and q.explanation = #{Questions.explanation}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from questions
+        <where>
+            <if test="questionId != null">
+                and question_id = #{questionId}
+            </if>
+            <if test="question != null and question != ''">
+                and question = #{question}
+            </if>
+            <if test="questionTypeId != null">
+                and question_type_id = #{questionTypeId}
+            </if>
+            <if test="picturePath != null and picturePath != ''">
+                and picture_path = #{picturePath}
+            </if>
+            <if test="videoPath != null and videoPath != ''">
+                and video_path = #{videoPath}
+            </if>
+            <if test="audioPath != null and audioPath != ''">
+                and audio_path = #{audioPath}
+            </if>
+            <if test="questionOrder != null">
+                and question_order = #{questionOrder}
+            </if>
+            <if test="explanation != null and explanation != ''">
+                and explanation = #{explanation}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="questionId" useGeneratedKeys="true">
+        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation)
+        values (#{question}, #{questionTypeId}, #{picturePath}, #{videoPath}, #{audioPath}, #{questionOrder}, #{explanation})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="questionId" useGeneratedKeys="true">
+        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.question}, #{entity.questionTypeId}, #{entity.picturePath}, #{entity.videoPath}, #{entity.audioPath}, #{entity.questionOrder}, #{entity.explanation})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="questionId" useGeneratedKeys="true">
+        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.question}, #{entity.questionTypeId}, #{entity.picturePath}, #{entity.videoPath}, #{entity.audioPath}, #{entity.questionOrder}, #{entity.explanation})
+        </foreach>
+        on duplicate key update
+        question = values(question),
+        question_type_id = values(question_type_id),
+        picture_path = values(picture_path),
+        video_path = values(video_path),
+        audio_path = values(audio_path),
+        question_order = values(question_order),
+        explanation = values(explanation)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update questions
+        <set>
+            <if test="question != null and question != ''">
+                question = #{question},
+            </if>
+            <if test="questionTypeId != null">
+                question_type_id = #{questionTypeId},
+            </if>
+            <if test="picturePath != null and picturePath != ''">
+                picture_path = #{picturePath},
+            </if>
+            <if test="videoPath != null and videoPath != ''">
+                video_path = #{videoPath},
+            </if>
+            <if test="audioPath != null and audioPath != ''">
+                audio_path = #{audioPath},
+            </if>
+            <if test="questionOrder != null">
+                question_order = #{questionOrder},
+            </if>
+            <if test="explanation != null and explanation != ''">
+                explanation = #{explanation},
+            </if>
+        </set>
+        where question_id = #{questionId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from questions where question_id = #{questionId}
+    </delete>
+
+</mapper>
+

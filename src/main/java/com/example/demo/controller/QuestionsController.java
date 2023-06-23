@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.Questions;
 import com.example.demo.service.QuestionsService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class QuestionsController {
      * 分页查询
      *
      * @param questions 筛选条件
-     * @param pageRequest      分页对象
+     * @param Pageable      分页对象
      * @return 查询结果
      */
     @GetMapping

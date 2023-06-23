@@ -41,7 +41,7 @@ FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id)
 
 -- 创建题目类型表
 CREATE TABLE question_types (
-question_type_id INT PRIMARY KEY,
+question_type_id INT AUTO_INCREMENT PRIMARY KEY,
 question_type VARCHAR(255)
 );
 

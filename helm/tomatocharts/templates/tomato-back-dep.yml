@@ -5,7 +5,7 @@ metadata:
   labels: 
     app: tback
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: tback
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tback
-        image: xiaochili123/tomato-back:V2
+        image: xiaochili123/tomato-back:V1-jar
         ports:
         - name: tback-port
           containerPort: 8080

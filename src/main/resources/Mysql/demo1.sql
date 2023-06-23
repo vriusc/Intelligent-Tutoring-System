@@ -1,3 +1,5 @@
+create schema test;
+
 use test;
 
 CREATE TABLE student_user (
@@ -74,9 +76,17 @@ order_number    INT NOT NULL,
 FOREIGN KEY (question_id) REFERENCES questions (question_id)
 );
 
-# CREATE TABLE performance(
-# performance_id      INT AUTO_INCREMENT PRIMARY KEY,
-# student_id          INT NOT NULL,
-# Unit_id             INT NOT NULL,
-# question_id         INT NOT NULL,
+
+create table record(
+    record_id   int    auto_increment primary key,
+    student_id int    not null,
+    question_id int    not null,
+    option_id int    not null,
+    foreign key (student_id) references student_user (id),
+    foreign key (question_id) references questions (question_id),
+    foreign key (option_id) references options (option_id)
+);
+
+insert into student_user (username, password, email) values ('admin', 'admin', 'email');
+
 

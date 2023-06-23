@@ -16,7 +16,6 @@ import java.util.List;
  * @author makejava
  * @since 2023-06-22 20:46:33
  */
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("units")
 public class UnitsController {

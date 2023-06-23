@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tback
+  labels: 
+    app: tback
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tback
+  template:
+    metadata:
+      labels:
+        app: tback
+    spec:
+      containers:
+      - name: tback
+        image: xiaochili123/tomato-back:V2
+        ports:
+        - name: tback-port
+          containerPort: 8080

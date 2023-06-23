@@ -27,3 +27,7 @@
 .Login-form input, .Login-form button {
   margin-top: 15px;
 }
+
+.Alert-error {
+  width: 350px;
+}

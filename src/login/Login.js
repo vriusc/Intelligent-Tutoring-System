@@ -1,29 +1,49 @@
 import './Login.css'
-import { Button, Input, Label } from 'reactstrap'
+import { Alert, Button, Input, Label } from 'reactstrap'
 import logo from '../assets/logo-no-background.png'
 import { useState } from 'react'
 import { loginUser } from '../lib/tutoring-client'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const [loginForm, setLoginForm] = useState({ username: '', password: '' })
+  const [loginForm, setLoginForm] = useState({ usernameOrEmail: '', password: '' })
+  const [errorMessage, setErrorMessage] = useState()
+  const navigate = useNavigate()
 
   const handleLogIn = () => {
     // console.log('Login with', loginForm)
     const result = loginUser(loginForm)
-    console.log(result)
+    result
+      .then((response) => {
+        console.log('result', response.data)
+        localStorage.setItem('studentId', response.data.studentId)
+        navigate('/')
+      })
+      .catch((error) => {
+        console.error('error', error.message)
+        setErrorMessage(error.response.data.message || error.message || 'Error')
+      })
   }
 
   return (
     <div className="Login-body">
       <img src={logo} className="Login-logo" alt="logo" />
+      <Alert
+        className="Alert-error"
+        color="danger"
+        isOpen={!!errorMessage}
+        toggle={() => setErrorMessage('')}
+      >
+        {errorMessage}
+      </Alert>
       <div className="Login-form">
         <Input
           id="username"
-          name="username"
+          name="usernameOrEmail"
           type="text"
-          placeholder="Username"
+          placeholder="Username or Email"
           value={loginForm.email}
-          onChange={(e) => setLoginForm({ ...loginForm, username: e.target.value })}
+          onChange={(e) => setLoginForm({ ...loginForm, usernameOrEmail: e.target.value })}
         />
 
         <Input

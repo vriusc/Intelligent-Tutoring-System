@@ -1,12 +1,12 @@
-// import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import Header from './element/Header'
 import logo from './assets/logo.svg'
 
 const Home = () => {
-  // const user = false
-  // if (!user) {
-  //   return <Navigate replace to="/login" />
-  // }
+  const studentId = localStorage.getItem('studentId')
+  if (!studentId) {
+    return <Navigate replace to="/login" />
+  }
 
   return (
     <>

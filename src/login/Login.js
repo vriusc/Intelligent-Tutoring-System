@@ -25,6 +25,10 @@ const Login = () => {
       })
   }
 
+  const registerStudent = () => {
+    localStorage.clear()
+  }
+
   return (
     <div className="Login-body">
       <img src={logo} className="Login-logo" alt="logo" />
@@ -58,7 +62,7 @@ const Login = () => {
           LOG IN
         </Button>
         <Label style={{ marginTop: '20px' }}>Or</Label>
-        <Button color="secondary" block>
+        <Button color="secondary" block onClick={registerStudent}>
           REGISTER
         </Button>
       </div>

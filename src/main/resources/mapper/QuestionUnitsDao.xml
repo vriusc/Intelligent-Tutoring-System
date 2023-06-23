@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.QuestionUnitsDao">
+
+    <resultMap type="com.example.demo.entity.QuestionUnits" id="QuestionUnitsMap">
+        <result property="questionUnitId" column="question_unit_id" jdbcType="INTEGER"/>
+        <result property="questionId" column="question_id" jdbcType="INTEGER"/>
+        <result property="unitId" column="unit_id" jdbcType="INTEGER"/>
+
+
+        <association property="questions" javaType="com.example.demo.entity.Questions">
+            <id property="questionId" column="q_question_id" jdbcType="INTEGER" />
+            <result property="question" column="question" jdbcType="VARCHAR" />
+            <result property="questionTypeId" column="question_type_id" jdbcType="INTEGER" />
+            <result property="picturePath" column="picture_path" jdbcType="VARCHAR" />
+            <result property="videoPath" column="video_path" jdbcType="VARCHAR" />
+            <result property="audioPath" column="audio_path" jdbcType="VARCHAR" />
+            <result property="questionOrder" column="question_order" jdbcType="INTEGER" />
+            <result property="explanation" column="explanation" jdbcType="VARCHAR" />
+
+
+        </association>
+        <association property="units" javaType="com.example.demo.entity.Units">
+            <id property="unitId" column="u_unit_id" jdbcType="INTEGER" />
+            <result property="unitName" column="unit_name" jdbcType="VARCHAR" />
+            <result property="subjectId" column="subject_id" jdbcType="INTEGER" />
+            <result property="unitOrder" column="units_order" jdbcType="INTEGER" />
+            <result property="materials_path" column="materials_path" jdbcType="VARCHAR" />
+            <result property="description" column="description" jdbcType="VARCHAR" />
+        </association>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="QuestionUnitsMap">
+        select qu.question_unit_id, qu.question_id, qu.unit_id,
+               q.question_id as q_question_id, q.question, q.question_type_id,
+               q.picture_path, q.video_path, q.audio_path, q.question_order,
+               q.explanation, u.unit_id as u_unit_id, u.unit_name,
+               u.subject_id, u.units_order, u.materials_path, u.description
+        from question_units qu
+                 left join questions q on qu.question_id = q.question_id
+                 left join units u on qu.unit_id = u.unit_id
+        where qu.question_unit_id = #{questionUnitId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="QuestionUnitsMap">
+        SELECT qu.question_unit_id, qu.question_id, qu.unit_id,
+        q.question_id AS q_question_id, q.question, q.question_type_id,
+        q.picture_path, q.video_path, q.audio_path, q.question_order,
+        q.explanation, u.unit_id AS u_unit_id, u.unit_name,
+        u.subject_id, u.units_order, u.materials_path, u.description
+        FROM question_units qu
+        LEFT JOIN questions q ON qu.question_id = q.question_id
+        LEFT JOIN units u ON qu.unit_id = u.unit_id
+        <where>
+            <if test="questionUnits.questionUnitId != null">
+                AND qu.question_unit_id = #{questionUnits.questionUnitId}
+            </if>
+            <if test="questionUnits.questionId != null">
+                AND qu.question_id = #{questionUnits.questionId}
+            </if>
+            <if test="questionUnits.unitId != null">
+                AND qu.unit_id = #{questionUnits.unitId}
+            </if>
+        </where>
+        LIMIT #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from question_units
+        <where>
+            <if test="questionUnitId != null">
+                and question_unit_id = #{questionUnitId}
+            </if>
+            <if test="questionId != null">
+                and question_id = #{questionId}
+            </if>
+            <if test="unitId != null">
+                and unit_id = #{unitId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="questionUnitId" useGeneratedKeys="true">
+        insert into question_units(question_id, unit_id)
+        values (#{questionId}, #{unitId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="questionUnitId" useGeneratedKeys="true">
+        insert into question_units(question_id, unit_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.questionId}, #{entity.unitId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="questionUnitId" useGeneratedKeys="true">
+        insert into question_units(question_id, unit_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.questionId}, #{entity.unitId})
+        </foreach>
+        on duplicate key update
+        question_id = values(question_id),
+        unit_id = values(unit_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update question_units
+        <set>
+            <if test="questionId != null">
+                question_id = #{questionId},
+            </if>
+            <if test="unitId != null">
+                unit_id = #{unitId},
+            </if>
+        </set>
+        where question_unit_id = #{questionUnitId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from question_units where question_unit_id = #{questionUnitId}
+    </delete>
+
+</mapper>
+

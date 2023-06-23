@@ -13,7 +13,7 @@
         <result property="explanation" column="explanation" jdbcType="VARCHAR"/>
 
     <association property="questionTypes" javaType="com.example.demo.entity.QuestionTypes">
-        <result property="questionTypeId" column="question_type_id" jdbcType="INTEGER"/>
+        <id property="questionTypeId" column="question_type_id" jdbcType="INTEGER"/>
         <result property="questionType" column="question_type" jdbcType="VARCHAR"/>
     </association>
     </resultMap>

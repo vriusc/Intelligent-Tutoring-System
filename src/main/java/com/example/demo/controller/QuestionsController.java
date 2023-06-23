@@ -28,7 +28,7 @@ public class QuestionsController {
      * 分页查询
      *
      * @param questions 筛选条件
-     * @param Pageable      分页对象
+     * @param pageable      分页对象
      * @return 查询结果
      */
     @GetMapping

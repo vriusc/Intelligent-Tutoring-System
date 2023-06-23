@@ -42,6 +42,7 @@ public class StudentUserController {
      * @param studentUser 实体
      * @return 注册
      */
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
     public ResponseEntity<RegisterResponseDTO> add(@RequestBody StudentUser studentUser) {
 

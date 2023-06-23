@@ -73,3 +73,10 @@ is_correct      BOOLEAN NOT NULL,
 order_number    INT NOT NULL,
 FOREIGN KEY (question_id) REFERENCES questions (question_id)
 );
+
+# CREATE TABLE performance(
+# performance_id      INT AUTO_INCREMENT PRIMARY KEY,
+# student_id          INT NOT NULL,
+# Unit_id             INT NOT NULL,
+# question_id         INT NOT NULL,
+

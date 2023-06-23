@@ -10,6 +10,10 @@ export const registerStudent = async (studentForm) => {
   return await axios.post(`${baseURL}/studentUser/register`, studentForm)
 }
 
+export const updatePassword = async (updateStudentForm) => {
+  return await axios.post(`${baseURL}/studentUser/password`, updateStudentForm)
+}
+
 export const getStudent = async (studentId) => {
   return await axios.get(`${baseURL}/studentUser/${studentId}`)
 }

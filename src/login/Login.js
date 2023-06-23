@@ -1,5 +1,5 @@
 import './Login.css'
-import { Alert, Button, Input, Label } from 'reactstrap'
+import { Alert, Button, Input } from 'reactstrap'
 import logo from '../assets/logo-no-background.png'
 import { useState } from 'react'
 import { loginStudent } from '../lib/tutoring-client'
@@ -57,7 +57,6 @@ const Login = () => {
         <Button color="secondary" block onClick={handleLogIn}>
           LOG IN
         </Button>
-        <Label style={{ marginTop: '20px' }}>Or</Label>
         <RegisterBtn />
       </div>
     </div>

@@ -23,10 +23,9 @@ const RegisterBtn = () => {
   const toggle = () => setModal(!modal)
 
   const handleRegister = () => {
-    console.log('Registering in progress..', newStudent)
     registerStudent(newStudent)
       .then((response) => {
-        console.log(response.data)
+        console.log('Success', response.data)
         toggle()
         setSuccessRegister(true)
       })
@@ -34,6 +33,10 @@ const RegisterBtn = () => {
         console.error('error', error)
         setErrorRegister(error.response.data.message || error.message || 'Error')
       })
+  }
+  const handleCancel = () => {
+    setNewStudent({ username: '', email: '', password: '' })
+    toggle()
   }
 
   return (
@@ -62,7 +65,7 @@ const RegisterBtn = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="Email">Email</Label>
+              <Label for="email">Email</Label>
               <Input
                 id="email"
                 name="email"
@@ -87,7 +90,7 @@ const RegisterBtn = () => {
         </ModalBody>
         <ModalFooter>
           <Button onClick={handleRegister}>Register</Button>
-          <Button outline onClick={toggle}>
+          <Button outline onClick={handleCancel}>
             Cancel
           </Button>
         </ModalFooter>

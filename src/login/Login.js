@@ -1,26 +1,29 @@
 import './Login.css'
-import { Button, Form, Input, Label } from 'reactstrap'
+import { Button, Input, Label } from 'reactstrap'
 import logo from '../assets/logo-no-background.png'
 import { useState } from 'react'
+import { loginUser } from '../lib/tutoring-client'
 
 const Login = () => {
-  const [loginForm, setLoginForm] = useState({ email: '', password: '' })
+  const [loginForm, setLoginForm] = useState({ username: '', password: '' })
 
   const handleLogIn = () => {
-    console.log('Login with', loginForm)
+    // console.log('Login with', loginForm)
+    const result = loginUser(loginForm)
+    console.log(result)
   }
 
   return (
     <div className="Login-body">
       <img src={logo} className="Login-logo" alt="logo" />
-      <Form className="Login-form">
+      <div className="Login-form">
         <Input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email"
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Username"
           value={loginForm.email}
-          onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+          onChange={(e) => setLoginForm({ ...loginForm, username: e.target.value })}
         />
 
         <Input
@@ -38,7 +41,7 @@ const Login = () => {
         <Button color="secondary" block>
           REGISTER
         </Button>
-      </Form>
+      </div>
     </div>
   )
 }

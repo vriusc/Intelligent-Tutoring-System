@@ -1,5 +1,5 @@
 // import { Navigate } from 'react-router-dom'
-import Header from './Header'
+import Header from './element/Header'
 import logo from './assets/logo.svg'
 
 const Home = () => {

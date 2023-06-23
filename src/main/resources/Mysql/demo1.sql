@@ -2,6 +2,9 @@ create schema test;
 
 use test;
 
+-- 创建学生用户表
+
+
 CREATE TABLE student_user (
 id         INT AUTO_INCREMENT PRIMARY KEY,
 username   VARCHAR(50) NOT NULL,
@@ -88,5 +91,4 @@ create table record(
 );
 
 insert into student_user (username, password, email) values ('admin', 'admin', 'email');
-
-
+insert into student_user (username, password, email) values ('student', 'student', 'email1');

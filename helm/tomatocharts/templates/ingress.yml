@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: tomato.vprofile.tomatokillerucd.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/studentUser"
+        backend:
+          service:
+            name: tback
+            port:
+              number: 31000
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: tfront
+            port:
+              number: 31001

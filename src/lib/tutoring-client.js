@@ -17,3 +17,11 @@ export const updatePassword = async (updateStudentForm) => {
 export const getStudent = async (studentId) => {
   return await axios.get(`${baseURL}/studentUser/${studentId}`)
 }
+
+export const getAllSubjects = async (params) => {
+  return await axios.get(`${baseURL}/subjects/queryAllSubjects`, { params })
+}
+
+export const getSubjectsById = async (studentId) => {
+  return await axios.get(`${baseURL}/studentSubjects/queryByStudentId/${studentId}`)
+}

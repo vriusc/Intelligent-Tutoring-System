@@ -1,7 +1,7 @@
 import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import ErrorPage from './error-page'
-import Home from './Home'
+import Home from './home/Home'
 import Login from './login/Login'
 
 const router = createBrowserRouter([

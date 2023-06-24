@@ -1,3 +1,5 @@
+
+
 use test;
 
 CREATE TABLE student_user (
@@ -84,3 +86,12 @@ FOREIGN KEY (unit_id) REFERENCES Units (unit_id)
 );
 
 
+CREATE TABLE record(
+record_id           INT AUTO_INCREMENT PRIMARY KEY,
+student_id          INT NOT NULL,
+question_id         INT NOT NULL,
+option_id           INT NOT NULL,
+FOREIGN KEY (student_id) REFERENCES student_user (id),
+FOREIGN KEY (question_id) REFERENCES questions (question_id),
+FOREIGN KEY (option_id) REFERENCES options (option_id)
+)

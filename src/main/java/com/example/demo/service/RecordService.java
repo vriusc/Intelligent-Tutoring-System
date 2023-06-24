@@ -1,56 +1,57 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Score;
+import com.example.demo.entity.Record;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 /**
- * (Score)表服务接口
+ * (Record)表服务接口
  *
  * @author makejava
- * @since 2023-06-23 16:05:58
+ * @since 2023-06-23 19:27:35
  */
-public interface ScoreService {
+public interface RecordService {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param scoreId 主键
+     * @param recordId 主键
      * @return 实例对象
      */
-    Score queryById(Integer scoreId);
+    Record queryById(Integer recordId);
 
     /**
      * 分页查询
      *
-     * @param score 筛选条件
+     * @param record 筛选条件
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<Score> queryByPage(Score score, PageRequest pageRequest);
+    Page<Record> queryByPage(Record record, Pageable pageRequest);
 
     /**
      * 新增数据
      *
-     * @param score 实例对象
+     * @param record 实例对象
      * @return 实例对象
      */
-    Score insert(Score score);
+    Record insert(Record record);
 
     /**
      * 修改数据
      *
-     * @param score 实例对象
+     * @param record 实例对象
      * @return 实例对象
      */
-    Score update(Score score);
+    Record update(Record record);
 
     /**
      * 通过主键删除数据
      *
-     * @param scoreId 主键
+     * @param recordId 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer scoreId);
+    boolean deleteById(Integer recordId);
 
 }

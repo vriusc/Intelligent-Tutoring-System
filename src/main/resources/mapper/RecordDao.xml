@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.RecordDao">
+
+    <resultMap type="com.example.demo.entity.Record" id="RecordMap">
+        <result property="recordId" column="record_id" jdbcType="INTEGER"/>
+        <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+        <result property="questionId" column="question_id" jdbcType="INTEGER"/>
+        <result property="optionId" column="option_id" jdbcType="INTEGER"/>
+
+        <association property="studentUser" javaType="com.example.demo.entity.StudentUser">
+            <id property="id" column="student_id"/>
+            <result property="username" column="username"/>
+            <result property="password" column="password"/>
+            <result property="email" column="email"/>
+        </association>
+
+        <association property="questions" javaType="com.example.demo.entity.Questions">
+            <id property="questionId" column="q_question_id" jdbcType="INTEGER" />
+            <result property="question" column="question" jdbcType="VARCHAR" />
+            <result property="questionTypeId" column="question_type_id" jdbcType="INTEGER" />
+            <result property="picturePath" column="picture_path" jdbcType="VARCHAR" />
+            <result property="videoPath" column="video_path" jdbcType="VARCHAR" />
+            <result property="audioPath" column="audio_path" jdbcType="VARCHAR" />
+            <result property="questionOrder" column="question_order" jdbcType="INTEGER" />
+            <result property="explanation" column="explanation" jdbcType="VARCHAR" />
+
+        </association>
+
+        <association property="options" javaType="com.example.demo.entity.Options">
+            <id property="optionId" column="option_id" jdbcType="INTEGER"/>
+            <result property="questionId" column="question_id" jdbcType="INTEGER"/>
+            <result property="option" column="option" jdbcType="VARCHAR"/>
+            <result property="isCorrect" column="is_correct" jdbcType="INTEGER"/>
+            <result property="orderNumber" column="order_number" jdbcType="INTEGER"/>
+        </association>
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" parameterType="java.lang.Integer" resultMap="RecordMap">
+        SELECT
+            r.record_id,
+            r.student_id,
+            r.question_id,
+            r.option_id,
+            s.id,
+            s.username ,
+            s.email,
+            q.question_id AS q_question_id,
+            q.question,
+            q.question_type_id,
+            q.picture_path,
+            q.video_path,
+            q.audio_path,
+            q.question_order,
+            q.explanation,
+            o.option_id,
+            o.question_id,
+            o.option,
+            o.is_correct,
+            o.order_number
+        FROM
+            record r
+                LEFT JOIN
+            student_user s ON r.student_id = s.id
+                LEFT JOIN
+            questions q ON r.question_id = q.question_id
+                LEFT JOIN
+            options o ON r.option_id = o.option_id
+        WHERE
+            r.record_id = #{record.recordId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RecordMap">
+        select
+        r.record_id,
+        r.student_id,
+        r.question_id,
+        r.option_id,
+        s.id,
+        s.username,
+        s.email,
+        q.question_id AS q_question_id,
+        q.question,
+        q.question_type_id,
+        q.picture_path,
+        q.video_path,
+        q.audio_path,
+        q.question_order,
+        q.explanation,
+        o.option_id,
+        o.question_id,
+        o.option,
+        o.is_correct,
+        o.order_number
+        FROM
+        record r
+        LEFT JOIN
+        student_user s ON r.student_id = s.id
+        LEFT JOIN
+        questions q ON r.question_id = q.question_id
+        LEFT JOIN
+        options o ON r.option_id = o.option_id
+        <where>
+            <if test="record.recordId != null">
+                and r.record_id = #{record.recordId}
+            </if>
+            <if test="record.studentId != null">
+                and r.student_id = #{record.studentId}
+            </if>
+            <if test="record.questionId != null">
+                and r.question_id = #{record.questionId}
+            </if>
+            <if test="record.optionId != null">
+                and r.option_id = #{record.optionId}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from record
+        <where>
+            <if test="recordId != null">
+                and record_id = #{recordId}
+            </if>
+            <if test="studentId != null">
+                and student_id = #{studentId}
+            </if>
+            <if test="questionId != null">
+                and question_id = #{questionId}
+            </if>
+            <if test="optionId != null">
+                and option_id = #{optionId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="recordId" useGeneratedKeys="true">
+        insert into record(student_id, question_id, option_id)
+        values (#{studentId}, #{questionId}, #{optionId})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="recordId" useGeneratedKeys="true">
+        insert into record(student_id, question_id, option_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.studentId}, #{entity.questionId}, #{entity.optionId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="recordId" useGeneratedKeys="true">
+        insert into record(student_id, question_id, option_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.studentId}, #{entity.questionId}, #{entity.optionId})
+        </foreach>
+        on duplicate key update
+        student_id = values(student_id),
+        question_id = values(question_id),
+        option_id = values(option_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update record
+        <set>
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="questionId != null">
+                question_id = #{questionId},
+            </if>
+            <if test="optionId != null">
+                option_id = #{optionId},
+            </if>
+        </set>
+        where record_id = #{recordId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from record where record_id = #{recordId}
+    </delete>
+
+</mapper>
+

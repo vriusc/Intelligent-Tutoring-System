@@ -95,7 +95,7 @@ const Home = () => {
                 {contentList.map((content) => {
                   if (content.subjectName === subjectSelected) {
                     return (
-                      <Card key={content.id} className="Card-list">
+                      <Card key={content.subjectId} className="Card-list">
                         <CardBody>
                           <CardTitle tag="h5">{`${content.subjectName} - ${content.level}`}</CardTitle>
                           <CardText>{content.description}</CardText>

@@ -1,0 +1,34 @@
+.Course-container {
+  background-color: #282c34;
+  color:#fff;
+  min-height: 93vh;
+}
+
+.Course {
+  padding: 3em 4em;
+}
+
+.Course-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.Card-container {
+  width: 320px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.Card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Card-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

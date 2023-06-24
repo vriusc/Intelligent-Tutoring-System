@@ -1,7 +1,9 @@
+import './Course.css'
 import { useEffect, useState } from 'react'
 import Header from '../element/Header'
 import { Navigate } from 'react-router-dom'
 import { getStudent, getSubjectsById } from '../lib/tutoring-client'
+import { Button, Card, CardBody, CardHeader, CardSubtitle, CardText, CardTitle } from 'reactstrap'
 
 const Course = () => {
   const studentId = localStorage.getItem('studentId')
@@ -36,7 +38,36 @@ const Course = () => {
   return (
     <>
       <Header user={student} subjectCount={subjects.length} />
-      <div>Testing</div>
+      <div className="Course-container">
+        <div className="Course">
+          <h3>My Courses list</h3>
+          <div className="Course-body">
+            {subjects.map((studentSubject) => (
+              <Card key={studentSubject.studentSubjectId} className="Card-container">
+                <CardHeader>
+                  <CardTitle tag="h5">
+                    {`${studentSubject.subject.subjectName} - ${studentSubject.subject.level}`}
+                  </CardTitle>
+                </CardHeader>
+                <CardBody className="Card-body">
+                  <div className="mb-3 mt-2">
+                    <CardSubtitle className="mb-2 text-muted" tag="h6">
+                      Description
+                    </CardSubtitle>
+                    <CardText>{studentSubject.subject.description}</CardText>
+                  </div>
+                  <div className="Card-bottom">
+                    <Button>{studentSubject.progress > 0 ? 'CONTINUE' : 'START'}</Button>
+                    <CardTitle style={{ color: 'red' }} tag="h3">
+                      {`${studentSubject.progress} %`}
+                    </CardTitle>
+                  </div>
+                </CardBody>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   )
 }

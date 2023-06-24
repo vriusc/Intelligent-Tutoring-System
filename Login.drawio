@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-06-24T17:54:20.005Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="gcn-qT2TIT8sy3RU9pbA" version="21.3.8" type="github">
+<mxfile host="app.diagrams.net" modified="2023-06-24T18:19:27.967Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="DYbrUWpZd0g6RP_AZrK5" version="21.3.8" type="github">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
     <mxGraphModel dx="2133" dy="755" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -46,14 +46,11 @@
         <mxCell id="Eow9V9qrAzXgovBorhqP-51" value="4.login(usernameOrEmail, password)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="120" y="210" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Eow9V9qrAzXgovBorhqP-53" value="5.insert(StudentUser&lt;span style=&quot;background-color: initial;&quot;&gt;)&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="Eow9V9qrAzXgovBorhqP-53" value="&lt;div style=&quot;&quot;&gt;5.insert(StudentUser studentUser)&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="300" y="250" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Eow9V9qrAzXgovBorhqP-58" value="6.queryByUserName" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="500" y="290" width="130" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="Eow9V9qrAzXgovBorhqP-61" value="7. StudentName" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="510" y="340" width="110" height="30" as="geometry" />
+        <mxCell id="Eow9V9qrAzXgovBorhqP-61" value="7.StudentUser" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="515" y="340" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Eow9V9qrAzXgovBorhqP-70" value="9.throw&lt;br&gt;RuntimeException&lt;br&gt;message" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="150" y="410" width="60" height="30" as="geometry" />
@@ -203,7 +200,7 @@
         <mxCell id="Eow9V9qrAzXgovBorhqP-122" value="8. StudentName" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="305" y="380" width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Eow9V9qrAzXgovBorhqP-123" value="{name already exist}" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="Eow9V9qrAzXgovBorhqP-123" value="{name not exist}" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-370" y="375" width="145" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Eow9V9qrAzXgovBorhqP-128" value="9.insert(StudentUser&lt;span style=&quot;background-color: initial;&quot;&gt;)&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -224,7 +221,7 @@
         <mxCell id="Eow9V9qrAzXgovBorhqP-139" value="ALT" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-450" y="770" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Eow9V9qrAzXgovBorhqP-140" value="{email already exist}" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="Eow9V9qrAzXgovBorhqP-140" value="{email not exist}" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-365" y="800" width="145" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Eow9V9qrAzXgovBorhqP-148" value="11.Email" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -265,6 +262,9 @@
         </mxCell>
         <mxCell id="Eow9V9qrAzXgovBorhqP-193" value="13.register failed message" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-5" y="840" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VWIVNXtLc2JzitBILpdr-2" value="6.findByUsername (usernameOrEmail)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="530" y="290" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

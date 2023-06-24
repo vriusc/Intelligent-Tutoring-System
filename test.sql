@@ -4,7 +4,7 @@ CREATE SCHEMA IF NOT EXISTS test;
 
 USE test;
 
--- Create table test.test
+-- Create table for user(student)
 CREATE TABLE IF NOT EXISTS student_user (
     id         INT AUTO_INCREMENT   PRIMARY KEY,
     username   VARCHAR(50)          NOT NULL,
@@ -13,6 +13,3 @@ CREATE TABLE IF NOT EXISTS student_user (
     CONSTRAINT Email UNIQUE (email),
     CONSTRAINT Username UNIQUE (username)
 );
-
-
-# SELECT * FROM student_user;

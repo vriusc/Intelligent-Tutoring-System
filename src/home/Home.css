@@ -28,4 +28,5 @@
 .Level-list .Card-list {
   margin: 5px;
   max-width: 320px;
+  padding: 6px;
 }

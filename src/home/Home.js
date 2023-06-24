@@ -1,7 +1,7 @@
 import './Home.css'
 import { Navigate } from 'react-router-dom'
 import Header from '../element/Header'
-import { getAllSubjects, getStudent, getSubjectsById } from '../lib/tutoring-client'
+import { getAllSubjects, getStudent } from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
 
@@ -16,11 +16,7 @@ const Home = () => {
   const [subjectSelected, setSubjectSected] = useState('')
 
   useEffect(() => {
-    Promise.all([
-      getStudent(studentId),
-      getAllSubjects({ page: 0, size: 30 }),
-      getSubjectsById(studentId)
-    ]).then((response) => {
+    Promise.all([getStudent(studentId), getAllSubjects({ page: 0, size: 30 })]).then((response) => {
       console.log(response)
       settingStudents(response[0])
       settingSubjects(response[1])
@@ -49,6 +45,10 @@ const Home = () => {
     setSubjectList(mySubject)
   }
 
+  const joinSubject = () => {
+    console.log('joining')
+  }
+
   return (
     <>
       <Header user={student} />
@@ -58,7 +58,12 @@ const Home = () => {
           {subjectList.length > 0 && (
             <div className="Subject-list">
               {subjectList.map((mySubject, index) => (
-                <Button key={index} size="lg" onClick={() => setSubjectSected(mySubject)}>
+                <Button
+                  key={index}
+                  color={mySubject === subjectSelected ? 'dark' : 'secondary'}
+                  size="lg"
+                  onClick={() => setSubjectSected(mySubject)}
+                >
                   {mySubject.toUpperCase()}
                 </Button>
               ))}
@@ -66,16 +71,23 @@ const Home = () => {
           )}
           {subjectSelected && (
             <>
-              <h2>Which level do you want to start?</h2>
+              <h2 style={{ paddingTop: '50px' }}>Which level do you want to start?</h2>
               <div className="Level-list">
-                {contentList.map((content) => (
-                  <Card key={content.id} className="Card-list">
-                    <CardBody>
-                      <CardTitle>{`${content.subjectName} - ${content.level}`}</CardTitle>
-                      <CardText>{content.description}</CardText>
-                    </CardBody>
-                  </Card>
-                ))}
+                {contentList.map((content) => {
+                  if (content.subjectName === subjectSelected) {
+                    return (
+                      <Card key={content.id} className="Card-list">
+                        <CardBody>
+                          <CardTitle tag="h5">{`${content.subjectName} - ${content.level}`}</CardTitle>
+                          <CardText>{content.description}</CardText>
+                        </CardBody>
+                        <Button onClick={joinSubject}>JOIN COURSE</Button>
+                      </Card>
+                    )
+                  } else {
+                    return <></>
+                  }
+                })}
               </div>
             </>
           )}

@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-06-24T17:23:33.517Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="wblH5cQt4LS5QpPe7b2_" version="21.3.8" type="github">
+<mxfile host="app.diagrams.net" modified="2023-06-24T17:37:52.373Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="MnTRN6Htm5I1W2Kc3N6T" version="21.3.8" type="github">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
     <mxGraphModel dx="2057" dy="711" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -40,7 +40,7 @@
         <mxCell id="Eow9V9qrAzXgovBorhqP-30" value="2.Jump to&lt;br&gt;register&amp;nbsp; Page" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-180" y="110" width="130" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="Eow9V9qrAzXgovBorhqP-49" value="3.Input&lt;br&gt;login&lt;br&gt;message" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="Eow9V9qrAzXgovBorhqP-49" value="3.Input&lt;br&gt;register&lt;br&gt;message" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="-5" y="150" width="70" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Eow9V9qrAzXgovBorhqP-51" value="4.add(StudentUser )" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">

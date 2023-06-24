@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-ingress
+  name: tomato-ingress
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
@@ -11,7 +11,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/studentUser"
+        path: "/api"
         backend:
           service:
             name: tback

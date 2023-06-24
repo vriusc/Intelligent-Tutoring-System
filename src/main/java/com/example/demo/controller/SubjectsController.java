@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @since 2023-06-22 06:24:38
  */
 @RestController
-@RequestMapping("subjects")
+@RequestMapping("api/subjects")
 public class SubjectsController {
     /**
      * 服务对象

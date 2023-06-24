@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2023-06-22 20:46:33
  */
 @RestController
-@RequestMapping("units")
+@RequestMapping("api/units")
 public class UnitsController {
     /**
      * 服务对象

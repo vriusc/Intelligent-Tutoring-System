@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @since 2023-06-23 10:58:28
  */
 @RestController
-@RequestMapping("options")
+@RequestMapping("api/options")
 public class OptionsController {
     /**
      * 服务对象

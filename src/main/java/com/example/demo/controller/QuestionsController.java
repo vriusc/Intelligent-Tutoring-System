@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @since 2023-06-23 08:55:36
  */
 @RestController
-@RequestMapping("questions")
+@RequestMapping("api/questions")
 public class QuestionsController {
     /**
      * 服务对象

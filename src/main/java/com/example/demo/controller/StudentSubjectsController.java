@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2023-06-22 06:25:52
  */
 @RestController
-@RequestMapping("studentSubjects")
+@RequestMapping("api/studentSubjects")
 public class StudentSubjectsController {
 
 

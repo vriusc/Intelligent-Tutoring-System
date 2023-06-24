@@ -23,7 +23,7 @@ import {
 import { updatePassword } from '../lib/tutoring-client'
 
 const Header = (student) => {
-  const { user } = student
+  const { user, subjectCount } = student
   const [collapsed, setCollapsed] = useState(true)
   const navigate = useNavigate()
   const [resetPass, setResetPass] = useState(false)
@@ -82,6 +82,11 @@ const Header = (student) => {
         <NavbarToggler className="me-2" onClick={toggleNavbar} />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
+            <NavItem hidden={subjectCount === 0 || subjectCount === null}>
+              <NavLink href="#" onClick={() => navigate('/courses')}>
+                My Course
+              </NavLink>
+            </NavItem>
             <NavItem>
               <NavLink href="#" onClick={handleResetPass}>
                 Reset Password

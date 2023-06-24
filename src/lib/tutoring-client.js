@@ -25,3 +25,7 @@ export const getAllSubjects = async (params) => {
 export const getSubjectsById = async (studentId) => {
   return await axios.get(`${baseURL}/studentSubjects/queryByStudentId/${studentId}`)
 }
+
+export const addSubjectStudent = async (data) => {
+  return await axios.post(`${baseURL}/studentSubjects/add`, data)
+}

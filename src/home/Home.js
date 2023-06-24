@@ -1,12 +1,18 @@
 import './Home.css'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import Header from '../element/Header'
-import { getAllSubjects, getStudent } from '../lib/tutoring-client'
+import {
+  addSubjectStudent,
+  getAllSubjects,
+  getStudent,
+  getSubjectsById
+} from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
 
 const Home = () => {
   const studentId = localStorage.getItem('studentId')
+  const navigate = useNavigate()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -14,12 +20,21 @@ const Home = () => {
   const [subjectList, setSubjectList] = useState([])
   const [contentList, setContentList] = useState([])
   const [subjectSelected, setSubjectSected] = useState('')
+  const [studentSubjectList, setStudentSubject] = useState([])
 
   useEffect(() => {
-    Promise.all([getStudent(studentId), getAllSubjects({ page: 0, size: 30 })]).then((response) => {
+    Promise.all([
+      getStudent(studentId),
+      getAllSubjects({ page: 0, size: 30 }),
+      getSubjectsById(studentId)
+    ]).then((response) => {
       console.log(response)
       settingStudents(response[0])
       settingSubjects(response[1])
+      //Student Subject
+      const { data } = response[2]
+      console.log('data:', data)
+      setStudentSubject(data)
     })
   }, [studentId])
 
@@ -45,13 +60,17 @@ const Home = () => {
     setSubjectList(mySubject)
   }
 
-  const joinSubject = () => {
-    console.log('joining')
+  const joinSubject = (currentContent) => {
+    console.log('joining', currentContent)
+    const { subjectId } = currentContent
+    addSubjectStudent({ studentId, subjectId, progress: 0 }).then(() => {
+      navigate('/courses')
+    })
   }
 
   return (
     <>
-      <Header user={student} />
+      <Header user={student} subjectCount={studentSubjectList.length} />
       <div className="Container">
         <div className="Home">
           <h2>What do you want to learn today?</h2>
@@ -81,7 +100,7 @@ const Home = () => {
                           <CardTitle tag="h5">{`${content.subjectName} - ${content.level}`}</CardTitle>
                           <CardText>{content.description}</CardText>
                         </CardBody>
-                        <Button onClick={joinSubject}>JOIN COURSE</Button>
+                        <Button onClick={() => joinSubject(content)}>JOIN COURSE</Button>
                       </Card>
                     )
                   } else {

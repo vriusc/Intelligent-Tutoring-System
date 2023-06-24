@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tback
-        image: xiaochili123/tomato-back:V3-jar
+        image: xiaochili123/tomato-back:V1
         ports:
         - name: tback-port
           containerPort: 8080

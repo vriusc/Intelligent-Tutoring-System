@@ -18,7 +18,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/reply/')
+@app.route('/gpt/reply/')
 def process_request():
     # Retrieve the parameters from the URL
     username = request.args.get('username')

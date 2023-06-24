@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tchat
+  labels: 
+    app: tchat
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tchat
+  template:
+    metadata:
+      labels:
+        app: tchat
+    spec:
+      containers:
+      - name: tchat
+        image: xiaochili123/tomato-chat:V1
+        ports:
+        - name: tchat-port
+          containerPort: 5000

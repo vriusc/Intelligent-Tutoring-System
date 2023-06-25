@@ -123,3 +123,11 @@ CREATE TABLE Reading_Choice_Right_Answer_About_Text_Question(
     Question VARCHAR(255) NOT NULL,       -- Question
     FOREIGN KEY (Reading_Choice_Right_Answer_About_Text_ID) REFERENCES Reading_Choice_Right_Answer_About_Text(Reading_Choice_Right_Answer_About_Text_ID)
 );
+
+CREATE TABLE Reading_Choice_Right_Answer_About_Text_Question_Answer(
+    Reading_Choice_Right_Answer_About_Text_Question_Answer_ID INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each question
+    Reading_Choice_Right_Answer_About_Text_Question_ID INT NOT NULL,   -- Unique ID for each question
+    Answer VARCHAR(255) NOT NULL,       -- Answer
+    is_correct ENUM ('True', 'False') NOT NULL,   -- is correct
+    FOREIGN KEY (Reading_Choice_Right_Answer_About_Text_Question_ID) REFERENCES Reading_Choice_Right_Answer_About_Text_Question(Reading_Choice_Right_Answer_About_Text_Question_ID)
+);

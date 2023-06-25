@@ -32,3 +32,14 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.Units-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.Unit-list-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

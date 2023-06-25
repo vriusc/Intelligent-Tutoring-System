@@ -76,16 +76,6 @@ order_number    INT NOT NULL,
 FOREIGN KEY (question_id) REFERENCES questions (question_id)
 );
 
-CREATE TABLE score (
-score_id            INT AUTO_INCREMENT PRIMARY KEY,
-student_id          INT NOT NULL,
-unit_id             INT NOT NULL,
-score               INT NOT NULL,
-FOREIGN KEY (student_id) REFERENCES student_user (id),
-FOREIGN KEY (unit_id) REFERENCES Units (unit_id)
-);
-
-
 CREATE TABLE record(
 record_id           INT AUTO_INCREMENT PRIMARY KEY,
 student_id          INT NOT NULL,

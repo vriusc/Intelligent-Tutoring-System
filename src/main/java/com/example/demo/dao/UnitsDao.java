@@ -70,7 +70,7 @@ public interface UnitsDao {
      * 通过subjectId查找对应全部数据
      *
      * @param subjectId 主键
-     * @return 影响行数
+     * @return 对象列表
      */
     List<Units> queryBySubjectId(Integer subjectId);
 

@@ -1,3 +1,5 @@
+CREATE DATABASE test;
+
 use test;
 
 CREATE TABLE student_user (
@@ -83,5 +85,3 @@ FOREIGN KEY (student_id) REFERENCES student_user (id),
 FOREIGN KEY (question_id) REFERENCES questions (question_id),
 FOREIGN KEY (option_id) REFERENCES options (option_id)
 )
-
-

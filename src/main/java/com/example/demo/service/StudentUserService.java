@@ -6,7 +6,7 @@ import com.example.demo.entity.StudentUser;
 /**
  * (StudentUser)表服务接口
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-21 06:36:40
  */
 public interface StudentUserService {
@@ -53,7 +53,7 @@ public interface StudentUserService {
      * @param currentPassword 当前密码
      * @param newPassword 新密码
      */
-    public void updatePassword(String username, String email, String currentPassword, String newPassword);
+    void updatePassword(String username, String email, String currentPassword, String newPassword);
     /**
      * 通过主键删除数据
      *

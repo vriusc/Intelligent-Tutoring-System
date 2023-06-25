@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * (StudentSubjects)表服务接口
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-22 06:25:52
  */
 public interface StudentSubjectsService {

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * (Record)表数据库访问层
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-23 19:27:35
  */
 @Mapper

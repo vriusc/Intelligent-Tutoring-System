@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * (StudentSubjects)表服务实现类
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-22 06:25:52
  */
 @Service("studentSubjectsService")

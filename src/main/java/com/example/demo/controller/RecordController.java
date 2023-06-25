@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 /**
  * (Record)表控制层
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-23 19:27:35
  */
 @RestController

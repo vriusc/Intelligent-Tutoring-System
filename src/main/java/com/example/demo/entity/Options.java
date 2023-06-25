@@ -10,6 +10,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2023-06-23 10:58:28
  */
+
 @Data
 public class Options implements Serializable {
     private static final long serialVersionUID = 402090795382669059L;

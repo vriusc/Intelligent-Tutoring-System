@@ -5,9 +5,7 @@ import com.example.demo.dao.StudentUserDao;
 import com.example.demo.service.StudentUserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+
 
 import javax.annotation.Resource;
 

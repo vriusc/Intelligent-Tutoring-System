@@ -108,3 +108,18 @@ CREATE TABLE Reading_Choice_Right_Answer_About_Question_Answer(
     is_correct ENUM ('True', 'False') NOT NULL,   -- is correct
     FOREIGN KEY (Reading_Choice_Right_Answer_About_Question_ID) REFERENCES Reading_Choice_Right_Answer_About_Question(Reading_Choice_Right_Answer_About_Question_ID)
 );
+
+
+CREATE TABLE Reading_Choice_Right_Answer_About_Text(
+    Reading_Choice_Right_Answer_About_Text_ID INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each question
+    Text VARCHAR(255) NOT NULL,       -- Text
+    Level ENUM ('HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5', 'HSK6') NOT NULL, -- HSK level
+    DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  -- Date of creation
+);
+
+CREATE TABLE Reading_Choice_Right_Answer_About_Text_Question(
+    Reading_Choice_Right_Answer_About_Text_Question_ID INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each question
+    Reading_Choice_Right_Answer_About_Text_ID INT NOT NULL,   -- Unique ID for each question
+    Question VARCHAR(255) NOT NULL,       -- Question
+    FOREIGN KEY (Reading_Choice_Right_Answer_About_Text_ID) REFERENCES Reading_Choice_Right_Answer_About_Text(Reading_Choice_Right_Answer_About_Text_ID)
+);

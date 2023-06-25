@@ -90,3 +90,11 @@ CREATE TABLE Reading_Choice_Right_Picture_About_Word (
     Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- Date of creation
     FOREIGN KEY (Picture_File_Path) REFERENCES Materials(Materials_ID)
 );
+
+-- Reading Choice the right word about the question
+CREATE TABLE Reading_Choice_Right_Answer_About_Question (
+    Reading_Choice_Right_Answer_About_Question_ID INT AUTO_INCREMENT PRIMARY KEY,   -- Unique ID for each question
+    Question VARCHAR(255) NOT NULL,      -- Question is a word ,you need to choose the right choice to answer this question
+    Level ENUM ('HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5', 'HSK6') NOT NULL, -- HSK level
+    DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  -- Date of creation
+);

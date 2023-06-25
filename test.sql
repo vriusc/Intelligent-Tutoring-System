@@ -16,3 +16,9 @@ CREATE TABLE Users (
     UNIQUE(username),  -- Set username as unique
     UNIQUE(email)  -- Set email as unique
 );
+
+-- CREATE TABLE Materials,used to store different educational materials
+CREATE TABLE Materials (
+    Materials_ID INT AUTO_INCREMENT PRIMARY KEY,   -- Unique ID for each material
+    File_Path VARCHAR(255) NOT NULL-- Path to the file
+);

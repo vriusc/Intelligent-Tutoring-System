@@ -22,3 +22,16 @@
   align-self: center;
   margin: 2em 0;
 }
+
+.Question-container {
+  margin: 1em;
+}
+
+.Quest-image {
+  max-height: 350px;
+  margin: 20px;
+}
+
+.Quest-audio {
+  margin: 20px;
+}

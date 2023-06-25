@@ -56,7 +56,7 @@ const Course = () => {
                   </div>
                   {/* TODO if the unit is finished set an Icon done */}
                   <div style={{ alignSelf: 'center' }}>
-                    {index === 0 ? (
+                    {index === 2 ? (
                       <h4 style={{ color: 'green' }}>
                         Finished <BsFillCheckCircleFill />
                       </h4>

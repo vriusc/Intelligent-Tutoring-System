@@ -37,3 +37,12 @@ export const getUnitsBySubjectId = async (subjectId) => {
 export const getUnitById = async (unitId) => {
   return await axios.get(`${baseURL}/units/${unitId}`)
 }
+
+export const getQuestionsByUnitId = async (unitId) => {
+  const params = { unitId }
+  return await axios.get(`${baseURL}/questionUnits`, { params })
+}
+
+export const getOptions = async (params) => {
+  return await axios.get(`${baseURL}/options`, { params })
+}

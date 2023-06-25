@@ -23,7 +23,7 @@ CREATE TABLE Materials (
     File_Path VARCHAR(255) NOT NULL-- Path to the file
 );
 
--- CREATE TABLE Listening_Judgement_By_Picture - to see if the picture matches the audio
+-- CREATE TABLE Listening_Judgement_By_Picture - check if the picture matches the audio
 CREATE TABLE Listening_Judgement_By_Picture (
     Listening_Judgement_By_Picture_ID INT AUTO_INCREMENT PRIMARY KEY,   -- Unique ID for each question
     Question VARCHAR(255) NOT NULL,      -- Description of the question Like "Does the picture match the audio?"

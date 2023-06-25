@@ -17,9 +17,8 @@
             <result property="audioPath" column="audio_path" jdbcType="VARCHAR" />
             <result property="questionOrder" column="question_order" jdbcType="INTEGER" />
             <result property="explanation" column="explanation" jdbcType="VARCHAR" />
-
-
         </association>
+
         <association property="units" javaType="com.example.demo.entity.Units">
             <id property="unitId" column="u_unit_id" jdbcType="INTEGER" />
             <result property="unitName" column="unit_name" jdbcType="VARCHAR" />

@@ -33,3 +33,7 @@ export const addSubjectStudent = async (data) => {
 export const getUnitsBySubjectId = async (subjectId) => {
   return await axios.get(`${baseURL}/units/subject/${subjectId}`)
 }
+
+export const getUnitById = async (unitId) => {
+  return await axios.get(`${baseURL}/units/${unitId}`)
+}

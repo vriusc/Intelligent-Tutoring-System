@@ -1,0 +1,24 @@
+.Unit-container {
+  background-color: #282c34;
+  color:#fff;
+  min-height: 93vh;
+}
+
+.Unit {
+  padding: 3em 4em;
+}
+
+.Unit-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.Unit-video {
+  align-self: center;
+  margin-top: 3em;
+}
+
+.Unit-btn-quest {
+  align-self: center;
+  margin: 2em 0;
+}

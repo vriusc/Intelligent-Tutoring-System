@@ -1,5 +1,5 @@
 import './Course.css'
-import { Navigate, useLoaderData } from 'react-router-dom'
+import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
 import { getStudent, getUnitsBySubjectId } from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import Header from '../element/Header'
@@ -13,12 +13,12 @@ export async function loader({ params }) {
 
 const Course = () => {
   const studentId = localStorage.getItem('studentId')
+  const navigate = useNavigate()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
   const [student, setStudent] = useState({})
   const { data } = useLoaderData().units
-  console.log('units', data)
 
   useEffect(() => {
     getStudent(studentId).then((response) => {
@@ -31,6 +31,11 @@ const Course = () => {
     if (data) {
       setStudent(data)
     }
+  }
+
+  const goToUnit = (unit) => {
+    const { subjectId, unitId } = unit
+    navigate(`/courses/${subjectId}/unit/${unitId}`)
   }
 
   return (
@@ -56,7 +61,9 @@ const Course = () => {
                         Finished <BsFillCheckCircleFill />
                       </h4>
                     ) : (
-                      <Button color="dark">START</Button>
+                      <Button color="dark" onClick={() => goToUnit(unit)}>
+                        START
+                      </Button>
                     )}
                   </div>
                 </CardBody>

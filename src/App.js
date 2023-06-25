@@ -5,6 +5,7 @@ import Home from './home/Home'
 import Login from './login/Login'
 import CoursesList from './course/Course-list'
 import Course, { loader as unitsLoader } from './course/Course'
+import Unit, { loader as unitIdLoader } from './unit/Unit'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
     path: '/courses/:courseId',
     element: <Course />,
     loader: unitsLoader
+  },
+  {
+    path: '/courses/:courseId/unit/:unitId',
+    element: <Unit />,
+    loader: unitIdLoader
   }
 ])
 

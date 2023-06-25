@@ -3,7 +3,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import ErrorPage from './error-page'
 import Home from './home/Home'
 import Login from './login/Login'
-import Course from './course/Course'
+import CoursesList from './course/Course-list'
+import Course, { loader as unitsLoader } from './course/Course'
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/courses',
-    element: <Course />
+    element: <CoursesList />
+  },
+  {
+    path: '/courses/:courseId',
+    element: <Course />,
+    loader: unitsLoader
   }
 ])
 

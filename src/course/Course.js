@@ -1,9 +1,12 @@
-import './Course.css'
+import { Navigate, useLoaderData } from 'react-router-dom'
+import { getStudent, getUnitsBySubjectId } from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import Header from '../element/Header'
-import { Navigate } from 'react-router-dom'
-import { getStudent, getSubjectsById } from '../lib/tutoring-client'
-import { Button, Card, CardBody, CardHeader, CardSubtitle, CardText, CardTitle } from 'reactstrap'
+
+export async function loader({ params }) {
+  const units = await getUnitsBySubjectId(params.courseId)
+  return { units }
+}
 
 const Course = () => {
   const studentId = localStorage.getItem('studentId')
@@ -11,13 +14,12 @@ const Course = () => {
     return <Navigate replace to="/login" />
   }
   const [student, setStudent] = useState({})
-  const [subjects, setSubject] = useState([])
+  const { data } = useLoaderData().units
+  console.log('units', data)
 
   useEffect(() => {
-    Promise.all([getStudent(studentId), getSubjectsById(studentId)]).then((response) => {
-      console.log(response)
-      settingStudents(response[0])
-      settingSubjects(response[1])
+    getStudent(studentId).then((response) => {
+      settingStudents(response)
     })
   }, [studentId])
 
@@ -28,45 +30,11 @@ const Course = () => {
     }
   }
 
-  const settingSubjects = (response) => {
-    const { data } = response
-    if (data) {
-      setSubject(data)
-    }
-  }
-
   return (
     <>
-      <Header user={student} subjectCount={subjects.length} />
+      <Header user={student} subjectCount={1} title="My units" />
       <div className="Course-container">
-        <div className="Course">
-          <h3>My Courses list</h3>
-          <div className="Course-body">
-            {subjects.map((studentSubject) => (
-              <Card key={studentSubject.studentSubjectId} className="Card-container">
-                <CardHeader>
-                  <CardTitle tag="h5">
-                    {`${studentSubject.subject.subjectName} - ${studentSubject.subject.level}`}
-                  </CardTitle>
-                </CardHeader>
-                <CardBody className="Card-body">
-                  <div className="mb-3 mt-2">
-                    <CardSubtitle className="mb-2 text-muted" tag="h6">
-                      Description
-                    </CardSubtitle>
-                    <CardText>{studentSubject.subject.description}</CardText>
-                  </div>
-                  <div className="Card-bottom">
-                    <Button>{studentSubject.progress > 0 ? 'CONTINUE' : 'START'}</Button>
-                    <CardTitle style={{ color: 'red' }} tag="h3">
-                      {`${studentSubject.progress} %`}
-                    </CardTitle>
-                  </div>
-                </CardBody>
-              </Card>
-            ))}
-          </div>
-        </div>
+        <div className="Course"></div>
       </div>
     </>
   )

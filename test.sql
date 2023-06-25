@@ -131,3 +131,78 @@ CREATE TABLE Reading_Choice_Right_Answer_About_Text_Question_Answer(
     is_correct ENUM ('True', 'False') NOT NULL,   -- is correct
     FOREIGN KEY (Reading_Choice_Right_Answer_About_Text_Question_ID) REFERENCES Reading_Choice_Right_Answer_About_Text_Question(Reading_Choice_Right_Answer_About_Text_Question_ID)
 );
+
+CREATE TABLE Test (
+    Test_ID INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID
+    Title VARCHAR(255) NOT NULL, -- Test title
+    Type ENUM ('Reading', 'Listen') NOT NULL, -- Test type
+    Level ENUM ('HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5', 'HSK6') NOT NULL, -- HSK level of the test
+    Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Creation date
+);
+
+
+-- Table for associating the type of questions as "Listening_Judgement_By_Picture"
+CREATE TABLE Test_Listening_Judgement_By_Picture (
+    Test_ID INT NOT NULL, -- Test ID
+    Listening_Judgement_By_Picture_ID INT NOT NULL, -- Question ID
+    FOREIGN KEY (Test_ID) REFERENCES Test(Test_ID),
+    FOREIGN KEY (Listening_Judgement_By_Picture_ID) REFERENCES Listening_Judgement_By_Picture(Listening_Judgement_By_Picture_ID)
+);
+
+-- Table for associating the question type as "Listening_Choice_By_Picture"
+CREATE TABLE Test_Listening_Choice_By_Picture (
+    Test_ID INT NOT NULL, -- Test ID
+    Listening_Choice_By_Picture_ID INT NOT NULL, -- Question ID
+    FOREIGN KEY (Test_ID) REFERENCES Test(Test_ID),
+    FOREIGN KEY (Listening_Choice_By_Picture_ID) REFERENCES Listening_Choice_By_Picture(Listening_Choice_By_Picture_ID)
+);
+
+-- Table for associating the question type as "Listening_Choice_Right_Word"
+CREATE TABLE Test_Listen_Choice_Right_Word (
+    Test_ID INT NOT NULL, -- Test ID
+    Listen_Choice_Right_Word_ID INT NOT NULL, -- Question ID
+    FOREIGN KEY (Test_ID) REFERENCES Test(Test_ID),
+    FOREIGN KEY (Listen_Choice_Right_Word_ID) REFERENCES Listen_Choice_Right_Word(Listen_Choice_Right_Word_ID)
+);
+
+-- Table for associating the question type as "Reading_Judgement_By_Picture"
+CREATE TABLE Test_Reading_Judgement_By_Picture (
+    Test_ID INT NOT NULL, -- Test ID
+    Reading_Judgement_By_Picture_ID INT NOT NULL, -- Question ID
+    FOREIGN KEY (Test_ID) REFERENCES Test(Test_ID),
+    FOREIGN KEY (Reading_Judgement_By_Picture_ID) REFERENCES Reading_Judgement_By_Picture(Reading_Judgement_By_Picture_ID)
+);
+
+-- Table for associating the question type as "Reading_Choice_Right_Picture_About_Word"
+CREATE TABLE Test_Reading_Choice_Right_Picture_About_Word (
+    Test_ID INT NOT NULL, -- Test ID
+    Reading_Choice_Right_Picture_About_Word_ID INT NOT NULL, -- Question ID
+    FOREIGN KEY (Test_ID) REFERENCES Test(Test_ID),
+    FOREIGN KEY (Reading_Choice_Right_Picture_About_Word_ID) REFERENCES Reading_Choice_Right_Picture_About_Word(Reading_Choice_Right_Picture_About_Word_ID)
+);
+
+-- Table for associating the question type as "Reading_Choice_Right_Answer_About_Question"
+CREATE TABLE Test_Reading_Choice_Right_Answer_About_Question (
+    Test_ID INT NOT NULL, -- Test ID
+    Reading_Choice_Right_Answer_About_Question_ID INT NOT NULL, -- Question ID
+    FOREIGN KEY (Test_ID) REFERENCES Test(Test_ID),
+    FOREIGN KEY (Reading_Choice_Right_Answer_About_Question_ID) REFERENCES Reading_Choice_Right_Answer_About_Question(Reading_Choice_Right_Answer_About_Question_ID)
+);
+
+-- Table for associating the question type as "Reading_Choice_Right_Answer_About_Text"
+CREATE TABLE Test_Reading_Choice_Right_Answer_About_Text (
+    Test_ID INT NOT NULL, -- Test ID
+    Reading_Choice_Right_Answer_About_Text_ID INT NOT NULL, -- Question ID
+    FOREIGN KEY (Test_ID) REFERENCES Test(Test_ID),
+    FOREIGN KEY (Reading_Choice_Right_Answer_About_Text_ID) REFERENCES Reading_Choice_Right_Answer_About_Text(Reading_Choice_Right_Answer_About_Text_ID)
+);
+
+CREATE TABLE Score (
+    Score_ID INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID
+    Test_ID INT NOT NULL, -- Test ID
+    User_ID INT NOT NULL, -- User ID
+    Score INT NOT NULL, -- Score
+    Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Test date
+    FOREIGN KEY (Test_ID) REFERENCES Test(Test_ID),
+    FOREIGN KEY (User_ID) REFERENCES Users(Id)
+);

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 /**
  * (QuestionTypes)表服务接口
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-23 08:12:09
  */
 public interface QuestionTypesService {

@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 /**
  * (Subjects)表控制层
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-22 06:24:38
  */
 @CrossOrigin(origins = "http://localhost:3000")

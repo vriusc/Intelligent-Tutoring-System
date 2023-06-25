@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 /**
  * (Subjects)表服务实现类
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-22 06:24:38
  */
 @Service("subjectsService")

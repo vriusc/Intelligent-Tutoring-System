@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
+    /**
+     * 全局异常处理
+     *
+     * @author qianyongru
+     * @since 2023-06-23 15:58:28
+     */
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody

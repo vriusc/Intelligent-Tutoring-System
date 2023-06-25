@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 /**
  * (Record)表服务接口
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-23 19:27:35
  */
 public interface RecordService {

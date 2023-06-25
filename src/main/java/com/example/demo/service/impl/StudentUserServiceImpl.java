@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 /**
  * (StudentUser)表服务实现类
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-21 06:36:40
  */
 @Service("studentUserService")

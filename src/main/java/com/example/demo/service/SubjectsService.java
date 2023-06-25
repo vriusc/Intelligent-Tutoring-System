@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 /**
  * (Subjects)表服务接口
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-06-22 06:24:38
  */
 public interface SubjectsService {

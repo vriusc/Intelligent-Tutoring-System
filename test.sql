@@ -79,3 +79,14 @@ CREATE TABLE Reading_Judgement_By_Picture (
     Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- Date of creation
     FOREIGN KEY (Picture_File_Path) REFERENCES Materials(Materials_ID)
 );
+
+-- Reading Choice the right Picture about the word
+CREATE TABLE Reading_Choice_Right_Picture_About_Word (
+    Reading_Choice_Right_Picture_About_Word_ID INT AUTO_INCREMENT PRIMARY KEY,   -- Unique ID for each question
+    Picture_File_Path INT NOT NULL,      -- Picture_File_Path
+    Question VARCHAR(255) NOT NULL,      -- Question is a word to describe the picture
+    Answer ENUM ('A', 'B', 'C','D','E','F') NOT NULL,    -- Answer
+    Level ENUM ('HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5', 'HSK6') NOT NULL, -- HSK level
+    Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- Date of creation
+    FOREIGN KEY (Picture_File_Path) REFERENCES Materials(Materials_ID)
+);

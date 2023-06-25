@@ -59,3 +59,23 @@ CREATE TABLE Listen_Choice_Right_Word (
     Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- Date of creation
     FOREIGN KEY (Audio_File_Path) REFERENCES Materials(Materials_ID)
 );
+
+-- Choose the appropriate answer based on the questions asked in the audio
+CREATE TABLE Listen_Choice_Right_Word_Answer (
+    Listen_Choice_Right_Word_Answer_ID INT AUTO_INCREMENT PRIMARY KEY,   -- Unique ID for each question
+    Listen_Choice_Right_Word_ID INT NOT NULL,   -- Unique ID for each question
+    Choice VARCHAR(255) NOT NULL,      -- Choice
+    isRight ENUM ('True', 'False') NOT NULL,    -- isRight
+    FOREIGN KEY (Listen_Choice_Right_Word_ID) REFERENCES Listen_Choice_Right_Word(Listen_Choice_Right_Word_ID)
+);
+
+-- Reading Judgement By Picture
+CREATE TABLE Reading_Judgement_By_Picture (
+    Reading_Judgement_By_Picture_ID INT AUTO_INCREMENT PRIMARY KEY,   -- Unique ID for each question
+    Question VARCHAR(255) NOT NULL,      -- Description of the question Like "judge correctness based on the picture"
+    Picture_File_Path INT NOT NULL,     -- Picture_File_Path
+    Answer ENUM ('True', 'False') NOT NULL,    -- Answer
+    Level ENUM ('HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5', 'HSK6') NOT NULL, -- HSK level
+    Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- Date of creation
+    FOREIGN KEY (Picture_File_Path) REFERENCES Materials(Materials_ID)
+);

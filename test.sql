@@ -15,8 +15,23 @@ CREATE TABLE student_user (
     CONSTRAINT Username UNIQUE (username)  -- Set username as unique
 );
 
+-- CREATE TABLE Subjects to store information about the subjects
+CREATE TABLE  Subjects (
+    subject_id      INT AUTO_INCREMENT  PRIMARY KEY,  -- Unique ID for each subject
+    subject_name    VARCHAR(50)         NOT NULL,  -- Subject name
+    level           VARCHAR(50)         NOT NULL, -- Subject level
+    description     VARCHAR(255)        NOT NULL -- Subject description
+);
 
-
+-- CREATE TABLE student_subjects to store information about the subjects that the student is studying
+CREATE TABLE  student_subjects (
+    student_subject_id INT  AUTO_INCREMENT PRIMARY KEY, -- Unique ID for relation between each student and the subject
+    student_id         INT  NOT NULL, -- ID of the student
+    subject_id         INT  NOT NULL, -- ID of the subject
+    progress           INT  NOT NULL, -- Progress of the student in the subject
+    FOREIGN KEY (student_id) REFERENCES student_user (id), -- Set student_id as foreign key from table student_user
+    FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id) -- Set subject_id as foreign key from table Subjects
+);
 
 
 

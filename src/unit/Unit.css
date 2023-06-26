@@ -35,3 +35,14 @@
 .Quest-audio {
   margin: 20px;
 }
+
+.Btn-row {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+}
+
+.Unit-btn {
+  margin: 0 10px;
+  min-width: 80px;
+}

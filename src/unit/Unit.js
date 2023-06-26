@@ -21,6 +21,7 @@ const Unit = () => {
   const [questions, setQuestions] = useState({})
   const [questOptions, setQuestOptions] = useState([])
   const [showQuestions, setShowQuestions] = useState(false)
+  const [onReview, setOnReview] = useState(false)
 
   useEffect(() => {
     Promise.all([getStudent(studentId), getOptions({})]).then((response) => {
@@ -56,6 +57,10 @@ const Unit = () => {
     return [...thisOptions.filter((option) => option.questionId === questionId)]
   }
 
+  const reviewQuestions = () => {
+    setOnReview(true)
+  }
+
   return (
     <>
       <Header user={student} subjectCount={1} title={data.unitName} />
@@ -84,6 +89,7 @@ const Unit = () => {
                   question={question}
                   options={myOptions(questOptions, question.questionId)}
                   number={index + 1}
+                  review={onReview}
                 />
               ))}
               {questions.length === 0 && (
@@ -91,6 +97,19 @@ const Unit = () => {
                   <Badge color="info">Sorry we are creating the questions for this unit</Badge>
                 </h3>
               )}
+              <div className="Btn-row">
+                <Button
+                  disabled={!onReview}
+                  className="Unit-btn"
+                  color="danger"
+                  onClick={() => setOnReview(false)}
+                >
+                  Restart
+                </Button>
+                <Button className="Unit-btn" color="success" onClick={() => reviewQuestions()}>
+                  Submit
+                </Button>
+              </div>
             </>
           )}
         </div>

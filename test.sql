@@ -72,6 +72,17 @@ CREATE TABLE question_units (
     FOREIGN KEY (unit_id) REFERENCES Units (unit_id) -- Set unit_id as foreign key from table Units's unit_id
 );
 
+-- CREATE TABLE options to store information about all options
+CREATE TABLE options (
+    option_id       INT             AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each option
+    question_id     INT             NOT NULL, -- ID of the question
+    `option`        VARCHAR(255)    NOT NULL, -- Contents of the option
+    is_correct      BOOLEAN         NOT NULL, -- Whether the option is correct
+    order_number    INT             NOT NULL, -- Order of the option
+    FOREIGN KEY (question_id) REFERENCES questions (question_id) -- Set question_id as foreign key from table questions's question_id
+);
+
+
 
 
 

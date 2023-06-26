@@ -5,23 +5,6 @@ CREATE SCHEMA IF NOT EXISTS test;
 USE test;
 
 
--- CREATE TABLE student_user to store information about the user
-CREATE TABLE student_user (
-    id         INT AUTO_INCREMENT   PRIMARY KEY, -- Unique ID for each user
-    username   VARCHAR(50)          NOT NULL,   -- Unique username
-    password   VARCHAR(255)         NOT NULL,  -- Hashed password
-    email      VARCHAR(255)         NOT NULL,   -- Unique email
-    CONSTRAINT Email UNIQUE (email),  -- Set email as unique
-    CONSTRAINT Username UNIQUE (username)  -- Set username as unique
-);
-
-
-
-
-
-
-
-
 
 
 

@@ -82,8 +82,16 @@ CREATE TABLE options (
     FOREIGN KEY (question_id) REFERENCES questions (question_id) -- Set question_id as foreign key from table questions's question_id
 );
 
-
-
+-- CREATE TABLE record to store information about all records
+create table record (
+    record_id   INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each record
+    student_id  INT NOT NULL, -- ID of the student
+    question_id INT NOT NULL, -- ID of the question
+    option_id   INT NOT NULL, -- ID of the option
+    FOREIGN KEY (student_id) REFERENCES student_user (id), -- Set student_id as foreign key from table student_user's id
+    FOREIGN KEY (question_id) REFERENCES questions (question_id), -- Set question_id as foreign key from table questions's question_id
+    FOREIGN KEY (option_id) REFERENCES options (option_id) -- Set option_id as foreign key from table options's option_id
+);
 
 
 

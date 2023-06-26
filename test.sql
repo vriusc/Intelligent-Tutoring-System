@@ -29,8 +29,26 @@ CREATE TABLE  student_subjects (
     student_id         INT  NOT NULL, -- ID of the student
     subject_id         INT  NOT NULL, -- ID of the subject
     progress           INT  NOT NULL, -- Progress of the student in the subject
-    FOREIGN KEY (student_id) REFERENCES student_user (id), -- Set student_id as foreign key from table student_user
-    FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id) -- Set subject_id as foreign key from table Subjects
+    FOREIGN KEY (student_id) REFERENCES student_user (id), -- Set student_id as foreign key from table student_user's id
+    FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id) -- Set subject_id as foreign key from table Subjects's subject_id
+);
+
+-- CREATE TABLE Units to store information about all units
+CREATE TABLE  Units (
+    unit_id         INT             AUTO_INCREMENT PRIMARY KEY,  -- Unique ID for each unit
+    unit_name       VARCHAR(50)     NOT NULL,  -- Unit name
+    subject_id      INT             NOT NULL,  -- ID of the subject
+    Units_order     INT             NOT NULL,  -- Order of the unit
+    description     VARCHAR(255)    NOT NULL,  -- Unit description
+    materials_path  VARCHAR(255),  -- Path to the materials
+    FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id) -- Set subject_id as foreign key from table Subjects's subject_id
+);
+
+
+-- CREATE TABLE question_types to types of questions
+CREATE TABLE question_types (
+    question_type_id    INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each question type
+    question_type       VARCHAR(255) NOT NULL -- Question type
 );
 
 

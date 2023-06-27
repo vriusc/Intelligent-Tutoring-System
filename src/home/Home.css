@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
   color:#fff;
+  min-height: 93vh;
 }
 .Home {
   display: flex;
@@ -28,4 +29,5 @@
 .Level-list .Card-list {
   margin: 5px;
   max-width: 320px;
+  padding: 6px;
 }

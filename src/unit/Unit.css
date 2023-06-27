@@ -1,0 +1,48 @@
+.Unit-container {
+  background-color: #282c34;
+  color:#fff;
+  min-height: 93vh;
+}
+
+.Unit {
+  padding: 3em 4em;
+}
+
+.Unit-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.Unit-video {
+  align-self: center;
+  margin-top: 3em;
+}
+
+.Unit-btn-quest {
+  align-self: center;
+  margin: 2em 0;
+}
+
+.Question-container {
+  margin: 1em;
+}
+
+.Quest-image {
+  max-height: 350px;
+  margin: 20px;
+}
+
+.Quest-audio {
+  margin: 20px;
+}
+
+.Btn-row {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+}
+
+.Unit-btn {
+  margin: 0 10px;
+  min-width: 80px;
+}

@@ -1,3 +1,6 @@
+
+
+
 | Columns  | Data_type    | Constraints | Key         |
 | -------- | ------------ | ----------- | ----------- |
 | id       | INT          | AI          | PRIMARY KEY |
@@ -65,3 +68,36 @@ Table 5: question_types
 | explanation      | VARCHAR(255) | NOT NULL    |             |
 
 Table 6: questions
+
+
+
+| Columns          | Data_type | Constraints | Key         |
+| ---------------- | --------- | ----------- | ----------- |
+| question_unit_id | INT       | AI          | PRIMARY KEY |
+| question_id      | INT       | NOT NULL    | FOREIGN KEY |
+| unit_id          | INT       | NOT NULL    | FOREIGN KEY |
+
+Table 7: question_units
+
+
+
+| Columns      | Data_type    | Constraints | Key         |
+| ------------ | ------------ | ----------- | ----------- |
+| option_id    | INT          | AI          | PRIMARY KEY |
+| question_id  | INT          | NOT NULL    | FOREIGN KEY |
+| option       | VARCHAR(255) | NOT NULL    |             |
+| is_correct   | BOOLEAN      | NOT NULL    |             |
+| order_number | INT          | NOT NULL    |             |
+
+Table 8: options
+
+
+
+| Columns     | Data_type | Constraints | Key         |
+| ----------- | --------- | ----------- | ----------- |
+| record_id   | INT       | AI          | PRIMARY KEY |
+| student_id  | INT       | NOT NULL    | FOREIGN KEY |
+| question_id | INT       | NOT NULL    | FOREIGN KEY |
+| option_id   | INT       | NOT NULL    | FOREIGN KEY |
+
+Table 9: record

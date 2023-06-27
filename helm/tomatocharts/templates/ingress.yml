@@ -18,6 +18,13 @@ spec:
             port:
               number: 31000
       - pathType: Prefix
+        path: "/gpt"
+        backend:
+          service:
+            name: tchat
+            port:
+              number: 31002
+      - pathType: Prefix
         path: "/"
         backend:
           service:

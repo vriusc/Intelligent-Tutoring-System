@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tfront
+spec:
+  ports:
+  - port: 31001
+    targetPort: tfront-port
+    protocol: TCP
+  selector:
+    app: tfront
+# type: LoadBalancer
+

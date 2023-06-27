@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tfront
+  labels:
+    app: tfront
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tfront
+  template:
+    metadata:
+      labels:
+        app: tfront
+    spec:
+      containers:
+      - name: tfront
+        image: xiaochili123/tomato-front:V4.0.1
+        ports:
+        - name: tfront-port
+          containerPort: 3000
+            #   volumeMounts:
+            #- name: efs-volume
+            #mountPath: /mnt/efs  
+            # volumes:
+            #- name: efs-volume
+            #persistentVolumeClaim:
+            #claimName: tomato-efs-claim

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomatodb
+  labels:
+    app: tomatodb
+spec:
+  selector:
+    matchLabels:
+      app: tomatodb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tomatodb
+    spec:
+      containers:
+      - name: tomatodb
+        image: xiaochili123/tomato-db:V1
+        ports:
+        - name: tdb-port
+          containerPort: 3306
+        env: 
+         - name: MYSQL_ROOT_PASSWORD
+           value: Souvenir

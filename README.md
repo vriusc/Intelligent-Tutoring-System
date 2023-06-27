@@ -1,5 +1,3 @@
-MYSQL 8.0.33
-
 | Columns  | Data_type    | Constraints | Key         |
 | -------- | ------------ | ----------- | ----------- |
 | id       | INT          | AI          | PRIMARY KEY |
@@ -21,3 +19,49 @@ Table 1: student_user table
 Table 2: Subjects table
 
 
+
+| Columns            | Data_type | Constraints | Key         |
+| ------------------ | --------- | ----------- | ----------- |
+| student_subject_id | INT       | AI          | PRIMARY KEY |
+| student_id         | INT       | NOT NULL    | FOREIGN KEY |
+| subject_id         | INT       | NOT NULL    | FOREIGN KEY |
+| progress           | INT       | NOT NULL    |             |
+
+Table 3: student_subjects
+
+
+
+| Columns        | Data_type    | Constraints | Key         |
+| -------------- | ------------ | ----------- | ----------- |
+| unit_id        | INT          | AI          | PRIMARY KEY |
+| unit_name      | VARCHAR(50)  | NOT NULL    |             |
+| subject_id     | INT          | NOT NULL    | FOREIGN KEY |
+| Units_order    | INT          | NOT NULL    |             |
+| description    | VARCHAR(255) | NOT NULL    |             |
+| materials_path | VARCHAR(255) |             |             |
+
+Table 4: Units
+
+
+
+| Columns          | Data_type    | Constraints | Key         |
+| ---------------- | ------------ | ----------- | ----------- |
+| question_type_id | INT          | AI          | PRIMARY KEY |
+| question_type    | VARCHAR(255) | NOT NULL    |             |
+
+Table 5: question_types
+
+
+
+| Columns          | Data_type    | Constraints | Key         |
+| ---------------- | ------------ | ----------- | ----------- |
+| question_id      | INT          | AI          | PRIMARY KEY |
+| question         | VARCHAR(255) | NOT NULL    |             |
+| question_type_id | INT          | NOT NULL    | FOREIGN KEY |
+| picture_path     | VARCHAR(255) |             |             |
+| video_path       | VARCHAR(255) |             |             |
+| audio_path       | VARCHAR(255) |             |             |
+| question_order   | INT          | NOT NULL    |             |
+| explanation      | VARCHAR(255) | NOT NULL    |             |
+
+Table 6: questions

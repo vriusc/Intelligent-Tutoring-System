@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import YoutubePlater from './YoutubePlayer'
 import { Badge, Button } from 'reactstrap'
 import Question from './Question'
+import { gptResponse } from '../lib/gpt-client'
 
 export async function loader({ params }) {
   const unit = await getUnitById(params.unitId)
@@ -22,6 +23,9 @@ const Unit = () => {
   const [questOptions, setQuestOptions] = useState([])
   const [showQuestions, setShowQuestions] = useState(false)
   const [onReview, setOnReview] = useState(false)
+  const [answersList, setAnswersList] = useState([])
+
+  const { data } = useLoaderData().unit
 
   useEffect(() => {
     Promise.all([getStudent(studentId), getOptions({})]).then((response) => {
@@ -30,7 +34,6 @@ const Unit = () => {
       settingOptions(response[1])
     })
   }, [studentId])
-  const { data } = useLoaderData().unit
 
   const settingStudents = (response) => {
     const { data } = response
@@ -61,6 +64,33 @@ const Unit = () => {
     setOnReview(true)
   }
 
+  const resetQuestions = () => {
+    setAnswersList([])
+    setOnReview(false)
+  }
+
+  const getFeedback = () => {
+    console.log('feedback', answersList)
+    const params = {
+      username: student.username,
+      test_score: '8',
+      text: 'aaa'
+    }
+
+    gptResponse(params)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.error(error.message)
+      })
+  }
+
+  // const checkFeedback = () => {
+  //   console.log(answersList)
+  //   return answersList.length < 2
+  // }
+
   return (
     <>
       <Header user={student} subjectCount={1} title={data.unitName} />
@@ -90,6 +120,8 @@ const Unit = () => {
                   options={myOptions(questOptions, question.questionId)}
                   number={index + 1}
                   review={onReview}
+                  answersList={answersList}
+                  setAnswersList={setAnswersList}
                 />
               ))}
               {questions.length === 0 && (
@@ -102,12 +134,20 @@ const Unit = () => {
                   disabled={!onReview}
                   className="Unit-btn"
                   color="danger"
-                  onClick={() => setOnReview(false)}
+                  onClick={() => resetQuestions()}
                 >
                   Restart
                 </Button>
                 <Button className="Unit-btn" color="success" onClick={() => reviewQuestions()}>
                   Submit
+                </Button>
+                <Button
+                  disabled={false}
+                  className="Unit-btn"
+                  color="primary"
+                  onClick={() => getFeedback()}
+                >
+                  Feedback
                 </Button>
               </div>
             </>

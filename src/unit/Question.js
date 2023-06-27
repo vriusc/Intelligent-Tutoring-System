@@ -5,23 +5,25 @@ import laptopImage from '../assets/question1_image.jpeg'
 import phoneAudio from '../assets/question2_audio.mp3'
 
 const Question = (args) => {
-  const { question, options, number, review } = args
+  const { question, options, number, review, answersList, setAnswersList } = args
   const { questions: quest } = question
   const [optSelected, setOptSelected] = useState(null)
   const [isCorrect, setIsCorrect] = useState(2)
-  console.log(question, options)
 
-  const handleRadioBtn = (event) => {
+  const handleRadioBtn = (event, currentOption) => {
     setOptSelected(parseInt(event.target.value))
+    if (currentOption.isCorrect === 1) {
+      setAnswersList([...answersList, currentOption.questionId])
+    }
   }
 
   useEffect(() => {
-    console.log('review', review)
     if (review === true) {
-      // console.log('q', optSelected, options)
       const currentOption = options.find((opt) => opt.optionId === optSelected)
       setIsCorrect(currentOption.isCorrect)
-      // console.log(currentOption, isCorrect, currentOption.isCorrect)
+      // if (currentOption.isCorrect === 1) {
+      //   setAnswersList([...answersList, currentOption.questionId])
+      // }
     } else {
       setIsCorrect(2)
     }
@@ -48,7 +50,7 @@ const Question = (args) => {
               value={currentOptions.optionId}
               checked={currentOptions.optionId === optSelected}
               disabled={review}
-              onChange={handleRadioBtn}
+              onChange={(event) => handleRadioBtn(event, currentOptions)}
             />
             <Label style={{ marginLeft: '0.5em' }}>{` ${currentOptions.option}`}</Label>
           </div>

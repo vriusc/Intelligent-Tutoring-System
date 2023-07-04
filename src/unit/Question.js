@@ -1,7 +1,7 @@
 import { Alert, Input, Label } from 'reactstrap'
 import './Unit.css'
 import { useEffect, useState } from 'react'
-import laptopImage from '../assets/question1_image.jpeg'
+import laptopImage from 'https://tomatolearning.s3.amazonaws.com/question2.mp3'
 import phoneAudio from '../assets/question2_audio.mp3'
 
 const Question = (args) => {

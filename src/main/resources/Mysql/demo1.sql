@@ -96,3 +96,14 @@ theorist              INT NOT NULL,
 pragmatist            INT NOT NULL,
 FOREIGN KEY (student_id) REFERENCES student_user (id)
 );
+
+CREATE TABLE comments(
+comment_id          INT AUTO_INCREMENT PRIMARY KEY,
+student_id          INT NOT NULL,
+question_id         INT NOT NULL,
+comment             VARCHAR(255) NOT NULL,
+time                TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+likes               INT NOT NULL,
+FOREIGN KEY (student_id) REFERENCES student_user (id),
+FOREIGN KEY (question_id) REFERENCES questions (question_id)
+);

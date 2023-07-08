@@ -32,7 +32,7 @@
     <!--查询所有并分页-->
     <select id="queryAllByLimit" resultMap="QuestionsMap">
         select
-        q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,,q.description
+        q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,q.description,
         qt.question_type_id , qt.question_type
         from questions q
         left join question_types qt on q.question_type_id = qt.question_type_id
@@ -60,6 +60,9 @@
             </if>
             <if test="Questions.explanation != null and Questions.explanation != ''">
                 and q.explanation = #{Questions.explanation}
+            </if>
+            <if test="Questions.description != null and Questions.description != ''">
+                and q.description = #{Questions.description}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}

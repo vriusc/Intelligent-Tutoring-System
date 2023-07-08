@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.LearningStyleDao">
+
+    <resultMap type="com.example.demo.entity.LearningStyle" id="LearningStyleMap">
+        <result property="learningStyleId" column="learning_style_id" jdbcType="INTEGER"/>
+        <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+        <result property="activist" column="activist" jdbcType="INTEGER"/>
+        <result property="reflector" column="reflector" jdbcType="INTEGER"/>
+        <result property="theorist" column="theorist" jdbcType="INTEGER"/>
+        <result property="pragmatist" column="pragmatist" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="LearningStyleMap">
+        select
+          learning_style_id, student_id, activist, reflector, theorist, pragmatist
+        from learning_style
+        where learning_style_id = #{learningStyleId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="LearningStyleMap">
+        select
+          learning_style_id, student_id, activist, reflector, theorist, pragmatist
+        from learning_style
+        <where>
+            <if test="learningStyle.learningStyleId != null">
+                and learning_style_id = #{learningStyle.learningStyleId}
+            </if>
+            <if test="learningStyle.studentId != null">
+                and student_id = #{learningStyle.studentId}
+            </if>
+            <if test="learningStyle.activist != null">
+                and activist = #{learningStyle.activist}
+            </if>
+            <if test="learningStyle.reflector != null">
+                and reflector = #{learningStyle.reflector}
+            </if>
+            <if test="learningStyle.theorist != null">
+                and theorist = #{learningStyle.theorist}
+            </if>
+            <if test="learningStyle.pragmatist != null">
+                and pragmatist = #{learningStyle.pragmatist}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from learning_style
+        <where>
+            <if test="learningStyleId != null">
+                and learning_style_id = #{learningStyleId}
+            </if>
+            <if test="studentId != null">
+                and student_id = #{studentId}
+            </if>
+            <if test="activist != null">
+                and activist = #{activist}
+            </if>
+            <if test="reflector != null">
+                and reflector = #{reflector}
+            </if>
+            <if test="theorist != null">
+                and theorist = #{theorist}
+            </if>
+            <if test="pragmatist != null">
+                and pragmatist = #{pragmatist}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="learningStyleId" useGeneratedKeys="true">
+        insert into learning_style(learning_style.student_id, learning_style.activist, learning_style.reflector, learning_style.theorist, learning_style.pragmatist)
+        values (#{studentId}, #{activist}, #{reflector}, #{theorist}, #{pragmatist})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="learningStyleId" useGeneratedKeys="true">
+        insert into learning_style(student_id, activist, reflector, theorist, pragmatist)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.studentId}, #{entity.activist}, #{entity.reflector}, #{entity.theorist}, #{entity.pragmatist})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="learningStyleId" useGeneratedKeys="true">
+        insert into learning_style(student_id, activist, reflector, theorist, pragmatist)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.studentId}, #{entity.activist}, #{entity.reflector}, #{entity.theorist}, #{entity.pragmatist})
+        </foreach>
+        on duplicate key update
+        student_id = values(student_id),
+        activist = values(activist),
+        reflector = values(reflector),
+        theorist = values(theorist),
+        pragmatist = values(pragmatist)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update learning_style
+        <set>
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="activist != null">
+                activist = #{activist},
+            </if>
+            <if test="reflector != null">
+                reflector = #{reflector},
+            </if>
+            <if test="theorist != null">
+                theorist = #{theorist},
+            </if>
+            <if test="pragmatist != null">
+                pragmatist = #{pragmatist},
+            </if>
+        </set>
+        where learning_style_id = #{learningStyleId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from learning_style where learning_style_id = #{learningStyleId}
+    </delete>
+
+</mapper>
+

@@ -16,7 +16,8 @@ import javax.annotation.Resource;
  * @since 2023-06-23 19:27:35
  */
 @RestController
-@RequestMapping("api/record")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/record")
 public class RecordController {
     /**
      * 服务对象

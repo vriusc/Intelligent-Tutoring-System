@@ -16,10 +16,15 @@ spec:
     spec:
       containers:
       - name: tfront
-        image: xiaochili123/tomato-front:V4.0.1
+        image: xiaochili123/tomato-front:V4.4
         ports:
         - name: tfront-port
           containerPort: 3000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 250Mi
+
             #   volumeMounts:
             #- name: efs-volume
             #mountPath: /mnt/efs  

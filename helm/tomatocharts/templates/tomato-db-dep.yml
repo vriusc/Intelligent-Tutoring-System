@@ -16,10 +16,25 @@ spec:
     spec:
       containers:
       - name: tomatodb
-        image: xiaochili123/tomato-db:V1
+        image: xiaochili123/tomato-db:V5.1
+        volumeMounts:
+        - mountPath: /var/lin/mysql
+          name: tomato-db-data
         ports:
         - name: tdb-port
           containerPort: 3306
         env: 
          - name: MYSQL_ROOT_PASSWORD
            value: Souvenir
+        resources:
+          requests:
+            cpu: 500m
+            memory: 500Mi
+
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+      volumes:
+      - name: tomato-db-data
+        awsElasticBlockStore:
+          volumeID: vol-0977e3b07bfbaad51	
+          fsType: ext4

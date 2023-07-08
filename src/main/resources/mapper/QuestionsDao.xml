@@ -11,6 +11,7 @@
         <result property="audioPath" column="audio_path" jdbcType="VARCHAR"/>
         <result property="questionOrder" column="question_order" jdbcType="INTEGER"/>
         <result property="explanation" column="explanation" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
 
     <association property="questionTypes" javaType="com.example.demo.entity.QuestionTypes">
         <id property="questionTypeId" column="question_type_id" jdbcType="INTEGER"/>
@@ -21,7 +22,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="QuestionsMap">
         select
-            q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,
+            q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,q.description,
             qt.question_type_id, qt.question_type
         from questions q
                  inner join question_types qt on q.question_type_id = qt.question_type_id
@@ -31,7 +32,7 @@
     <!--查询所有并分页-->
     <select id="queryAllByLimit" resultMap="QuestionsMap">
         select
-        q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,
+        q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,,q.description
         qt.question_type_id , qt.question_type
         from questions q
         left join question_types qt on q.question_type_id = qt.question_type_id
@@ -98,23 +99,23 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="questionId" useGeneratedKeys="true">
-        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation)
-        values (#{question}, #{questionTypeId}, #{picturePath}, #{videoPath}, #{audioPath}, #{questionOrder}, #{explanation})
+        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation,description)
+        values (#{question}, #{questionTypeId}, #{picturePath}, #{videoPath}, #{audioPath}, #{questionOrder}, #{explanation},#{description})
     </insert>
 
     <insert id="insertBatch" keyProperty="questionId" useGeneratedKeys="true">
-        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation)
+        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation,description)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.question}, #{entity.questionTypeId}, #{entity.picturePath}, #{entity.videoPath}, #{entity.audioPath}, #{entity.questionOrder}, #{entity.explanation})
+        (#{entity.question}, #{entity.questionTypeId}, #{entity.picturePath}, #{entity.videoPath}, #{entity.audioPath}, #{entity.questionOrder}, #{entity.explanation},#{entity.description})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="questionId" useGeneratedKeys="true">
-        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation)
+        insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation,description)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.question}, #{entity.questionTypeId}, #{entity.picturePath}, #{entity.videoPath}, #{entity.audioPath}, #{entity.questionOrder}, #{entity.explanation})
+            (#{entity.question}, #{entity.questionTypeId}, #{entity.picturePath}, #{entity.videoPath}, #{entity.audioPath}, #{entity.questionOrder}, #{entity.explanation}, #{entity.description})
         </foreach>
         on duplicate key update
         question = values(question),
@@ -150,6 +151,9 @@
             </if>
             <if test="explanation != null and explanation != ''">
                 explanation = #{explanation},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
             </if>
         </set>
         where question_id = #{questionId}

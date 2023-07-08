@@ -25,6 +25,8 @@ public class Questions implements Serializable {
     private String videoPath;
     
     private String audioPath;
+
+    private String description;
     
     private Integer questionOrder;
     

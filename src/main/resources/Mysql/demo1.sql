@@ -1,5 +1,5 @@
+DROP DATABASE IF EXISTS test;
 CREATE DATABASE test;
-
 use test;
 
 CREATE TABLE student_user (
@@ -56,6 +56,7 @@ video_path          VARCHAR(255),
 audio_path          VARCHAR(255),
 question_order      INT NOT NULL,
 explanation         VARCHAR(255) NOT NULL,
+description         VARCHAR(255) NOT NULL,
 FOREIGN KEY (question_type_id) REFERENCES question_types (question_type_id)
 );
 
@@ -84,4 +85,14 @@ option_id           INT NOT NULL,
 FOREIGN KEY (student_id) REFERENCES student_user (id),
 FOREIGN KEY (question_id) REFERENCES questions (question_id),
 FOREIGN KEY (option_id) REFERENCES options (option_id)
-)
+);
+
+CREATE TABLE learning_style(
+learning_style_id   INT AUTO_INCREMENT PRIMARY KEY,
+student_id          INT NOT NULL UNIQUE,
+activist              INT NOT NULL,
+reflector             INT NOT NULL,
+theorist              INT NOT NULL,
+pragmatist            INT NOT NULL,
+FOREIGN KEY (student_id) REFERENCES student_user (id)
+);

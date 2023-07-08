@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  */
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("studentUser")
+@RequestMapping("/api/studentUser")
 public class StudentUserController {
     /**
      * 服务对象

@@ -18,7 +18,7 @@ import java.util.List;
  */
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("units")
+@RequestMapping("/api/units")
 public class UnitsController {
     /**
      * 服务对象

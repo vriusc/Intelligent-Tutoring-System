@@ -46,3 +46,15 @@ export const getQuestionsByUnitId = async (unitId) => {
 export const getOptions = async (params) => {
   return await axios.get(`${baseURL}/options`, { params })
 }
+
+export const postLearningStyle = async (data) => {
+  return await axios.post(`${baseURL}/learningStyle`, data)
+}
+
+export const editLearningStyle = async (data) => {
+  return await axios.put(`${baseURL}/learningStyle`, data)
+}
+
+export const getLearningStyle = async (params) => {
+  return await axios.get(`${baseURL}/learningStyle`, { params })
+}

@@ -6,6 +6,7 @@ import Login from './login/Login'
 import CoursesList from './course/Course-list'
 import Course, { loader as unitsLoader } from './course/Course'
 import Unit, { loader as unitIdLoader } from './unit/Unit'
+import Questionnaire from './home/Questionnaire'
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/questionnaire',
+    element: <Questionnaire />
   },
   {
     path: '/courses',

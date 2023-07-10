@@ -4,7 +4,7 @@ import { getOptions, getQuestionsByUnitId, getStudent, getUnitById } from '../li
 import Header from '../element/Header'
 import { useEffect, useState } from 'react'
 import YoutubePlater from './YoutubePlayer'
-import { Badge, Button } from 'reactstrap'
+import { Badge, Button, Card, CardBody, CardText } from 'reactstrap'
 import Question from './Question'
 import { gptResponse } from '../lib/gpt-client'
 
@@ -24,6 +24,7 @@ const Unit = () => {
   const [showQuestions, setShowQuestions] = useState(false)
   const [onReview, setOnReview] = useState(false)
   const [answersList, setAnswersList] = useState([])
+  const [gptFeedback, setGPTFeedback] = useState('')
 
   const { data } = useLoaderData().unit
 
@@ -80,6 +81,7 @@ const Unit = () => {
     gptResponse(params)
       .then((response) => {
         console.log(response)
+        setGPTFeedback(response.data)
       })
       .catch((error) => {
         console.error(error.message)
@@ -100,6 +102,7 @@ const Unit = () => {
           <h5>Description</h5>
           <p>{data.description}</p>
           <div className="Unit-video">
+            {/* <iframe width="420" height="315" src={data.materials_path}></iframe> */}
             <YoutubePlater urlPath={data.materials_path} />
           </div>
           <Button
@@ -150,6 +153,13 @@ const Unit = () => {
                   Feedback
                 </Button>
               </div>
+              {gptFeedback && (
+                <Card style={{ marginTop: '1em' }}>
+                  <CardBody>
+                    <CardText>{gptFeedback}</CardText>
+                  </CardBody>
+                </Card>
+              )}
             </>
           )}
         </div>

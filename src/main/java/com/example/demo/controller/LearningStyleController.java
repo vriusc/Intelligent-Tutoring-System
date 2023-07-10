@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.LearningStyle;
 import com.example.demo.service.LearningStyleService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

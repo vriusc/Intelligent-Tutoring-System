@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Comments;
 import com.example.demo.service.CommentsService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @since 2023-07-08 05:07:47
  */
 @RestController
-@RequestMapping("comments")
+@RequestMapping("/api/comments")
 public class CommentsController {
     /**
      * 服务对象
@@ -32,7 +32,7 @@ public class CommentsController {
      * @return 查询结果
      */
     @GetMapping
-    public ResponseEntity<Page<Comments>> queryByPage(Comments comments, PageRequest pageRequest) {
+    public ResponseEntity<Page<Comments>> queryByPage(Comments comments, Pageable pageRequest) {
         return ResponseEntity.ok(this.commentsService.queryByPage(comments, pageRequest));
     }
 
@@ -54,7 +54,7 @@ public class CommentsController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Comments> add(Comments comments) {
+    public ResponseEntity<Comments> add(@RequestBody Comments comments) {
         return ResponseEntity.ok(this.commentsService.insert(comments));
     }
 
@@ -65,7 +65,7 @@ public class CommentsController {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<Comments> edit(Comments comments) {
+    public ResponseEntity<Comments> edit(@RequestBody Comments comments) {
         return ResponseEntity.ok(this.commentsService.update(comments));
     }
 

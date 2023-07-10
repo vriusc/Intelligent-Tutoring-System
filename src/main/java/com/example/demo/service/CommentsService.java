@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.entity.Comments;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 /**
  * (Comments)表服务接口
@@ -27,7 +28,7 @@ public interface CommentsService {
      * @param pageRequest      分页对象
      * @return 查询结果
      */
-    Page<Comments> queryByPage(Comments comments, PageRequest pageRequest);
+    Page<Comments> queryByPage(Comments comments, Pageable pageRequest);
 
     /**
      * 新增数据

@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.Comments;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2023-07-08 05:07:47
  */
+@Mapper
 public interface CommentsDao {
 
     /**
@@ -28,7 +30,7 @@ public interface CommentsDao {
      * @param pageable         分页对象
      * @return 对象列表
      */
-    List<Comments> queryAllByLimit(Comments comments, @Param("pageable") Pageable pageable);
+    List<Comments> queryAllByLimit(@Param("comments") Comments comments, @Param("pageable") Pageable pageable);
 
     /**
      * 统计总行数

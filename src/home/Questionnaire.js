@@ -2,7 +2,12 @@ import './Home.css'
 import Header from '../element/Header'
 import { Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { getStudent } from '../lib/tutoring-client'
+import {
+  editLearningStyle,
+  getLearningStyle,
+  getStudent,
+  postLearningStyle
+} from '../lib/tutoring-client'
 import { getLearningQuestionnaire } from '../lib/local-client'
 import { Button, Input, Label } from 'reactstrap'
 
@@ -55,6 +60,7 @@ const Questionnaire = () => {
   const [student, setStudent] = useState({})
   const [questionnaire, setQuestionare] = useState([])
   const [score, setScore] = useState({})
+  const [learningStyle, setLearningStyle] = useState({})
 
   const description = `There is no time limit to this questionnaire. It will probably take you 10-15 minutes. The accuracy of the results depends on how honest you can be. There are no right or wrong answers. If you agree more than you disagree with a statement choose the option agree. If you disagree more than you agree choose the option disagree. Be sure to mark each item with either agree or desagree. When you have completed the questionnaire, continue by selecting 'End Questionnaire'`
   const scoreList = {
@@ -78,9 +84,14 @@ const Questionnaire = () => {
 
   useEffect(() => {
     setScore(scoreList)
-    Promise.all([getStudent(studentId), getLearningQuestionnaire()]).then((response) => {
+    Promise.all([
+      getStudent(studentId),
+      getLearningQuestionnaire(),
+      getLearningStyle({ studentId })
+    ]).then((response) => {
       settingStudents(response[0])
       settingQuestionare(response[1])
+      settingLearningStyle(response[2])
     })
   }, [studentId])
 
@@ -95,6 +106,13 @@ const Questionnaire = () => {
     const { data } = response
     if (data) {
       setQuestionare(data)
+    }
+  }
+
+  const settingLearningStyle = (response) => {
+    const { data } = response
+    if (data.content.length) {
+      setLearningStyle(data.content[0])
     }
   }
 
@@ -114,7 +132,31 @@ const Questionnaire = () => {
     pragmatist.total = filterListTotal(pragmatist)
     setScore({ ...score, pragmatist })
 
-    console.log(score)
+    const newLearningStyle = {
+      activist: activist.total,
+      reflector: reflector.total,
+      theorist: theorist.total,
+      pragmatist: pragmatist.total,
+      studentId
+    }
+    if (learningStyle.learningStyleId) {
+      const edited = { ...learningStyle, ...newLearningStyle }
+      setLearningStyle(edited)
+      editLearningStyle(edited)
+        .then((response) => {
+          const { data } = response
+          setLearningStyle(data)
+        })
+        .catch((error) => console.error(error))
+    } else {
+      setLearningStyle(newLearningStyle)
+      postLearningStyle(newLearningStyle)
+        .then((response) => {
+          const { data } = response
+          setLearningStyle(data)
+        })
+        .catch((error) => console.error(error))
+    }
   }
 
   const filterListTotal = (scoreObject) => {
@@ -145,7 +187,6 @@ const Questionnaire = () => {
             style={{ alignSelf: 'end' }}
             color="success"
             size="lg"
-            disabled={questionnaire.some((quest) => quest.answer === 'none')}
             onClick={() => onFinishQuestionnaire()}
           >
             END QUESTIONNAIRE

@@ -9,7 +9,7 @@ import {
   postLearningStyle
 } from '../lib/tutoring-client'
 import { getLearningQuestionnaire } from '../lib/local-client'
-import { Button, Input, Label } from 'reactstrap'
+import { Alert, Button, Input, Label } from 'reactstrap'
 
 const LearningQuestion = (args) => {
   const { question: quest, questionnaire, setQuestionare } = args
@@ -61,6 +61,7 @@ const Questionnaire = () => {
   const [questionnaire, setQuestionare] = useState([])
   const [score, setScore] = useState({})
   const [learningStyle, setLearningStyle] = useState({})
+  const [showAlert, setShowAlert] = useState(false)
 
   const description = `There is no time limit to this questionnaire. It will probably take you 10-15 minutes. The accuracy of the results depends on how honest you can be. There are no right or wrong answers. If you agree more than you disagree with a statement choose the option agree. If you disagree more than you agree choose the option disagree. Be sure to mark each item with either agree or desagree. When you have completed the questionnaire, continue by selecting 'End Questionnaire'`
   const scoreList = {
@@ -146,6 +147,8 @@ const Questionnaire = () => {
         .then((response) => {
           const { data } = response
           setLearningStyle(data)
+          setShowAlert(true)
+          setTimeout(() => setShowAlert(false), 2000)
         })
         .catch((error) => console.error(error))
     } else {
@@ -154,6 +157,8 @@ const Questionnaire = () => {
         .then((response) => {
           const { data } = response
           setLearningStyle(data)
+          setShowAlert(true)
+          setTimeout(() => setShowAlert(false), 2000)
         })
         .catch((error) => console.error(error))
     }
@@ -183,6 +188,9 @@ const Questionnaire = () => {
                 />
               ))}
           </div>
+          <Alert color="success" isOpen={showAlert}>
+            Questionnaire updated successfully
+          </Alert>
           <Button
             style={{ alignSelf: 'end' }}
             color="success"

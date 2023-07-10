@@ -16,7 +16,6 @@ const LearningQuestion = (args) => {
       } else return searchQuest
     })
     setQuestionare(newQuestionnaire)
-    console.log(questionnaire)
   }
 
   return (
@@ -101,7 +100,6 @@ const Questionnaire = () => {
 
   const onFinishQuestionnaire = () => {
     // To Continue
-    console.log(questionnaire, score)
     const { activist, reflector, theorist, pragmatist } = score
 
     activist.total = filterListTotal(activist)

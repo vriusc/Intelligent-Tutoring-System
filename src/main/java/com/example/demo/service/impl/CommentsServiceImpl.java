@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.entity.Comments;
 import com.example.demo.dao.CommentsDao;
 import com.example.demo.service.CommentsService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -40,7 +41,7 @@ public class CommentsServiceImpl implements CommentsService {
      * @return 查询结果
      */
     @Override
-    public Page<Comments> queryByPage(Comments comments, PageRequest pageRequest) {
+    public Page<Comments> queryByPage(Comments comments, Pageable pageRequest) {
         long total = this.commentsDao.count(comments);
         return new PageImpl<>(this.commentsDao.queryAllByLimit(comments, pageRequest), pageRequest, total);
     }
@@ -53,6 +54,7 @@ public class CommentsServiceImpl implements CommentsService {
      */
     @Override
     public Comments insert(Comments comments) {
+        comments.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
         this.commentsDao.insert(comments);
         return comments;
     }

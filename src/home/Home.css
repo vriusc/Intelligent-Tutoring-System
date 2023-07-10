@@ -1,14 +1,18 @@
 .Container {
   background-color: #282c34;
-  width: 100%;
-  height: 100%;
   color:#fff;
-  min-height: 93vh;
+  min-height: 94vh;
 }
 .Home {
   display: flex;
   flex-direction: column;
   padding: 3em 2em;
+}
+
+.Home .Home-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .Subject-list {
@@ -30,4 +34,13 @@
   margin: 5px;
   max-width: 320px;
   padding: 6px;
+}
+
+.Quest-container {
+  margin: 15px;
+}
+.Quest-radio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

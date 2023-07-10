@@ -68,12 +68,21 @@ const Home = () => {
     })
   }
 
+  const goToQuestionnaire = () => {
+    navigate('/questionnaire')
+  }
+
   return (
     <>
       <Header user={student} subjectCount={studentSubjectList.length} />
       <div className="Container">
         <div className="Home">
-          <h2>What do you want to learn today?</h2>
+          <div className="Home-head">
+            <h2>What do you want to learn today?</h2>
+            <Button color="success" onClick={() => goToQuestionnaire()}>
+              Learning Questionnaire
+            </Button>
+          </div>
           {subjectList.length > 0 && (
             <div className="Subject-list">
               {subjectList.map((mySubject, index) => (

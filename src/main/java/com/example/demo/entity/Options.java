@@ -25,8 +25,9 @@ public class Options implements Serializable {
     
     private Integer orderNumber;
 
-    private Questions questions;
+    private String description;
 
+    private Questions questions;
 
 }
 

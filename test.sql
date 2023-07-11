@@ -41,8 +41,13 @@ CREATE TABLE  Units (
     Units_order     INT             NOT NULL,  -- Order of the unit
     description     VARCHAR(255)    NOT NULL,  -- Unit description
     materials_path  VARCHAR(255),  -- Path to the materials
+    text           VARCHAR(255)    ,  -- Text of the unit
+    text_description VARCHAR(255)  ,  -- Text description
     FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id) -- Set subject_id as foreign key from table Subjects's subject_id
 );
+
+ALTER TABLE Units ADD COLUMN text VARCHAR(255) AFTER materials_path;
+ALTER TABLE Units ADD COLUMN text_description VARCHAR(255) AFTER text;
 
 -- CREATE TABLE question_types to types of questions
 -- reading, listening, writing, speaking
@@ -83,8 +88,12 @@ CREATE TABLE options (
     `option`        VARCHAR(255)    NOT NULL, -- Contents of the option
     is_correct      BOOLEAN         NOT NULL, -- Whether the option is correct
     order_number    INT             NOT NULL, -- Order of the option
+    description     VARCHAR(255)    NOT NULL, -- Description of the option
     FOREIGN KEY (question_id) REFERENCES questions (question_id) -- Set question_id as foreign key from table questions's question_id
 );
+
+ALTER TABLE options ADD COLUMN description VARCHAR(255) AFTER order_number;
+
 
 -- CREATE TABLE record to store information about all records
 create table record (
@@ -132,99 +141,149 @@ INSERT INTO `student_user` (`id`, `username`, `password`, `email`) VALUES (5, 't
 
 
 # insert data into Subjects
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (1, 'Spanish', 'Junior', 'Junior Spanish');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (1, 'Spanish', 'Beginner', 'Beginner Spanish');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (2, 'Spanish', 'Intermediate', 'Intermediate Spanish');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (3, 'Spanish', 'Advanced', 'Advanced Spanish');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (4, 'Mandarin', 'Junior', 'Junior Mandarin');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (4, 'Mandarin', 'Beginner', 'Beginner Mandarin');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (5, 'Mandarin', 'Intermediate', 'Intermediate Mandarin');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (6, 'Mandarin', 'Advanced', 'Advanced Mandarin');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (7, 'English', 'Junior', 'Junior English');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (7, 'English', 'Beginner', 'Beginner English');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (8, 'English', 'Intermediate', 'Intermediate English');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (9, 'English', 'Advanced', 'Advanced English');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (10, 'French', 'Junior', 'Junior French');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (10, 'French', 'Beginner', 'Beginner French');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (11, 'French', 'Intermediate', 'Intermediate French');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (12, 'French', 'Advanced', 'Advanced French');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (13, 'Italian', 'Junior', 'Junior Italian');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (13, 'Italian', 'Beginner', 'Beginner Italian');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (14, 'Italian', 'Intermediate', 'Intermediate Italian');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (15, 'Italian', 'Advanced', 'Advanced Italian');
 
 
 # insert data into Units
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (1, 'Junior Spanish Unit1', 1, 1, 'the 1st unit of Junior Spanish ', 'https://www.youtube.com/embed/LGMKg6MUdxI');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (2, 'Junior Spanish Unit2', 1, 2, 'the 2nd unit of Junior Spanish ', 'https://www.youtube.com/embed/LGMKg6MUdxI');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (3, 'Junior Spanish Unit3', 1, 3, 'the 3rd unit of Junior Spanish ', 'https://www.youtube.com/embed/VSuFrFPNbzA');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (4, 'Junior Spanish Unit4', 1, 4, 'the 4th unit of Junior Spanish ', 'https://www.youtube.com/embed/K6SUsWizytA');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (5, 'Junior Spanish Unit5', 1, 5, 'the 5th unit of Junior Spanish ', 'https://www.youtube.com/embed/hsLYD1Jyf3A');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (6, 'Intermediate Spanish Unit1', 2, 1, 'the 1st unit of Intermediate Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (7, 'Intermediate Spanish Unit2', 2, 2, 'the 2nd unit of Intermediate Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (8, 'Intermediate Spanish Unit3', 2, 3, 'the 3rd unit of Intermediate Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (9, 'Intermediate Spanish Unit4', 2, 4, 'the 4th unit of Intermediate Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (10, 'Intermediate Spanish Unit5', 2, 5, 'the 5th unit of Intermediate Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (11, 'Advanced Spanish Unit1', 3, 1, 'the 1st unit of Advanced Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (12, 'Advanced Spanish Unit2', 3, 2, 'the 2nd unit of Advanced Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (13, 'Advanced Spanish Unit3', 3, 3, 'the 3rd unit of Advanced Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (14, 'Advanced Spanish Unit4', 3, 4, 'the 4th unit of Advanced Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (15, 'Advanced Spanish Unit5', 3, 5, 'the 5th unit of Advanced Spanish ', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (16, 'Junior MandarinUnit1', 4, 1, 'the 1st unit of Junior Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (17, 'Junior MandarinUnit2', 4, 2, 'the 2nd unit of Junior Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (18, 'Junior MandarinUnit3', 4, 3, 'the 3rd unit of Junior Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (19, 'Junior MandarinUnit4', 4, 4, 'the 4th unit of Junior Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (20, 'Junior MandarinUnit5', 4, 5, 'the 5th unit of Junior Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (21, 'Intermediate MandarinUnit1', 5, 1, 'the 1st unit of Intermediate Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (22, 'Intermediate MandarinUnit2', 5, 2, 'the 2nd unit of Intermediate Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (23, 'Intermediate MandarinUnit3', 5, 3, 'the 3rd unit of Intermediate Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (24, 'Intermediate MandarinUnit4', 5, 4, 'the 4th unit of Intermediate Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (25, 'Intermediate MandarinUnit5', 5, 5, 'the 5th unit of Intermediate Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (26, 'Advanced MandarinUnit1', 6, 1, 'the 1st unit of Advanced Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (27, 'Advanced MandarinUnit2', 6, 2, 'the 2nd unit of Advanced Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (28, 'Advanced MandarinUnit3', 6, 3, 'the 3rd unit of Advanced Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (29, 'Advanced MandarinUnit4', 6, 4, 'the 4th unit of Advanced Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (30, 'Advanced MandarinUnit5', 6, 5, 'the 5th unit of Advanced Mandarin', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (31, 'Junior EnglishUnit1', 7, 1, 'the 1st unit of Junior English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (32, 'Junior EnglishUnit2', 7, 2, 'the 2nd unit of Junior English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (33, 'Junior EnglishUnit3', 7, 3, 'the 3rd unit of Junior English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (34, 'Junior EnglishUnit4', 7, 4, 'the 4th unit of Junior English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (35, 'Junior EnglishUnit5', 7, 5, 'the 5th unit of Junior English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (36, 'Intermediate EnglishUnit1', 8, 1, 'the 1st unit of Intermediate English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (37, 'Intermediate EnglishUnit2', 8, 2, 'the 2nd unit of Intermediate English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (38, 'Intermediate EnglishUnit3', 8, 3, 'the 3rd unit of Intermediate English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (39, 'Intermediate EnglishUnit4', 8, 4, 'the 4th unit of Intermediate English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (40, 'Intermediate EnglishUnit5', 8, 5, 'the 5th unit of Intermediate English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (41, 'Advanced EnglishUnit1', 9, 1, 'the 1st unit of Advanced English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (42, 'Advanced EnglishUnit2', 9, 2, 'the 2nd unit of Advanced English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (43, 'Advanced EnglishUnit3', 9, 3, 'the 3rd unit of Advanced English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (44, 'Advanced EnglishUnit4', 9, 4, 'the 4th unit of Advanced English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (45, 'Advanced EnglishUnit5', 9, 5, 'the 5th unit of Advanced English', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (46, 'Junior FrenchUnit1', 10, 1, 'the 1st unit of Junior French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (47, 'Junior FrenchUnit2', 10, 2, 'the 2nd unit of Junior French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (48, 'Junior FrenchUnit3', 10, 3, 'the 3rd unit of Junior French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (49, 'Junior FrenchUnit4', 10, 4, 'the 4th unit of Junior French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (50, 'Junior FrenchUnit5', 10, 5, 'the 5th unit of Junior French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (51, 'Intermediate FrenchUnit1', 11, 1, 'the 1st unit of Intermediate French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (52, 'Intermediate FrenchUnit2', 11, 2, 'the 2nd unit of Intermediate French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (53, 'Intermediate FrenchUnit3', 11, 3, 'the 3rd unit of Intermediate French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (54, 'Intermediate FrenchUnit4', 11, 4, 'the 4th unit of Intermediate French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (55, 'Intermediate FrenchUnit5', 11, 5, 'the 5th unit of Intermediate French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (56, 'Advanced FrenchUnit1', 12, 1, 'the 1st unit of Advanced French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (57, 'Advanced FrenchUnit2', 12, 2, 'the 2nd unit of Advanced French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (58, 'Advanced FrenchUnit3', 12, 3, 'the 3rd unit of Advanced French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (59, 'Advanced FrenchUnit4', 12, 4, 'the 4th unit of Advanced French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (60, 'Advanced FrenchUnit5', 12, 5, 'the 5th unit of Advanced French', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (61, 'Junior ItalianUnit1', 13, 1, 'the 1st unit of Junior Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (62, 'Junior ItalianUnit2', 13, 2, 'the 2nd unit of Junior Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (63, 'Junior ItalianUnit3', 13, 3, 'the 3rd unit of Junior Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (64, 'Junior ItalianUnit4', 13, 4, 'the 4th unit of Junior Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (65, 'Junior ItalianUnit5', 13, 5, 'the 5th unit of Junior Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (66, 'Intermediate ItalianUnit1', 14, 1, 'the 1st unit of Intermediate Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (67, 'Intermediate ItalianUnit2', 14, 2, 'the 2nd unit of Intermediate Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (68, 'Intermediate ItalianUnit3', 14, 3, 'the 3rd unit of Intermediate Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (69, 'Intermediate ItalianUnit4', 14, 4, 'the 4th unit of Intermediate Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (70, 'Intermediate ItalianUnit5', 14, 5, 'the 5th unit of Intermediate Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (71, 'Advanced ItalianUnit1', 15, 1, 'the 1st unit of Advanced Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (72, 'Advanced ItalianUnit2', 15, 2, 'the 2nd unit of Advanced Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (73, 'Advanced ItalianUnit3', 15, 3, 'the 3rd unit of Advanced Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (74, 'Advanced ItalianUnit4', 15, 4, 'the 4th unit of Advanced Italian', 'None');
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`) VALUES (75, 'Advanced ItalianUnit5', 15, 5, 'the 5th unit of Advanced Italian', 'None');
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (1, 'Beginner English Unit 1', 1, 1, 'the 1st unit of Beginner English ', 'https://www.youtube.com/embed/7fAJ13DgvYM', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (2, 'Beginner English Unit 2', 1, 2, 'the 2nd unit of Beginner English ', NULL, NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (3, 'Beginner English Unit 3', 1, 3, 'the 3rd unit of Beginner English ', NULL, NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (4, 'Beginner English Unit 4', 1, 4, 'the 4th unit of Beginner English ', NULL, NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (5, 'Beginner English Unit 5', 1, 5, 'the 5th unit of Beginner English ', NULL, NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (6, 'Intermediate English Unit 1', 2, 1, 'the 1st unit of Intermediate English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (7, 'Intermediate English Unit 2', 2, 2, 'the 2nd unit of Intermediate English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (8, 'Intermediate English Unit 3', 2, 3, 'the 3rd unit of Intermediate English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (9, 'Intermediate English Unit 4', 2, 4, 'the 4th unit of Intermediate English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (10, 'Intermediate English Unit 5', 2, 5, 'the 5th unit of Intermediate English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (11, 'Advanced English Unit 1', 3, 1, 'the 1st unit of Advanced English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (12, 'Advanced English Unit 2', 3, 2, 'the 2nd unit of Advanced English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (13, 'Advanced English Unit 3', 3, 3, 'the 3rd unit of Advanced English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (14, 'Advanced English Unit 4', 3, 4, 'the 4th unit of Advanced English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (15, 'Advanced English Unit 5', 3, 5, 'the 5th unit of Advanced English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (16, 'Beginner Mandarin Unit 1', 4, 1, 'the 1st unit of Beginner Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (17, 'Beginner Mandarin Unit 2', 4, 2, 'the 2nd unit of Beginner Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (18, 'Beginner Mandarin Unit 3', 4, 3, 'the 3rd unit of Beginner Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (19, 'Beginner Mandarin Unit 4', 4, 4, 'the 4th unit of Beginner Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (20, 'Beginner Mandarin Unit 5', 4, 5, 'the 5th unit of Beginner Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (21, 'Intermediate Mandarin Unit 1', 5, 1, 'the 1st unit of Intermediate Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (22, 'Intermediate Mandarin Unit 2', 5, 2, 'the 2nd unit of Intermediate Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (23, 'Intermediate Mandarin Unit 3', 5, 3, 'the 3rd unit of Intermediate Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (24, 'Intermediate Mandarin Unit 4', 5, 4, 'the 4th unit of Intermediate Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (25, 'Intermediate Mandarin Unit 5', 5, 5, 'the 5th unit of Intermediate Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (26, 'Advanced Mandarin Unit 1', 6, 1, 'the 1st unit of Advanced Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (27, 'Advanced Mandarin Unit 2', 6, 2, 'the 2nd unit of Advanced Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (28, 'Advanced Mandarin Unit 3', 6, 3, 'the 3rd unit of Advanced Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (29, 'Advanced Mandarin Unit 4', 6, 4, 'the 4th unit of Advanced Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (30, 'Advanced Mandarin Unit 5', 6, 5, 'the 5th unit of Advanced Mandarin ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (31, 'Beginner Spanish Unit 1', 7, 1, 'the 1st unit of Beginner Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (32, 'Beginner Spanish Unit 2', 7, 2, 'the 2nd unit of Beginner Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (33, 'Beginner Spanish Unit 3', 7, 3, 'the 3rd unit of Beginner Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (34, 'Beginner Spanish Unit 4', 7, 4, 'the 4th unit of Beginner Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (35, 'Beginner Spanish Unit 5', 7, 5, 'the 5th unit of Beginner Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (36, 'Intermediate Spanish Unit 1', 8, 1, 'the 1st unit of Intermediate Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (37, 'Intermediate Spanish Unit 2', 8, 2, 'the 2nd unit of Intermediate Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (38, 'Intermediate Spanish Unit 3', 8, 3, 'the 3rd unit of Intermediate Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (39, 'Intermediate Spanish Unit 4', 8, 4, 'the 4th unit of Intermediate Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (40, 'Intermediate Spanish Unit 5', 8, 5, 'the 5th unit of Intermediate Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (41, 'Advanced Spanish Unit 1', 9, 1, 'the 1st unit of Advanced Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (42, 'Advanced Spanish Unit 2', 9, 2, 'the 2nd unit of Advanced Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (43, 'Advanced Spanish Unit 3', 9, 3, 'the 3rd unit of Advanced Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (44, 'Advanced Spanish Unit 4', 9, 4, 'the 4th unit of Advanced Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (45, 'Advanced Spanish Unit 5', 9, 5, 'the 5th unit of Advanced Spanish ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (46, 'Beginner French Unit 1', 10, 1, 'the 1st unit of Beginner French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (47, 'Beginner French Unit 2', 10, 2, 'the 2nd unit of Beginner French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (48, 'Beginner French Unit 3', 10, 3, 'the 3rd unit of Beginner French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (49, 'Beginner French Unit 4', 10, 4, 'the 4th unit of Beginner French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (50, 'Beginner French Unit 5', 10, 5, 'the 5th unit of Beginner French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (51, 'Intermediate French Unit 1', 11, 1, 'the 1st unit of Intermediate French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (52, 'Intermediate French Unit 2', 11, 2, 'the 2nd unit of Intermediate French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (53, 'Intermediate French Unit 3', 11, 3, 'the 3rd unit of Intermediate French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (54, 'Intermediate French Unit 4', 11, 4, 'the 4th unit of Intermediate French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (55, 'Intermediate French Unit 5', 11, 5, 'the 5th unit of Intermediate French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (56, 'Advanced French Unit 1', 12, 1, 'the 1st unit of Advanced French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (57, 'Advanced French Unit 2', 12, 2, 'the 2nd unit of Advanced French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (58, 'Advanced French Unit 3', 12, 3, 'the 3rd unit of Advanced French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (59, 'Advanced French Unit 4', 12, 4, 'the 4th unit of Advanced French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (60, 'Advanced French Unit 5', 12, 5, 'the 5th unit of Advanced French ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (61, 'Beginner Italian Unit 1', 13, 1, 'the 1st unit of Beginner Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (62, 'Beginner Italian Unit 2', 13, 2, 'the 2nd unit of Beginner Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (63, 'Beginner Italian Unit 3', 13, 3, 'the 3rd unit of Beginner Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (64, 'Beginner Italian Unit 4', 13, 4, 'the 4th unit of Beginner Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (65, 'Beginner Italian Unit 5', 13, 5, 'the 5th unit of Beginner Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (66, 'Intermediate Italian Unit 1', 14, 1, 'the 1st unit of Intermediate Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (67, 'Intermediate Italian Unit 2', 14, 2, 'the 2nd unit of Intermediate Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (68, 'Intermediate Italian Unit 3', 14, 3, 'the 3rd unit of Intermediate Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (69, 'Intermediate Italian Unit 4', 14, 4, 'the 4th unit of Intermediate Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (70, 'Intermediate Italian Unit 5', 14, 5, 'the 5th unit of Intermediate Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (71, 'Advanced Italian Unit 1', 15, 1, 'the 1st unit of Advanced Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (72, 'Advanced Italian Unit 2', 15, 2, 'the 2nd unit of Advanced Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (73, 'Advanced Italian Unit 3', 15, 3, 'the 3rd unit of Advanced Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (74, 'Advanced Italian Unit 4', 15, 4, 'the 4th unit of Advanced Italian ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (75, 'Advanced Italian Unit 5', 15, 5, 'the 5th unit of Advanced Italian ', 'None', NULL, NULL);
+
+
+# insert into questions_units table
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (1, 1, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (2, 2, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (3, 3, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (4, 4, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (5, 5, 1);
+
+# insert into question_types table
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (1, 'text_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (2, 'text_picture');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (3, 'picture_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (4, 'audio_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (5, 'audio_picture');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (6, 'muti_text_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (7, 'muti_text_picture');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (8, 'muti_picture_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (9, 'muti_audio_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (10, 'muti_audio_picture');
+
+# insert into questions table
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (1, 'What\'s the CAPITAL letter for \"t\"? ', 1, NULL, NULL, NULL, 1, 'To choose capital letter for \"t\" which is \"T\"', '');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (2, 'What\'s the LOWERCASE letter for \"R\"? ', 2, NULL, NULL, NULL, 2, 'To choose letter \"R\" in lowercase which is \"r\"', '');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (3, 'What\'s the CAPITAL letter for the alphabet shown below?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/D', NULL, NULL, 3, 'To choose letter \"D\" in lowercase which is \"d\"', '');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (4, 'What letter is being spoked in the audio?', 4, NULL, NULL, NULL, 4, '', '');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (5, 'What\'s the LOWERCASE letter for \"Q\" and \"H\"? ', 6, NULL, NULL, NULL, 5, '', '');
+
+# insert data into options table
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (1, 1, 'I', 0, 1, 'letter \"I/i\" in uppercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (2, 1, 'T', 1, 2, 'letter \"T/t\" in uppercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (3, 1, 'L', 0, 3, 'letter \"L/l\" in uppercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (4, 1, 'F', 0, 4, 'letter \"F/f\" in uppercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (5, 2, 'https://tomatolearning.s3.amazonaws.com/option/h', 0, 1, 'a picture of letter \"h\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (6, 2, 'https://tomatolearning.s3.amazonaws.com/option/e', 0, 2, 'a picture of letter \"e\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (7, 2, 'https://tomatolearning.s3.amazonaws.com/option/r', 1, 3, 'a picture of letter \"r\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (8, 2, 'https://tomatolearning.s3.amazonaws.com/option/q', 0, 4, 'a picture of letter \"q\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (9, 3, 'a', 0, 1, 'letter \"A/a\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (10, 3, 'o', 0, 2, 'letter \"O/o\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (11, 3, 'c', 0, 3, 'letter \"C/c\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (12, 3, 'd', 1, 4, 'letter \"D/d\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (13, 4, 'B/b', 0, 1, 'letter \"B/b\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (14, 4, 'V/v', 0, 2, 'letter \"V/v\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (15, 4, 'W/w', 0, 3, 'letter \"W/w\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (16, 4, 'Y/y', 0, 4, 'letter \"Y/y\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (17, 5, 'q', 1, 1, NULL);
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (18, 5, 'r', 0, 2, NULL);
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (19, 5, 'p', 0, 3, NULL);
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (20, 5, 'g', 0, 4, NULL);
+
 
 
 

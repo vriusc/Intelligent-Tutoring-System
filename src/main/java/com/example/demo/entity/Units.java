@@ -26,6 +26,11 @@ public class Units implements Serializable {
     
     private String description;
 
+    private String text;
+
+    private String text_description;
+
     private Subjects subject;
+
 }
 

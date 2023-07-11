@@ -18,7 +18,7 @@ import java.util.List;
  * @author qianyongru
  * @since 2023-06-22 06:25:52
  */
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/studentSubjects")
 public class StudentSubjectsController {

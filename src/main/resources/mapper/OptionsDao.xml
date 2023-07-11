@@ -8,6 +8,7 @@
         <result property="option" column="option" jdbcType="VARCHAR"/>
         <result property="isCorrect" column="is_correct" jdbcType="INTEGER"/>
         <result property="orderNumber" column="order_number" jdbcType="INTEGER"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
 
         <association property="questions" javaType="com.example.demo.entity.Questions">
             <id property="questionId" column="q_question_id" jdbcType="INTEGER" />
@@ -30,6 +31,7 @@
             o.option,
             o.is_correct,
             o.order_number,
+            o.description,
             q.question_id AS q_question_id,
             q.question,
             q.question_type_id,
@@ -51,6 +53,7 @@
         o.option,
         o.is_correct,
         o.order_number,
+        o.description,
         q.question_id AS q_question_id,
         q.question,
         q.question_type_id,
@@ -101,17 +104,20 @@
             <if test="orderNumber != null">
                 and order_number = #{orderNumber}
             </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="optionId" useGeneratedKeys="true">
-        insert into options(question_id, 'option', is_correct, order_number)
+        insert into options(question_id, 'option', is_correct, order_number, description)
         values (#{questionId}, #{option}, #{isCorrect}, #{orderNumber})
     </insert>
 
     <insert id="insertBatch" keyProperty="optionId" useGeneratedKeys="true">
-        insert into options(question_id, 'option', is_correct, order_number)
+        insert into options(question_id, 'option', is_correct, order_number, description)
         values
         <foreach collection="entities" item="entity" separator=",">
         (#{entity.questionId}, #{entity.option}, #{entity.isCorrect}, #{entity.orderNumber})
@@ -119,7 +125,7 @@
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="optionId" useGeneratedKeys="true">
-        insert into options(question_id, 'option', is_correct, order_number)
+        insert into options(question_id, 'option', is_correct, order_number,description)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.questionId}, #{entity.option}, #{entity.isCorrect}, #{entity.orderNumber})
@@ -146,6 +152,9 @@
             </if>
             <if test="orderNumber != null">
                 order_number = #{orderNumber},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
             </if>
         </set>
         where option_id = #{optionId}

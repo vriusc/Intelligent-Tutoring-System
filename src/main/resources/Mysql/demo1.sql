@@ -38,8 +38,15 @@ subject_id      INT NOT NULL,
 Units_order     INT NOT NULL,
 description     VARCHAR(255) NOT NULL,
 materials_path      VARCHAR(255),
+text_path           VARCHAR(255),
+text_description    VARCHAR(255),
 FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id)
 );
+
+# alter table Units
+#     add text VARCHAR(255) null,
+#     add text_description VARCHAR(255) null
+# ;
 
 -- 创建题目类型表
 CREATE TABLE question_types (
@@ -74,8 +81,12 @@ question_id     INT NOT NULL,
 `option`          VARCHAR(255) NOT NULL,
 is_correct      BOOLEAN NOT NULL,
 order_number    INT NOT NULL,
+description     VARCHAR(255) NOT NULL,
 FOREIGN KEY (question_id) REFERENCES questions (question_id)
 );
+
+# alter table options
+#     add description VARCHAR(255) not null;
 
 CREATE TABLE record(
 record_id           INT AUTO_INCREMENT PRIMARY KEY,

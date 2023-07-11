@@ -9,6 +9,8 @@
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="unitOrder" column="units_order" jdbcType="INTEGER"/>  <!-- 2020-12-28 16:00:00 -->
         <result property="materials_path" column="materials_path" jdbcType="VARCHAR"/>
+        <result property="text" column="text" jdbcType="VARCHAR"/>
+        <result property="text_description" column="video" jdbcType="VARCHAR"/>
 
         <!-- 关联Subjects对象 -->
         <association property="subject" javaType="com.example.demo.entity.Subjects">
@@ -90,6 +92,8 @@
             u.description as description,
             u.units_order as unitOrder,
             u.materials_path as materials_path,
+            u.text as text,
+            u.text_description as text_description,
             s.subject_id as "subject.subjectId",
             s.subject_name as "subject.subjectName",
             s.level as "subject.level",

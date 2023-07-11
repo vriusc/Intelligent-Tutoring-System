@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @author qianyongru
  * @since 2023-07-08 04:19:23
  */
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/learningStyle")
 public class LearningStyleController {

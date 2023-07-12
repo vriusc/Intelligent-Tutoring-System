@@ -1,0 +1,31 @@
+scenarios:
+  get-requests:
+    store-cache: true  # browser cache simulation, enabled by default
+    store-cookie: true  # browser cookies simulation, enabled by default
+    headers: # global headers
+      header-name: header-value
+    think-time: 1s500ms  # global delay between each request
+    timeout: 500ms  #  timeout for connecting, receiving results, default value is 30s
+    default-address: "http://tomato.vprofile.tomatokillerucd.com/"  
+    keepalive: true  # true by default, applied on all requests in scenario
+    retrieve-resources: true  # true by default, retrieves all embedded resources from HTML pages
+    retrieve-resources-regex: ^((?!google|facebook).)*$  # regular expression used to match any resource
+                                                         # URLs found in HTML document against. Unset by default
+    concurrent-pool-size: 4  # concurrent pool size for resources download, 4 by default
+    use-dns-cache-mgr: true  # use DNS Cache Manager to test resources
+                             # behind dns load balancers. True by default.
+    force-parent-sample: false  # generate only parent sample for transaction controllers.
+                               # False by default
+    content-encoding: utf-8  # global content encoding, applied to all requests.
+                             # Unset by default
+    follow-redirects: true  # follow redirects for all HTTP requests
+    random-source-ip: false  # use one of host IPs to send requests, chosen randomly.
+                             # False by default
+    data-sources:  # these are data-sources options for Jmeter. See more info below.
+    - path/to/my.csv  # this is a shorthand form
+    - path: path/to/another.csv  # this is a full form
+      delimiter: ';'
+      quoted: false
+      loop: true
+      variable-names: id,name
+      random-order: false

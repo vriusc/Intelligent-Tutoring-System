@@ -92,7 +92,7 @@ CREATE TABLE options (
     FOREIGN KEY (question_id) REFERENCES questions (question_id) -- Set question_id as foreign key from table questions's question_id
 );
 
-ALTER TABLE options ADD COLUMN description VARCHAR(255) AFTER order_number;
+-- ALTER TABLE options ADD COLUMN description VARCHAR(255) AFTER order_number;
 
 
 -- CREATE TABLE record to store information about all records

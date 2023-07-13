@@ -10,10 +10,12 @@ from google.cloud import vision_v1
 from PIL import Image
 from google.cloud.vision_v1.services.image_annotator import client
 
+
 # Initialize OpenAI API key and model
 openai.organization = "org-l9GqGTyn1y6BFwYBluQ9mzxt"
-openai.api_key = "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"
+openai.api_key = "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"
 MODEL = "gpt-3.5-turbo"
+
 
 # Set Google Cloud Vision API credentials
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'EmotionIdentification/MyKey.json'
@@ -27,22 +29,22 @@ client = vision_v1.ImageAnnotatorClient()
 
 
 # Function to generate response from OpenAI GPT model
-def reply_generate(MODEL, username, test_score):
+def feedback_reply_generate(MODEL, username, test_score):
     response = openai.ChatCompletion.create(
         model=MODEL,
         messages=[
             {"role": "system",
-             "content": "You are a teacher and need to give sudent persional reply with suggest based on their score. Student name is " + username},
-            {"role": "user", "content": "The student got " + test_score + " in all the question test"},
+             "content": "You are a tutor giving direct and informal feedback to your student, " + username + ", based on their test score."},
+            {"role": "user", "content": "The student got " + test_score + " in all the question test. (Assuming a perfect score on all questions is ten)"},
         ],
         temperature=0,
     )
     return response['choices'][0]['message']['content']
 
 
-# Route for GPT reply
-@app.route('/gpt/reply', methods=['Post'])
-def process_request():
+# Route for GPT feedback reply
+@app.route('/gpt/feedback', methods=['Post'])
+def process_feedback_request():
     # Retrieve the parameters from the URL
     username = request.args.get('username')
     test_score = request.args.get('test_score')
@@ -53,14 +55,69 @@ def process_request():
         return 'Username or test score not provided', 400
 
     # Generate a reply
-    reply = reply_generate(MODEL, username, test_score)
+    reply = feedback_reply_generate(MODEL, username, test_score)
     return reply  # Return the reply as the response
+
+
+# This function uses the OpenAI GPT model to generate a reply,
+# where the model plays the role of a tutor evaluating a student's essay.
+def writing_reply_generate(MODEL, username, essay_topic, essay_content):
+    # Call the OpenAI API to generate a response.
+    response = openai.ChatCompletion.create(
+        model=MODEL,  # The specific model being used, e.g., "text-davinci-002"
+        messages=[
+            # The initial system message sets up the scenario.
+            {"role": "system",
+             "content": "You are a tutor who is evaluating a student's essay. The student's name is "
+                        + username
+                        + ". Use the following grading rubric for your assessment: \
+                        1. Content (7 points): The essay should accurately and comprehensively address the topic. \
+                        2. Organization (3 points): The essay should have a clear introduction, body, and conclusion. \
+                        3. Grammar and Vocabulary (3 points): The essay should use correct grammar and sophisticated vocabulary. \
+                        4. Creativity (2 points): The essay should provide a unique perspective or insights about the topic. Provide a score for each criteria and an overall score."},
+            # The user message provides the essay topic and content for the model to evaluate.
+            {"role": "user", "content": "Here's the essay topic and content: "
+                                        + essay_topic
+                                        + " and "
+                                        + essay_content},
+        ],
+        # The temperature parameter controls the randomness of the model's output.
+        temperature=0.7,
+    )
+    # The function returns the model's generated message content.
+    return response['choices'][0]['message']['content']
+
+
+# This route processes incoming requests to evaluate an essay.
+@app.route('/gpt/writing', methods=['Post'])
+def process_writing_request():
+    # Retrieve the parameters from the incoming request.
+    username = request.args.get('username')
+    essay_topic = request.args.get('essay_topic')
+    essay_content = request.args.get('essay_content')
+
+    # Check if any necessary parameters are missing.
+    if username is None or essay_content is None or essay_topic is None:
+        return 'Username, essay topic, or essay content not provided', 400
+
+    # Generate a response using the writing_reply_generate function.
+    reply = writing_reply_generate(MODEL, username, essay_topic, essay_content)
+
+    # Return the generated reply as the response.
+    return reply
+
+
+
+
 
 
 # Home route
 @app.route('/home')
 def home():
     return render_template('index.html')
+
+
+
 
 # SocketIO event for image
 @socketio.on('image')

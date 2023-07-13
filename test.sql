@@ -46,8 +46,8 @@ CREATE TABLE  Units (
     FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id) -- Set subject_id as foreign key from table Subjects's subject_id
 );
 
-ALTER TABLE Units ADD COLUMN text VARCHAR(255) AFTER materials_path;
-ALTER TABLE Units ADD COLUMN text_description VARCHAR(255) AFTER text;
+-- ALTER TABLE Units ADD COLUMN text VARCHAR(255) AFTER materials_path;
+-- ALTER TABLE Units ADD COLUMN text_description VARCHAR(255) AFTER text;
 
 -- CREATE TABLE question_types to types of questions
 -- reading, listening, writing, speaking

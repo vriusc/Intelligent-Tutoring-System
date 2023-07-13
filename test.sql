@@ -282,10 +282,10 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (14, 4, 'V/v', 0, 2, 'letter \"V/v\"');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (15, 4, 'W/w', 0, 3, 'letter \"W/w\"');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (16, 4, 'Y/y', 0, 4, 'letter \"Y/y\"');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (17, 5, 'q', 1, 1, NULL);
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (18, 5, 'r', 0, 2, NULL);
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (19, 5, 'p', 0, 3, NULL);
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (20, 5, 'g', 0, 4, NULL);
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (17, 5, 'q', 1, 1, '1');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (18, 5, 'r', 0, 2, '1');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (19, 5, 'p', 0, 3, '1');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (20, 5, 'g', 0, 4, '1');
 
 
 

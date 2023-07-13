@@ -236,13 +236,6 @@ INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `descr
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (75, 'Advanced Italian Unit 5', 15, 5, 'the 5th unit of Advanced Italian ', 'None', NULL, NULL);
 
 
-# insert into questions_units table
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (1, 1, 1);
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (2, 2, 1);
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (3, 3, 1);
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (4, 4, 1);
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (5, 5, 1);
-
 # insert into question_types table
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (1, 'text_text');
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (2, 'text_picture');
@@ -261,6 +254,16 @@ INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (3, 'What\'s the CAPITAL letter for the alphabet shown below?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/D', NULL, NULL, 3, 'To choose letter \"D\" in lowercase which is \"d\"', '');
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (4, 'What letter is being spoked in the audio?', 4, NULL, NULL, NULL, 4, '', '');
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (5, 'What\'s the LOWERCASE letter for \"Q\" and \"H\"? ', 6, NULL, NULL, NULL, 5, '', '');
+
+
+# insert into questions_units table
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (1, 1, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (2, 2, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (3, 3, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (4, 4, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (5, 5, 1);
+
+
 
 # insert data into options table
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (1, 1, 'I', 0, 1, 'letter \"I/i\" in uppercase');

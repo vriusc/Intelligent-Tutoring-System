@@ -159,11 +159,11 @@ INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VA
 
 
 # insert data into Units
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (1, 'Beginner English Unit 1', 1, 1, 'the 1st unit of Beginner English ', 'https://www.youtube.com/embed/7fAJ13DgvYM', NULL, NULL);
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (2, 'Beginner English Unit 2', 1, 2, 'the 2nd unit of Beginner English ', NULL, NULL, NULL);
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (3, 'Beginner English Unit 3', 1, 3, 'the 3rd unit of Beginner English ', NULL, NULL, NULL);
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (4, 'Beginner English Unit 4', 1, 4, 'the 4th unit of Beginner English ', NULL, NULL, NULL);
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (5, 'Beginner English Unit 5', 1, 5, 'the 5th unit of Beginner English ', NULL, NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (1, 'Beginner English Unit 1', 1, 1, 'the 1st unit of Beginner English ', 'https://www.youtube-nocookie.com/embed/um3YrKRfsr0', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (2, 'Beginner English Unit 2', 1, 2, 'the 2nd unit of Beginner English ', 'https://www.youtube.com/embed/oFT45Oq7X9k', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (3, 'Beginner English Unit 3', 1, 3, 'the 3rd unit of Beginner English ', 'https://www.youtube.com/embed/KQt3jVyME-k', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (4, 'Beginner English Unit 4', 1, 4, 'the 4th unit of Beginner English ', 'https://www.youtube.com/embed/dNP6L6y7ZEM', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (5, 'Beginner English Unit 5', 1, 5, 'the 5th unit of Beginner English ', 'https://www.youtube.com/embed/jhzj9D73SZw', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (6, 'Intermediate English Unit 1', 2, 1, 'the 1st unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (7, 'Intermediate English Unit 2', 2, 2, 'the 2nd unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (8, 'Intermediate English Unit 3', 2, 3, 'the 3rd unit of Intermediate English ', 'None', NULL, NULL);
@@ -257,11 +257,32 @@ INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALU
 
 
 # insert into questions table
-INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (1, 'What\'s the CAPITAL letter for \"t\"? ', 1, NULL, NULL, NULL, 1, 'To choose capital letter for \"t\" which is \"T\"', '');
-INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (2, 'What\'s the LOWERCASE letter for \"R\"? ', 2, NULL, NULL, NULL, 2, 'To choose letter \"R\" in lowercase which is \"r\"', '');
-INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (3, 'What\'s the CAPITAL letter for the alphabet shown below?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/D', NULL, NULL, 3, 'To choose letter \"D\" in lowercase which is \"d\"', '');
-INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (4, 'What letter is being spoked in the audio?', 4, NULL, NULL, NULL, 4, '', '');
-INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (5, 'What\'s the LOWERCASE letter for \"Q\" and \"H\"? ', 6, NULL, NULL, NULL, 5, '', '');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (1, 'What\'s the CAPITAL letter for \"t\"? ', 1, NULL, NULL, NULL, 1, 'Capital letter for \"t\" is \"T\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (2, 'What\'s the LOWERCASE letter for \"R\"? ', 2, NULL, NULL, NULL, 2, 'Letter \"R\" in lowercase is \"r\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (3, 'What\'s the CAPITAL letter for the alphabet shown below?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/D', NULL, NULL, 3, 'Letter \"D\" in lowercase is \"d\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (4, 'What letter is in the audio?', 4, NULL, NULL, 'https://www.youtube.com/embed/PJV35b4cPgo?start=210', 4, '', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (5, 'What\'s the LOWERCASE letter for \"Q\" and \"H\"? ', 6, NULL, NULL, NULL, 5, '', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (6, 'What color is shown in the picture below?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/yellow', NULL, NULL, 1, '\"yellow\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (7, 'What color snow is?', 1, NULL, NULL, NULL, 2, '\"white\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (8, 'Choose what you hear.', 5, NULL, NULL, 'https://www.youtube.com/embed/ybt2jhCQ3lA?start=105', 3, '\"pink\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (9, 'Choose what you hear.', 10, NULL, NULL, 'https://www.youtube.com/embed/ybt2jhCQ3lA?start=31', 4, '\"blue\" \"purple\"', '\"red and blue make purple\"');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (10, 'Choose the option(s) that describes the picture.', 8, 'https://tomatolearning.s3.amazonaws.com/picture/apple', NULL, NULL, 5, '\"red\" \"apple\" \"green\" \"brown\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (11, 'What animals are in this picture?', 8, 'https://tomatolearning.s3.amazonaws.com/picture/dog_cat', NULL, NULL, 1, '\"dog\" and \"cat\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (12, 'What animal is shown in this video?', 4, NULL, NULL, 'https://www.youtube.com/embed/H0xZ9DThon0?start=23', 2, '\"bear\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (13, 'What animals live under water?', 6, NULL, NULL, NULL, 3, '\"shark\" \"octopus\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (14, 'What animal is it in the picture?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/sheep', NULL, NULL, 4, '\"sheep\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (15, 'What animals are in the audio?', 9, NULL, NULL, 'https://www.youtube.com/embed/H0xZ9DThon0?start=226', 5, '\"giraffe\" \"gorilla\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (16, 'How to spell 23?', 1, NULL, NULL, NULL, 1, '\"twenty-three\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (17, 'What number is in the audio?', 4, NULL, NULL, 'https://www.youtube.com/embed/dNP6L6y7ZEM?start=207', 2, '\"57\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (18, 'Choose the number(s) smaller than the number in the audio.', 9, NULL, NULL, 'https://www.youtube.com/embed/dNP6L6y7ZEM?start=144', 3, 'choose number smaller than 39', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (19, 'Choose which is \"Zero\"', 1, NULL, NULL, NULL, 4, '\"0\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (20, 'How to spell 100?', 1, NULL, NULL, NULL, 5, '\"one hundred\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (21, 'What day comes after Tuesday?', 1, NULL, NULL, NULL, 1, 'Wednesday', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (22, 'What\'s the last month of a year?', 1, NULL, NULL, NULL, 2, 'December', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (23, 'What month comes after June in a year?', 6, NULL, NULL, NULL, 3, 'July, August', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (24, 'Choose what day is it.', 4, NULL, NULL, 'https://www.youtube.com/embed/jhzj9D73SZw?start=31', 4, '\"Thursday\"', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (25, 'Choose what month is it.', 4, NULL, NULL, 'https://www.youtube.com/embed/jhzj9D73SZw?start=108', 5, 'November', '1');
+
 
 # insert data into options table
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (1, 1, 'I', 0, 1, 'letter \"I/i\" in uppercase');
@@ -278,13 +299,92 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (12, 3, 'd', 1, 4, 'letter \"D/d\"');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (13, 4, 'B/b', 0, 1, 'letter \"B/b\"');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (14, 4, 'V/v', 0, 2, 'letter \"V/v\"');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (15, 4, 'W/w', 0, 3, 'letter \"W/w\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (15, 4, 'G/g', 1, 3, 'letter \"G/g\"');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (16, 4, 'Y/y', 0, 4, 'letter \"Y/y\"');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (17, 5, 'q', 1, 1, NULL);
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (18, 5, 'r', 0, 2, NULL);
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (19, 5, 'p', 0, 3, NULL);
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (20, 5, 'g', 0, 4, NULL);
-
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (17, 5, 'q', 1, 1, 'letter \"Q\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (18, 5, 'r', 0, 2, 'letter \"r\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (19, 5, 'p', 0, 3, 'letter \"p\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (20, 5, 'h', 1, 4, 'letter \"h\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (21, 6, 'yellow', 1, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (22, 6, 'red', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (23, 6, 'purple', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (24, 6, 'green', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (25, 7, 'black', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (26, 7, 'pink', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (27, 7, 'white', 1, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (28, 7, 'blue', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (29, 8, 'https://tomatolearning.s3.amazonaws.com/option/orange', 0, 1, 'orange');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (30, 8, 'https://tomatolearning.s3.amazonaws.com/option/purple', 0, 2, 'purple');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (31, 8, 'https://tomatolearning.s3.amazonaws.com/option/pink', 1, 3, 'pink');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (32, 8, 'https://tomatolearning.s3.amazonaws.com/option/blue', 0, 4, 'blue');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (33, 9, 'orange', 0, 1, 'orange');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (34, 9, 'purple', 1, 2, 'purple');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (35, 9, 'pink', 0, 3, 'pink');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (36, 9, 'blue', 1, 4, 'blue');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (37, 10, 'green', 1, 1, 'green');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (38, 10, 'brown', 1, 2, 'brown');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (39, 10, 'apple', 1, 3, 'apple');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (40, 10, 'red', 1, 4, 'red');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (41, 11, 'rabbit', 0, 1, 'rabbit');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (42, 11, 'cat', 1, 2, 'cat');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (43, 11, 'dog', 1, 3, 'dog');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (44, 11, 'wolf', 0, 4, 'wolf');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (45, 12, 'fish', 0, 1, 'fish');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (46, 12, 'cat', 0, 2, 'cat');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (47, 12, 'horse', 0, 3, 'horse');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (48, 12, 'bear', 1, 4, 'bear');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (49, 13, 'shark', 1, 1, 'shark');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (50, 13, 'octopus', 1, 2, 'octopus');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (51, 13, 'tiger', 0, 3, 'tiger');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (52, 13, 'snake', 0, 4, 'snake');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (53, 14, 'cow', 0, 1, 'cow');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (54, 14, 'chicken', 0, 2, 'chicken');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (55, 14, 'sheep', 1, 3, 'sheep');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (56, 14, 'dolphin', 0, 4, 'dolphin');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (57, 15, 'goat', 0, 1, 'goat');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (58, 15, 'gorilla', 1, 2, 'gorilla');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (59, 15, 'goose', 0, 3, 'goose');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (60, 15, 'giraffe', 1, 4, 'giraffe');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (61, 16, 'twenty-tree', 0, 1, 'wrong spelling of 3 - should be \"three\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (62, 16, 'twenty-three', 1, 2, '\"23\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (63, 16, 'tewny-six', 0, 3, 'wrong spelling of 20 - should be \"twenty\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (64, 16, 'twenty-six', 0, 4, 'this is \"26\", not \"23\"');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (65, 17, '57', 1, 1, '57');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (66, 17, '45', 0, 2, '45');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (67, 17, '67', 0, 3, '67');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (68, 17, '47', 0, 4, '47');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (69, 18, '35', 1, 1, '35');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (70, 18, '48', 0, 2, '48');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (71, 18, '25', 1, 3, '25');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (72, 18, '58', 0, 4, '58');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (73, 19, '3', 0, 1, '3');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (74, 19, '5', 0, 2, '5');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (75, 19, '0', 1, 3, '0');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (76, 19, '8', 0, 4, '8');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (77, 20, 'one hundrad', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (78, 20, 'one hudred', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (79, 20, 'one hundroed', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (80, 20, 'one hundred', 1, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (81, 21, 'Wednesday', 1, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (82, 21, 'Thursday', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (83, 21, 'Monday', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (84, 21, 'Sunday', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (85, 22, 'January', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (86, 22, 'December', 1, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (87, 22, 'September', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (88, 22, 'October', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (89, 23, 'July', 1, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (90, 23, 'June', 1, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (91, 23, 'March', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (92, 23, 'April', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (93, 24, 'Friday', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (94, 24, 'Saturday', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (95, 24, 'Thursday', 1, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (96, 24, 'Tuesday', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (97, 25, 'December', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (98, 25, 'October', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (99, 25, 'November', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (100, 25, 'September', 0, 4, 'zzz');
 
 
 

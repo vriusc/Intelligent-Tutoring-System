@@ -1,10 +1,9 @@
-import { Input } from 'reactstrap'
 import './Question.css'
+import { Input } from 'reactstrap'
 import audiExample from '../assets/question2_audio.mp3'
 
 const QuestionAudioPicture = (args) => {
   const { title, audio, options, handleRadioBtn, optSelected } = args
-  console.log('options', options, audio)
   // TODO: this is a continue work because it may be videos with audio
   // TODO: this type of question has not been created a data yet so it's not tested
 

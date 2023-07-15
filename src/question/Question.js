@@ -6,11 +6,13 @@ import QuestionTextPicture from './QuestTextPicture'
 import QuestionPictureText from './QuestPictureText'
 import QuestionAudioText from './QuestAudioText'
 import QuestionAudioPicture from './QuestAudioPicture'
+import MultiQuestTextText from './MultiQuestTextText'
 
 const Question = (args) => {
   const { question, options, number, review, answersList, setAnswersList } = args
   const { questions: quest } = question
   const [optSelected, setOptSelected] = useState(null)
+  const [optMultple, setOptMultple] = useState([])
   const [isCorrect, setIsCorrect] = useState(2)
   // TODO Work on answers when backend is ready
 
@@ -23,6 +25,18 @@ const Question = (args) => {
     if (currentOption.isCorrect === 1) {
       setAnswersList([...answersList, currentOption.questionId])
     }
+  }
+
+  const handleCheckBoxBtn = (event) => {
+    const selected = parseInt(event.target.value)
+    if (optMultple === null) {
+      setOptMultple([selected])
+    } else if (optMultple.some((opt) => opt === selected)) {
+      setOptMultple([...optMultple.filter((opt) => opt !== selected)])
+    } else {
+      setOptMultple([...optMultple, selected])
+    }
+    // TODO implement ANSWER later
   }
 
   useEffect(() => {
@@ -80,7 +94,15 @@ const Question = (args) => {
           handleRadioBtn={handleRadioBtn}
         />
       )}
-      {quest.questionTypeId > 5 && (
+      {quest.questionTypeId === 6 && (
+        <MultiQuestTextText
+          title={`${number}. ${quest.question}`}
+          options={options}
+          optSelected={optMultple}
+          handleCheckBoxBtn={handleCheckBoxBtn}
+        />
+      )}
+      {quest.questionTypeId > 6 && (
         <h3>
           <Badge color="info">The question is not ready</Badge>
         </h3>

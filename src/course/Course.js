@@ -54,14 +54,18 @@ const Course = () => {
                     </CardTitle>
                     <CardText className="text-muted">{unit.description}</CardText>
                   </div>
-                  {/* TODO if the unit is finished set an Icon done */}
+                  {/* TODO COMPLETE ONCE WE HAVE THE UNIT DONE */}
                   <div style={{ alignSelf: 'center' }}>
-                    {index === 2 ? (
+                    {index === 100 ? (
                       <h4 style={{ color: 'green' }}>
                         Finished <BsFillCheckCircleFill />
                       </h4>
                     ) : (
-                      <Button color="dark" onClick={() => goToUnit(unit)}>
+                      <Button
+                        color="dark"
+                        disabled={!unit.materials_path}
+                        onClick={() => goToUnit(unit)}
+                      >
                         START
                       </Button>
                     )}

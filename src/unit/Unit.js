@@ -5,7 +5,7 @@ import Header from '../element/Header'
 import { useEffect, useState } from 'react'
 import YoutubePlater from './YoutubePlayer'
 import { Badge, Button, Card, CardBody, CardText } from 'reactstrap'
-import Question from './Question'
+import Question from '../question/Question'
 import { gptResponse } from '../lib/gpt-client'
 
 export async function loader({ params }) {
@@ -30,7 +30,7 @@ const Unit = () => {
 
   useEffect(() => {
     Promise.all([getStudent(studentId), getOptions({})]).then((response) => {
-      console.log(response)
+      console.log('Student, Options', response)
       settingStudents(response[0])
       settingOptions(response[1])
     })
@@ -52,6 +52,7 @@ const Unit = () => {
 
   const goToQuestions = () => {
     getQuestionsByUnitId(data.unitId).then((response) => {
+      console.log('Questions', response.data.content)
       setQuestions(response.data.content)
       setShowQuestions(true)
     })

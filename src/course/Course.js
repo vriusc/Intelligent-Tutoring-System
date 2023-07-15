@@ -61,7 +61,11 @@ const Course = () => {
                         Finished <BsFillCheckCircleFill />
                       </h4>
                     ) : (
-                      <Button color="dark" onClick={() => goToUnit(unit)}>
+                      <Button
+                        color="dark"
+                        disabled={!unit.materials_path}
+                        onClick={() => goToUnit(unit)}
+                      >
                         START
                       </Button>
                     )}

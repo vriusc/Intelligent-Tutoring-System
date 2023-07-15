@@ -2,6 +2,7 @@ import { Badge } from 'reactstrap'
 import './Question.css'
 import { useEffect, useState } from 'react'
 import QuestionTextText from './QuestTextText'
+import QuestionTextPicture from './QuestTextPicture'
 
 const Question = (args) => {
   const { question, options, number, review, answersList, setAnswersList } = args
@@ -36,7 +37,16 @@ const Question = (args) => {
           isCorrect={isCorrect}
         />
       )}
-      {quest.questionId > 1 && (
+      {quest.questionId === 2 && (
+        <QuestionTextPicture
+          title={`${number}. ${quest.question}`}
+          options={options}
+          optSelected={optSelected}
+          handleRadioBtn={handleRadioBtn}
+          isCorrect={isCorrect}
+        />
+      )}
+      {quest.questionId > 2 && (
         <h3>
           <Badge color="info">The question is not ready</Badge>
         </h3>

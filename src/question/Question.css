@@ -23,3 +23,8 @@
   justify-content: space-around;
   margin: 30px 5px;
 }
+
+.Quest-opt-image {
+  display: flex;
+  flex-direction: column;
+}

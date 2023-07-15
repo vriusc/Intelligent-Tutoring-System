@@ -3,6 +3,7 @@ import './Question.css'
 
 const QuestionTextText = (args) => {
   const { title, options, handleRadioBtn, optSelected } = args
+
   return (
     <>
       <h5>{title}</h5>

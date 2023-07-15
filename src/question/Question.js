@@ -5,6 +5,7 @@ import QuestionTextText from './QuestTextText'
 import QuestionTextPicture from './QuestTextPicture'
 import QuestionPictureText from './QuestPictureText'
 import QuestionAudioText from './QuestAudioText'
+import QuestionAudioPicture from './QuestAudioPicture'
 
 const Question = (args) => {
   const { question, options, number, review, answersList, setAnswersList } = args
@@ -70,7 +71,16 @@ const Question = (args) => {
           handleRadioBtn={handleRadioBtn}
         />
       )}
-      {quest.questionId > 4 && (
+      {quest.questionTypeId === 5 && (
+        <QuestionAudioPicture
+          title={`${number}. ${quest.question}`}
+          audio={quest.audioPath}
+          options={options}
+          optSelected={optSelected}
+          handleRadioBtn={handleRadioBtn}
+        />
+      )}
+      {quest.questionTypeId > 5 && (
         <h3>
           <Badge color="info">The question is not ready</Badge>
         </h3>

@@ -289,10 +289,10 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (2, 1, 'T', 1, 2, 'letter \"T/t\" in uppercase');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (3, 1, 'L', 0, 3, 'letter \"L/l\" in uppercase');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (4, 1, 'F', 0, 4, 'letter \"F/f\" in uppercase');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (5, 2, 'https://tomatolearning.s3.amazonaws.com/option/h', 0, 1, 'a picture of letter \"h\" in lowercase');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (6, 2, 'https://tomatolearning.s3.amazonaws.com/option/e', 0, 2, 'a picture of letter \"e\" in lowercase');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (7, 2, 'https://tomatolearning.s3.amazonaws.com/option/r', 1, 3, 'a picture of letter \"r\" in lowercase');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (8, 2, 'https://tomatolearning.s3.amazonaws.com/option/q', 0, 4, 'a picture of letter \"q\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (5, 2, 'https://tomatolearning.s3.amazonaws.com/option/h.png', 0, 1, 'a picture of letter \"h\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (6, 2, 'https://tomatolearning.s3.amazonaws.com/option/e.png', 0, 2, 'a picture of letter \"e\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (7, 2, 'https://tomatolearning.s3.amazonaws.com/option/r.png', 1, 3, 'a picture of letter \"r\" in lowercase');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (8, 2, 'https://tomatolearning.s3.amazonaws.com/option/q.png', 0, 4, 'a picture of letter \"q\" in lowercase');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (9, 3, 'a', 0, 1, 'letter \"A/a\"');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (10, 3, 'o', 0, 2, 'letter \"O/o\"');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (11, 3, 'c', 0, 3, 'letter \"C/c\"');

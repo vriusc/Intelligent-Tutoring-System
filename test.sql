@@ -235,7 +235,6 @@ INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `descr
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (74, 'Advanced Italian Unit 4', 15, 4, 'the 4th unit of Advanced Italian ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (75, 'Advanced Italian Unit 5', 15, 5, 'the 5th unit of Advanced Italian ', 'None', NULL, NULL);
 
-
 # insert into question_types table
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (1, 'text_text');
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (2, 'text_picture');
@@ -247,14 +246,6 @@ INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (7, 'm
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (8, 'muti_picture_text');
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (9, 'muti_audio_text');
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (10, 'muti_audio_picture');
-
-# insert into questions_units table
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (1, 1, 1);
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (2, 2, 1);
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (3, 3, 1);
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (4, 4, 1);
-INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (5, 5, 1);
-
 
 # insert into questions table
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (1, 'What\'s the CAPITAL letter for \"t\"? ', 1, NULL, NULL, NULL, 1, 'Capital letter for \"t\" is \"T\"', '1');
@@ -282,6 +273,18 @@ INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (23, 'What month comes after June in a year?', 6, NULL, NULL, NULL, 3, 'July, August', '1');
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (24, 'Choose what day is it.', 4, NULL, NULL, 'https://www.youtube.com/embed/jhzj9D73SZw?start=31', 4, '\"Thursday\"', '1');
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (25, 'Choose what month is it.', 4, NULL, NULL, 'https://www.youtube.com/embed/jhzj9D73SZw?start=108', 5, 'November', '1');
+
+
+
+
+# insert into questions_units table
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (1, 1, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (2, 2, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (3, 3, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (4, 4, 1);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (5, 5, 1);
+
+
 
 
 # insert data into options table

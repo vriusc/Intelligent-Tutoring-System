@@ -1,0 +1,18 @@
+.Question-container {
+  margin: 1em;
+}
+
+.Quest-image {
+  max-height: 350px;
+  margin: 20px;
+}
+
+.Quest-audio {
+  margin: 20px;
+}
+
+.Btn-row {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+}

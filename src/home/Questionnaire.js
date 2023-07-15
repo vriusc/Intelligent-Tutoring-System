@@ -188,17 +188,20 @@ const Questionnaire = () => {
                 />
               ))}
           </div>
-          <Alert color="success" isOpen={showAlert}>
-            Questionnaire updated successfully
-          </Alert>
-          <Button
-            style={{ alignSelf: 'end' }}
-            color="success"
-            size="lg"
-            onClick={() => onFinishQuestionnaire()}
+          <div
+            style={{ display: 'flex', justifyContent: showAlert ? 'space-between' : 'flex-end' }}
           >
-            END QUESTIONNAIRE
-          </Button>
+            <Alert
+              color="success"
+              isOpen={showAlert}
+              style={{ alignSelf: 'center', margin: 0, padding: '8px 15px' }}
+            >
+              Questionnaire updated successfully
+            </Alert>
+            <Button color="success" size="lg" onClick={() => onFinishQuestionnaire()}>
+              END QUESTIONNAIRE
+            </Button>
+          </div>
         </div>
       </div>
     </>

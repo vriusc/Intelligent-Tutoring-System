@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react'
 import QuestionTextText from './QuestTextText'
 import QuestionTextPicture from './QuestTextPicture'
 import QuestionPictureText from './QuestPictureText'
+import QuestionAudioText from './QuestAudioText'
 
 const Question = (args) => {
   const { question, options, number, review, answersList, setAnswersList } = args
   const { questions: quest } = question
   const [optSelected, setOptSelected] = useState(null)
   const [isCorrect, setIsCorrect] = useState(2)
+  // TODO Work on answers when backend is ready
 
   if (quest.questionTypeId === 3) {
     console.log('Working Quest', quest)
@@ -59,7 +61,16 @@ const Question = (args) => {
           handleRadioBtn={handleRadioBtn}
         />
       )}
-      {quest.questionId > 3 && (
+      {quest.questionTypeId === 4 && (
+        <QuestionAudioText
+          title={`${number}. ${quest.question}`}
+          audio={quest.audioPath}
+          options={options}
+          optSelected={optSelected}
+          handleRadioBtn={handleRadioBtn}
+        />
+      )}
+      {quest.questionId > 4 && (
         <h3>
           <Badge color="info">The question is not ready</Badge>
         </h3>

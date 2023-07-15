@@ -3,8 +3,6 @@ import './Question.css'
 
 const QuestionTextPicture = (args) => {
   const { title, options, handleRadioBtn, optSelected } = args
-  // const { title, options } = args
-  console.log('options', options)
 
   const getName = (name) => {
     const splitName = name.split('/')
@@ -26,7 +24,7 @@ const QuestionTextPicture = (args) => {
               checked={currentOptions.optionId === optSelected}
               onChange={(event) => handleRadioBtn(event, currentOptions)}
             />
-            <img src={currentOptions.option} className="Quest-image" />
+            <img src={currentOptions.option} className="Option-image" />
           </div>
         ))}
       </div>

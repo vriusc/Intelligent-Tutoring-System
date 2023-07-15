@@ -1,9 +1,13 @@
 .Question-container {
   margin: 1em;
+  display: flex;
+  flex-direction: column;
 }
 
 .Quest-image {
+  align-self: center;
   max-height: 350px;
+  max-width: 500px;
   margin: 20px;
 }
 
@@ -27,4 +31,9 @@
 .Quest-opt-image {
   display: flex;
   flex-direction: column;
+}
+
+.Option-image {
+  max-width: 160px;
+  margin: 10px;
 }

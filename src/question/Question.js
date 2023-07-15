@@ -3,12 +3,17 @@ import './Question.css'
 import { useEffect, useState } from 'react'
 import QuestionTextText from './QuestTextText'
 import QuestionTextPicture from './QuestTextPicture'
+import QuestionPictureText from './QuestPictureText'
 
 const Question = (args) => {
   const { question, options, number, review, answersList, setAnswersList } = args
   const { questions: quest } = question
   const [optSelected, setOptSelected] = useState(null)
   const [isCorrect, setIsCorrect] = useState(2)
+
+  if (quest.questionTypeId === 3) {
+    console.log('Working Quest', quest)
+  }
 
   const handleRadioBtn = (event, currentOption) => {
     setOptSelected(parseInt(event.target.value))
@@ -28,7 +33,7 @@ const Question = (args) => {
 
   return (
     <div className="Question-container">
-      {quest.questionId === 1 && (
+      {quest.questionTypeId === 1 && (
         <QuestionTextText
           title={`${number}. ${quest.question}`}
           options={options}
@@ -37,16 +42,24 @@ const Question = (args) => {
           isCorrect={isCorrect}
         />
       )}
-      {quest.questionId === 2 && (
+      {quest.questionTypeId === 2 && (
         <QuestionTextPicture
           title={`${number}. ${quest.question}`}
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}
-          isCorrect={isCorrect}
         />
       )}
-      {quest.questionId > 2 && (
+      {quest.questionTypeId === 3 && (
+        <QuestionPictureText
+          title={`${number}. ${quest.question}`}
+          picture={quest.picturePath}
+          options={options}
+          optSelected={optSelected}
+          handleRadioBtn={handleRadioBtn}
+        />
+      )}
+      {quest.questionId > 3 && (
         <h3>
           <Badge color="info">The question is not ready</Badge>
         </h3>

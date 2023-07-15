@@ -8,6 +8,6 @@ spec:
     kind: Deployment
     name: tback
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 2
   targetCPUUtilizationPercentage: 80
 

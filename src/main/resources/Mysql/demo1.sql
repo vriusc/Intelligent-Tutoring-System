@@ -31,6 +31,16 @@ CREATE TABLE  student_subjects
 );
 
 
+CREATE TABLE  student_units (
+student_unit_id     INT AUTO_INCREMENT PRIMARY KEY,
+student_id          INT NOT NULL,
+unit_id             INT NOT NULL,
+isFinished            BOOLEAN NOT NULL,
+FOREIGN KEY (student_id) REFERENCES student_user (id),
+FOREIGN KEY (unit_id) REFERENCES Units (unit_id)
+);
+
+
 CREATE TABLE  Units (
 unit_id         INT AUTO_INCREMENT PRIMARY KEY,
 unit_name       VARCHAR(50) NOT NULL,
@@ -118,3 +128,4 @@ likes               INT NOT NULL,
 FOREIGN KEY (student_id) REFERENCES student_user (id),
 FOREIGN KEY (question_id) REFERENCES questions (question_id)
 );
+

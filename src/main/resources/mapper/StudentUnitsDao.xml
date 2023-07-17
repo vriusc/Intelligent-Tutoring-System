@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.StudentUnitsDao">
+
+    <resultMap type="com.example.demo.entity.StudentUnits" id="StudentUnitsMap">
+        <result property="studentUnitId" column="student_unit_id" jdbcType="INTEGER"/>
+        <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+        <result property="unitId" column="unit_id" jdbcType="INTEGER"/>
+        <result property="isfinished" column="isFinished" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentUnitsMap">
+        select
+          student_unit_id, student_id, unit_id, isFinished
+        from student_units
+        where student_unit_id = #{studentUnitId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentUnitsMap">
+        select
+          student_unit_id, student_id, unit_id, isFinished
+        from student_units
+        <where>
+            <if test="studentUnits.studentUnitId != null">
+                and student_unit_id = #{studentUnits.studentUnitId}
+            </if>
+            <if test="studentUnits.studentId != null">
+                and student_id = #{studentUnits.studentId}
+            </if>
+            <if test="studentUnits.unitId != null">
+                and unit_id = #{studentUnits.unitId}
+            </if>
+            <if test="studentUnits.isfinished != null">
+                and isFinished = #{studentUnits.isfinished}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from student_units
+        <where>
+            <if test="studentUnitId != null">
+                and student_unit_id = #{studentUnitId}
+            </if>
+            <if test="studentId != null">
+                and student_id = #{studentId}
+            </if>
+            <if test="unitId != null">
+                and unit_id = #{unitId}
+            </if>
+            <if test="isfinished != null">
+                and isFinished = #{isfinished}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="studentUnitId" useGeneratedKeys="true">
+        insert into student_units(student_id, unit_id, isFinished)
+        values (#{studentId}, #{unitId}, #{isfinished})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="studentUnitId" useGeneratedKeys="true">
+        insert into student_units(student_id, unit_id, isFinished)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.studentId}, #{entity.unitId}, #{entity.isfinished})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="studentUnitId" useGeneratedKeys="true">
+        insert into student_units(student_id, unit_id, isFinished)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.studentId}, #{entity.unitId}, #{entity.isfinished})
+        </foreach>
+        on duplicate key update
+        student_id = values(student_id),
+        unit_id = values(unit_id),
+        isFinished = values(isFinished)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update student_units
+        <set>
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="unitId != null">
+                unit_id = #{unitId},
+            </if>
+            <if test="isfinished != null">
+                isFinished = #{isfinished},
+            </if>
+        </set>
+        where student_unit_id = #{studentUnitId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from student_units where student_unit_id = #{studentUnitId}
+    </delete>
+
+</mapper>
+

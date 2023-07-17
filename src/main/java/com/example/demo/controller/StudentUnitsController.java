@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.StudentUnits;
 import com.example.demo.service.StudentUnitsService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,12 @@
 import './Unit.css'
 import { Navigate, useLoaderData } from 'react-router-dom'
-import { getOptions, getQuestionsByUnitId, getStudent, getUnitById } from '../lib/tutoring-client'
+import {
+  getOptions,
+  getQuestionsByUnitId,
+  getStudent,
+  getUnitById,
+  postRecord
+} from '../lib/tutoring-client'
 import Header from '../element/Header'
 import { useEffect, useState } from 'react'
 import YoutubePlater from './YoutubePlayer'
@@ -52,9 +58,11 @@ const Unit = () => {
 
   const goToQuestions = () => {
     getQuestionsByUnitId(data.unitId).then((response) => {
-      console.log('Questions', response.data.content)
-      setQuestions(response.data.content)
+      const data = response.data.content
+      console.log('Questions', data)
+      setQuestions(data)
       setShowQuestions(true)
+      createAnswerList(data)
     })
   }
 
@@ -62,13 +70,38 @@ const Unit = () => {
     return [...thisOptions.filter((option) => option.questionId === questionId)]
   }
 
-  const reviewQuestions = () => {
-    setOnReview(true)
+  const reviewQuestions = async () => {
+    try {
+      setOnReview(true)
+      const recordList = []
+      const newAnswerList = answersList.map((myQuest) => {
+        const { studentId, questionId } = myQuest
+        const toRecord = myQuest.myOptions.map((myOpt) => ({
+          studentId,
+          questionId,
+          optionId: myOpt.optionId
+        }))
+        recordList.push(...toRecord)
+        myQuest.isCorrect = checkCorrectQuest(myQuest)
+        return myQuest
+      })
+      setAnswersList(newAnswerList)
+      console.log('review final:', newAnswerList, recordList)
+
+      // POSTING questions
+      for (const record of recordList) {
+        await postRecord(record)
+        console.log('Question posted', record)
+      }
+      lastAnswerReview()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const resetQuestions = () => {
-    setAnswersList([])
     setOnReview(false)
+    setAnswersList(answersList.map((answer) => ({ ...answer, myOptions: [] })))
   }
 
   const getFeedback = () => {
@@ -89,10 +122,33 @@ const Unit = () => {
       })
   }
 
-  // const checkFeedback = () => {
-  //   console.log(answersList)
-  //   return answersList.length < 2
-  // }
+  const createAnswerList = (list) => {
+    const newAnswerList = list.map((quest) => {
+      const options = myOptions(questOptions, quest.questionId).filter((opt) => opt.isCorrect)
+      return {
+        studentId,
+        questionId: quest.questionId,
+        isCorrect: false,
+        correctOptions: options,
+        myOptions: []
+      }
+    })
+    console.log('answerList: ', newAnswerList)
+    setAnswersList(newAnswerList)
+  }
+
+  const checkCorrectQuest = (quest) => {
+    if (quest.myOptions.length > 0) {
+      const allCorrect = !quest.myOptions.some((opt) => opt.isCorrect !== 1)
+      return allCorrect && quest.myOptions.length === quest.correctOptions.length
+    } else {
+      return quest.isCorrect
+    }
+  }
+
+  const lastAnswerReview = () => {
+    // TODO getting answer
+  }
 
   return (
     <>
@@ -142,7 +198,12 @@ const Unit = () => {
                 >
                   Restart
                 </Button>
-                <Button className="Unit-btn" color="success" onClick={() => reviewQuestions()}>
+                <Button
+                  className="Unit-btn"
+                  color="success"
+                  disabled={onReview}
+                  onClick={() => reviewQuestions()}
+                >
                   Submit
                 </Button>
                 <Button

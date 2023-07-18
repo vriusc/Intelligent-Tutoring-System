@@ -1,6 +1,6 @@
-import { Badge } from 'reactstrap'
+import { Alert, Badge } from 'reactstrap'
 import './Question.css'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import QuestionTextText from './QuestTextText'
 import QuestionTextPicture from './QuestTextPicture'
 import QuestionPictureText from './QuestPictureText'
@@ -14,39 +14,61 @@ const Question = (args) => {
   const [optSelected, setOptSelected] = useState(null)
   const [optMultple, setOptMultple] = useState([])
   const [isCorrect, setIsCorrect] = useState(2)
-  // TODO Work on answers when backend is ready
-
-  if (quest.questionTypeId === 3) {
-    console.log('Working Quest', quest)
-  }
+  const [errorText, setErrorText] = useState('')
 
   const handleRadioBtn = (event, currentOption) => {
-    setOptSelected(parseInt(event.target.value))
-    if (currentOption.isCorrect === 1) {
-      setAnswersList([...answersList, currentOption.questionId])
-    }
+    const answerOptionID = parseInt(event.target.value)
+    setOptSelected(answerOptionID)
+    setIsCorrect(currentOption.isCorrect)
+
+    const answerList = answersList.map((element) => {
+      if (element.questionId === quest.questionId) {
+        element.myOptions = [currentOption]
+      }
+      return element
+    })
+    setAnswersList(answerList)
   }
 
   const handleCheckBoxBtn = (event) => {
     const selected = parseInt(event.target.value)
-    if (optMultple === null) {
-      setOptMultple([selected])
-    } else if (optMultple.some((opt) => opt === selected)) {
-      setOptMultple([...optMultple.filter((opt) => opt !== selected)])
+    let multipleArray = []
+    if (optMultple.some((opt) => opt === selected)) {
+      multipleArray = [...optMultple.filter((opt) => opt !== selected)]
     } else {
-      setOptMultple([...optMultple, selected])
+      multipleArray = [...optMultple, selected]
     }
-    // TODO implement ANSWER later
+    setOptMultple(multipleArray)
+    multipleErrorReview(multipleArray)
+
+    const answerList = answersList.map((element) => {
+      if (element.questionId === quest.questionId) {
+        element.myOptions = [
+          ...options.filter((opt) => multipleArray.some((multi) => multi === opt.optionId))
+        ]
+      }
+      return element
+    })
+    setAnswersList(answerList)
   }
 
-  useEffect(() => {
-    if (review === true) {
-      const currentOption = options.find((opt) => opt.optionId === optSelected)
-      setIsCorrect(currentOption.isCorrect)
+  const multipleErrorReview = (list) => {
+    const totalCount = options.filter((opt) => opt.isCorrect === 1).length
+    const correctCount = list.filter((id) => {
+      const myOpt = options.find((opt) => opt.optionId === id)
+      return myOpt && myOpt.isCorrect === 1
+    }).length
+    if (totalCount === correctCount && correctCount === list.length) {
+      setIsCorrect(1)
     } else {
-      setIsCorrect(2)
+      setIsCorrect(0)
+      if (correctCount === 0) {
+        setErrorText('All the answers are wrong')
+      } else if (totalCount > correctCount && correctCount > 0) {
+        setErrorText('You have partially right')
+      }
     }
-  }, [review])
+  }
 
   return (
     <div className="Question-container">
@@ -56,7 +78,6 @@ const Question = (args) => {
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}
-          isCorrect={isCorrect}
         />
       )}
       {quest.questionTypeId === 2 && (
@@ -107,37 +128,12 @@ const Question = (args) => {
           <Badge color="info">The question is not ready</Badge>
         </h3>
       )}
+      {review && isCorrect == 0 && (
+        <Alert color="danger">{quest.explanation || errorText || 'Your answer is incorrect'}</Alert>
+      )}
+      {review && isCorrect == 1 && <Alert>Correct Answer!</Alert>}
     </div>
   )
-  // return (
-  //   <div className="Question-container">
-  //     <h5>{`${number}. ${quest.question}`}</h5>
-  //     {review && isCorrect == 0 && <Alert color="danger">{quest.explanation}</Alert>}
-  //     {review && isCorrect == 1 && <Alert>Correct Answer!</Alert>}
-  //     {quest.questionTypeId === 1 && <img src={laptopImage} className="Quest-image" />}
-  //     {quest.questionTypeId === 2 && (
-  //       <audio controls className="Quest-audio">
-  //         <source src={phoneAudio} type="audio/mpeg" />
-  //       </audio>
-  //     )}
-  //     <div className="options-list">
-  //       {options.map((currentOptions) => (
-  //         <div key={currentOptions.optionId}>
-  //           <Input
-  //             type="radio"
-  //             id={currentOptions.optionId}
-  //             name={`${currentOptions.optionId}-${currentOptions.option}`}
-  //             value={currentOptions.optionId}
-  //             checked={currentOptions.optionId === optSelected}
-  //             disabled={review}
-  //             onChange={(event) => handleRadioBtn(event, currentOptions)}
-  //           />
-  //           <Label style={{ marginLeft: '0.5em' }}>{` ${currentOptions.option}`}</Label>
-  //         </div>
-  //       ))}
-  //     </div>
-  //   </div>
-  // )
 }
 
 export default Question

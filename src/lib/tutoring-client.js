@@ -58,3 +58,7 @@ export const editLearningStyle = async (data) => {
 export const getLearningStyle = async (params) => {
   return await axios.get(`${baseURL}/learningStyle`, { params })
 }
+
+export const postRecord = async (data) => {
+  return await axios.post(`${baseURL}/record`, data)
+}

@@ -276,6 +276,8 @@ INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (26, 'She ______ dogs.', 1, NULL, NULL, NULL, 1, 'She \"likes\" dogs.', '1');
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (27, 'Adam loves to _____ to music while running. ', 1, NULL, NULL, NULL, 2, 'Adam loves to listen to music while running. ', '1');
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (28, 'Choose sentence(s) applied to the picture.', 6, 'https://tomatolearning.s3.amazonaws.com/picture/mother_baby.jpeg', NULL, NULL, 3, 'A women is holding a baby on the beach and the weather is nice.', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (29, 'Choose the option(s) corresponding to the description: He goes hiking every weekend.', 7, NULL, NULL, NULL, 4, 'zzz', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (30, 'Choose the option(s) corresponding to the audio.', 10, NULL, NULL, 'https://www.youtube.com/embed/jul2urONzOQ?start=891&end=895', 5, 'zzz', '1');
 
 
 
@@ -309,6 +311,8 @@ INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALU
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (26, 26, 6);
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (27, 27, 6);
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (28, 28, 6);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (29, 29, 6);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (30, 30, 6);
 
 
 
@@ -342,10 +346,10 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (26, 7, 'pink', 0, 2, 'zzz');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (27, 7, 'white', 1, 3, 'zzz');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (28, 7, 'blue', 0, 4, 'zzz');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (29, 8, 'https://tomatolearning.s3.amazonaws.com/option/orange', 0, 1, 'orange');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (30, 8, 'https://tomatolearning.s3.amazonaws.com/option/purple', 0, 2, 'purple');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (31, 8, 'https://tomatolearning.s3.amazonaws.com/option/pink', 1, 3, 'pink');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (32, 8, 'https://tomatolearning.s3.amazonaws.com/option/blue', 0, 4, 'blue');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (29, 8, 'https://tomatolearning.s3.amazonaws.com/option/orange.png', 0, 1, 'orange');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (30, 8, 'https://tomatolearning.s3.amazonaws.com/option/purple.png', 0, 2, 'purple');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (31, 8, 'https://tomatolearning.s3.amazonaws.com/option/pink.png', 1, 3, 'pink');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (32, 8, 'https://tomatolearning.s3.amazonaws.com/option/blue.png', 0, 4, 'blue');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (33, 9, 'orange', 0, 1, 'orange');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (34, 9, 'purple', 1, 2, 'purple');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (35, 9, 'pink', 0, 3, 'pink');
@@ -426,6 +430,14 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (110, 28, 'The baby is crying.', 0, 2, 'zzz');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (111, 28, 'A woman is holding a baby.', 1, 3, 'zzz');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (112, 28, 'It\'s raining.', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (113, 29, 'https://tomatolearning.s3.amazonaws.com/option/hockey.jpeg', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (114, 29, 'https://tomatolearning.s3.amazonaws.com/option/he.jpeg', 1, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (115, 29, 'https://tomatolearning.s3.amazonaws.com/option/hike.jpeg', 1, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (116, 29, 'https://tomatolearning.s3.amazonaws.com/option/sofa.jpeg', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (117, 30, 'https://tomatolearning.s3.amazonaws.com/option/strawberry.jpeg', 1, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (118, 30, 'https://tomatolearning.s3.amazonaws.com/option/lemon.jpeg', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (119, 30, 'https://tomatolearning.s3.amazonaws.com/option/carrot.jpeg', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (120, 30, 'https://tomatolearning.s3.amazonaws.com/option/she.jpeg', 1, 4, 'zzz');
 
 
 

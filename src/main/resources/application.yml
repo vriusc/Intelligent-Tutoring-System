@@ -6,6 +6,7 @@ spring:
     password: Souvenir
     #password: Souvenir0104
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+    hikari:
+      maximum-pool-size: 10
 mybatis:
   mapper-locations: classpath:/mapper/*.xml

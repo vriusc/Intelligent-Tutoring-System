@@ -40,5 +40,5 @@ pipeline {
                 sh "helm upgrade --install --force vprofile-stack helm/tomatocharts --set appimage=${registry}:V${BUILD_NUMBER} --namespace prod"
             }
         }
-    }
+    
 }

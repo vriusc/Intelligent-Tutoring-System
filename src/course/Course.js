@@ -1,6 +1,6 @@
 import './Course.css'
 import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
-import { getStudent, getUnitsBySubjectId } from '../lib/tutoring-client'
+import { getStudent, getStudentUnit, getUnitsBySubjectId } from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import Header from '../element/Header'
 import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
@@ -18,11 +18,13 @@ const Course = () => {
     return <Navigate replace to="/login" />
   }
   const [student, setStudent] = useState({})
+  const [unitsSolved, setUnitsSolved] = useState([])
   const { data } = useLoaderData().units
 
   useEffect(() => {
-    getStudent(studentId).then((response) => {
-      settingStudents(response)
+    Promise.all([getStudent(studentId), getStudentUnit({ studentId })]).then((response) => {
+      settingStudents(response[0])
+      settingStudentUnit(response[1])
     })
   }, [studentId])
 
@@ -33,9 +35,18 @@ const Course = () => {
     }
   }
 
+  const settingStudentUnit = (response) => {
+    const { content } = response.data
+    setUnitsSolved(content)
+  }
+
   const goToUnit = (unit) => {
     const { subjectId, unitId } = unit
     navigate(`/courses/${subjectId}/unit/${unitId}`)
+  }
+
+  const checkFinish = (unit) => {
+    return unitsSolved.some((solve) => solve.unitId === unit.unitId && solve.isfinished === 1)
   }
 
   return (
@@ -45,7 +56,7 @@ const Course = () => {
         <div className="Course">
           <h3>Units list</h3>
           <div className="Units-list">
-            {data.map((unit, index) => (
+            {data.map((unit) => (
               <Card key={unit.unitId} className="mt-3">
                 <CardBody className="Unit-list-body p-4">
                   <div className="">
@@ -56,7 +67,7 @@ const Course = () => {
                   </div>
                   {/* TODO COMPLETE ONCE WE HAVE THE UNIT DONE */}
                   <div style={{ alignSelf: 'center' }}>
-                    {index === 100 ? (
+                    {checkFinish(unit) ? (
                       <h4 style={{ color: 'green' }}>
                         Finished <BsFillCheckCircleFill />
                       </h4>

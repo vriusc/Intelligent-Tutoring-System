@@ -124,7 +124,6 @@ const Unit = () => {
   }
 
   const getFeedback = () => {
-    console.log('feedback', answersList)
     const params = {
       username: student.username,
       test_score: '8',
@@ -152,7 +151,6 @@ const Unit = () => {
         myOptions: []
       }
     })
-    console.log('answerList: ', newAnswerList)
     setAnswersList(newAnswerList)
   }
 

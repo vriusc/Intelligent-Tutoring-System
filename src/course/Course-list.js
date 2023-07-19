@@ -37,9 +37,8 @@ const CoursesList = () => {
   }
 
   const goToCourse = (studentSubject) => {
-    const { subjectId } = studentSubject
-    console.log(subjectId)
-    navigate(`/courses/${subjectId}`)
+    const { studentSubjectId } = studentSubject
+    navigate(`/courses/${studentSubjectId}`)
   }
 
   return (

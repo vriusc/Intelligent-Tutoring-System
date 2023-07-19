@@ -19,7 +19,7 @@ import { gptResponse } from '../lib/gpt-client'
 
 export async function loader({ params }) {
   const unit = await getUnitById(params.unitId)
-  return { unit }
+  return { unit, studentSubjectId: params.courseId }
 }
 
 const Unit = () => {
@@ -38,6 +38,7 @@ const Unit = () => {
 
   const navigate = useNavigate()
   const { data } = useLoaderData().unit
+  const studentSubjectId = useLoaderData().studentSubjectId
 
   useEffect(() => {
     Promise.all([
@@ -187,7 +188,7 @@ const Unit = () => {
   const endPage = (dataStUnit) => {
     setStudentUnit(dataStUnit)
     if (dataStUnit.isfinished === 1) {
-      navigate(`/courses/${data.subjectId}`)
+      navigate(`/courses/${studentSubjectId}`)
     }
   }
 

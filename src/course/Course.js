@@ -1,14 +1,21 @@
 import './Course.css'
 import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
-import { getStudent, getStudentUnit, getUnitsBySubjectId } from '../lib/tutoring-client'
+import {
+  getStudent,
+  getStudentSubjectById,
+  getStudentUnit,
+  getUnitsBySubjectId,
+  putStudentSubject
+} from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import Header from '../element/Header'
 import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 
 export async function loader({ params }) {
-  const units = await getUnitsBySubjectId(params.courseId)
-  return { units }
+  const studentSubject = await getStudentSubjectById(params.courseId)
+  const units = await getUnitsBySubjectId(studentSubject.data.subjectId)
+  return { units, studentSubject }
 }
 
 const Course = () => {
@@ -20,11 +27,14 @@ const Course = () => {
   const [student, setStudent] = useState({})
   const [unitsSolved, setUnitsSolved] = useState([])
   const { data: unitList } = useLoaderData().units
+  const { data: studentSubject } = useLoaderData().studentSubject
 
   useEffect(() => {
     Promise.all([getStudent(studentId), getStudentUnit({ studentId })]).then((response) => {
+      console.log(response)
       settingStudents(response[0])
       settingStudentUnit(response[1])
+      checkSubjectProgress(response[1].data.content)
     })
   }, [studentId])
 
@@ -41,12 +51,32 @@ const Course = () => {
   }
 
   const goToUnit = (unit) => {
-    const { subjectId, unitId } = unit
-    navigate(`/courses/${subjectId}/unit/${unitId}`)
+    const { unitId } = unit
+    const { studentSubjectId } = studentSubject
+    navigate(`/courses/${studentSubjectId}/unit/${unitId}`)
   }
 
   const checkFinish = (unit) => {
     return unitsSolved.some((solve) => solve.unitId === unit.unitId && solve.isfinished === 1)
+  }
+
+  const checkSubjectProgress = (solvedList) => {
+    console.log(studentSubject, solvedList, unitList)
+    const total = unitList.length
+    const count = unitList.filter((thisUnit) => {
+      return solvedList.some(
+        (solved) => solved.unitId === thisUnit.unitId && solved.isfinished === 1
+      )
+    }).length
+    const currentProgress = (count / total) * 100
+    if (currentProgress !== studentSubject.progress) {
+      const { studentSubjectId, subjectId, studentId } = studentSubject
+      putStudentSubject({ studentSubjectId, subjectId, studentId, progress: currentProgress }).then(
+        (response) => {
+          console.log(response, total, count, currentProgress)
+        }
+      )
+    }
   }
 
   return (

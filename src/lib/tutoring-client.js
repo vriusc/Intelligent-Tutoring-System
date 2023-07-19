@@ -26,6 +26,14 @@ export const getSubjectsById = async (studentId) => {
   return await axios.get(`${baseURL}/studentSubjects/queryByStudentId/${studentId}`)
 }
 
+export const getStudentSubjectById = async (studentSubjectId) => {
+  return await axios.get(`${baseURL}/studentSubjects/${studentSubjectId}`)
+}
+
+export const putStudentSubject = async (data) => {
+  return await axios.put(`${baseURL}/studentSubjects`, data)
+}
+
 export const addSubjectStudent = async (data) => {
   return await axios.post(`${baseURL}/studentSubjects/add`, data)
 }

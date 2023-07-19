@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tfront
-  labels: 
+  labels:
     app: tfront
 spec:
   replicas: 2
@@ -20,3 +20,7 @@ spec:
         ports:
         - name: tfront-port
           containerPort: 3000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 250Mi

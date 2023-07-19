@@ -19,7 +19,7 @@ const Course = () => {
   }
   const [student, setStudent] = useState({})
   const [unitsSolved, setUnitsSolved] = useState([])
-  const { data } = useLoaderData().units
+  const { data: unitList } = useLoaderData().units
 
   useEffect(() => {
     Promise.all([getStudent(studentId), getStudentUnit({ studentId })]).then((response) => {
@@ -56,7 +56,7 @@ const Course = () => {
         <div className="Course">
           <h3>Units list</h3>
           <div className="Units-list">
-            {data.map((unit) => (
+            {unitList.map((unit) => (
               <Card key={unit.unitId} className="mt-3">
                 <CardBody className="Unit-list-body p-4">
                   <div className="">

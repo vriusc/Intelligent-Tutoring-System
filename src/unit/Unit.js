@@ -1,11 +1,14 @@
 import './Unit.css'
-import { Navigate, useLoaderData } from 'react-router-dom'
+import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
 import {
   getOptions,
   getQuestionsByUnitId,
   getStudent,
+  getStudentUnit,
   getUnitById,
-  postRecord
+  postRecord,
+  postStudentUnit,
+  putStudentUnit
 } from '../lib/tutoring-client'
 import Header from '../element/Header'
 import { useEffect, useState } from 'react'
@@ -31,14 +34,21 @@ const Unit = () => {
   const [onReview, setOnReview] = useState(false)
   const [answersList, setAnswersList] = useState([])
   const [gptFeedback, setGPTFeedback] = useState('')
+  const [studentUnit, setStudentUnit] = useState({})
 
+  const navigate = useNavigate()
   const { data } = useLoaderData().unit
 
   useEffect(() => {
-    Promise.all([getStudent(studentId), getOptions({})]).then((response) => {
+    Promise.all([
+      getStudent(studentId),
+      getOptions({}),
+      getStudentUnit({ studentId, unitId: data.unitId })
+    ]).then((response) => {
       console.log('Student, Options', response)
       settingStudents(response[0])
       settingOptions(response[1])
+      settingStudentUnit(response[2])
     })
   }, [studentId])
 
@@ -53,6 +63,15 @@ const Unit = () => {
     const { content } = response.data
     if (content) {
       setQuestOptions(content)
+    }
+  }
+
+  const settingStudentUnit = (response) => {
+    const { content } = response.data
+    if (content && content.length) {
+      endPage(content[0])
+    } else {
+      setStudentUnit({ studentId, unitId: data.unitId, isfinished: 0 })
     }
   }
 
@@ -147,7 +166,31 @@ const Unit = () => {
   }
 
   const lastAnswerReview = () => {
-    // TODO getting answer
+    // TODO getting answer in progress
+    const newStudentUnit = {
+      ...studentUnit,
+      isfinished: answersList.some((answer) => !answer.isCorrect) ? 0 : 1
+    }
+    setStudentUnit(newStudentUnit)
+    if (newStudentUnit.studentUnitId) {
+      const { studentUnitId, isfinished } = newStudentUnit
+      putStudentUnit({ studentUnitId, isfinished }).then((response) => {
+        const { data } = response
+        endPage(data)
+      })
+    } else {
+      postStudentUnit(studentUnit).then((response) => {
+        const { data } = response
+        endPage(data)
+      })
+    }
+  }
+
+  const endPage = (dataStUnit) => {
+    setStudentUnit(dataStUnit)
+    if (dataStUnit.isfinished === 1) {
+      navigate(`/courses/${data.subjectId}`)
+    }
   }
 
   return (

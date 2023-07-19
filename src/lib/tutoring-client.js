@@ -62,3 +62,15 @@ export const getLearningStyle = async (params) => {
 export const postRecord = async (data) => {
   return await axios.post(`${baseURL}/record`, data)
 }
+
+export const getStudentUnit = async (params) => {
+  return await axios.get(`${baseURL}/studentUnits`, { params })
+}
+
+export const postStudentUnit = async (data) => {
+  return await axios.post(`${baseURL}/studentUnits`, data)
+}
+
+export const putStudentUnit = async (data) => {
+  return await axios.put(`${baseURL}/studentUnits`, data)
+}

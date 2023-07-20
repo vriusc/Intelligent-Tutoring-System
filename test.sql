@@ -165,7 +165,14 @@ INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `descr
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (4, 'Beginner English Unit 4', 1, 4, 'the 4th unit of Beginner English ', 'https://www.youtube.com/embed/dNP6L6y7ZEM', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (5, 'Beginner English Unit 5', 1, 5, 'the 5th unit of Beginner English ', 'https://www.youtube.com/embed/jhzj9D73SZw', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (6, 'Intermediate English Unit 1', 2, 1, 'the 1st unit of Intermediate English ', 'https://www.youtube.com/embed/jul2urONzOQ', NULL, NULL);
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (7, 'Intermediate English Unit 2', 2, 2, 'the 2nd unit of Intermediate English ', 'https://www.youtube.com/embed/56Gsym70j-A', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (7, 'Intermediate English Unit 2', 2, 2, 'the 2nd unit of Intermediate English ', 'https://www.youtube.com/embed/56Gsym70j-A', 'https://tomatolearning.s3.amazonaws.com/test/unit6.png', '<p>Purchase a 12 month subscription to Vacation the Nation today and receive a free pair of Sunnies Sunglasses with your very own soft leather case.*</p>
+<p>To get your free Sunnies, follow these 3 easy steps:</p>
+<ol>
+  <li>Purchase a copy of Vacation the Nation, New York\'s #1 Travel magazine.</li>
+  <li>Fill out the application card (found in the center of the magazine).</li>
+  <li>Mail the card and $21.95 US to the address provided.</li>
+</ol>
+<p>*This is a limited time offer only. Application and funds must be received no later than Dec 1st, 2004. Canadian residents should add $3 US for shipping. Offer not available for residents outside of North America.</p>');
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (8, 'Intermediate English Unit 3', 2, 3, 'the 3rd unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (9, 'Intermediate English Unit 4', 2, 4, 'the 4th unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (10, 'Intermediate English Unit 5', 2, 5, 'the 5th unit of Intermediate English ', 'None', NULL, NULL);

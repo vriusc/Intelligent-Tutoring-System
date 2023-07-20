@@ -165,7 +165,7 @@ INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `descr
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (4, 'Beginner English Unit 4', 1, 4, 'the 4th unit of Beginner English ', 'https://www.youtube.com/embed/dNP6L6y7ZEM', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (5, 'Beginner English Unit 5', 1, 5, 'the 5th unit of Beginner English ', 'https://www.youtube.com/embed/jhzj9D73SZw', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (6, 'Intermediate English Unit 1', 2, 1, 'the 1st unit of Intermediate English ', 'https://www.youtube.com/embed/jul2urONzOQ', NULL, NULL);
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (7, 'Intermediate English Unit 2', 2, 2, 'the 2nd unit of Intermediate English ', 'None', NULL, NULL);
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (7, 'Intermediate English Unit 2', 2, 2, 'the 2nd unit of Intermediate English ', 'https://www.youtube.com/embed/56Gsym70j-A', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (8, 'Intermediate English Unit 3', 2, 3, 'the 3rd unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (9, 'Intermediate English Unit 4', 2, 4, 'the 4th unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (10, 'Intermediate English Unit 5', 2, 5, 'the 5th unit of Intermediate English ', 'None', NULL, NULL);
@@ -278,6 +278,11 @@ INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (28, 'Choose sentence(s) applied to the picture.', 6, 'https://tomatolearning.s3.amazonaws.com/picture/mother_baby.jpeg', NULL, NULL, 3, 'A women is holding a baby on the beach and the weather is nice.', '1');
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (29, 'Choose the option(s) corresponding to the description: He goes hiking every weekend.', 7, NULL, NULL, NULL, 4, 'zzz', '1');
 INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (30, 'Choose the option(s) corresponding to the audio.', 10, NULL, NULL, 'https://www.youtube.com/embed/jul2urONzOQ?start=891&end=895', 5, 'zzz', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (31, 'What is this advertisement for?', 1, NULL, NULL, NULL, 1, 'zzz', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (32, 'How much do the sunglasses cost?', 1, NULL, NULL, NULL, 2, 'zzz', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (33, 'Who cannot benefit from this special deal?', 1, NULL, NULL, NULL, 3, 'zzz', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (34, 'Choose the picture of sunglasses.', 2, NULL, NULL, NULL, 4, 'zzz', '1');
+INSERT INTO `questions` (`question_id`, `question`, `question_type_id`, `picture_path`, `video_path`, `audio_path`, `question_order`, `explanation`, `description`) VALUES (35, 'Bob purchased a subscription to this on 3rd Oct, 2004. Which date is the subcription no longer valid?', 1, NULL, NULL, NULL, 5, 'zzz', '1');
 
 
 
@@ -313,6 +318,11 @@ INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALU
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (28, 28, 6);
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (29, 29, 6);
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (30, 30, 6);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (31, 31, 7);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (32, 32, 7);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (33, 33, 7);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (34, 34, 7);
+INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (35, 35, 7);
 
 
 
@@ -438,7 +448,26 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (118, 30, 'https://tomatolearning.s3.amazonaws.com/option/lemon.jpeg', 0, 2, 'zzz');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (119, 30, 'https://tomatolearning.s3.amazonaws.com/option/carrot.jpeg', 0, 3, 'zzz');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (120, 30, 'https://tomatolearning.s3.amazonaws.com/option/she.jpeg', 1, 4, 'zzz');
-
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (121, 31, 'A summer trip.', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (122, 31, 'A travel company.', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (123, 31, 'A special deal.', 1, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (124, 31, 'A free magazine.', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (125, 32, 'They are free with a subscription.', 1, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (126, 32, 'They cost $1.', 0, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (127, 32, 'They cost $3 Canadian.', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (128, 32, 'They cost $21. 95 US.', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (129, 33, 'Canadians.', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (130, 33, 'UK residents.', 1, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (131, 33, 'North Americans.', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (132, 33, 'US residents.', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (133, 34, 'https://tomatolearning.s3.amazonaws.com/option/sun.jpeg', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (134, 34, 'https://tomatolearning.s3.amazonaws.com/option/sunglasses.jpeg', 1, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (135, 34, 'https://tomatolearning.s3.amazonaws.com/option/glasses.jpeg', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (136, 34, 'https://tomatolearning.s3.amazonaws.com/option/cone.jpeg', 0, 4, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (137, 35, '12th Aug', 0, 1, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (138, 35, '11th Nov', 1, 2, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (139, 35, '23rd Apr', 0, 3, 'zzz');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (140, 35, '7th May', 0, 4, 'zzz');
 
 
 

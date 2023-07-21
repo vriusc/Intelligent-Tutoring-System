@@ -112,7 +112,7 @@ public class StudentSubjectsController {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<StudentSubjects> edit(StudentSubjects studentSubjects) {
+    public ResponseEntity<StudentSubjects> edit(@RequestBody StudentSubjects studentSubjects) {
         return ResponseEntity.ok(this.studentSubjectsService.update(studentSubjects));
     }
 

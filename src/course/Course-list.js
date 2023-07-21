@@ -66,7 +66,10 @@ const CoursesList = () => {
                     <Button onClick={() => goToCourse(studentSubject)}>
                       {studentSubject.progress > 0 ? 'CONTINUE' : 'START'}
                     </Button>
-                    <CardTitle style={{ color: 'red' }} tag="h3">
+                    <CardTitle
+                      style={{ color: studentSubject.progress > 0 ? 'green' : 'red' }}
+                      tag="h3"
+                    >
                       {`${studentSubject.progress} %`}
                     </CardTitle>
                   </div>

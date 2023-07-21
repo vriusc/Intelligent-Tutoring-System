@@ -125,7 +125,7 @@ const Question = (args) => {
       )}
       {quest.questionTypeId > 6 && (
         <h3>
-          <Badge color="info">The question is not ready</Badge>
+          <Badge color="info">{`The question is not ready, Question Type: ${quest.questionTypeId}`}</Badge>
         </h3>
       )}
       {review && isCorrect == 0 && (

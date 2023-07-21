@@ -26,6 +26,7 @@ const Course = () => {
   }
   const [student, setStudent] = useState({})
   const [unitsSolved, setUnitsSolved] = useState([])
+  const [currentUnit, setCurrentUnit] = useState(0)
   const { data: unitList } = useLoaderData().units
   const { data: studentSubject } = useLoaderData().studentSubject
 
@@ -77,6 +78,7 @@ const Course = () => {
         }
       )
     }
+    setCurrentUnit(unitList[count].unitId)
   }
 
   return (
@@ -95,7 +97,6 @@ const Course = () => {
                     </CardTitle>
                     <CardText className="text-muted">{unit.description}</CardText>
                   </div>
-                  {/* TODO COMPLETE ONCE WE HAVE THE UNIT DONE */}
                   <div style={{ alignSelf: 'center' }}>
                     {checkFinish(unit) ? (
                       <h4 style={{ color: 'green' }}>
@@ -104,7 +105,7 @@ const Course = () => {
                     ) : (
                       <Button
                         color="dark"
-                        disabled={!unit.materials_path}
+                        disabled={!unit.materials_path || unit.unitId !== currentUnit}
                         onClick={() => goToUnit(unit)}
                       >
                         START
@@ -119,7 +120,12 @@ const Course = () => {
             <h5 style={{ alignSelf: 'center', margin: 0, flex: 2 }}>
               Once you finished all the units you can start the test
             </h5>
-            <Button block style={{ alignSelf: 'center', flex: 1 }} color="success" disabled>
+            <Button
+              block
+              style={{ alignSelf: 'center', flex: 1 }}
+              color="success"
+              disabled={studentSubject.progress < 100}
+            >
               TEST
             </Button>
           </div>

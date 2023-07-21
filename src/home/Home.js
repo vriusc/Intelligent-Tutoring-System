@@ -112,9 +112,8 @@ const Home = () => {
                         <Button onClick={() => joinSubject(content)}>JOIN COURSE</Button>
                       </Card>
                     )
-                  } else {
-                    return <></>
                   }
+                  return <></>
                 })}
               </div>
             </>

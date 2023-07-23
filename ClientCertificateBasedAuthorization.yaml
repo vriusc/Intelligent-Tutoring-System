@@ -1,0 +1,21 @@
+scenarios:
+  client-cert-scenario:
+    data-sources: # Read cert aliases from this CSV file
+    - path: ${BASE_DIR}/test-data/my-client-certificate-aliases.csv
+      delimiter: ','
+      quoted: false  # allow quoted data
+      loop: true  # loop over in case of end-of-file reached if true, stop thread if false
+      variable-names: certalias  # variable-name here needs to be used in keystore-config next
+    keystore-config:
+      variable-name: certalias # variable name used in data-source element
+      start-index: 0 # The index of the first key to use in Keystore, 0-based.
+      end-index: 99 # The index of the last key to use in Keystore, 0-based.
+      preload: true
+
+
+modules:
+  jmeter:
+    properties:
+    system-properties:
+      javax.net.ssl.keyStore: ${BASE_DIR}/test-data/my-client-certificates-in-one-jks.jks
+      javax.net.ssl.keyStorePassword: MyClientCertificateJKSFilePassword

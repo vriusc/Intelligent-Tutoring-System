@@ -1,0 +1,14 @@
+scenarios:
+  little_cookies:
+    requests:
+    - http://tomato.vprofile.tomatokillerucd.com/api/studentUser/password
+    - http://tomato.vprofile.tomatokillerucd.com/api/studentUser/2
+    cookies:
+    - name: n0  # name of cookie, required
+      value: v0 # value of cookie, required
+      domain: blazedemo.com # hosts to which the cookie will be sent, required
+    - name: n1
+      value: v1
+      domain: blazemeter.com
+      path: /pricing  # must exist in the request for sending cookie
+      secure: true    # send only through https, optional, default: false

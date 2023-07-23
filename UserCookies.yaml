@@ -9,6 +9,6 @@ scenarios:
       domain: blazedemo.com # hosts to which the cookie will be sent, required
     - name: n1
       value: v1
-      domain: blazemeter.com
+      domain:  http://tomato.vprofile.tomatokillerucd.com
       path: /pricing  # must exist in the request for sending cookie
       secure: true    # send only through https, optional, default: false

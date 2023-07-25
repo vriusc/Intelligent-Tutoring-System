@@ -14,7 +14,7 @@ public class StudentUserTest {
         studentUser.setUsername("qianyongru");
         studentUser.setEmail("qianyongru@icloud.com");
         studentUser.setPassword("123446");
-        System.out.println(studentUser.toString());
+        System.out.println(studentUser);
     }
 
 

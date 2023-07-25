@@ -1,0 +1,15 @@
+modules:
+  jmeter:
+    protocol-handlers:  # list of protocols supported by JMX generator
+      http: bzt.jmx.http.HTTPProtocolHandler
+    default-protocol: http  # default protocol used by JMX generator
+
+scenarios:
+  protocols-demo:
+    protocol: http  # default protocol
+    requests:
+    - url: http://blazedemo.com/
+
+execution:
+- executor: jmeter
+  scenario: protocols-demo

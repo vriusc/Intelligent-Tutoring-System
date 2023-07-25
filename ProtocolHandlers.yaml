@@ -8,7 +8,7 @@ scenarios:
   protocols-demo:
     protocol: http  # default protocol
     requests:
-    - url: http://blazedemo.com/
+    - url: http://tomato.vprofile.tomatokillerucd.com
 
 execution:
 - executor: jmeter

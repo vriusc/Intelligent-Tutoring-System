@@ -67,7 +67,7 @@ public class RecordController {
      * @return 编辑结果
      */
     @PutMapping
-    public ResponseEntity<Record> edit(Record record) {
+    public ResponseEntity<Record> edit(@RequestBody Record record) {
         return ResponseEntity.ok(this.recordService.update(record));
     }
 

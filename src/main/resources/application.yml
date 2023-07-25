@@ -1,12 +1,12 @@
 spring:
   datasource:
-    url: jdbc:mysql://tomatodb:3306/test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-    #url: jdbc:mysql://localhost:3306/test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    #url: jdbc:mysql://tomatodb:3306/test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     username: root
-    password: Souvenir
-    #password: Souvenir0104
+    #password: Souvenir
+    password: Souvenir0104
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      maximum-pool-size: 10
+      maximum-pool-size: 20
 mybatis:
   mapper-locations: classpath:/mapper/*.xml

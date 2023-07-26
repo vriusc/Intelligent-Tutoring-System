@@ -1,6 +1,6 @@
 import { Alert, Badge } from 'reactstrap'
 import './Question.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import QuestionTextText from './QuestTextText'
 import QuestionTextPicture from './QuestTextPicture'
 import QuestionPictureText from './QuestPictureText'
@@ -9,12 +9,31 @@ import QuestionAudioPicture from './QuestAudioPicture'
 import MultiQuestTextText from './MultiQuestTextText'
 
 const Question = (args) => {
-  const { question, options, number, review, answersList, setAnswersList, disabled } = args
+  const {
+    question,
+    options,
+    number,
+    review,
+    answersList,
+    setAnswersList,
+    disabled,
+    radioSelected,
+    multiSelected
+  } = args
   const { questions: quest } = question
   const [optSelected, setOptSelected] = useState(null)
   const [optMultple, setOptMultple] = useState([])
   const [isCorrect, setIsCorrect] = useState(2)
   const [errorText, setErrorText] = useState('')
+
+  useEffect(() => {
+    if (radioSelected) {
+      setOptSelected(radioSelected)
+    }
+    if (multiSelected && multiSelected.length >= 1) {
+      setOptMultple(multiSelected)
+    }
+  }, [radioSelected, multiSelected])
 
   const handleRadioBtn = (event, currentOption) => {
     const answerOptionID = parseInt(event.target.value)

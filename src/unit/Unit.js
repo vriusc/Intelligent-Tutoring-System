@@ -43,7 +43,7 @@ const Unit = () => {
   useEffect(() => {
     Promise.all([
       getStudent(studentId),
-      getOptions({}),
+      getOptions({ size: 1000 }),
       getStudentUnit({ studentId, unitId: data.unitId })
     ]).then((response) => {
       console.log('Student, Options, Student-unit', response)
@@ -226,6 +226,7 @@ const Unit = () => {
                   review={onReview}
                   answersList={answersList}
                   setAnswersList={setAnswersList}
+                  disabled={onReview}
                 />
               ))}
               {questions.length === 0 && (

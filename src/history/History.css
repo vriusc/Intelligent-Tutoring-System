@@ -7,3 +7,8 @@
 .History {
   padding: 3em 4em;
 }
+
+.History-image {
+  max-width: 95px;
+  margin: 5px;
+}

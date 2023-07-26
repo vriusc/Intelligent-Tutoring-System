@@ -132,6 +132,11 @@ def image(data):
     image = vision_v1.Image(content=imgByteArr)
     response = client.face_detection(image=image)
     faces = response.face_annotations
+
+    if not faces:  # Check if any face is detected
+        emit('response', None)
+        return
+
     # Loop over all detected faces
     for face in faces:
         # There may be multiple detected emotions, choose the one with highest confidence

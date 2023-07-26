@@ -9,7 +9,7 @@ import QuestionAudioPicture from './QuestAudioPicture'
 import MultiQuestTextText from './MultiQuestTextText'
 
 const Question = (args) => {
-  const { question, options, number, review, answersList, setAnswersList } = args
+  const { question, options, number, review, answersList, setAnswersList, disabled } = args
   const { questions: quest } = question
   const [optSelected, setOptSelected] = useState(null)
   const [optMultple, setOptMultple] = useState([])
@@ -78,6 +78,7 @@ const Question = (args) => {
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}
+          disabled={disabled}
         />
       )}
       {quest.questionTypeId === 2 && (
@@ -86,6 +87,7 @@ const Question = (args) => {
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}
+          disabled={disabled}
         />
       )}
       {quest.questionTypeId === 3 && (
@@ -95,6 +97,7 @@ const Question = (args) => {
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}
+          disabled={disabled}
         />
       )}
       {quest.questionTypeId === 4 && (
@@ -104,6 +107,7 @@ const Question = (args) => {
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}
+          disabled={disabled}
         />
       )}
       {quest.questionTypeId === 5 && (
@@ -113,6 +117,7 @@ const Question = (args) => {
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}
+          disabled={disabled}
         />
       )}
       {quest.questionTypeId === 6 && (
@@ -121,6 +126,7 @@ const Question = (args) => {
           options={options}
           optSelected={optMultple}
           handleCheckBoxBtn={handleCheckBoxBtn}
+          disabled={disabled}
         />
       )}
       {quest.questionTypeId > 6 && (

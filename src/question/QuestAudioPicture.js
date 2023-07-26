@@ -3,7 +3,7 @@ import { Input } from 'reactstrap'
 import audiExample from '../assets/question2_audio.mp3'
 
 const QuestionAudioPicture = (args) => {
-  const { title, audio, options, handleRadioBtn, optSelected } = args
+  const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
   // TODO: this is a continue work because it may be videos with audio
   // TODO: this type of question has not been created a data yet so it's not tested
 
@@ -32,6 +32,7 @@ const QuestionAudioPicture = (args) => {
               style={{ alignSelf: 'center' }}
               id={currentOptions.optionId}
               name={`${currentOptions.optionId}-${getName(currentOptions.option)}`}
+              disabled={disabled}
               value={currentOptions.optionId}
               checked={currentOptions.optionId === optSelected}
               onChange={(event) => handleRadioBtn(event, currentOptions)}

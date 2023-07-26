@@ -3,7 +3,7 @@ import imageExample from '../assets/question1_image.jpeg'
 import './Question.css'
 
 const QuestionPictureText = (args) => {
-  const { title, picture, options, handleRadioBtn, optSelected } = args
+  const { title, picture, options, handleRadioBtn, optSelected, disabled } = args
 
   return (
     <>
@@ -20,6 +20,7 @@ const QuestionPictureText = (args) => {
               type="radio"
               id={currentOptions.optionId}
               name={`${currentOptions.optionId}-${currentOptions.option}`}
+              disabled={disabled}
               value={currentOptions.optionId}
               checked={currentOptions.optionId === optSelected}
               onChange={(event) => handleRadioBtn(event, currentOptions)}

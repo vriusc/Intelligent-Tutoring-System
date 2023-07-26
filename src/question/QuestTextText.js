@@ -2,7 +2,7 @@ import { Input, Label } from 'reactstrap'
 import './Question.css'
 
 const QuestionTextText = (args) => {
-  const { title, options, handleRadioBtn, optSelected } = args
+  const { title, options, handleRadioBtn, optSelected, disabled } = args
 
   return (
     <>
@@ -14,6 +14,7 @@ const QuestionTextText = (args) => {
               type="radio"
               id={currentOptions.optionId}
               name={`${currentOptions.optionId}-${currentOptions.option}`}
+              disabled={disabled}
               value={currentOptions.optionId}
               checked={currentOptions.optionId === optSelected}
               onChange={(event) => handleRadioBtn(event, currentOptions)}

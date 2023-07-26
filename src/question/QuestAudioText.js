@@ -3,7 +3,7 @@ import audiExample from '../assets/question2_audio.mp3'
 import { Input, Label } from 'reactstrap'
 
 const QuestionAudioText = (args) => {
-  const { title, audio, options, handleRadioBtn, optSelected } = args
+  const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
   // TODO: this is a continue work because it may be videos with audio
 
   return (
@@ -25,6 +25,7 @@ const QuestionAudioText = (args) => {
               type="radio"
               id={currentOptions.optionId}
               name={`${currentOptions.optionId}-${currentOptions.option}`}
+              disabled={disabled}
               value={currentOptions.optionId}
               checked={currentOptions.optionId === optSelected}
               onChange={(event) => handleRadioBtn(event, currentOptions)}

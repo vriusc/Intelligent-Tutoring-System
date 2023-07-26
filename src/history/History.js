@@ -1,10 +1,19 @@
 import './History.css'
 import { useEffect, useState } from 'react'
-import { Navigate, useLoaderData } from 'react-router-dom'
+import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
 import { getOptions, getQuestionsByUnitId, getStudent, getUnitById } from '../lib/tutoring-client'
 import Header from '../element/Header'
 import HistoryTable from './HistoryTable'
 import Question from '../question/Question'
+import { styled } from 'styled-components'
+import { Button } from 'reactstrap'
+
+const TitleComponent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 24px;
+`
 
 export async function loader({ params }) {
   const { courseId: studentSubjectId, unitId } = params
@@ -14,6 +23,7 @@ export async function loader({ params }) {
 
 const History = () => {
   const studentId = localStorage.getItem('studentId')
+  const navigate = useNavigate()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -23,6 +33,7 @@ const History = () => {
   const [optionsList, setOptionsList] = useState([])
 
   const { data: unit } = useLoaderData().unit
+  const { studentSubjectId } = useLoaderData()
 
   useEffect(() => {
     Promise.all([
@@ -74,12 +85,21 @@ const History = () => {
     return [...optionsSelected.map((opt) => opt.optionId)]
   }
 
+  const goToUnit = () => {
+    navigate(`/courses/${studentSubjectId}/unit/${unit.unitId}`)
+  }
+
   return (
     <>
       <Header user={student} subjectCount={1} title={unit.unitName} />
       <div className="History-container">
         <div className="History">
-          <h3 className="mb-5">{`${unit.unitName}: History`}</h3>
+          <TitleComponent>
+            <h3 style={{ alignSelf: 'center' }}>{`${unit.unitName}: History`}</h3>
+            <Button color="success" style={{ alignSelf: 'center' }} onClick={() => goToUnit()}>
+              Keep practicing
+            </Button>
+          </TitleComponent>
           {questionList.map((question, index) => (
             <div key={index} className="mb-5">
               <h5>{`${index + 1}. ${question.questions.question}`}</h5>

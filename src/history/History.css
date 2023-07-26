@@ -1,0 +1,9 @@
+.History-container {
+  background-color: #282c34;
+  color:#fff;
+  min-height: 94vh;
+}
+
+.History {
+  padding: 3em 4em;
+}

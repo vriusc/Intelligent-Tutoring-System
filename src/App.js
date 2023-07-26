@@ -7,6 +7,7 @@ import CoursesList from './course/Course-list'
 import Course, { loader as unitsLoader } from './course/Course'
 import Unit, { loader as unitIdLoader } from './unit/Unit'
 import Questionnaire from './home/Questionnaire'
+import History from './history/History'
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
   {
     path: '/courses/:courseId/unit/:unitId',
     element: <Unit />,
+    loader: unitIdLoader
+  },
+  {
+    path: '/courses/:courseId/history/:unitId/',
+    element: <History />,
     loader: unitIdLoader
   }
 ])

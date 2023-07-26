@@ -46,7 +46,7 @@ const Unit = () => {
       getOptions({}),
       getStudentUnit({ studentId, unitId: data.unitId })
     ]).then((response) => {
-      console.log('Student, Options', response)
+      console.log('Student, Options, Student-unit', response)
       settingStudents(response[0])
       settingOptions(response[1])
       settingStudentUnit(response[2])
@@ -70,7 +70,7 @@ const Unit = () => {
   const settingStudentUnit = (response) => {
     const { content } = response.data
     if (content && content.length) {
-      endPage(content[0])
+      endPage(content[0], true)
     } else {
       setStudentUnit({ studentId, unitId: data.unitId, isfinished: 0 })
     }
@@ -113,7 +113,9 @@ const Unit = () => {
         await postRecord(record)
         console.log('Question posted', record)
       }
-      lastAnswerReview()
+      if (studentUnit.isfinished !== 1) {
+        lastAnswerReview()
+      }
     } catch (error) {
       console.error(error)
     }
@@ -185,9 +187,9 @@ const Unit = () => {
     }
   }
 
-  const endPage = (dataStUnit) => {
+  const endPage = (dataStUnit, firstLoad = false) => {
     setStudentUnit(dataStUnit)
-    if (dataStUnit.isfinished === 1) {
+    if (dataStUnit.isfinished === 1 && !firstLoad) {
       navigate(`/courses/${studentSubjectId}`)
     }
   }

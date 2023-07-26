@@ -44,6 +44,12 @@
   justify-content: space-between;
 }
 
+.Unit-list-body .Finish-btn {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+}
+
 .Course-test-cont {
   margin-top: 3em;
   display: flex;

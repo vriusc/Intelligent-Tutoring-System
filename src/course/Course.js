@@ -57,6 +57,12 @@ const Course = () => {
     navigate(`/courses/${studentSubjectId}/unit/${unitId}`)
   }
 
+  const goToHistory = (unit) => {
+    const { unitId } = unit
+    const { studentSubjectId } = studentSubject
+    navigate(`/courses/${studentSubjectId}/history/${unitId}`)
+  }
+
   const checkFinish = (unit) => {
     return unitsSolved.some((solve) => solve.unitId === unit.unitId && solve.isfinished === 1)
   }
@@ -97,11 +103,16 @@ const Course = () => {
                     </CardTitle>
                     <CardText className="text-muted">{unit.description}</CardText>
                   </div>
-                  <div style={{ alignSelf: 'center' }}>
+                  <div className="Finish-btn">
                     {checkFinish(unit) ? (
-                      <h4 style={{ color: 'green' }}>
-                        Finished <BsFillCheckCircleFill />
-                      </h4>
+                      <>
+                        <h4 style={{ color: 'green', marginRight: '10px' }}>
+                          Finished <BsFillCheckCircleFill />
+                        </h4>
+                        <Button color="warning" onClick={() => goToHistory(unit)}>
+                          HISTORY
+                        </Button>
+                      </>
                     ) : (
                       <Button
                         color="dark"

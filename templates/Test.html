@@ -2,54 +2,45 @@
 <html>
 <body>
 <video id="video" width="720" height="560" autoplay></video>
-<button id="startbutton">Take photo</button>
-<canvas id="canvas"></canvas>
+<p id="emotionResult" style="position: absolute; top: 10px; left: 10px; color: red; font-size: 20px;"></p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
 <script>
 console.log("Frontend Socket.IO version:", io.version);
 
-    // Put event listeners into place
-    window.addEventListener("DOMContentLoaded", function() {
-        // Grab elements, create settings, etc.
-        var canvas = document.getElementById('canvas');
+window.addEventListener("DOMContentLoaded", function() {
+    var video = document.getElementById('video');
+    var mediaConfig =  { video: true };
+    var errBack = function(e) {
+        console.log('An error has occurred!', e)
+    };
+
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        });
+    }
+
+    var socket = io.connect('http://127.0.0.1:8080');
+
+    setInterval(function() {
+        var canvas = document.createElement('canvas');
         var context = canvas.getContext('2d');
-        var video = document.getElementById('video');
-        var mediaConfig =  { video: true };
-        var errBack = function(e) {
-            console.log('An error has occurred!', e)
-        };
+        var width = video.videoWidth;
+        var height = video.videoHeight;
+        canvas.width = width;
+        canvas.height = height;
+        context.drawImage(video, 0, 0, width, height);
+        var data = canvas.toDataURL('image/png');
 
-        // Put video listeners into place
-        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
-                video.srcObject = stream;
-                video.play();
-            });
-        }
+        socket.emit('image', data);
+    }, 30000); // 30 seconds
 
-        // Create a socket.io connection
-        var socket = io.connect('http://127.0.0.1:8080');
-
-        // Trigger photo take
-        document.getElementById('startbutton').addEventListener('click', function() {
-            var width = video.videoWidth;
-            var height = video.videoHeight;
-            canvas.width = width;
-            canvas.height = height;
-            context.drawImage(video, 0, 0, width, height);
-            var data = canvas.toDataURL('image/png');
-
-            // Send the image data to the server
-            socket.emit('image', data);
-        });
-
-        // Receive data from the server
-        socket.on('response', function(emotion) {
-            // Handle the emotion response from the server
-            console.log(emotion);
-        });
-    }, false);
+    socket.on('response', function(emotion) {
+        document.getElementById('emotionResult').innerText = emotion;
+    });
+}, false);
 </script>
 
 </body>

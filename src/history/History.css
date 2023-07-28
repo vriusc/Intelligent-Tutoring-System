@@ -8,6 +8,12 @@
   padding: 3em 4em;
 }
 
+.History-border {
+  border: solid 1px white;
+  padding: 10px 1em;
+  border-radius: 10px;
+}
+
 .History-image {
   max-width: 60px;
   margin: 2px;

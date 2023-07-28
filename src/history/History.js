@@ -101,7 +101,7 @@ const History = () => {
             </Button>
           </TitleComponent>
           {questionList.map((question, index) => (
-            <div key={index} className="mb-5">
+            <div key={index} className="mb-5 History-border">
               <h5>{`${index + 1}. ${question.questions.question}`}</h5>
               <h6>Table:</h6>
               <HistoryTable studentId={studentId} questionId={question.questionId} />

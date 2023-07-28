@@ -246,7 +246,7 @@ const Unit = () => {
                 <Button
                   className="Unit-btn"
                   color="success"
-                  disabled={onReview}
+                  disabled={onReview || questions.length === 0}
                   onClick={() => reviewQuestions()}
                 >
                   Submit

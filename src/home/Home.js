@@ -28,7 +28,7 @@ const Home = () => {
       getAllSubjects({ page: 0, size: 30 }),
       getSubjectsById(studentId)
     ]).then((response) => {
-      console.log(response)
+      console.log('student, Subjects, StudentSubjectByID', response)
       settingStudents(response[0])
       settingSubjects(response[1])
       //Student Subject
@@ -72,6 +72,17 @@ const Home = () => {
     navigate('/questionnaire')
   }
 
+  const isSubscribed = ({ subjectId }) => {
+    return studentSubjectList.some((studentSub) => studentSub.subjectId === subjectId)
+  }
+
+  const goToCourse = ({ subjectId }) => {
+    const studentSubject = studentSubjectList.find(
+      (studentSub) => studentSub.subjectId === subjectId
+    )
+    navigate(`/courses/${studentSubject.studentSubjectId}`)
+  }
+
   return (
     <>
       <Header user={student} subjectCount={studentSubjectList.length} />
@@ -109,7 +120,11 @@ const Home = () => {
                           <CardTitle tag="h5">{`${content.subjectName} - ${content.level}`}</CardTitle>
                           <CardText>{content.description}</CardText>
                         </CardBody>
-                        <Button onClick={() => joinSubject(content)}>JOIN COURSE</Button>
+                        {isSubscribed(content) ? (
+                          <Button onClick={() => goToCourse(content)}>CONTINUE COURSE</Button>
+                        ) : (
+                          <Button onClick={() => joinSubject(content)}>JOIN COURSE</Button>
+                        )}
                       </Card>
                     )
                   }

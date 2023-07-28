@@ -34,9 +34,18 @@ const RegisterBtn = () => {
         setErrorRegister(error.response.data.message || error.message || 'Error')
       })
   }
+
   const handleCancel = () => {
     setNewStudent({ username: '', email: '', password: '' })
     toggle()
+  }
+
+  const disableButton = () => {
+    return (
+      newStudent.username.trim() === '' ||
+      newStudent.email.trim() === '' ||
+      newStudent.password.trim() === ''
+    )
   }
 
   return (
@@ -89,7 +98,9 @@ const RegisterBtn = () => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={handleRegister}>Register</Button>
+          <Button disabled={disableButton()} onClick={handleRegister}>
+            Register
+          </Button>
           <Button outline onClick={handleCancel}>
             Cancel
           </Button>

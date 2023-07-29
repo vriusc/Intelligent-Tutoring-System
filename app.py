@@ -2,9 +2,9 @@
 import base64
 import io
 import os
-import emit as emit
 import openai
 from flask_socketio import SocketIO, emit
+import emit as emit
 from flask import Flask, request, render_template
 from google.cloud import vision_v1
 from PIL import Image
@@ -13,7 +13,7 @@ from google.cloud.vision_v1.services.image_annotator import client
 
 # Initialize OpenAI API key and model
 openai.organization = "org-l9GqGTyn1y6BFwYBluQ9mzxt"
-openai.api_key = "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"
+openai.api_key = "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"
 MODEL = "gpt-3.5-turbo"
 
 
@@ -42,6 +42,10 @@ def feedback_reply_generate(MODEL, username, test_score):
     return response['choices'][0]['message']['content']
 
 
+
+
+
+
 # Route for GPT feedback reply
 @app.route('/gpt/feedback', methods=['Post'])
 def process_feedback_request():
@@ -61,20 +65,25 @@ def process_feedback_request():
 
 # This function uses the OpenAI GPT model to generate a reply,
 # where the model plays the role of a tutor evaluating a student's essay.
-def writing_reply_generate(MODEL, username, essay_topic, essay_content):
+def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_language):
     # Call the OpenAI API to generate a response.
     response = openai.ChatCompletion.create(
         model=MODEL,  # The specific model being used, e.g., "text-davinci-002"
         messages=[
             # The initial system message sets up the scenario.
             {"role": "system",
-             "content": "You are a tutor who is evaluating a student's essay. The student's name is "
+             "content": "You are a tutor who is evaluating a student's essay written in "
+                        + essay_language
+                        + ". The student's name is "
                         + username
                         + ". Use the following grading rubric for your assessment: \
                         1. Content (7 points): The essay should accurately and comprehensively address the topic. \
                         2. Organization (3 points): The essay should have a clear introduction, body, and conclusion. \
                         3. Grammar and Vocabulary (3 points): The essay should use correct grammar and sophisticated vocabulary. \
-                        4. Creativity (2 points): The essay should provide a unique perspective or insights about the topic. Provide a score for each criteria and an overall score."},
+                        4. Creativity (2 points): The essay should provide a unique perspective or insights about the topic. \
+                        5. Language Usage (5 points): The essay should be written appropriately in "
+                        + essay_language
+                        + ". Provide a score for each criteria and an overall score."},
             # The user message provides the essay topic and content for the model to evaluate.
             {"role": "user", "content": "Here's the essay topic and content: "
                                         + essay_topic
@@ -88,20 +97,22 @@ def writing_reply_generate(MODEL, username, essay_topic, essay_content):
     return response['choices'][0]['message']['content']
 
 
+
 # This route processes incoming requests to evaluate an essay.
-@app.route('/gpt/writing', methods=['Post'])
+@app.route('/gpt/writting', methods=['Post'])
 def process_writing_request():
     # Retrieve the parameters from the incoming request.
     username = request.args.get('username')
     essay_topic = request.args.get('essay_topic')
     essay_content = request.args.get('essay_content')
+    essay_language = request.args.get('essay_language')
 
     # Check if any necessary parameters are missing.
     if username is None or essay_content is None or essay_topic is None:
         return 'Username, essay topic, or essay content not provided', 400
 
     # Generate a response using the writing_reply_generate function.
-    reply = writing_reply_generate(MODEL, username, essay_topic, essay_content)
+    reply = writing_reply_generate(MODEL, username, essay_topic, essay_content,essay_language)
 
     # Return the generated reply as the response.
     return reply

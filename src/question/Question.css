@@ -16,6 +16,11 @@
   align-self: center;
 }
 
+.Quest-video {
+  align-self: center;
+  margin: 5px;
+}
+
 .Btn-row {
   align-self: flex-end;
   display: flex;

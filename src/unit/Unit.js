@@ -40,6 +40,7 @@ const Unit = () => {
   const navigate = useNavigate()
   const { data } = useLoaderData().unit
   const studentSubjectId = useLoaderData().studentSubjectId
+  console.log('Unit', data)
 
   useEffect(() => {
     Promise.all([
@@ -227,7 +228,16 @@ const Unit = () => {
           </Button>
           {showQuestions && (
             <>
-              {questions.length > 0 && <h4 className="mt-5">Questions</h4>}
+              {questions.length > 0 && (
+                <h4 className="mt-5" style={{ alignSelf: 'center' }}>
+                  Questions
+                </h4>
+              )}
+              {data.text && (
+                <div className="Unit-text-new">
+                  <img src={data.text} style={{ alignSelf: 'center' }} />
+                </div>
+              )}
               {questions.map((question, index) => (
                 <Question
                   key={question.questionId}

@@ -99,7 +99,7 @@ def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_la
 
 
 # This route processes incoming requests to evaluate an essay.
-@app.route('/writting/', methods=['Post'])
+@app.route('/gpt/writting/', methods=['Post'])
 def process_writing_request():
     # Retrieve the parameters from the incoming request.
     username = request.args.get('username')

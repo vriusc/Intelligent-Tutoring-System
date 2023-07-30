@@ -1,6 +1,5 @@
-package com.example.demo;
+package com.example.demo.dao;
 
-import com.example.demo.dao.StudentUserDao;
 import com.example.demo.entity.StudentUser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

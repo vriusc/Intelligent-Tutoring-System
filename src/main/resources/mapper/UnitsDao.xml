@@ -10,7 +10,7 @@
         <result property="unitOrder" column="units_order" jdbcType="INTEGER"/>  <!-- 2020-12-28 16:00:00 -->
         <result property="materials_path" column="materials_path" jdbcType="VARCHAR"/>
         <result property="text" column="text" jdbcType="VARCHAR"/>
-        <result property="text_description" column="video" jdbcType="VARCHAR"/>
+        <result property="text_description" column="text_description" jdbcType="VARCHAR"/>
 
         <!-- 关联Subjects对象 -->
         <association property="subject" javaType="com.example.demo.entity.Subjects">
@@ -25,7 +25,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="UnitsMap">
         select
-          unit_id, unit_name, subject_id, description, units_order, materials_path
+          unit_id, unit_name, subject_id, description, units_order, materials_path,text, text_description
         from Units
         where unit_id = #{unitId}
     </select>
@@ -33,7 +33,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="UnitsMap">
         select
-          unit_id, unit_name, subject_id, description, units_order, materials_path
+          unit_id, unit_name, subject_id, description, units_order, materials_path,text, text_description
         from Units
         <where>
             <if test="unitId != null">
@@ -53,6 +53,12 @@
             </if>
             <if test="materials_path != null and materials_path != ''">
                   and materials_path = #{materials_path}
+            </if>
+            <if test="text != null and text != ''">
+                  and text = #{text}
+            </if>
+            <if test="text_description != null and text_description != ''">
+                  and text_description = #{text_description}
             </if>
         </where>
         limit #{pageable.offset}, #{pageable.pageSize}

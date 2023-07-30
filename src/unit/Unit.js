@@ -16,6 +16,7 @@ import YoutubePlater from './YoutubePlayer'
 import { Badge, Button, Card, CardBody, CardText } from 'reactstrap'
 import Question from '../question/Question'
 import { postGPTFeedback } from '../lib/gpt-client'
+import VideoSocket from '../video/VideoSocket'
 
 export async function loader({ params }) {
   const unit = await getUnitById(params.unitId)
@@ -201,6 +202,7 @@ const Unit = () => {
   return (
     <>
       <Header user={student} subjectCount={1} title={data.unitName} />
+      <VideoSocket />
       <div className="Unit-container">
         <div className="Unit Unit-flex">
           <div className="Unit-title mb-4">

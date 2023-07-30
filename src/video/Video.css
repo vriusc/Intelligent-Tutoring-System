@@ -1,0 +1,9 @@
+
+.Video-component {
+  background-color: green;
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  width: 200px;
+  height: 160px;
+}

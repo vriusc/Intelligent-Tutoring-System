@@ -24,6 +24,7 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'EmotionIdentification/MyKey.json
 
 # Initialize Flask app and SocketIO
 app = Flask(__name__)
+CORS(app)
 socketio = SocketIO(app, async_model='eventlet')
 
 # Instantiate Google Cloud Vision API client

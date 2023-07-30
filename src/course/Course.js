@@ -63,6 +63,11 @@ const Course = () => {
     navigate(`/courses/${studentSubjectId}/history/${unitId}`)
   }
 
+  const goToTesting = () => {
+    const { studentSubjectId } = studentSubject
+    navigate(`/courses/${studentSubjectId}/finalTest`)
+  }
+
   const checkFinish = (unit) => {
     return unitsSolved.some((solve) => solve.unitId === unit.unitId && solve.isfinished === 1)
   }
@@ -135,9 +140,10 @@ const Course = () => {
               block
               style={{ alignSelf: 'center', flex: 1 }}
               color="success"
-              disabled={studentSubject.progress < 100}
+              disabled={studentSubject.progress === 0}
+              onClick={() => goToTesting()}
             >
-              TEST
+              WRITING TEST
             </Button>
           </div>
         </div>

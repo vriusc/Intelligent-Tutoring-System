@@ -194,12 +194,21 @@ const Unit = () => {
     }
   }
 
+  const goBack = () => {
+    navigate(`/courses/${studentSubjectId}`)
+  }
+
   return (
     <>
       <Header user={student} subjectCount={1} title={data.unitName} />
       <div className="Unit-container">
         <div className="Unit Unit-flex">
-          <h3 className="mb-4">Unit Lesson</h3>
+          <div className="Unit-title mb-4">
+            <Button color="info" onClick={() => goBack()}>
+              Back
+            </Button>
+            <h3>Unit Lesson</h3>
+          </div>
           <h5>Description</h5>
           <p>{data.description}</p>
           <div className="Unit-video">

@@ -13,6 +13,11 @@
   flex-direction: column;
 }
 
+.Unit-title {
+  display: flex;
+  justify-content: space-between;
+}
+
 .Unit-video {
   align-self: center;
   margin-top: 3em;

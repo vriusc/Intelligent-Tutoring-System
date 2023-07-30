@@ -129,10 +129,11 @@ const Unit = () => {
   }
 
   const getFeedback = () => {
-    // TODO Change the Feedback test score
+    const correctList = [...answersList.filter((answer) => answer.isCorrect)]
+    const test_score = (correctList.length * 10) / answersList.length
     const params = {
       username: student.username,
-      test_score: '7'
+      test_score
     }
 
     postGPTFeedback(params)

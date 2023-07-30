@@ -2,7 +2,7 @@ import { Form, Navigate, useNavigate } from 'react-router-dom'
 import { getStudent } from './lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import Header from './element/Header'
-import { Button, FormGroup, Input, Label } from 'reactstrap'
+import { Button, Card, CardBody, CardText, FormGroup, Input, Label } from 'reactstrap'
 import { postGPTEssay } from './lib/gpt-client'
 
 const WritingTest = () => {
@@ -13,6 +13,7 @@ const WritingTest = () => {
 
   const [student, setStudent] = useState({})
   const [essay, setEssay] = useState({ essay_topic: '', essay_content: '' })
+  const [gptAnswer, setGptAnswer] = useState('')
 
   const navigate = useNavigate()
 
@@ -33,9 +34,11 @@ const WritingTest = () => {
   const submitEssay = () => {
     const { username } = student
     const params = { ...essay, userName: username }
+    setGptAnswer('')
     postGPTEssay(params)
       .then((response) => {
         console.log('Submit essay response', response.data)
+        setGptAnswer(response.data)
       })
       .catch((error) => {
         console.error(error.message)
@@ -106,7 +109,13 @@ const WritingTest = () => {
               Submit
             </Button>
           </div>
-          {/* TODO after getting the result, publish them */}
+          {gptAnswer && (
+            <Card color="info" style={{ marginTop: '1em' }}>
+              <CardBody>
+                <CardText>{gptAnswer}</CardText>
+              </CardBody>
+            </Card>
+          )}
         </div>
       </div>
     </>

@@ -132,20 +132,6 @@ const Course = () => {
               </Card>
             ))}
           </div>
-          {/* <div className="Course-test-cont">
-            <h5 style={{ alignSelf: 'center', margin: 0, flex: 2 }}>
-              Once you finished all the units you can start the test
-            </h5>
-            <Button
-              block
-              style={{ alignSelf: 'center', flex: 1 }}
-              color="success"
-              disabled={studentSubject.progress === 0}
-              onClick={() => goToTesting()}
-            >
-              WRITING TEST
-            </Button>
-          </div> */}
         </div>
       </div>
     </>

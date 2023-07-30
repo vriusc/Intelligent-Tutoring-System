@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.entity.StudentUser;
 import com.example.demo.entity.Subjects;
 import org.junit.jupiter.api.Test;
 

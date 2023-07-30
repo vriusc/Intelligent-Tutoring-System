@@ -8,7 +8,7 @@ import Course, { loader as unitsLoader } from './course/Course'
 import Unit, { loader as unitIdLoader } from './unit/Unit'
 import Questionnaire from './home/Questionnaire'
 import History, { loader as historyLoader } from './history/History'
-import FinalTest, { loader as finalLoader } from './course/FinalTest'
+import WritingTest from './WritingTest'
 
 const router = createBrowserRouter([
   {
@@ -44,9 +44,8 @@ const router = createBrowserRouter([
     loader: historyLoader
   },
   {
-    path: '/courses/:courseId/finalTest',
-    element: <FinalTest />,
-    loader: finalLoader
+    path: '/writingTest',
+    element: <WritingTest />
   }
 ])
 

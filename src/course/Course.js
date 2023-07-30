@@ -63,11 +63,6 @@ const Course = () => {
     navigate(`/courses/${studentSubjectId}/history/${unitId}`)
   }
 
-  const goToTesting = () => {
-    const { studentSubjectId } = studentSubject
-    navigate(`/courses/${studentSubjectId}/finalTest`)
-  }
-
   const checkFinish = (unit) => {
     return unitsSolved.some((solve) => solve.unitId === unit.unitId && solve.isfinished === 1)
   }
@@ -137,7 +132,7 @@ const Course = () => {
               </Card>
             ))}
           </div>
-          <div className="Course-test-cont">
+          {/* <div className="Course-test-cont">
             <h5 style={{ alignSelf: 'center', margin: 0, flex: 2 }}>
               Once you finished all the units you can start the test
             </h5>
@@ -150,7 +145,7 @@ const Course = () => {
             >
               WRITING TEST
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

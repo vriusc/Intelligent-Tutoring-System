@@ -1,21 +1,15 @@
-import { Form, Navigate, useLoaderData, useNavigate } from 'react-router-dom'
-import { getStudent, getStudentSubjectById } from '../lib/tutoring-client'
+import { Form, Navigate, useNavigate } from 'react-router-dom'
+import { getStudent } from './lib/tutoring-client'
 import { useEffect, useState } from 'react'
-import Header from '../element/Header'
+import Header from './element/Header'
 import { Button, FormGroup, Input, Label } from 'reactstrap'
-import { postGPTEssay } from '../lib/gpt-client'
+import { postGPTEssay } from './lib/gpt-client'
 
-export async function loader({ params }) {
-  const studentSubject = await getStudentSubjectById(params.courseId)
-  return { studentSubject }
-}
-
-const FinalTest = () => {
+const WritingTest = () => {
   const studentId = localStorage.getItem('studentId')
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
-  const { data: studentSubject } = useLoaderData().studentSubject
 
   const [student, setStudent] = useState({})
   const [essay, setEssay] = useState({ essay_topic: '', essay_content: '' })
@@ -53,8 +47,11 @@ const FinalTest = () => {
   }
 
   const goBack = () => {
-    const { studentSubjectId } = studentSubject
-    navigate(`/courses/${studentSubjectId}`)
+    navigate(`/courses/`)
+  }
+
+  const goHome = () => {
+    navigate('/')
   }
 
   return (
@@ -63,9 +60,14 @@ const FinalTest = () => {
       <div className="Course-container">
         <div className="Course Final-body">
           <div className="Final-test-title">
-            <Button color="info" onClick={() => goBack()}>
-              Back
-            </Button>
+            <div style={{ display: 'flex' }}>
+              <Button color="info" onClick={() => goBack()}>
+                Go to my Courses
+              </Button>
+              <Button style={{ marginLeft: '10px' }} color="info" onClick={() => goHome()}>
+                Find Courses
+              </Button>
+            </div>
             <h3>Final Test</h3>
           </div>
           <h5 style={{ marginTop: '10px' }}>
@@ -111,4 +113,4 @@ const FinalTest = () => {
   )
 }
 
-export default FinalTest
+export default WritingTest

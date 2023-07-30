@@ -3,6 +3,7 @@ import base64
 import io
 import os
 import openai
+from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import emit as emit
 from flask import Flask, request, render_template

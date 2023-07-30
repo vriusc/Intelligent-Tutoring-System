@@ -1,14 +1,21 @@
 import './Course.css'
 import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
-import { getStudent, getUnitsBySubjectId } from '../lib/tutoring-client'
+import {
+  getStudent,
+  getStudentSubjectById,
+  getStudentUnit,
+  getUnitsBySubjectId,
+  putStudentSubject
+} from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import Header from '../element/Header'
 import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 
 export async function loader({ params }) {
-  const units = await getUnitsBySubjectId(params.courseId)
-  return { units }
+  const studentSubject = await getStudentSubjectById(params.courseId)
+  const units = await getUnitsBySubjectId(studentSubject.data.subjectId)
+  return { units, studentSubject }
 }
 
 const Course = () => {
@@ -18,11 +25,17 @@ const Course = () => {
     return <Navigate replace to="/login" />
   }
   const [student, setStudent] = useState({})
-  const { data } = useLoaderData().units
+  const [unitsSolved, setUnitsSolved] = useState([])
+  const [currentUnit, setCurrentUnit] = useState(0)
+  const { data: unitList } = useLoaderData().units
+  const { data: studentSubject } = useLoaderData().studentSubject
 
   useEffect(() => {
-    getStudent(studentId).then((response) => {
-      settingStudents(response)
+    Promise.all([getStudent(studentId), getStudentUnit({ studentId })]).then((response) => {
+      console.log(response)
+      settingStudents(response[0])
+      settingStudentUnit(response[1])
+      checkSubjectProgress(response[1].data.content)
     })
   }, [studentId])
 
@@ -33,9 +46,45 @@ const Course = () => {
     }
   }
 
+  const settingStudentUnit = (response) => {
+    const { content } = response.data
+    setUnitsSolved(content)
+  }
+
   const goToUnit = (unit) => {
-    const { subjectId, unitId } = unit
-    navigate(`/courses/${subjectId}/unit/${unitId}`)
+    const { unitId } = unit
+    const { studentSubjectId } = studentSubject
+    navigate(`/courses/${studentSubjectId}/unit/${unitId}`)
+  }
+
+  const goToHistory = (unit) => {
+    const { unitId } = unit
+    const { studentSubjectId } = studentSubject
+    navigate(`/courses/${studentSubjectId}/history/${unitId}`)
+  }
+
+  const checkFinish = (unit) => {
+    return unitsSolved.some((solve) => solve.unitId === unit.unitId && solve.isfinished === 1)
+  }
+
+  const checkSubjectProgress = (solvedList) => {
+    console.log(studentSubject, solvedList, unitList)
+    const total = unitList.length
+    const count = unitList.filter((thisUnit) => {
+      return solvedList.some(
+        (solved) => solved.unitId === thisUnit.unitId && solved.isfinished === 1
+      )
+    }).length
+    const currentProgress = (count / total) * 100
+    if (currentProgress !== studentSubject.progress) {
+      const { studentSubjectId, subjectId, studentId } = studentSubject
+      putStudentSubject({ studentSubjectId, subjectId, studentId, progress: currentProgress }).then(
+        (response) => {
+          console.log(response, total, count, currentProgress)
+        }
+      )
+    }
+    setCurrentUnit(unitList[count].unitId)
   }
 
   return (
@@ -43,9 +92,14 @@ const Course = () => {
       <Header user={student} subjectCount={1} title="My units" />
       <div className="Course-container">
         <div className="Course">
-          <h3>Units list</h3>
+          <div className="Course-title">
+            <h3>Units list</h3>
+            <Button color="info" onClick={() => navigate('/courses')}>
+              Back to Courses
+            </Button>
+          </div>
           <div className="Units-list">
-            {data.map((unit, index) => (
+            {unitList.map((unit) => (
               <Card key={unit.unitId} className="mt-3">
                 <CardBody className="Unit-list-body p-4">
                   <div className="">
@@ -54,16 +108,20 @@ const Course = () => {
                     </CardTitle>
                     <CardText className="text-muted">{unit.description}</CardText>
                   </div>
-                  {/* TODO COMPLETE ONCE WE HAVE THE UNIT DONE */}
-                  <div style={{ alignSelf: 'center' }}>
-                    {index === 100 ? (
-                      <h4 style={{ color: 'green' }}>
-                        Finished <BsFillCheckCircleFill />
-                      </h4>
+                  <div className="Finish-btn">
+                    {checkFinish(unit) ? (
+                      <>
+                        <h4 style={{ color: 'green', marginRight: '10px' }}>
+                          Finished <BsFillCheckCircleFill />
+                        </h4>
+                        <Button color="warning" onClick={() => goToHistory(unit)}>
+                          HISTORY
+                        </Button>
+                      </>
                     ) : (
                       <Button
                         color="dark"
-                        disabled={!unit.materials_path}
+                        disabled={!unit.materials_path || unit.unitId !== currentUnit}
                         onClick={() => goToUnit(unit)}
                       >
                         START
@@ -73,14 +131,6 @@ const Course = () => {
                 </CardBody>
               </Card>
             ))}
-          </div>
-          <div className="Course-test-cont">
-            <h5 style={{ alignSelf: 'center', margin: 0, flex: 2 }}>
-              Once you finished all the units you can start the test
-            </h5>
-            <Button block style={{ alignSelf: 'center', flex: 1 }} color="success" disabled>
-              TEST
-            </Button>
           </div>
         </div>
       </div>

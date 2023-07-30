@@ -37,9 +37,13 @@ const CoursesList = () => {
   }
 
   const goToCourse = (studentSubject) => {
-    const { subjectId } = studentSubject
-    console.log(subjectId)
-    navigate(`/courses/${subjectId}`)
+    const { studentSubjectId } = studentSubject
+    navigate(`/courses/${studentSubjectId}`)
+  }
+
+  const btnText = (studentSubject) => {
+    const { progress } = studentSubject
+    return progress > 0 ? (progress === 100 ? 'REVIEW' : 'CONTINUE') : 'START'
   }
 
   return (
@@ -47,7 +51,12 @@ const CoursesList = () => {
       <Header user={student} subjectCount={subjects.length} title="Courses" />
       <div className="Course-container">
         <div className="Course">
-          <h3>My Courses list</h3>
+          <div className="Course-title">
+            <h3>My Courses list</h3>
+            <Button color="info" onClick={() => navigate('/')}>
+              Find a course
+            </Button>
+          </div>
           <div className="Course-body">
             {subjects.map((studentSubject) => (
               <Card key={studentSubject.studentSubjectId} className="Card-container">
@@ -65,9 +74,12 @@ const CoursesList = () => {
                   </div>
                   <div className="Card-bottom">
                     <Button onClick={() => goToCourse(studentSubject)}>
-                      {studentSubject.progress > 0 ? 'CONTINUE' : 'START'}
+                      {btnText(studentSubject)}
                     </Button>
-                    <CardTitle style={{ color: 'red' }} tag="h3">
+                    <CardTitle
+                      style={{ color: studentSubject.progress > 0 ? 'green' : 'red' }}
+                      tag="h3"
+                    >
                       {`${studentSubject.progress} %`}
                     </CardTitle>
                   </div>

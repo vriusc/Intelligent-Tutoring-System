@@ -28,7 +28,7 @@ const Home = () => {
       getAllSubjects({ page: 0, size: 30 }),
       getSubjectsById(studentId)
     ]).then((response) => {
-      console.log(response)
+      console.log('student, Subjects, StudentSubjectByID', response)
       settingStudents(response[0])
       settingSubjects(response[1])
       //Student Subject
@@ -64,12 +64,27 @@ const Home = () => {
     console.log('joining', currentContent)
     const { subjectId } = currentContent
     addSubjectStudent({ studentId, subjectId, progress: 0 }).then(() => {
-      navigate('/courses')
+      goToCoursesList()
     })
   }
 
   const goToQuestionnaire = () => {
     navigate('/questionnaire')
+  }
+
+  const isSubscribed = ({ subjectId }) => {
+    return studentSubjectList.some((studentSub) => studentSub.subjectId === subjectId)
+  }
+
+  const goToCourse = ({ subjectId }) => {
+    const studentSubject = studentSubjectList.find(
+      (studentSub) => studentSub.subjectId === subjectId
+    )
+    navigate(`/courses/${studentSubject.studentSubjectId}`)
+  }
+
+  const goToCoursesList = () => {
+    navigate('/courses')
   }
 
   return (
@@ -79,9 +94,18 @@ const Home = () => {
         <div className="Home">
           <div className="Home-head">
             <h2>What do you want to learn today?</h2>
-            <Button color="success" onClick={() => goToQuestionnaire()}>
-              Learning Questionnaire
-            </Button>
+            <div>
+              <Button
+                style={{ marginRight: '5px' }}
+                color="success"
+                onClick={() => goToCoursesList()}
+              >
+                My Courses
+              </Button>
+              <Button color="info" onClick={() => goToQuestionnaire()}>
+                Learning Questionnaire
+              </Button>
+            </div>
           </div>
           {subjectList.length > 0 && (
             <div className="Subject-list">
@@ -109,12 +133,15 @@ const Home = () => {
                           <CardTitle tag="h5">{`${content.subjectName} - ${content.level}`}</CardTitle>
                           <CardText>{content.description}</CardText>
                         </CardBody>
-                        <Button onClick={() => joinSubject(content)}>JOIN COURSE</Button>
+                        {isSubscribed(content) ? (
+                          <Button onClick={() => goToCourse(content)}>CONTINUE COURSE</Button>
+                        ) : (
+                          <Button onClick={() => joinSubject(content)}>JOIN COURSE</Button>
+                        )}
                       </Card>
                     )
-                  } else {
-                    return <></>
                   }
+                  return <></>
                 })}
               </div>
             </>

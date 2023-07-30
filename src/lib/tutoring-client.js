@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const baseURL = '/api'
+export const baseURL = 'http://localhost:8080/api'
 
 export const loginStudent = async (loginForm) => {
   return await axios.post(`${baseURL}/studentUser/login`, loginForm)
@@ -24,6 +24,14 @@ export const getAllSubjects = async (params) => {
 
 export const getSubjectsById = async (studentId) => {
   return await axios.get(`${baseURL}/studentSubjects/queryByStudentId/${studentId}`)
+}
+
+export const getStudentSubjectById = async (studentSubjectId) => {
+  return await axios.get(`${baseURL}/studentSubjects/${studentSubjectId}`)
+}
+
+export const putStudentSubject = async (data) => {
+  return await axios.put(`${baseURL}/studentSubjects`, data)
 }
 
 export const addSubjectStudent = async (data) => {
@@ -57,4 +65,24 @@ export const editLearningStyle = async (data) => {
 
 export const getLearningStyle = async (params) => {
   return await axios.get(`${baseURL}/learningStyle`, { params })
+}
+
+export const getRecordList = async (params) => {
+  return await axios.get(`${baseURL}/record`, { params })
+}
+
+export const postRecord = async (data) => {
+  return await axios.post(`${baseURL}/record`, data)
+}
+
+export const getStudentUnit = async (params) => {
+  return await axios.get(`${baseURL}/studentUnits`, { params })
+}
+
+export const postStudentUnit = async (data) => {
+  return await axios.post(`${baseURL}/studentUnits`, data)
+}
+
+export const putStudentUnit = async (data) => {
+  return await axios.put(`${baseURL}/studentUnits`, data)
 }

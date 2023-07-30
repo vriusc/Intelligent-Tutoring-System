@@ -1,0 +1,39 @@
+.History-container {
+  background-color: #282c34;
+  color:#fff;
+  min-height: 94vh;
+}
+
+.History {
+  padding: 3em 4em;
+}
+
+.History-border {
+  border: solid 1px white;
+  padding: 10px 1em;
+  border-radius: 10px;
+}
+
+.History-image {
+  max-width: 60px;
+  margin: 2px;
+}
+
+.Pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.Pagination-btn {
+  color: #fff;
+  cursor: pointer;
+  margin: 0 1em;
+  font-weight: bold;
+}
+
+.Pagination-btn.disabled {
+  cursor: no-drop;
+  font-weight: 400;
+}

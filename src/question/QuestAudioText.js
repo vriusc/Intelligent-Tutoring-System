@@ -3,17 +3,22 @@ import audiExample from '../assets/question2_audio.mp3'
 import { Input, Label } from 'reactstrap'
 
 const QuestionAudioText = (args) => {
-  const { title, audio, options, handleRadioBtn, optSelected } = args
+  const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
   // TODO: this is a continue work because it may be videos with audio
+  const isYouTube = audio.search('youtube')
 
   return (
     <>
       <h5>{title}</h5>
-      {audio ? (
+      {audio && isYouTube && (
+        <iframe className="Quest-video" width="420" height="315" src={audio} />
+      )}
+      {audio && !isYouTube && (
         <audio controls className="Quest-audio">
           <source src={audio} type="audio/mpeg" />
         </audio>
-      ) : (
+      )}
+      {!audio && (
         <audio controls className="Quest-audio">
           <source src={audiExample} type="audio/mpeg" />
         </audio>
@@ -25,6 +30,7 @@ const QuestionAudioText = (args) => {
               type="radio"
               id={currentOptions.optionId}
               name={`${currentOptions.optionId}-${currentOptions.option}`}
+              disabled={disabled}
               value={currentOptions.optionId}
               checked={currentOptions.optionId === optSelected}
               onChange={(event) => handleRadioBtn(event, currentOptions)}

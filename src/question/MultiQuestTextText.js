@@ -2,7 +2,7 @@ import { Input, Label } from 'reactstrap'
 import './Question.css'
 
 const MultiQuestTextText = (args) => {
-  const { title, options, handleCheckBoxBtn, optSelected } = args
+  const { title, options, handleCheckBoxBtn, optSelected, disabled } = args
 
   return (
     <>
@@ -14,6 +14,7 @@ const MultiQuestTextText = (args) => {
               type="checkbox"
               id={currentOptions.optionId}
               name={`${currentOptions.optionId}-${currentOptions.option}`}
+              disabled={disabled}
               value={currentOptions.optionId}
               checked={optSelected && optSelected.some((opt) => opt === currentOptions.optionId)}
               onChange={(event) => handleCheckBoxBtn(event)}

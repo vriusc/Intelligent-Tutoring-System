@@ -47,7 +47,7 @@ def feedback_reply_generate(MODEL, username, test_score):
 
 
 # Route for GPT feedback reply
-@app.route('/gpt/feedback', methods=['Post'])
+@app.route('/feedback/', methods=['Post'])
 def process_feedback_request():
     # Retrieve the parameters from the URL
     username = request.args.get('username')
@@ -99,7 +99,7 @@ def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_la
 
 
 # This route processes incoming requests to evaluate an essay.
-@app.route('/gpt/writting', methods=['Post'])
+@app.route('/writting/', methods=['Post'])
 def process_writing_request():
     # Retrieve the parameters from the incoming request.
     username = request.args.get('username')

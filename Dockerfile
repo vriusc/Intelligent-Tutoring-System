@@ -10,5 +10,5 @@ COPY . .
 EXPOSE 5000
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 ##CMD ["flask", "--app", "app", "run"]
-CMD ["python", "your_flask_app.py"]
+CMD ["python", "app.py"]
 

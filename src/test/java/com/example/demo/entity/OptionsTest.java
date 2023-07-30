@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.entity;
 
 import com.example.demo.entity.Options;
 import org.junit.jupiter.api.Test;

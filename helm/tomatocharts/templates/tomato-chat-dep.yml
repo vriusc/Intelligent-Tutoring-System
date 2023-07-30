@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tchat
-        image: xiaochili123/tomato-chat:V7
+        image: xiaochili123/tomato-chat:V8.14
         ports:
         - name: tchat-port
           containerPort: 5000

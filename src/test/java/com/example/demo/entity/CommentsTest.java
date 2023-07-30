@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.Comments;
 import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 

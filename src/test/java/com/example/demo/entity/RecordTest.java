@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
 
-import com.example.demo.entity.Record;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

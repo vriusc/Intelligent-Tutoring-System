@@ -75,7 +75,10 @@ const Header = (student) => {
   return (
     <>
       <Navbar color="dark" dark>
-        <NavbarBrand className={title ? 'me-2' : 'me-auto'} href="/">
+        <NavbarBrand
+          className={title ? 'me-2' : 'me-auto'}
+          href={subjectCount > 0 ? '/courses' : '/'}
+        >
           Intelligent Tutoring System
         </NavbarBrand>
         <NavbarText className="me-auto" hidden={!title}>{` - ${title}`}</NavbarText>

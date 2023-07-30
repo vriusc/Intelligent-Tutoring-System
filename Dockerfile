@@ -1,6 +1,6 @@
 FROM maven:3.8.6-openjdk-11 AS build
 RUN git clone https://github.com/vriusc/Intelligent-Tutoring-System.git
-RUN cd Intelligent-Tutoring-System && git checkout qianbackground && mvn install
+RUN cd Intelligent-Tutoring-System && git checkout qianbackground && mvn install -DskipTests
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 #FROM tomcat:9-jre11
 

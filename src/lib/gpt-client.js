@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // export const baseURL = 'http://tomato.vprofile.tomatokillerucd.com/gpt/reply/'
-export const baseURL = 'http://127.0.0.1:8082/api'
+export const baseURL = '/api'
 
 export const postGPTFeedback = async (params) => {
   return await axios.post(`${baseURL}/feedback`, params, { params })

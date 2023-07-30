@@ -37,7 +37,6 @@ public class SubjectsDaoTest {
         Subjects result = subjectsDao.queryById(subjects.getSubjectId());
         System.out.println(result);
         assertEquals(subjects.getSubjectId(), result.getSubjectId());
-        // TODO: Add more assertions for other properties
     }
 
     @AfterEach

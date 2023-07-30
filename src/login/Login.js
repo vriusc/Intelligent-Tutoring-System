@@ -2,7 +2,7 @@ import './Login.css'
 import { Alert, Button, Input } from 'reactstrap'
 import logo from '../assets/logo-no-background.png'
 import { useState } from 'react'
-import { loginStudent } from '../lib/tutoring-client'
+import { getSubjectsById, loginStudent } from '../lib/tutoring-client'
 import { useNavigate } from 'react-router-dom'
 import RegisterBtn from './Register'
 
@@ -17,7 +17,14 @@ const Login = () => {
       .then((response) => {
         console.log('result', response.data)
         localStorage.setItem('studentId', response.data.studentId)
-        navigate('/')
+        getSubjectsById(response.data.studentId).then((response) => {
+          const { data } = response
+          if (data && data.length > 0) {
+            navigate(`/courses`)
+          } else {
+            navigate('/')
+          }
+        })
       })
       .catch((error) => {
         console.error(error.message)

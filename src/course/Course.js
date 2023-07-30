@@ -97,7 +97,12 @@ const Course = () => {
       <Header user={student} subjectCount={1} title="My units" />
       <div className="Course-container">
         <div className="Course">
-          <h3>Units list</h3>
+          <div className="Course-title">
+            <h3>Units list</h3>
+            <Button color="info" onClick={() => navigate('/courses')}>
+              Back to Courses
+            </Button>
+          </div>
           <div className="Units-list">
             {unitList.map((unit) => (
               <Card key={unit.unitId} className="mt-3">

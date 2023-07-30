@@ -8,6 +8,11 @@
   padding: 3em 4em;
 }
 
+.Course-title {
+  display: flex;
+  justify-content: space-between;
+}
+
 .Final-body {
   display: flex;
   flex-direction: column;

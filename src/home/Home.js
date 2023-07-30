@@ -64,7 +64,7 @@ const Home = () => {
     console.log('joining', currentContent)
     const { subjectId } = currentContent
     addSubjectStudent({ studentId, subjectId, progress: 0 }).then(() => {
-      navigate('/courses')
+      goToCoursesList()
     })
   }
 
@@ -83,6 +83,10 @@ const Home = () => {
     navigate(`/courses/${studentSubject.studentSubjectId}`)
   }
 
+  const goToCoursesList = () => {
+    navigate('/courses')
+  }
+
   return (
     <>
       <Header user={student} subjectCount={studentSubjectList.length} />
@@ -90,9 +94,18 @@ const Home = () => {
         <div className="Home">
           <div className="Home-head">
             <h2>What do you want to learn today?</h2>
-            <Button color="success" onClick={() => goToQuestionnaire()}>
-              Learning Questionnaire
-            </Button>
+            <div>
+              <Button
+                style={{ marginRight: '5px' }}
+                color="success"
+                onClick={() => goToCoursesList()}
+              >
+                My Courses
+              </Button>
+              <Button color="info" onClick={() => goToQuestionnaire()}>
+                Learning Questionnaire
+              </Button>
+            </div>
           </div>
           {subjectList.length > 0 && (
             <div className="Subject-list">

@@ -13,7 +13,7 @@ from google.cloud.vision_v1.services.image_annotator import client
 
 # Initialize OpenAI API key and model
 openai.organization = "org-l9GqGTyn1y6BFwYBluQ9mzxt"
-openai.api_key = "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"
+openai.api_key = "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"
 MODEL = "gpt-3.5-turbo"
 
 

@@ -53,10 +53,7 @@ text_description    VARCHAR(255),
 FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id)
 );
 
-# alter table Units
-#     add text VARCHAR(255) null,
-#     add text_description VARCHAR(255) null
-# ;
+
 
 -- 创建题目类型表
 CREATE TABLE question_types (

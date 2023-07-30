@@ -3,6 +3,8 @@ package com.example.demo;
 import com.example.demo.entity.StudentUser;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class StudentUserTest {
 
@@ -15,9 +17,9 @@ public class StudentUserTest {
         studentUser.setEmail("qianyongru@icloud.com");
         studentUser.setPassword("123446");
         System.out.println(studentUser);
+        assertEquals(1, studentUser.getId());
+        assertEquals("qianyongru", studentUser.getUsername());
+        assertEquals("qianyongru@icloud.com", studentUser.getEmail());
+        assertEquals("123446", studentUser.getPassword());
     }
-
-
-
-
 }

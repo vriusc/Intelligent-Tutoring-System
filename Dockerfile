@@ -11,4 +11,4 @@ EXPOSE 5000
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
 CMD ["flask", "--app", "app", "run"]
 #CMD ["python", "app.py"]
-
+CMD ["flask", "run"]

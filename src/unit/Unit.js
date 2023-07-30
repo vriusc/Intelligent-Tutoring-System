@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react'
 import YoutubePlater from './YoutubePlayer'
 import { Badge, Button, Card, CardBody, CardText } from 'reactstrap'
 import Question from '../question/Question'
-import { gptResponse } from '../lib/gpt-client'
+import { postGPTFeedback } from '../lib/gpt-client'
 
 export async function loader({ params }) {
   const unit = await getUnitById(params.unitId)
@@ -127,13 +127,13 @@ const Unit = () => {
   }
 
   const getFeedback = () => {
+    // TODO Change the Feedback test score
     const params = {
       username: student.username,
-      test_score: '8',
-      text: 'aaa'
+      test_score: '7'
     }
 
-    gptResponse(params)
+    postGPTFeedback(params)
       .then((response) => {
         console.log(response)
         setGPTFeedback(response.data)

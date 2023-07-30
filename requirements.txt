@@ -5,3 +5,4 @@ opencv-python
 flask_socketio
 Pillow
 python-socketio
+emit

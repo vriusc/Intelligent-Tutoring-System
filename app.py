@@ -47,7 +47,7 @@ def feedback_reply_generate(MODEL, username, test_score):
 
 
 # Route for GPT feedback reply
-@app.route('/feedback/', methods=['Post'])
+@app.route('/gpt/feedback/', methods=['Post'])
 def process_feedback_request():
     # Retrieve the parameters from the URL
     username = request.args.get('username')

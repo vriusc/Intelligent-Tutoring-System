@@ -104,6 +104,7 @@ const FinalTest = () => {
               Submit
             </Button>
           </div>
+          {/* TODO after getting the result, publish them */}
         </div>
       </div>
     </>

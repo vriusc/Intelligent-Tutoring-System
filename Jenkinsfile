@@ -34,11 +34,11 @@ pipeline {
             }
         }
 
-        //stage("KUBERNETES DEPLOY"){
-            //agent {label 'KOPS'}
-            //steps{
-                //sh "helm upgrade --install --force vprofile-stack helm/tomatocharts --set appimage=${registry}:V${BUILD_NUMBER} --namespace prod"
-            //}
-        //}
+        stage("KUBERNETES DEPLOY"){
+            agent {label 'KOPS'}
+            steps{
+                sh "helm upgrade --install --force tomatofront helm/tomatocharts --set appimage=${registry}:V${BUILD_NUMBER} --namespace prod"
+            }
+        }
     }
 }

@@ -41,8 +41,8 @@ CREATE TABLE  Units (
     Units_order     INT             NOT NULL,  -- Order of the unit
     description     VARCHAR(255)    NOT NULL,  -- Unit description
     materials_path  VARCHAR(255),  -- Path to the materials
-    text           VARCHAR(255)    ,  -- Text of the unit
-    text_description VARCHAR(255)  ,  -- Text description
+    text            VARCHAR(255)    ,  -- Text of the unit
+    text_description LONGTEXT  ,  -- Text description
     FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id) -- Set subject_id as foreign key from table Subjects's subject_id
 );
 
@@ -98,8 +98,6 @@ CREATE TABLE options (
     description     VARCHAR(255)    NOT NULL, -- Description of the option
     FOREIGN KEY (question_id) REFERENCES questions (question_id) -- Set question_id as foreign key from table questions's question_id
 );
-
--- ALTER TABLE options ADD COLUMN description VARCHAR(255) AFTER order_number;
 
 
 -- CREATE TABLE record to store information about all records

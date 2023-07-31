@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tback
-        image: xiaochili123/tomato-back:V1
+        image: {{ .Values.appimage}}
         ports:
         - name: tback-port
           containerPort: 8080

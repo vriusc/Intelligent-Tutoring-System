@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tchat
+  name: tface
   labels: 
-    app: tchat
+    app: tface
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tchat
+      app: tface
   template:
     metadata:
       labels:
-        app: tchat
+        app: tface
     spec:
       containers:
-      - name: tchat
+      - name: tface
         image: {{ .Values.appimage}}
         ports:
-        - name: tchat-port
+        - name: tface-port
           containerPort: 5000

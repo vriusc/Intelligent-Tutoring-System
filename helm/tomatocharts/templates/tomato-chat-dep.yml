@@ -5,7 +5,7 @@ metadata:
   labels: 
     app: tchat
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: tchat
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tchat
-        image: xiaochili123/tomato-chat:V1
+        image: {{ .Values.appimage}}
         ports:
         - name: tchat-port
           containerPort: 5000

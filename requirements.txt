@@ -1,0 +1,9 @@
+Flask
+OpenAI
+google-cloud-vision
+opencv-python
+flask_socketio
+Pillow
+python-socketio
+eventlet
+emit

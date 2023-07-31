@@ -1,31 +1,17 @@
 # Import the necessary libraries
-import base64
-import io
-import os
 import openai
-from flask_socketio import SocketIO, emit
-import emit as emit
 from flask import Flask, request, render_template
-from google.cloud import vision_v1
-from PIL import Image
-from google.cloud.vision_v1.services.image_annotator import client
 
 
 # Initialize OpenAI API key and model
 openai.organization = "org-l9GqGTyn1y6BFwYBluQ9mzxt"
-openai.api_key = "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"
+openai.api_key = "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"
 MODEL = "gpt-3.5-turbo"
 
 
-# Set Google Cloud Vision API credentials
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'EmotionIdentification/MyKey.json'
 
-# Initialize Flask app and SocketIO
+# Initialize Flask app
 app = Flask(__name__)
-socketio = SocketIO(app, async_model='eventlet')
-
-# Instantiate Google Cloud Vision API client
-client = vision_v1.ImageAnnotatorClient()
 
 
 # Function to generate response from OpenAI GPT model
@@ -40,9 +26,6 @@ def feedback_reply_generate(MODEL, username, test_score):
         temperature=0,
     )
     return response['choices'][0]['message']['content']
-
-
-
 
 
 
@@ -99,7 +82,7 @@ def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_la
 
 
 # This route processes incoming requests to evaluate an essay.
-@app.route('/gpt/writting', methods=['Post'])
+@app.route('/gpt/writing', methods=['Post'])
 def process_writing_request():
     # Retrieve the parameters from the incoming request.
     username = request.args.get('username')
@@ -119,57 +102,6 @@ def process_writing_request():
 
 
 
-
-
-
-# Home route
-@app.route('/home')
-def home():
-    return render_template('index.html')
-
-
-
-
-# SocketIO event for image
-@socketio.on('image')
-def image(data):
-    # Receive and decode image from frontend
-    image_data = base64.b64decode(data.split(",")[1])
-    image = Image.open(io.BytesIO(image_data))
-    # Emotion recognition
-    imgByteArr = io.BytesIO()
-    image.save(imgByteArr, format='PNG')
-    imgByteArr = imgByteArr.getvalue()
-    image = vision_v1.Image(content=imgByteArr)
-    response = client.face_detection(image=image)
-    faces = response.face_annotations
-
-    if not faces:  # Check if any face is detected
-        emit('response', None)
-        return
-
-    # Loop over all detected faces
-    for face in faces:
-        # There may be multiple detected emotions, choose the one with highest confidence
-        emotions = [(face.joy_likelihood, 'Happy'),
-                    (face.sorrow_likelihood, 'Sad'),
-                    (face.anger_likelihood, 'Angry'),
-                    (face.surprise_likelihood, 'Normal'),
-                    ]
-        likely_emotion = max(emotions)[1]
-        # If detected emotion is sadness, change it to confusion
-        if likely_emotion == 'Sad':
-            likely_emotion = 'Confused'
-
-        # Send the recognition result to the frontend
-        emit('response', likely_emotion)
-
-# Route for testing
-@app.route('/test')
-def your_route_function():
-    return render_template('Test.html')
-
-
 # Run the Flask app
 if __name__ == '__main__':
-    socketio.run(app, debug=True, port=8080)
+    app.run(debug=True, port=8080)

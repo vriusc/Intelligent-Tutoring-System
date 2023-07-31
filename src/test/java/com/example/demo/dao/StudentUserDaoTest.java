@@ -57,16 +57,20 @@ public class StudentUserDaoTest {
 
     @Test
     public void testUpdate() {
-        // 调用方法并验证结果
-        student.setUsername("Test2");
-        student.setPassword("Password2");
-        student.setEmail("test2@example.com");
-        dao.update(student);
         StudentUser result = dao.queryById(student.getId());
         System.out.println(result);
-        assertEquals(student.getUsername(), result.getUsername());
-        assertEquals(student.getPassword(), result.getPassword());
-        assertEquals(student.getEmail(), result.getEmail());
+        int id=result.getId();
+        // 调用方法并验证结果
+        student.setId(id);
+        student.setUsername("Test99");
+        student.setPassword("Password99");
+        student.setEmail("test99@example.com");
+        dao.update(student);
+        StudentUser result1 = dao.queryById(student.getId());
+        System.out.println(result1);
+        assertEquals(student.getUsername(), result1.getUsername());
+        assertEquals(student.getPassword(), result1.getPassword());
+        assertEquals(student.getEmail(), result1.getEmail());
     }
 
     @AfterEach

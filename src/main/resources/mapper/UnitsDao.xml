@@ -10,7 +10,7 @@
         <result property="unitOrder" column="units_order" jdbcType="INTEGER"/>
         <result property="materials_path" column="materials_path" jdbcType="VARCHAR"/>
         <result property="text" column="text" jdbcType="VARCHAR"/>
-        <result property="text_description" column="text_description" jdbcType="VARCHAR"/>
+        <result property="text_description" column="text_description" jdbcType="LONGVARCHAR"/>
 
         <!-- 关联Subjects对象 -->
         <association property="subject" javaType="com.example.demo.entity.Subjects">

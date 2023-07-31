@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomatodb
+spec:
+  ports:
+  - port: 3306
+    targetPort: tdb-port
+    protocol: TCP
+  selector:
+    app: tomatodb
+  type: ClusterIP

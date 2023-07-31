@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomatodb
+  labels:
+    app: tomatodb
+spec:
+  selector:
+    matchLabels:
+      app: tomatodb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tomatodb
+    spec:
+      containers:
+      - name: tomatodb
+        image: {{ .Values.appimage}}
+        volumeMounts:
+        - mountPath: /var/lin/mysql
+          name: tomato-db-data
+        ports:
+        - name: tdb-port
+          containerPort: 3306
+        env: 
+         - name: MYSQL_ROOT_PASSWORD
+           value: Souvenir
+        resources:
+          requests:
+            cpu: 500m
+            memory: 500Mi
+
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
+      volumes:
+      - name: tomato-db-data
+        awsElasticBlockStore:
+          volumeID: vol-064c591d57dbcac3e
+          fsType: ext4

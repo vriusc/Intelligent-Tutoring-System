@@ -1,11 +1,20 @@
 # Import the necessary libraries
 import openai
-from flask import Flask, request, render_template
+from flask import Flask, request
 
 
 # Initialize OpenAI API key and model
-openai.organization = "org-l9GqGTyn1y6BFwYBluQ9mzxt"
-openai.api_key = "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"
+import configparser
+
+config = configparser.ConfigParser()
+config.read('openai_config.ini')
+
+openai_api_key = config['openai']['api_key']
+openai_organization = config['openai']['organization']
+
+openai.organization = openai_organization
+openai.api_key = openai_api_key
+
 MODEL = "gpt-3.5-turbo"
 
 
@@ -29,21 +38,6 @@ def feedback_reply_generate(MODEL, username, test_score):
 
 
 
-# Route for GPT feedback reply
-@app.route('/gpt/feedback', methods=['Post'])
-def process_feedback_request():
-    # Retrieve the parameters from the URL
-    username = request.args.get('username')
-    test_score = request.args.get('test_score')
-    text = request.args.get('text')
-
-    # Check if username or test_score is None
-    if username is None or test_score is None:
-        return 'Username or test score not provided', 400
-
-    # Generate a reply
-    reply = feedback_reply_generate(MODEL, username, test_score)
-    return reply  # Return the reply as the response
 
 
 # This function uses the OpenAI GPT model to generate a reply,
@@ -79,6 +73,23 @@ def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_la
     # The function returns the model's generated message content.
     return response['choices'][0]['message']['content']
 
+
+
+# Route for GPT feedback reply
+@app.route('/gpt/feedback', methods=['Post'])
+def process_feedback_request():
+    # Retrieve the parameters from the URL
+    username = request.args.get('username')
+    test_score = request.args.get('test_score')
+    text = request.args.get('text')
+
+    # Check if username or test_score is None
+    if username is None or test_score is None:
+        return 'Username or test score not provided', 400
+
+    # Generate a reply
+    reply = feedback_reply_generate(MODEL, username, test_score)
+    return reply  # Return the reply as the response
 
 
 # This route processes incoming requests to evaluate an essay.

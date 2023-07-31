@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tface
+  labels: 
+    app: tface
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tface
+  template:
+    metadata:
+      labels:
+        app: tface
+    spec:
+      containers:
+      - name: tface
+        image: xiaochili123/tomato-face:V1
+        ports:
+        - name: tface-port
+          containerPort: 5000
+

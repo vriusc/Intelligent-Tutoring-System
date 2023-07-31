@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tback
-        image: xiaochili123/tomato-back:V4.2
+        image: xiaochili123/tomato-back:V5.1
         ports:
         - name: tback-port
           containerPort: 8080

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tface
+spec:
+  ports:
+  - port: 31004
+    targetPort: tface-port
+    protocol: TCP
+  selector:
+    app: tface
+  type: ClusterIP
+

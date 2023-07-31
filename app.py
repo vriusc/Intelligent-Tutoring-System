@@ -4,16 +4,34 @@ from flask import Flask, request
 
 
 # Initialize OpenAI API key and model
+from cryptography.fernet import Fernet
 import configparser
 
+
+# 你之前保存的密钥
+key = b'PoLE4TnSm2Ys9QBeiNDJGuTkrl5NWap_He29jGQB3J8='
+
+# 使用密钥创建Fernet密码器
+cipher_suite = Fernet(key)
+
+# 读取加密文件
+with open('encrypted_config.ini', 'rb') as file:
+    cipher_text = file.read()
+
+# 解密数据
+decrypted_data = cipher_suite.decrypt(cipher_text)
+
+# 使用ConfigParser解析解密后的数据
 config = configparser.ConfigParser()
-config.read('openai_config.ini')
+config.read_string(decrypted_data.decode())
 
 openai_api_key = config['openai']['api_key']
 openai_organization = config['openai']['organization']
 
+# 初始化OpenAI库
 openai.organization = openai_organization
 openai.api_key = openai_api_key
+
 
 MODEL = "gpt-3.5-turbo"
 

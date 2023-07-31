@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.entity.Subjects;
 import com.example.demo.entity.Units;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,9 +19,6 @@ public class UnitsDaoTest {
 
     @Autowired
     private UnitsDao unitsDao;
-
-    @Autowired
-    private SubjectsDao subjectsDao;
 
     private Units units;
 
@@ -53,15 +49,9 @@ public class UnitsDaoTest {
 
     @Test
     public void testQueryBySubjectId() {
-        // Assuming your setUp method inserts a Units object with a SubjectId of 1
         List<Units> results = unitsDao.queryBySubjectId(1);
         System.out.println(results);
-
-        // Depending on the data in your database, this check may vary.
-        // Here we are checking if the method returns at least one result.
         assertTrue(results.size() > 0);
-        // Optionally, if you know more about the expected result, you could add more assertions. For example:
-        // assertEquals(expectedUnitId, results.get(0).getUnitId());
     }
 
 

@@ -4,8 +4,7 @@ import audiExample from '../assets/question2_audio.mp3'
 
 const QuestionAudioPicture = (args) => {
   const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
-  // TODO: this is a continue work because it may be videos with audio
-  // TODO: this type of question has not been created a data yet so it's not tested
+  const isYouTube = audio.search('youtube')
 
   const getName = (name) => {
     const splitName = name.split('/')
@@ -15,11 +14,15 @@ const QuestionAudioPicture = (args) => {
   return (
     <>
       <h5>{title}</h5>
-      {audio ? (
+      {audio && isYouTube && (
+        <iframe className="Quest-video" width="420" height="315" src={audio} />
+      )}
+      {audio && !isYouTube && (
         <audio controls className="Quest-audio">
           <source src={audio} type="audio/mpeg" />
         </audio>
-      ) : (
+      )}
+      {!audio && (
         <audio controls className="Quest-audio">
           <source src={audiExample} type="audio/mpeg" />
         </audio>

@@ -111,7 +111,7 @@ def process_feedback_request():
 
 
 # This route processes incoming requests to evaluate an essay.
-@app.route('/gpt/writing', methods=['Post'])
+@app.route('/gpt/writting', methods=['Post'])
 def process_writing_request():
     # Retrieve the parameters from the incoming request.
     username = request.args.get('username')

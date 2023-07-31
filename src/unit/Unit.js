@@ -16,7 +16,6 @@ import YoutubePlater from './YoutubePlayer'
 import { Badge, Button, Card, CardBody, CardText } from 'reactstrap'
 import Question from '../question/Question'
 import { postGPTFeedback } from '../lib/gpt-client'
-//import VideoSocket from '../video/VideoSocket'
 
 export async function loader({ params }) {
   const unit = await getUnitById(params.unitId)
@@ -40,7 +39,6 @@ const Unit = () => {
   const navigate = useNavigate()
   const { data } = useLoaderData().unit
   const studentSubjectId = useLoaderData().studentSubjectId
-  console.log('Unit', data)
 
   useEffect(() => {
     Promise.all([
@@ -49,6 +47,7 @@ const Unit = () => {
       getStudentUnit({ studentId, unitId: data.unitId })
     ]).then((response) => {
       console.log('Student, Options, Student-unit', response)
+      console.log('Unit', data)
       settingStudents(response[0])
       settingOptions(response[1])
       settingStudentUnit(response[2])

@@ -1,4 +1,4 @@
-import { Alert, Badge } from 'reactstrap'
+import { Alert } from 'reactstrap'
 import './Question.css'
 import { useEffect, useState } from 'react'
 import QuestionTextText from './QuestTextText'
@@ -7,6 +7,10 @@ import QuestionPictureText from './QuestPictureText'
 import QuestionAudioText from './QuestAudioText'
 import QuestionAudioPicture from './QuestAudioPicture'
 import MultiQuestTextText from './MultiQuestTextText'
+import MultiQuestTextPicture from './MultiQuestTextPicture'
+import MultiQuestPictureText from './MultiQuestPictureText'
+import MultiQuestAudioText from './MultiQuestAudioText'
+import MultiQuestAudioPicture from './MultiQuestAudioPicture'
 
 const Question = (args) => {
   const {
@@ -148,10 +152,44 @@ const Question = (args) => {
           disabled={disabled}
         />
       )}
-      {quest.questionTypeId > 6 && (
-        <h3>
-          <Badge color="info">{`The question is not ready, Question Type: ${quest.questionTypeId}`}</Badge>
-        </h3>
+      {quest.questionTypeId === 7 && (
+        <MultiQuestTextPicture
+          title={`${number}. ${quest.question}`}
+          options={options}
+          optSelected={optMultple}
+          handleCheckBoxBtn={handleCheckBoxBtn}
+          disabled={disabled}
+        />
+      )}
+      {quest.questionTypeId === 8 && (
+        <MultiQuestPictureText
+          title={`${number}. ${quest.question}`}
+          picture={quest.picturePath}
+          options={options}
+          optSelected={optMultple}
+          handleCheckBoxBtn={handleCheckBoxBtn}
+          disabled={disabled}
+        />
+      )}
+      {quest.questionTypeId === 9 && (
+        <MultiQuestAudioText
+          title={`${number}. ${quest.question}`}
+          audio={quest.audioPath}
+          options={options}
+          optSelected={optMultple}
+          handleCheckBoxBtn={handleCheckBoxBtn}
+          disabled={disabled}
+        />
+      )}
+      {quest.questionTypeId === 10 && (
+        <MultiQuestAudioPicture
+          title={`${number}. ${quest.question}`}
+          audio={quest.audioPath}
+          options={options}
+          optSelected={optMultple}
+          handleCheckBoxBtn={handleCheckBoxBtn}
+          disabled={disabled}
+        />
       )}
       {review && isCorrect == 0 && (
         <Alert color="danger">{quest.explanation || errorText || 'Your answer is incorrect'}</Alert>

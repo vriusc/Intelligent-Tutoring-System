@@ -1,9 +1,9 @@
-import './Question.css'
 import { Input } from 'reactstrap'
+import './Question.css'
 import audiExample from '../assets/question2_audio.mp3'
 
-const QuestionAudioPicture = (args) => {
-  const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
+const MultiQuestAudioPicture = (args) => {
+  const { title, audio, options, handleCheckBoxBtn, optSelected, disabled } = args
   const isYouTube = audio.search('youtube')
 
   const getName = (name) => {
@@ -31,14 +31,14 @@ const QuestionAudioPicture = (args) => {
         {options.map((currentOptions) => (
           <div key={currentOptions.optionId} className="Quest-opt-image">
             <Input
-              type="radio"
+              type="checkbox"
               style={{ alignSelf: 'center' }}
               id={currentOptions.optionId}
               name={`${currentOptions.optionId}-${getName(currentOptions.option)}`}
               disabled={disabled}
               value={currentOptions.optionId}
-              checked={currentOptions.optionId === optSelected}
-              onChange={(event) => handleRadioBtn(event, currentOptions)}
+              checked={optSelected && optSelected.some((opt) => opt === currentOptions.optionId)}
+              onChange={(event) => handleCheckBoxBtn(event)}
             />
             <img src={currentOptions.option} className="Option-image" />
           </div>
@@ -48,4 +48,4 @@ const QuestionAudioPicture = (args) => {
   )
 }
 
-export default QuestionAudioPicture
+export default MultiQuestAudioPicture

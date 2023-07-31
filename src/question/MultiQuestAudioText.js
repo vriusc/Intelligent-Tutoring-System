@@ -1,15 +1,10 @@
 import './Question.css'
-import { Input } from 'reactstrap'
 import audiExample from '../assets/question2_audio.mp3'
+import { Input, Label } from 'reactstrap'
 
-const QuestionAudioPicture = (args) => {
-  const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
+const MultiQuestAudioText = (args) => {
+  const { title, audio, options, handleCheckBoxBtn, optSelected, disabled } = args
   const isYouTube = audio.search('youtube')
-
-  const getName = (name) => {
-    const splitName = name.split('/')
-    return `${splitName[splitName.lenght - 2]}_${splitName[splitName.lenght - 1]}`
-  }
 
   return (
     <>
@@ -29,18 +24,17 @@ const QuestionAudioPicture = (args) => {
       )}
       <div className="Options-list">
         {options.map((currentOptions) => (
-          <div key={currentOptions.optionId} className="Quest-opt-image">
+          <div key={currentOptions.optionId}>
             <Input
-              type="radio"
-              style={{ alignSelf: 'center' }}
+              type="checkbox"
               id={currentOptions.optionId}
-              name={`${currentOptions.optionId}-${getName(currentOptions.option)}`}
+              name={`${currentOptions.optionId}-${currentOptions.option}`}
               disabled={disabled}
               value={currentOptions.optionId}
-              checked={currentOptions.optionId === optSelected}
-              onChange={(event) => handleRadioBtn(event, currentOptions)}
+              checked={optSelected && optSelected.some((opt) => opt === currentOptions.optionId)}
+              onChange={(event) => handleCheckBoxBtn(event)}
             />
-            <img src={currentOptions.option} className="Option-image" />
+            <Label style={{ marginLeft: '0.5em' }}>{` ${currentOptions.option}`}</Label>
           </div>
         ))}
       </div>
@@ -48,4 +42,4 @@ const QuestionAudioPicture = (args) => {
   )
 }
 
-export default QuestionAudioPicture
+export default MultiQuestAudioText

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tomatodb
-        image: xiaochili123/tomato-db:V6.6
+        image: xiaochili123/tomato-db:V7
         volumeMounts:
         - mountPath: /var/lin/mysql
           name: tomato-db-data
@@ -36,5 +36,5 @@ spec:
       volumes:
       - name: tomato-db-data
         awsElasticBlockStore:
-          volumeID: vol-03c4ad221ce63ff59
+          volumeID: vol-07bbe91bd4c89ee11
           fsType: ext4

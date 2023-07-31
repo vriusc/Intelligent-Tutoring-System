@@ -27,7 +27,6 @@ public class UnitsTest {
         assertEquals("test", units.getDescription());
         assertEquals("test", units.getText());
         assertEquals("test", units.getText_description());
-
     }
 
 }

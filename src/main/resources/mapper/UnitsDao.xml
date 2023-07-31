@@ -7,7 +7,7 @@
         <result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
         <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
-        <result property="unitOrder" column="units_order" jdbcType="INTEGER"/>  <!-- 2020-12-28 16:00:00 -->
+        <result property="unitOrder" column="units_order" jdbcType="INTEGER"/>
         <result property="materials_path" column="materials_path" jdbcType="VARCHAR"/>
         <result property="text" column="text" jdbcType="VARCHAR"/>
         <result property="text_description" column="text_description" jdbcType="VARCHAR"/>
@@ -89,6 +89,7 @@
             </if>
         </where>
     </select>
+
     <!--根据subjectId查询-->
     <select id="queryBySubjectId" resultType="com.example.demo.entity.Units">
         select
@@ -111,8 +112,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="unitId" useGeneratedKeys="true">
-        insert into Units(unit_name, subject_id, description, units_order, materials_path)
-        values (#{unitName}, #{subjectId}, #{description}, #{units_order}, #{materials_path})
+        insert into test.Units(unit_name, subject_id, description, units_order, materials_path, text, text_description)
+        values (#{unitName}, #{subjectId}, #{description}, #{unitOrder}, #{materials_path}, #{text}, #{text_description})
     </insert>
 
 

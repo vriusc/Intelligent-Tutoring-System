@@ -56,7 +56,7 @@ public class UnitsController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<Units> add(Units units) {
+    public ResponseEntity<Units> add(@RequestBody Units units) {
         return ResponseEntity.ok(this.unitsService.insert(units));
     }
 

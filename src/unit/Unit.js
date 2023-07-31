@@ -39,7 +39,6 @@ const Unit = () => {
   const navigate = useNavigate()
   const { data } = useLoaderData().unit
   const studentSubjectId = useLoaderData().studentSubjectId
-  console.log('Unit', data)
 
   useEffect(() => {
     Promise.all([
@@ -48,6 +47,7 @@ const Unit = () => {
       getStudentUnit({ studentId, unitId: data.unitId })
     ]).then((response) => {
       console.log('Student, Options, Student-unit', response)
+      console.log('Unit', data)
       settingStudents(response[0])
       settingOptions(response[1])
       settingStudentUnit(response[2])

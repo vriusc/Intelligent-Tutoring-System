@@ -37,7 +37,7 @@ pipeline {
         stage("KUBERNETES DEPLOY"){
             agent {label 'KOPS'}
             steps{
-                sh "helm upgrade --install --force tomato_chat helm/tomatocharts --set appimage=${registry}:V${BUILD_NUMBER} --namespace prod"
+                sh "helm upgrade --install --force tomatochat helm/tomatocharts --set appimage=${registry}:V${BUILD_NUMBER} --namespace prod"
             }
         }
     }

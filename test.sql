@@ -141,15 +141,15 @@ INSERT INTO `student_user` (`id`, `username`, `password`, `email`) VALUES (5, 't
 
 
 # insert data into Subjects
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (1, 'Spanish', 'Beginner', 'Beginner Spanish');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (2, 'Spanish', 'Intermediate', 'Intermediate Spanish');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (3, 'Spanish', 'Advanced', 'Advanced Spanish');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (1, 'English', 'Beginner', 'Beginner English');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (2, 'English', 'Intermediate', 'Intermediate English');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (3, 'English', 'Advanced', 'Advanced English');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (4, 'Mandarin', 'Beginner', 'Beginner Mandarin');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (5, 'Mandarin', 'Intermediate', 'Intermediate Mandarin');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (6, 'Mandarin', 'Advanced', 'Advanced Mandarin');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (7, 'English', 'Beginner', 'Beginner English');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (8, 'English', 'Intermediate', 'Intermediate English');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (9, 'English', 'Advanced', 'Advanced English');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (7, 'Spanish', 'Beginner', 'Beginner Spanish');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (8, 'Spanish', 'Intermediate', 'Intermediate Spanish');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (9, 'Spanish', 'Advanced', 'Advanced Spanish');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (10, 'French', 'Beginner', 'Beginner French');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (11, 'French', 'Intermediate', 'Intermediate French');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (12, 'French', 'Advanced', 'Advanced French');

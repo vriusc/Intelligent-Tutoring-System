@@ -89,16 +89,25 @@ const History = () => {
     navigate(`/courses/${studentSubjectId}/unit/${unit.unitId}`)
   }
 
+  const goToCourse = () => {
+    navigate(`/courses/${studentSubjectId}`)
+  }
+
   return (
     <>
       <Header user={student} subjectCount={1} title={unit.unitName} />
       <div className="History-container">
-        <div className="History">
+        <div className="History History-flex">
           <TitleComponent>
             <h3 style={{ alignSelf: 'center' }}>{`${unit.unitName}: History`}</h3>
-            <Button color="success" style={{ alignSelf: 'center' }} onClick={() => goToUnit()}>
-              Keep practicing
-            </Button>
+            <div>
+              <Button style={{ marginRight: '5px' }} color="info" onClick={() => goToCourse()}>
+                Unit list
+              </Button>
+              <Button color="success" style={{ alignSelf: 'center' }} onClick={() => goToUnit()}>
+                Keep practicing
+              </Button>
+            </div>
           </TitleComponent>
           {questionList.map((question, index) => (
             <div key={index} className="mb-5 History-border">
@@ -124,6 +133,13 @@ const History = () => {
               />
             </div>
           ))}
+          <Button
+            style={{ marginRight: '5px', alignSelf: 'flex-end' }}
+            color="info"
+            onClick={() => goToCourse()}
+          >
+            Back to Unit list
+          </Button>
         </div>
       </div>
     </>

@@ -95,7 +95,7 @@ const Course = () => {
           <div className="Course-title">
             <h3>Units list</h3>
             <Button color="info" onClick={() => navigate('/courses')}>
-              Back to Courses
+              Back to My Courses
             </Button>
           </div>
           <div className="Units-list">

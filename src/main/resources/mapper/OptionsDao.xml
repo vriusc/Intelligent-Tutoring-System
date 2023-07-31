@@ -112,12 +112,12 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="optionId" useGeneratedKeys="true">
-        insert into options(question_id, 'option', is_correct, order_number, description)
+        insert into options(question_id, `option`, is_correct, order_number, description)
         values (#{questionId}, #{option}, #{isCorrect}, #{orderNumber},#{description})
     </insert>
 
     <insert id="insertBatch" keyProperty="optionId" useGeneratedKeys="true">
-        insert into options(question_id, 'option', is_correct, order_number, description)
+        insert into options(question_id, `option`, is_correct, order_number, description)
         values
         <foreach collection="entities" item="entity" separator=",">
         (#{entity.questionId}, #{entity.option}, #{entity.isCorrect}, #{entity.orderNumber},#{entity.description}
@@ -125,7 +125,7 @@
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="optionId" useGeneratedKeys="true">
-        insert into options(question_id, 'option', is_correct, order_number,description)
+        insert into options(question_id, `option`, is_correct, order_number,description)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.questionId}, #{entity.option}, #{entity.isCorrect}, #{entity.orderNumber},#{entity.description})

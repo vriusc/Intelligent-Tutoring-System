@@ -4,14 +4,10 @@ metadata:
   name: tomato-ingress
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, DELETE, PATCH, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
 spec:
   ingressClassName: nginx
   rules:
-  - host: ab9a9c2d9065b43cfab66b1f4f89e7c6-ca3c54170f6d9440.elb.us-east-1.amazonaws.com
+  - host: tomato.vprofile.tomatokillerucd.com
     http:
       paths:
       - pathType: Prefix

@@ -29,6 +29,9 @@ const Login = () => {
       .catch((error) => {
         console.error(error.message)
         setErrorMessage(error.response.data.message || error.message || 'Error')
+        setTimeout(() => {
+          setErrorMessage('')
+        }, 5000)
       })
   }
 

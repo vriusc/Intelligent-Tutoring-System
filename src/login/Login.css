@@ -35,3 +35,8 @@
 .Success-register {
   margin-top: 10px;
 }
+
+.Register-validation {
+  margin-top: 5px;
+  padding: 6px !important;
+}

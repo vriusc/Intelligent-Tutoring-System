@@ -8,6 +8,11 @@
   padding: 3em 4em;
 }
 
+.History-flex {
+  display: flex;
+  flex-direction: column;
+}
+
 .History-border {
   border: solid 1px white;
   padding: 10px 1em;

@@ -3,7 +3,16 @@ import { useEffect, useState } from 'react'
 import Header from '../element/Header'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { getStudent, getSubjectsById } from '../lib/tutoring-client'
-import { Button, Card, CardBody, CardHeader, CardSubtitle, CardText, CardTitle } from 'reactstrap'
+import {
+  Badge,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardSubtitle,
+  CardText,
+  CardTitle
+} from 'reactstrap'
 
 const CoursesList = () => {
   const studentId = localStorage.getItem('studentId')
@@ -46,6 +55,11 @@ const CoursesList = () => {
     return progress > 0 ? (progress === 100 ? 'REVIEW' : 'CONTINUE') : 'START'
   }
 
+  const progressColor = (studentSubject) => {
+    const { progress } = studentSubject
+    return progress > 0 ? (progress === 100 ? 'success' : 'warning') : 'danger'
+  }
+
   return (
     <>
       <Header user={student} subjectCount={subjects.length} title="Courses" />
@@ -76,12 +90,11 @@ const CoursesList = () => {
                     <Button onClick={() => goToCourse(studentSubject)}>
                       {btnText(studentSubject)}
                     </Button>
-                    <CardTitle
-                      style={{ color: studentSubject.progress > 0 ? 'green' : 'red' }}
-                      tag="h3"
-                    >
-                      {`${studentSubject.progress} %`}
-                    </CardTitle>
+                    <h4 style={{ alignSelf: 'flex-end', marginBottom: 0 }}>
+                      <Badge color={progressColor(studentSubject)}>
+                        {`${studentSubject.progress} %`}
+                      </Badge>
+                    </h4>
                   </div>
                 </CardBody>
               </Card>

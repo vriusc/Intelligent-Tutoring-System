@@ -9,7 +9,7 @@ import {
 } from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import Header from '../element/Header'
-import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
+import { Badge, Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
 
 export async function loader({ params }) {
@@ -84,7 +84,7 @@ const Course = () => {
         }
       )
     }
-    setCurrentUnit(unitList[count].unitId)
+    setCurrentUnit(currentProgress === 100 ? -1 : unitList[count].unitId)
   }
 
   return (
@@ -93,7 +93,14 @@ const Course = () => {
       <div className="Course-container">
         <div className="Course">
           <div className="Course-title">
-            <h3>Units list</h3>
+            <h3>
+              Units list
+              {currentUnit === -1 && (
+                <Badge style={{ marginLeft: '10px' }} color="success">
+                  Completed
+                </Badge>
+              )}
+            </h3>
             <Button color="info" onClick={() => navigate('/courses')}>
               Back to My Courses
             </Button>

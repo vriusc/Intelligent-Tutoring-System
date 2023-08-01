@@ -246,16 +246,18 @@ const Unit = () => {
                   </Button>
                 )}
               </div>
-              <ScoreModal
-                isOpen={openModal}
-                score={getScore()}
-                finished={finished}
-                studentUnit={studentUnit}
-                setStudentUnit={setStudentUnit}
-                onReset={closeModal}
-                onNext={goNext}
-                username={student.username}
-              />
+              {openModal && (
+                <ScoreModal
+                  isOpen={openModal}
+                  score={getScore()}
+                  finished={finished}
+                  studentUnit={studentUnit}
+                  setStudentUnit={setStudentUnit}
+                  onReset={closeModal}
+                  onNext={goNext}
+                  username={student.username}
+                />
+              )}
             </>
           )}
         </div>

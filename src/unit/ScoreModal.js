@@ -41,19 +41,23 @@ const ScoreModal = (args) => {
     const { data } = response
     setStudentUnit(data)
   }
-  // TODO Check what to do when is a finished unit
+
   return (
     <Modal isOpen={isOpen}>
       <ModalHeader>{loadingFeedback ? 'Score' : `Score: ${score}`}</ModalHeader>
       <ModalBody>
         {score === 10 && gptFeedback && <Alert color="success">Congratulations!!</Alert>}
-        {loadingFeedback && <Alert color={score === 10 ? 'light' : 'dark'}>Loading score...</Alert>}
-        {!loadingFeedback && gptFeedback && <Alert color="warning">{gptFeedback}</Alert>}
+        {loadingFeedback && <Alert color="dark">Loading score...</Alert>}
+        {!loadingFeedback && gptFeedback && (
+          <Alert color={score >= 8 ? 'light' : score >= 4 ? 'warning' : 'danger'}>
+            {gptFeedback}
+          </Alert>
+        )}
       </ModalBody>
       <ModalFooter>
         <div className="Modal-bottom">
           {loadingFeedback && (
-            <Button color="info" disabled="true">
+            <Button color="info" disabled={true}>
               Loading...
             </Button>
           )}

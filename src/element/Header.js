@@ -96,6 +96,11 @@ const Header = (student) => {
                 Writing Test
               </NavLink>
             </NavItem>
+            <NavItem hidden={subjectCount === 0 || subjectCount === null}>
+              <NavLink href="#" onClick={() => navigate('/questionnaire')}>
+                Learning Style Questionnaire
+              </NavLink>
+            </NavItem>
             <NavItem>
               <NavLink href="#" onClick={handleResetPass}>
                 Reset Password

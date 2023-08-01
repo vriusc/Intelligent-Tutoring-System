@@ -68,10 +68,6 @@ const Home = () => {
     })
   }
 
-  const goToQuestionnaire = () => {
-    navigate('/questionnaire')
-  }
-
   const isSubscribed = ({ subjectId }) => {
     return studentSubjectList.some((studentSub) => studentSub.subjectId === subjectId)
   }
@@ -104,9 +100,6 @@ const Home = () => {
                   My Courses
                 </Button>
               )}
-              <Button color="info" onClick={() => goToQuestionnaire()}>
-                Learning Questionnaire
-              </Button>
             </div>
           </div>
           {subjectList.length > 0 && (

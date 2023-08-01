@@ -6,16 +6,14 @@ import {
   getStudent,
   getStudentUnit,
   getUnitById,
-  postRecord,
-  postStudentUnit,
-  putStudentUnit
+  postRecord
 } from '../lib/tutoring-client'
 import Header from '../element/Header'
 import { useEffect, useState } from 'react'
 import YoutubePlater from './YoutubePlayer'
-import { Badge, Button, Card, CardBody, CardText } from 'reactstrap'
+import { Badge, Button } from 'reactstrap'
 import Question from '../question/Question'
-import { postGPTFeedback } from '../lib/gpt-client'
+import ScoreModal from './ScoreModal'
 
 export async function loader({ params }) {
   const unit = await getUnitById(params.unitId)
@@ -33,8 +31,9 @@ const Unit = () => {
   const [showQuestions, setShowQuestions] = useState(false)
   const [onReview, setOnReview] = useState(false)
   const [answersList, setAnswersList] = useState([])
-  const [gptFeedback, setGPTFeedback] = useState('')
   const [studentUnit, setStudentUnit] = useState({})
+  const [finished, setFinished] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
   const navigate = useNavigate()
   const { data } = useLoaderData().unit
@@ -71,7 +70,8 @@ const Unit = () => {
   const settingStudentUnit = (response) => {
     const { content } = response.data
     if (content && content.length) {
-      endPage(content[0], true)
+      setStudentUnit(content[0])
+      setFinished(content[0].isfinished === 1)
     } else {
       setStudentUnit({ studentId, unitId: data.unitId, isfinished: 0 })
     }
@@ -114,9 +114,7 @@ const Unit = () => {
         await postRecord(record)
         console.log('Question posted', record)
       }
-      if (studentUnit.isfinished !== 1) {
-        lastAnswerReview()
-      }
+      lastAnswerReview()
     } catch (error) {
       console.error(error)
     }
@@ -127,22 +125,13 @@ const Unit = () => {
     setAnswersList(answersList.map((answer) => ({ ...answer, myOptions: [] })))
   }
 
-  const getFeedback = () => {
-    const correctList = [...answersList.filter((answer) => answer.isCorrect)]
-    const test_score = (correctList.length * 10) / answersList.length
-    const params = {
-      username: student.username,
-      test_score
-    }
+  const closeModal = () => {
+    setOpenModal(false)
+  }
 
-    postGPTFeedback(params)
-      .then((response) => {
-        console.log(response)
-        setGPTFeedback(response.data)
-      })
-      .catch((error) => {
-        console.error(error.message)
-      })
+  const getScore = () => {
+    const correctList = [...answersList.filter((answer) => answer.isCorrect)]
+    return (correctList.length * 10) / answersList.length
   }
 
   const createAnswerList = (list) => {
@@ -169,31 +158,17 @@ const Unit = () => {
   }
 
   const lastAnswerReview = () => {
-    // TODO getting answer in progress
     const newStudentUnit = {
       ...studentUnit,
       isfinished: answersList.some((answer) => !answer.isCorrect) ? 0 : 1
     }
     setStudentUnit(newStudentUnit)
-    if (newStudentUnit.studentUnitId) {
-      const { studentUnitId, isfinished } = newStudentUnit
-      putStudentUnit({ studentUnitId, isfinished }).then((response) => {
-        const { data } = response
-        endPage(data)
-      })
-    } else {
-      postStudentUnit(studentUnit).then((response) => {
-        const { data } = response
-        endPage(data)
-      })
-    }
+    setOpenModal(true)
   }
 
-  const endPage = (dataStUnit, firstLoad = false) => {
-    setStudentUnit(dataStUnit)
-    if (dataStUnit.isfinished === 1 && !firstLoad) {
-      navigate(`/courses/${studentSubjectId}`)
-    }
+  const goNext = () => {
+    setOpenModal(false)
+    goBack()
   }
 
   const goBack = () => {
@@ -254,39 +229,33 @@ const Unit = () => {
                   <Badge color="info">Sorry we are creating the questions for this unit</Badge>
                 </h3>
               )}
-              <div className="Btn-row">
-                <Button
-                  disabled={!onReview}
-                  className="Unit-btn"
-                  color="danger"
-                  onClick={() => resetQuestions()}
-                >
-                  Restart
-                </Button>
-                <Button
-                  className="Unit-btn"
-                  color="success"
-                  disabled={onReview || questions.length === 0}
-                  onClick={() => reviewQuestions()}
-                >
-                  Submit
-                </Button>
-                <Button
-                  disabled={false}
-                  className="Unit-btn"
-                  color="primary"
-                  onClick={() => getFeedback()}
-                >
-                  Feedback
-                </Button>
+              <div className="Btn-row-unit">
+                {onReview && (
+                  <Button className="Unit-btn" color="danger" onClick={() => resetQuestions()}>
+                    Restart
+                  </Button>
+                )}
+                {!onReview && (
+                  <Button
+                    className="Unit-btn"
+                    color="success"
+                    disabled={questions.length === 0}
+                    onClick={() => reviewQuestions()}
+                  >
+                    Submit
+                  </Button>
+                )}
               </div>
-              {gptFeedback && (
-                <Card style={{ marginTop: '1em' }}>
-                  <CardBody>
-                    <CardText>{gptFeedback}</CardText>
-                  </CardBody>
-                </Card>
-              )}
+              <ScoreModal
+                isOpen={openModal}
+                score={getScore()}
+                finished={finished}
+                studentUnit={studentUnit}
+                setStudentUnit={setStudentUnit}
+                onReset={closeModal}
+                onNext={goNext}
+                username={student.username}
+              />
             </>
           )}
         </div>

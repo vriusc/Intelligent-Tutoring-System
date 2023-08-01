@@ -1,10 +1,4 @@
+openai
 Flask
-OpenAI
-google-cloud-vision
-opencv-python
-flask_socketio
-Pillow
-python-socketio
-emit
-flask-cors
-Fernet
+cryptography
+configparser

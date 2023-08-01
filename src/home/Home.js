@@ -95,13 +95,15 @@ const Home = () => {
           <div className="Home-head">
             <h2>What do you want to learn today?</h2>
             <div>
-              <Button
-                style={{ marginRight: '5px' }}
-                color="success"
-                onClick={() => goToCoursesList()}
-              >
-                My Courses
-              </Button>
+              {studentSubjectList.length > 1 && (
+                <Button
+                  style={{ marginRight: '5px' }}
+                  color="success"
+                  onClick={() => goToCoursesList()}
+                >
+                  My Courses
+                </Button>
+              )}
               <Button color="info" onClick={() => goToQuestionnaire()}>
                 Learning Questionnaire
               </Button>

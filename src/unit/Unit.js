@@ -194,6 +194,16 @@ const Unit = () => {
     }
   }
 
+  const settingModal = () => {
+    const { username } = student
+
+    return {
+      username,
+      unit: data.unitId.toString(),
+      unit_description: data.description
+    }
+  }
+
   const goNext = () => {
     setOpenModal(false)
     goBack()
@@ -250,6 +260,8 @@ const Unit = () => {
                   answersList={answersList}
                   setAnswersList={setAnswersList}
                   disabled={onReview}
+                  questModal={settingModal()}
+                  subjectId={data.subject.subjectId}
                 />
               ))}
               {questions.length === 0 && (

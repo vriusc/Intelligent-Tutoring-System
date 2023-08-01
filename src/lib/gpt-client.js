@@ -13,6 +13,10 @@ export const postGPTEssay = async (data) => {
   return await axios.post(`${baseURL}/writting`, data)
 }
 
+export const postGPTQuestion = async (data) => {
+  return await axios.post(`${baseURL}/question`, data)
+}
+
 // export const gptResponse = async (params) => {
 //   return await axios.post(baseURL, params)
 // }

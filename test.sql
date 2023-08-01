@@ -179,8 +179,7 @@ INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `descr
   <li>Fill out the application card (found in the center of the magazine).</li>
   <li>Mail the card and $21.95 US to the address provided.</li>
 </ol>
-<p>*This is a limited time offer only. Application and funds must be received no later than Dec 1st, 2004. Canadian residents should add $3 US for shipping. Offer not available for residents outside of North America.</p>');INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (8, 'Intermediate English Unit 3', 2, 3, 'the 3rd unit of Intermediate English ', 'None', NULL, NULL);
-
+<p>*This is a limited time offer only. Application and funds must be received no later than Dec 1st, 2004. Canadian residents should add $3 US for shipping. Offer not available for residents outside of North America.</p>');
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (8, 'Intermediate English Unit 3', 2, 3, 'the 3rd unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (9, 'Intermediate English Unit 4', 2, 4, 'the 4th unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (10, 'Intermediate English Unit 5', 2, 5, 'the 5th unit of Intermediate English ', 'None', NULL, NULL);

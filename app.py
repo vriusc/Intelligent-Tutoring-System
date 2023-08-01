@@ -51,11 +51,11 @@ def feedback_reply_generate(MODEL, username, test_score, unit_description, evalu
                 "content": "You are a language tutor providing feedback to your student, " + username + ". "
                 + "Assess their performance in a test, focusing on their score of " + test_score + " in the unit '" + unit_description + "'. "
                 + "Consider their learning style evaluation of " + evaluation + ". "
-                + "Provide clear, concise feedback without using a formal letter format. Focus on the specific details of the test and avoid unrelated content."
+                + "Provide concise feedback without using a formal letter format. Focus on the specific details of the test and avoid unrelated content."
             },
             {
                 "role": "user",
-                "content": "The student scored " + test_score + " in the test on " + unit_description + ". (Assuming a perfect score on all questions is five)"
+                "content": "The student scored " + test_score + " in the test on " + unit_description + ".(Assuming a max score on all questions is five)"
             },
         ],
         temperature=0,
@@ -91,30 +91,36 @@ def answer_reply_generate(MODEL, username, subject, unit, unit_description, ques
 def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_language, evaluation):
     # Call the OpenAI API to generate a response.
     response = openai.ChatCompletion.create(
-        model=MODEL,  # The specific model being used, e.g., "text-davinci-002"
+        model=MODEL,
         messages=[
-            # The initial system message sets up the scenario.
             {
                 "role": "system",
                 "content": f"You are a tutor specialized in evaluating student essays written in {essay_language}. You are assessing an essay by {username}, following these guidelines and {evaluation}: \
-                            1. Content (7 points): Address the topic accurately and comprehensively. \
-                            2. Organization (3 points): Include a clear introduction, body, and conclusion. \
-                            3. Grammar and Vocabulary (3 points): Use correct grammar and sophisticated vocabulary. \
-                            4. Creativity (2 points): Provide a unique perspective or insights about the topic. \
-                            5. Language Usage (5 points): Write appropriately in {essay_language}. \
+                            1. Content (7 points): Address the topic accurately and comprehensively.<br />\
+                            2. Organization (3 points): Include a clear introduction, body, and conclusion.<br />\
+                            3. Grammar and Vocabulary (3 points): Use correct grammar and sophisticated vocabulary.<br />\
+                            4. Creativity (2 points): Provide a unique perspective or insights about the topic.<br />\
+                            5. Language Usage (5 points): Write appropriately in {essay_language}.<br />\
                             Provide a score for each criteria and an overall score. Focus on these criteria and avoid unrelated content."
             },
-            # The user message provides the essay topic and content for the model to evaluate.
             {
                 "role": "user",
                 "content": f"Here's the essay topic and content: {essay_topic} and {essay_content}"
             },
         ],
-        # The temperature parameter controls the randomness of the model's output.
         temperature=0.7,
     )
-    # The function returns the model's generated message content.
-    return response['choices'][0]['message']['content']
+
+    # Extract the original response
+    original_response = response['choices'][0]['message']['content']
+
+    # Break the original response into paragraphs based on your specific criteria
+    paragraphs = original_response.split('\n')
+
+    # Concatenate the paragraphs with HTML line break tag
+    formatted_response = "<br />".join(paragraphs)
+
+    return formatted_response
 
 
 def assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist):

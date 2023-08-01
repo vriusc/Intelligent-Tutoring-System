@@ -66,3 +66,9 @@
   justify-content: center;
   width: 100%;
 }
+
+.Help-btn-gpt {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}

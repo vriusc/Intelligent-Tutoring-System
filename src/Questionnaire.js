@@ -162,7 +162,10 @@ const Questionnaire = () => {
           const { data } = response
           setLearningStyle(data)
           setShowAlert(true)
-          setTimeout(() => setShowAlert(false), 2000)
+          setTimeout(() => {
+            setShowAlert(false)
+            navigate('/courses')
+          }, 2000)
         })
         .catch((error) => console.error(error))
     }

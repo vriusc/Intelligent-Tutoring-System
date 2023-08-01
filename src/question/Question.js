@@ -1,4 +1,4 @@
-import { Alert } from 'reactstrap'
+import { Alert, Badge } from 'reactstrap'
 import './Question.css'
 import { useEffect, useState } from 'react'
 import QuestionTextText from './QuestTextText'
@@ -11,6 +11,7 @@ import MultiQuestTextPicture from './MultiQuestTextPicture'
 import MultiQuestPictureText from './MultiQuestPictureText'
 import MultiQuestAudioText from './MultiQuestAudioText'
 import MultiQuestAudioPicture from './MultiQuestAudioPicture'
+import GPTQuestionModal from './QuestionModal'
 
 const Question = (args) => {
   const {
@@ -22,13 +23,16 @@ const Question = (args) => {
     setAnswersList,
     disabled,
     radioSelected,
-    multiSelected
+    multiSelected,
+    questModal,
+    subjectId
   } = args
   const { questions: quest } = question
   const [optSelected, setOptSelected] = useState(null)
   const [optMultple, setOptMultple] = useState([])
   const [isCorrect, setIsCorrect] = useState(2)
   const [errorText, setErrorText] = useState('')
+  const [gptModal, setGPTModal] = useState(false)
 
   useEffect(() => {
     if (radioSelected) {
@@ -93,11 +97,29 @@ const Question = (args) => {
     }
   }
 
+  const openQuestGPT = () => {
+    setGPTModal(true)
+  }
+
   return (
     <div className="Question-container">
+      <h5>
+        {`${number}. ${quest.question}`}
+        <Badge style={{ marginLeft: '5px' }} color="info" href="#" onClick={() => openQuestGPT()}>
+          Ask me
+        </Badge>
+      </h5>
+      {gptModal && (
+        <GPTQuestionModal
+          isOpen={gptModal}
+          setGPTModal={setGPTModal}
+          question={quest}
+          questModal={questModal}
+          subjectId={subjectId}
+        />
+      )}
       {quest.questionTypeId === 1 && (
         <QuestionTextText
-          title={`${number}. ${quest.question}`}
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}

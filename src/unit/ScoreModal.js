@@ -47,7 +47,7 @@ const ScoreModal = (args) => {
   }
 
   return (
-    <Modal isOpen={isOpen} centered>
+    <Modal isOpen={isOpen} size="lg" centered>
       <ModalHeader>{loadingFeedback ? 'Score' : `Score: ${score}`}</ModalHeader>
       <ModalBody>
         {score === 10 && !loadingFeedback && <Alert color="success">Congratulations!!</Alert>}

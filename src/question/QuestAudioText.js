@@ -3,12 +3,11 @@ import audiExample from '../assets/question2_audio.mp3'
 import { Input, Label } from 'reactstrap'
 
 const QuestionAudioText = (args) => {
-  const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
+  const { audio, options, handleRadioBtn, optSelected, disabled } = args
   const isYouTube = audio.search('youtube') >= 0
 
   return (
     <>
-      <h5>{title}</h5>
       {audio && isYouTube && (
         <iframe className="Quest-video" width="420" height="315" src={audio} />
       )}

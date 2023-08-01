@@ -43,3 +43,8 @@
   max-width: 160px;
   margin: 10px;
 }
+
+.Quest-modal-gpt {
+  display: flex;
+  flex-direction: row;
+}

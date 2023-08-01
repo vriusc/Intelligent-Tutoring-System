@@ -3,11 +3,10 @@ import imageExample from '../assets/question1_image.jpeg'
 import './Question.css'
 
 const QuestionPictureText = (args) => {
-  const { title, picture, options, handleRadioBtn, optSelected, disabled } = args
+  const { picture, options, handleRadioBtn, optSelected, disabled } = args
 
   return (
     <>
-      <h5>{title}</h5>
       {picture ? (
         <img src={picture} className="Quest-image" />
       ) : (

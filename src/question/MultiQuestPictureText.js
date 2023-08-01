@@ -3,11 +3,10 @@ import imageExample from '../assets/question1_image.jpeg'
 import './Question.css'
 
 const MultiQuestPictureText = (args) => {
-  const { title, picture, options, handleCheckBoxBtn, optSelected, disabled } = args
+  const { picture, options, handleCheckBoxBtn, optSelected, disabled } = args
 
   return (
     <>
-      <h5>{title}</h5>
       {picture ? (
         <img src={picture} className="Quest-image" />
       ) : (

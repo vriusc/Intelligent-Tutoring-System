@@ -4,7 +4,7 @@ import { Input, Label } from 'reactstrap'
 
 const QuestionAudioText = (args) => {
   const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
-  const isYouTube = audio.search('youtube')
+  const isYouTube = audio.search('youtube') >= 0
 
   return (
     <>

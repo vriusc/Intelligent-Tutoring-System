@@ -1,6 +1,7 @@
 import './Unit.css'
 import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
 import {
+  getLearningStyle,
   getOptions,
   getQuestionsByUnitId,
   getStudent,
@@ -34,6 +35,7 @@ const Unit = () => {
   const [studentUnit, setStudentUnit] = useState({})
   const [finished, setFinished] = useState(false)
   const [openModal, setOpenModal] = useState(false)
+  const [learningStyle, setLearningStyle] = useState({})
 
   const navigate = useNavigate()
   const { data } = useLoaderData().unit
@@ -43,13 +45,15 @@ const Unit = () => {
     Promise.all([
       getStudent(studentId),
       getOptions({ size: 1000 }),
-      getStudentUnit({ studentId, unitId: data.unitId })
+      getStudentUnit({ studentId, unitId: data.unitId }),
+      getLearningStyle({ studentId })
     ]).then((response) => {
-      console.log('Student, Options, Student-unit', response)
+      console.log('Student, Options, Student-unit, LearningStyle', response)
       console.log('Unit', data)
       settingStudents(response[0])
       settingOptions(response[1])
       settingStudentUnit(response[2])
+      settingLearningStyle(response[3])
     })
   }, [studentId])
 
@@ -64,6 +68,15 @@ const Unit = () => {
     const { content } = response.data
     if (content) {
       setQuestOptions(content)
+    }
+  }
+
+  const settingLearningStyle = (response) => {
+    const { data } = response
+    if (data?.content.length) {
+      setLearningStyle(data.content[0])
+    } else {
+      setLearningStyle({ activist: 0, reflector: 0, theorist: 0, pragmatist: 0 })
     }
   }
 
@@ -166,6 +179,21 @@ const Unit = () => {
     setOpenModal(true)
   }
 
+  const settingFeedback = () => {
+    const { username } = student
+    const { activist, reflector, theorist, pragmatist } = learningStyle
+
+    return {
+      username,
+      test_score: 0,
+      unit_description: data.text_description || '',
+      activist: activist.toString(),
+      reflector: reflector.toString(),
+      theorist: theorist.toString(),
+      pragmatist: pragmatist.toString()
+    }
+  }
+
   const goNext = () => {
     setOpenModal(false)
     goBack()
@@ -255,7 +283,7 @@ const Unit = () => {
                   setStudentUnit={setStudentUnit}
                   onReset={closeModal}
                   onNext={goNext}
-                  username={student.username}
+                  feedback={settingFeedback()}
                 />
               )}
             </>

@@ -1,14 +1,14 @@
-import './Home.css'
-import Header from '../element/Header'
-import { Navigate } from 'react-router-dom'
+import './home/Home.css'
+import Header from './element/Header'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
   editLearningStyle,
   getLearningStyle,
   getStudent,
   postLearningStyle
-} from '../lib/tutoring-client'
-import { getLearningQuestionnaire } from '../lib/local-client'
+} from './lib/tutoring-client'
+import { getLearningQuestionnaire } from './lib/local-client'
 import { Alert, Button, Input, Label } from 'reactstrap'
 
 const LearningQuestion = (args) => {
@@ -33,7 +33,7 @@ const LearningQuestion = (args) => {
             name={`${quest.id}-agree`}
             value="agree"
             checked={quest.answer === 'agree'}
-            onClick={handleRadioBtn}
+            onChange={handleRadioBtn}
           />
           <span style={{ marginLeft: '5px' }}>Agree</span>
         </Label>
@@ -43,7 +43,7 @@ const LearningQuestion = (args) => {
             name={`${quest.id}-disagree`}
             value="disagree"
             checked={quest.answer === 'disagree'}
-            onClick={handleRadioBtn}
+            onChange={handleRadioBtn}
           />
           <span style={{ marginLeft: '5px' }}>Disagree</span>
         </Label>
@@ -54,6 +54,7 @@ const LearningQuestion = (args) => {
 
 const Questionnaire = () => {
   const studentId = localStorage.getItem('studentId')
+  const navigate = useNavigate()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -148,7 +149,10 @@ const Questionnaire = () => {
           const { data } = response
           setLearningStyle(data)
           setShowAlert(true)
-          setTimeout(() => setShowAlert(false), 2000)
+          setTimeout(() => {
+            setShowAlert(false)
+            navigate('/courses')
+          }, 2000)
         })
         .catch((error) => console.error(error))
     } else {
@@ -198,7 +202,12 @@ const Questionnaire = () => {
             >
               Questionnaire updated successfully
             </Alert>
-            <Button color="success" size="lg" onClick={() => onFinishQuestionnaire()}>
+            <Button
+              color="success"
+              size="lg"
+              disabled={questionnaire.some((quest) => quest.answer === 'none')}
+              onClick={() => onFinishQuestionnaire()}
+            >
               END QUESTIONNAIRE
             </Button>
           </div>

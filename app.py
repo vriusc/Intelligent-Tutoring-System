@@ -150,6 +150,7 @@ def assess_learning_style(learning_activist,learning_reflector,learning_theorist
 
 
 
+
 # Route for GPT feedback reply
 @app.route('/gpt/feedback', methods=['Post'])
 def process_feedback_request():
@@ -163,10 +164,14 @@ def process_feedback_request():
     learning_theorist = request.json.get('theorist')
     learning_pragmatist = request.json.get('pragmatist')
 
-    evaluation = assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist)
+    if learning_activist is None and learning_reflector is None and learning_theorist is None and learning_pragmatist is None:
+        evaluation = " "
+
+    else:
+        evaluation = assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist)
 
     # Check if username or test_score is None
-    if username is None or test_score is None:
+    if username is None or test_score is None or unit_description is None:
         return 'Username or test score not provided', 400
 
     # Generate a reply
@@ -189,7 +194,7 @@ def process_question_request():
     student_question = request.json.get('student_question')
 
     # Check if username or test_score is None
-    if username is None or student_question is None:
+    if username is None or student_question is None or subject is None or unit is None or unit_description is None or question is None or question_description is None:
         return 'Username or user question not provided', 400
 
     # Generate a reply
@@ -217,7 +222,11 @@ def process_writing_request():
     learning_theorist = request.json.get('theorist')
     learning_pragmatist = request.json.get('pragmatist')
 
-    evaluation = assess_learning_style(learning_activist, learning_reflector, learning_theorist, learning_pragmatist)
+    if learning_activist is None and learning_reflector is None and learning_theorist is None and learning_pragmatist is None:
+        evaluation = " "
+
+    else:
+        evaluation = assess_learning_style(learning_activist, learning_reflector, learning_theorist, learning_pragmatist)
 
     # Check if any necessary parameters are missing.
     if username is None or essay_content is None or essay_topic is None:

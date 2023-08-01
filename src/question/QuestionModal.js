@@ -42,7 +42,7 @@ const GPTQuestionModal = (args) => {
       question: questionId.toString(),
       question_description: description || ''
     }
-    console.log('Data to send', data)
+    console.log('Question to send', data)
     setLoading(true)
     setGPTError(false)
     postGPTQuestion(data)

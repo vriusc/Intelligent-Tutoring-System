@@ -4,7 +4,6 @@ import axios from 'axios'
 // export const baseURL = 'http://localhost:8082/api'
 export const baseURL = '/gpt'
 
-
 export const postGPTFeedback = async (data) => {
   return await axios.post(`${baseURL}/feedback`, data)
 }

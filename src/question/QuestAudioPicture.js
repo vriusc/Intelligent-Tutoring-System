@@ -3,7 +3,7 @@ import { Input } from 'reactstrap'
 import audiExample from '../assets/question2_audio.mp3'
 
 const QuestionAudioPicture = (args) => {
-  const { title, audio, options, handleRadioBtn, optSelected, disabled } = args
+  const { audio, options, handleRadioBtn, optSelected, disabled } = args
   const isYouTube = audio.search('youtube')
 
   const getName = (name) => {
@@ -13,7 +13,6 @@ const QuestionAudioPicture = (args) => {
 
   return (
     <>
-      <h5>{title}</h5>
       {audio && isYouTube && (
         <iframe className="Quest-video" width="420" height="315" src={audio} />
       )}

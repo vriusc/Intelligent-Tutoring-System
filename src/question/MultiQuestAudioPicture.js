@@ -3,7 +3,7 @@ import './Question.css'
 import audiExample from '../assets/question2_audio.mp3'
 
 const MultiQuestAudioPicture = (args) => {
-  const { title, audio, options, handleCheckBoxBtn, optSelected, disabled } = args
+  const { audio, options, handleCheckBoxBtn, optSelected, disabled } = args
   const isYouTube = audio.search('youtube')
 
   const getName = (name) => {
@@ -13,7 +13,6 @@ const MultiQuestAudioPicture = (args) => {
 
   return (
     <>
-      <h5>{title}</h5>
       {audio && isYouTube && (
         <iframe className="Quest-video" width="420" height="315" src={audio} />
       )}

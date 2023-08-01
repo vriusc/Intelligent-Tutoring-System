@@ -95,9 +95,9 @@ const Question = (args) => {
 
   return (
     <div className="Question-container">
+      <h5>{`${number}. ${quest.question}`}</h5>
       {quest.questionTypeId === 1 && (
         <QuestionTextText
-          title={`${number}. ${quest.question}`}
           options={options}
           optSelected={optSelected}
           handleRadioBtn={handleRadioBtn}

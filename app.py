@@ -48,19 +48,20 @@ def feedback_reply_generate(MODEL, username, test_score, unit_description, evalu
         messages=[
             {
                 "role": "system",
-                "content": "You are a language tutor providing specific feedback to your student, " + username + ". "
-                + "You are to assess their performance in a test, focusing on their score of " + test_score + " and considering their learning style evaluation of " + evaluation + ". "
-                + "Please provide detailed and focused feedback on the test related to the unit '" + unit_description + "'. "
-                + "Avoid addressing unrelated content or questions."
+                "content": "You are a language tutor providing feedback to your student, " + username + ". "
+                + "Assess their performance in a test, focusing on their score of " + test_score + " in the unit '" + unit_description + "'. "
+                + "Consider their learning style evaluation of " + evaluation + ". "
+                + "Provide clear, concise feedback without using a formal letter format. Focus on the specific details of the test and avoid unrelated content."
             },
             {
                 "role": "user",
-                "content": "The student got " + test_score + " in all the question test. " + unit_description + " (Assuming a perfect score on all questions is five)"
+                "content": "The student scored " + test_score + " in the test on " + unit_description + ". (Assuming a perfect score on all questions is five)"
             },
         ],
         temperature=0,
     )
     return response['choices'][0]['message']['content']
+
 
 
 def answer_reply_generate(MODEL, username, subject, unit, unit_description, question, question_description, student_question):
@@ -237,6 +238,7 @@ def process_writing_request():
 
     # Return the generated reply as the response.
     return reply
+
 
 
 

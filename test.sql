@@ -42,7 +42,7 @@ CREATE TABLE  Units (
     description     VARCHAR(255)    NOT NULL,  -- Unit description
     materials_path  VARCHAR(255),  -- Path to the materials
     text           VARCHAR(255)    ,  -- Text of the unit
-    text_description VARCHAR(255)  ,  -- Text description
+    text_description LONGTEXT  ,  -- Text description
     FOREIGN KEY (subject_id) REFERENCES Subjects (subject_id) -- Set subject_id as foreign key from table Subjects's subject_id
 );
 
@@ -148,15 +148,15 @@ INSERT INTO `student_user` (`id`, `username`, `password`, `email`) VALUES (5, 't
 
 
 # insert data into Subjects
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (1, 'Spanish', 'Beginner', 'Beginner Spanish');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (2, 'Spanish', 'Intermediate', 'Intermediate Spanish');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (3, 'Spanish', 'Advanced', 'Advanced Spanish');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (1, 'English', 'Beginner', 'Beginner English');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (2, 'English', 'Intermediate', 'Intermediate English');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (3, 'English', 'Advanced', 'Advanced English');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (4, 'Mandarin', 'Beginner', 'Beginner Mandarin');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (5, 'Mandarin', 'Intermediate', 'Intermediate Mandarin');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (6, 'Mandarin', 'Advanced', 'Advanced Mandarin');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (7, 'English', 'Beginner', 'Beginner English');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (8, 'English', 'Intermediate', 'Intermediate English');
-INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (9, 'English', 'Advanced', 'Advanced English');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (7, 'Spanish', 'Beginner', 'Beginner Spanish');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (8, 'Spanish', 'Intermediate', 'Intermediate Spanish');
+INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (9, 'Spanish', 'Advanced', 'Advanced Spanish');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (10, 'French', 'Beginner', 'Beginner French');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (11, 'French', 'Intermediate', 'Intermediate French');
 INSERT INTO `Subjects` (`subject_id`, `subject_name`, `level`, `description`) VALUES (12, 'French', 'Advanced', 'Advanced French');
@@ -172,9 +172,14 @@ INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `descr
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (4, 'Beginner English Unit 4', 1, 4, 'the 4th unit of Beginner English ', 'https://www.youtube.com/embed/dNP6L6y7ZEM', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (5, 'Beginner English Unit 5', 1, 5, 'the 5th unit of Beginner English ', 'https://www.youtube.com/embed/jhzj9D73SZw', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (6, 'Intermediate English Unit 1', 2, 1, 'the 1st unit of Intermediate English ', 'https://www.youtube.com/embed/jul2urONzOQ', NULL, NULL);
-INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (7, 'Intermediate English Unit 2', 2, 2, 'the 2nd unit of Intermediate English ', 'https://www.youtube.com/embed/56Gsym70j-A', 'https://tomatolearning.s3.amazonaws.com/test/unit6.png',
-'Subscribe for FREE SUNGLASSES and CASE. Buy a magazine, Fill out the application card, Mail card and $21.95 US. Limited-time offer! due by Dec 1st, 2004. Canadian residents add $3 US for shipping. Offer not valid outside North America.
-');
+INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (7, 'Intermediate English Unit 2', 2, 2, 'the 2nd unit of Intermediate English ', 'https://www.youtube.com/embed/56Gsym70j-A', 'https://tomatolearning.s3.amazonaws.com/test/unit6.png', '<p>Purchase a 12 month subscription to Vacation the Nation today and receive a free pair of Sunnies Sunglasses with your very own soft leather case.*</p>
+<p>To get your free Sunnies, follow these 3 easy steps:</p>
+<ol>
+  <li>Purchase a copy of Vacation the Nation, New York\'s #1 Travel magazine.</li>
+  <li>Fill out the application card (found in the center of the magazine).</li>
+  <li>Mail the card and $21.95 US to the address provided.</li>
+</ol>
+<p>*This is a limited time offer only. Application and funds must be received no later than Dec 1st, 2004. Canadian residents should add $3 US for shipping. Offer not available for residents outside of North America.</p>');INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (8, 'Intermediate English Unit 3', 2, 3, 'the 3rd unit of Intermediate English ', 'None', NULL, NULL);
 
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (8, 'Intermediate English Unit 3', 2, 3, 'the 3rd unit of Intermediate English ', 'None', NULL, NULL);
 INSERT INTO `Units` (`unit_id`, `unit_name`, `subject_id`, `Units_order`, `description`, `materials_path`, `text`, `text_description`) VALUES (9, 'Intermediate English Unit 4', 2, 4, 'the 4th unit of Intermediate English ', 'None', NULL, NULL);
@@ -280,7 +285,7 @@ INSERT INTO test.questions (question_id, question, question_type_id, picture_pat
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (20, 'How to spell 100?', 1, null, null, null, 5, '"one hundred"', 'The number "100" is spelled as "one hundred."');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (21, 'What day comes right after Tuesday?', 1, null, null, null, 1, 'Wednesday', 'The day that comes after Tuesday is Wednesday.');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (22, 'What\'s the last month of a year?', 1, null, null, null, 2, 'December', 'What\'s the last month of a year?');
-INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (23, 'What month comes after May in a year?', 6, null, null, null, 3, 'July, August', 'What month comes after June in a year?');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (23, 'What months come after May in a year?', 6, null, null, null, 3, 'June, July', 'What month comes after May in a year?');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (24, 'Choose what day is it.', 4, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/Thursday.mp3', 4, 'Thursday', 'The audio plays "Thursday".');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (25, 'Choose what month is it.', 4, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/November.mp3', 5, 'November', 'The audio plays "November".');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (26, 'She ______ dogs.', 1, null, null, null, 1, 'She "likes" dogs.', 'she ____ dogs.
@@ -378,10 +383,10 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (30, 8, 'https://tomatolearning.s3.amazonaws.com/option/purple.png', 0, 2, 'this is a purple picture');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (31, 8, 'https://tomatolearning.s3.amazonaws.com/option/pink.png', 1, 3, 'this is a pink picture');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (32, 8, 'https://tomatolearning.s3.amazonaws.com/option/blue.png', 0, 4, 'this is a blue picture');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (33, 9, 'orange', 0, 1, 'orange');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (34, 9, 'purple', 1, 2, 'purple');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (35, 9, 'pink', 0, 3, 'pink');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (36, 9, 'blue', 1, 4, 'blue');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (33, 9, 'https://tomatolearning.s3.amazonaws.com/option/orange.png', 0, 1, 'this is an orange picture');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (34, 9, 'https://tomatolearning.s3.amazonaws.com/option/purple.png', 0, 2, 'this is a purple picture');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (35, 9, 'https://tomatolearning.s3.amazonaws.com/option/pink.png', 1, 3, 'this is a pink picture');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (36, 9, 'https://tomatolearning.s3.amazonaws.com/option/blue.png', 0, 4, 'this is a blue picture');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (37, 10, 'green', 1, 1, 'green');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (38, 10, 'brown', 1, 2, 'brown');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (39, 10, 'apple', 1, 3, 'apple');

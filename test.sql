@@ -383,9 +383,9 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (31, 8, 'https://tomatolearning.s3.amazonaws.com/option/pink.png', 1, 3, 'this is a pink picture');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (32, 8, 'https://tomatolearning.s3.amazonaws.com/option/blue.png', 0, 4, 'this is a blue picture');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (33, 9, 'https://tomatolearning.s3.amazonaws.com/option/orange.png', 0, 1, 'this is an orange picture');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (34, 9, 'https://tomatolearning.s3.amazonaws.com/option/purple.png', 0, 2, 'this is a purple picture');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (35, 9, 'https://tomatolearning.s3.amazonaws.com/option/pink.png', 1, 3, 'this is a pink picture');
-INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (36, 9, 'https://tomatolearning.s3.amazonaws.com/option/blue.png', 0, 4, 'this is a blue picture');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (34, 9, 'https://tomatolearning.s3.amazonaws.com/option/purple.png', 1, 2, 'this is a purple picture');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (35, 9, 'https://tomatolearning.s3.amazonaws.com/option/pink.png', 0, 3, 'this is a pink picture');
+INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (36, 9, 'https://tomatolearning.s3.amazonaws.com/option/blue.png', 1, 4, 'this is a blue picture');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (37, 10, 'green', 1, 1, 'green');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (38, 10, 'brown', 1, 2, 'brown');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (39, 10, 'apple', 1, 3, 'apple');

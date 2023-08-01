@@ -73,10 +73,10 @@ const Unit = () => {
 
   const settingLearningStyle = (response) => {
     const { data } = response
-    if (data.content.length) {
+    if (data?.content.length) {
       setLearningStyle(data.content[0])
     } else {
-      settingLearningStyle({ activist: 0, reflector: 0, theorist: 0, pragmatist: 0 })
+      setLearningStyle({ activist: 0, reflector: 0, theorist: 0, pragmatist: 0 })
     }
   }
 

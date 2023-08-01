@@ -2,10 +2,10 @@
 import openai
 from flask import Flask, request
 
-
 # Initialize OpenAI API key and model
 from cryptography.fernet import Fernet
 import configparser
+
 
 
 # 你之前保存的密钥
@@ -42,15 +42,41 @@ app = Flask(__name__)
 
 
 # Function to generate response from OpenAI GPT model
-def feedback_reply_generate(MODEL, username, test_score):
+def feedback_reply_generate(MODEL, username, test_score, unit_description, evaluation):
     response = openai.ChatCompletion.create(
         model=MODEL,
         messages=[
-            {"role": "system",
-             "content": "You are a tutor giving direct and informal feedback to your student, " + username + ", based on their test score."},
-            {"role": "user", "content": "The student got " + test_score + " in all the question test. (Assuming a perfect score on all questions is ten)"},
+            {
+                "role": "system",
+                "content": "You are a language tutor providing specific feedback to your student, " + username + ". "
+                + "You are to assess their performance in a test, focusing on their score of " + test_score + " and considering their learning style evaluation of " + evaluation + ". "
+                + "Please provide detailed and focused feedback on the test related to the unit '" + unit_description + "'. "
+                + "Avoid addressing unrelated content or questions."
+            },
+            {
+                "role": "user",
+                "content": "The student got " + test_score + " in all the question test. " + unit_description + " (Assuming a perfect score on all questions is five)"
+            },
         ],
         temperature=0,
+    )
+    return response['choices'][0]['message']['content']
+
+
+def answer_reply_generate(MODEL, username, subject, unit, unit_description, question, question_description, student_question):
+    response = openai.ChatCompletion.create(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": f"You are a tutor specialized in the subject {subject}, assisting students with their studies. Your student, {username}, is currently working on unit {unit}, described as '{unit_description}'. They are focused on the following question: '{question_description}', and have encountered difficulties. Provide a detailed and specific answer to their question without addressing unrelated content."
+            },
+            {
+                "role": "user",
+                "content": f"The student is stuck on the following question: '{question}'. They are asking: '{student_question}'"
+            },
+        ],
+        temperature=0.7,
     )
     return response['choices'][0]['message']['content']
 
@@ -58,32 +84,30 @@ def feedback_reply_generate(MODEL, username, test_score):
 
 
 
+
 # This function uses the OpenAI GPT model to generate a reply,
 # where the model plays the role of a tutor evaluating a student's essay.
-def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_language):
+def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_language, evaluation):
     # Call the OpenAI API to generate a response.
     response = openai.ChatCompletion.create(
         model=MODEL,  # The specific model being used, e.g., "text-davinci-002"
         messages=[
             # The initial system message sets up the scenario.
-            {"role": "system",
-             "content": "You are a tutor who is evaluating a student's essay written in "
-                        + essay_language
-                        + ". The student's name is "
-                        + username
-                        + ". Use the following grading rubric for your assessment: \
-                        1. Content (7 points): The essay should accurately and comprehensively address the topic. \
-                        2. Organization (3 points): The essay should have a clear introduction, body, and conclusion. \
-                        3. Grammar and Vocabulary (3 points): The essay should use correct grammar and sophisticated vocabulary. \
-                        4. Creativity (2 points): The essay should provide a unique perspective or insights about the topic. \
-                        5. Language Usage (5 points): The essay should be written appropriately in "
-                        + essay_language
-                        + ". Provide a score for each criteria and an overall score."},
+            {
+                "role": "system",
+                "content": f"You are a tutor specialized in evaluating student essays written in {essay_language}. You are assessing an essay by {username}, following these guidelines and {evaluation}: \
+                            1. Content (7 points): Address the topic accurately and comprehensively. \
+                            2. Organization (3 points): Include a clear introduction, body, and conclusion. \
+                            3. Grammar and Vocabulary (3 points): Use correct grammar and sophisticated vocabulary. \
+                            4. Creativity (2 points): Provide a unique perspective or insights about the topic. \
+                            5. Language Usage (5 points): Write appropriately in {essay_language}. \
+                            Provide a score for each criteria and an overall score. Focus on these criteria and avoid unrelated content."
+            },
             # The user message provides the essay topic and content for the model to evaluate.
-            {"role": "user", "content": "Here's the essay topic and content: "
-                                        + essay_topic
-                                        + " and "
-                                        + essay_content},
+            {
+                "role": "user",
+                "content": f"Here's the essay topic and content: {essay_topic} and {essay_content}"
+            },
         ],
         # The temperature parameter controls the randomness of the model's output.
         temperature=0.7,
@@ -92,39 +116,115 @@ def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_la
     return response['choices'][0]['message']['content']
 
 
+def assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist):
+    # 获取学生的学习风格分数
+    learning_activist = int(learning_activist)
+    learning_reflector = int(learning_reflector)
+    learning_theorist = int(learning_theorist)
+    learning_pragmatist = int(learning_pragmatist)
+
+    # 定义学习风格
+    learning_style = "Mixed"
+    max_score = max(learning_activist, learning_reflector, learning_theorist, learning_pragmatist)
+    if max_score == learning_activist:
+        learning_style = "Activist"
+    elif max_score == learning_reflector:
+        learning_style = "Reflector"
+    elif max_score == learning_theorist:
+        learning_style = "Theorist"
+    elif max_score == learning_pragmatist:
+        learning_style = "Pragmatist"
+
+    # 为学生提供基于其学习风格的评价
+    evaluation = f"The learning style seems to be predominantly {learning_style}."
+    if learning_style == "Activist":
+        evaluation += " The student learns best by doing and enjoys new experiences and challenges."
+    elif learning_style == "Reflector":
+        evaluation += " The student prefers to think about and analyze information before taking action."
+    elif learning_style == "Theorist":
+        evaluation += " The student enjoys understanding theories and underlying concepts."
+    elif learning_style == "Pragmatist":
+        evaluation += " The student is keen on trying out ideas and techniques to see if they work in practice."
+
+    return evaluation
+
+
 
 # Route for GPT feedback reply
 @app.route('/gpt/feedback', methods=['Post'])
 def process_feedback_request():
     # Retrieve the parameters from the URL
-    username = request.args.get('username')
-    test_score = request.args.get('test_score')
-    text = request.args.get('text')
+
+    username = request.json.get('username')
+    test_score = request.json.get('test_score')
+    unit_description = request.json.get('unit_description')
+    learning_activist = request.json.get('activist')
+    learning_reflector = request.json.get('reflector')
+    learning_theorist = request.json.get('theorist')
+    learning_pragmatist = request.json.get('pragmatist')
+
+    evaluation = assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist)
 
     # Check if username or test_score is None
     if username is None or test_score is None:
         return 'Username or test score not provided', 400
 
     # Generate a reply
-    reply = feedback_reply_generate(MODEL, username, test_score)
+    reply = feedback_reply_generate(MODEL, username, test_score,unit_description, evaluation)
     return reply  # Return the reply as the response
 
 
+
+# Route for GPT feedback reply
+@app.route('/gpt/question', methods = ['Post'])
+def process_question_request():
+    # 获取学生的问题和上下文信息
+
+    username = request.json.get('username')
+    subject = request.json.get('subject')
+    unit = request.json.get('unit')
+    unit_description = request.json.get('unit_description')
+    question = request.json.get('question')
+    question_description = request.json.get('question_description')
+    student_question = request.json.get('student_question')
+
+    # Check if username or test_score is None
+    if username is None or student_question is None:
+        return 'Username or user question not provided', 400
+
+    # Generate a reply
+    reply = answer_reply_generate(MODEL, username, subject, unit, unit_description, question, question_description, student_question)
+
+
+    return reply  # Return the reply as the response
+
+
+
+
+
 # This route processes incoming requests to evaluate an essay.
-@app.route('/gpt/writing', methods=['Post'])
+@app.route('/gpt/writting', methods=['Post'])
 def process_writing_request():
     # Retrieve the parameters from the incoming request.
-    username = request.args.get('username')
-    essay_topic = request.args.get('essay_topic')
-    essay_content = request.args.get('essay_content')
-    essay_language = request.args.get('essay_language')
+
+    username = request.json.get('username')
+    essay_topic = request.json.get('essay_topic')
+    essay_content = request.json.get('essay_content')
+    essay_language = request.json.get('essay_subject')  # 注意，这里我保留了您原来的键名 'essay_subject'
+
+    learning_activist = request.json.get('activist')
+    learning_reflector = request.json.get('reflector')
+    learning_theorist = request.json.get('theorist')
+    learning_pragmatist = request.json.get('pragmatist')
+
+    evaluation = assess_learning_style(learning_activist, learning_reflector, learning_theorist, learning_pragmatist)
 
     # Check if any necessary parameters are missing.
     if username is None or essay_content is None or essay_topic is None:
         return 'Username, essay topic, or essay content not provided', 400
 
     # Generate a response using the writing_reply_generate function.
-    reply = writing_reply_generate(MODEL, username, essay_topic, essay_content,essay_language)
+    reply = writing_reply_generate(MODEL, username, essay_topic, essay_content,essay_language, evaluation)
 
     # Return the generated reply as the response.
     return reply

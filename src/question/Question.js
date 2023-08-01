@@ -105,9 +105,11 @@ const Question = (args) => {
     <div className="Question-container">
       <h5>
         {`${number}. ${quest.question}`}
-        <Badge style={{ marginLeft: '5px' }} color="info" href="#" onClick={() => openQuestGPT()}>
-          Ask me
-        </Badge>
+        {review && (
+          <Badge style={{ marginLeft: '5px' }} color="info" href="#" onClick={() => openQuestGPT()}>
+            Ask me
+          </Badge>
+        )}
       </h5>
       {gptModal && (
         <GPTQuestionModal

@@ -38,10 +38,10 @@ const WritingTest = () => {
 
   const settingLearningStyle = (response) => {
     const { data } = response
-    if (data.content.length) {
+    if (data?.content.length) {
       setLearningStyle(data.content[0])
     } else {
-      settingLearningStyle({ activist: 0, reflector: 0, theorist: 0, pragmatist: 0 })
+      setLearningStyle({ activist: 0, reflector: 0, theorist: 0, pragmatist: 0 })
     }
   }
 
@@ -142,7 +142,9 @@ const WritingTest = () => {
               <CardBody>
                 <CardTitle tag="h5">Feedback</CardTitle>
                 {loadingFeedback && <CardText>Loading feedback...</CardText>}
-                {!loadingFeedback && gptAnswer && <CardText>{gptAnswer}</CardText>}
+                {!loadingFeedback && gptAnswer && (
+                  <CardText dangerouslySetInnerHTML={{ __html: gptAnswer }} />
+                )}
                 {!loadingFeedback && feedbackError && <CardText>Something went wrong</CardText>}
               </CardBody>
             </Card>

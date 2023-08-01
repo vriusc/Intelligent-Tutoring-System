@@ -1,6 +1,6 @@
 import './home/Home.css'
 import Header from './element/Header'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
   editLearningStyle,
@@ -54,6 +54,7 @@ const LearningQuestion = (args) => {
 
 const Questionnaire = () => {
   const studentId = localStorage.getItem('studentId')
+  const navigate = useNavigate()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -148,7 +149,10 @@ const Questionnaire = () => {
           const { data } = response
           setLearningStyle(data)
           setShowAlert(true)
-          setTimeout(() => setShowAlert(false), 2000)
+          setTimeout(() => {
+            setShowAlert(false)
+            navigate('/courses')
+          }, 2000)
         })
         .catch((error) => console.error(error))
     } else {

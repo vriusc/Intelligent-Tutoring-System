@@ -4,7 +4,7 @@ import { postStudentUnit, putStudentUnit } from '../lib/tutoring-client'
 import { postGPTFeedback } from '../lib/gpt-client'
 
 const ScoreModal = (args) => {
-  const { score, isOpen, finished, studentUnit, setStudentUnit, onReset, onNext, username } = args
+  const { score, isOpen, finished, studentUnit, setStudentUnit, onReset, onNext, feedback } = args
 
   const [loadingFeedback, setLoadingFeedback] = useState(true)
   const [gptFeedback, setGPTFeedback] = useState('')
@@ -23,11 +23,11 @@ const ScoreModal = (args) => {
       // FEEDBACK
       setLoadingFeedback(true)
       setGPTFeedback('')
-      const params = {
-        username,
-        test_score: score
+      const data = {
+        ...feedback,
+        test_score: score.toString()
       }
-      postGPTFeedback(params)
+      postGPTFeedback(data)
         .then((response) => {
           setGPTFeedback(response.data)
           setLoadingFeedback(false)

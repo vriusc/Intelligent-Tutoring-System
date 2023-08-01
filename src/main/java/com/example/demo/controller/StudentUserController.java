@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * (StudentUser)表控制层
@@ -70,7 +69,7 @@ public class StudentUserController {
      * @return 登录结果
      */
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequest, HttpServletRequest request) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequest) {
         String usernameOrEmail = loginRequest.getUsernameOrEmail();
         String password = loginRequest.getPassword();
 
@@ -84,8 +83,6 @@ public class StudentUserController {
             responseDTO.setStudentId(studentId);
             responseDTO.setToken("generated_token");
             responseDTO.setMessage("Login successful");
-
-            request.getSession().setAttribute("loggedIn", true);
 
             // 返回登录成功的响应
             return ResponseEntity.ok(responseDTO);
@@ -138,16 +135,6 @@ public class StudentUserController {
     public ResponseEntity<Boolean> deleteById(Integer id) {
         return ResponseEntity.ok(this.studentUserService.deleteById(id));
     }
-
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletRequest request) {
-        // remove the login attribute
-        request.getSession().removeAttribute("loggedIn");
-
-        // return a success message
-        return ResponseEntity.ok("Logged out successfully");
-    }
-
 
 
 }

@@ -8,6 +8,7 @@ const ScoreModal = (args) => {
 
   const [loadingFeedback, setLoadingFeedback] = useState(true)
   const [gptFeedback, setGPTFeedback] = useState('')
+  const [feedbackError, setFeedbackError] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
@@ -30,9 +31,12 @@ const ScoreModal = (args) => {
         .then((response) => {
           setGPTFeedback(response.data)
           setLoadingFeedback(false)
+          setFeedbackError(false)
         })
         .catch((error) => {
           console.error(error.message)
+          setLoadingFeedback(false)
+          setFeedbackError(true)
         })
     }
   }, [isOpen])
@@ -46,12 +50,20 @@ const ScoreModal = (args) => {
     <Modal isOpen={isOpen}>
       <ModalHeader>{loadingFeedback ? 'Score' : `Score: ${score}`}</ModalHeader>
       <ModalBody>
-        {score === 10 && gptFeedback && <Alert color="success">Congratulations!!</Alert>}
+        {score === 10 && !loadingFeedback && <Alert color="success">Congratulations!!</Alert>}
         {loadingFeedback && <Alert color="dark">Loading score...</Alert>}
         {!loadingFeedback && gptFeedback && (
           <Alert color={score >= 8 ? 'light' : score >= 4 ? 'warning' : 'danger'}>
             {gptFeedback}
           </Alert>
+        )}
+        {!loadingFeedback && feedbackError && (
+          <>
+            <Alert color={score >= 8 ? 'light' : score >= 4 ? 'warning' : 'danger'}>
+              {`Your score is ${score}`}
+            </Alert>
+            <Alert color="danger">No feedback available</Alert>
+          </>
         )}
       </ModalBody>
       <ModalFooter>

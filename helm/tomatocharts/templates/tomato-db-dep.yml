@@ -36,5 +36,5 @@ spec:
       volumes:
       - name: tomato-db-data
         awsElasticBlockStore:
-          volumeID: vol-03bae8b3a0ba956b2
+          volumeID: vol-0839882b0f9888f9e
           fsType: ext4

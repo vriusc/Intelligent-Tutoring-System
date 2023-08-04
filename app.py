@@ -42,35 +42,43 @@ app = Flask(__name__)
 
 
 # Function to generate response from OpenAI GPT model
-def feedback_reply_generate(MODEL, username, test_score, unit_description, evaluation):
+def feedback_reply_generate(MODEL, username, user_prefer_language, all_question_description, all_question_option_description, wrong_answer_number, subject, test_score, unit_description, evaluation):
+    print(user_prefer_language)
+
     response = openai.ChatCompletion.create(
         model=MODEL,
         messages=[
             {
                 "role": "system",
-                "content": "You are a language tutor providing feedback to your student, " + username + ". "
-                + "Assess their performance in a test, focusing on their score of " + test_score + " in the unit '" + unit_description + "'. "
-                + "Consider their learning style evaluation of " + evaluation + ". "
-                + "Provide concise feedback without using a formal letter format. Focus on the specific details of the test and avoid unrelated content."
+                "content": f"Answer in the user's preferred language. {user_prefer_language}. You must translate the following standards as an answer if the user's preferred language is not English."
+                f"You are a language tutor providing feedback to your student, {username}. "
+                f"Assess their performance in a test on {subject}, focusing on their score of {test_score} in the unit '{unit_description}'. "
+                f"Consider the specific questions: {all_question_description}, and the options provided: {all_question_option_description}. "
+                f"Take note of the wrong answers: {wrong_answer_number}. "
+                f"Consider their learning style evaluation of {evaluation}. "
+                f"Provide concise feedback without using a formal letter format. Focus on the specific details of the test and avoid unrelated content."
             },
             {
                 "role": "user",
-                "content": "The student scored " + test_score + " in the test on " + unit_description + ".(Assuming a max score on all questions is five)"
+                "content": f"The student scored {test_score} in the test on {unit_description}.(Assuming a max score on all questions is five)"
             },
         ],
-        temperature=0,
+        temperature=0.7,
     )
     return response['choices'][0]['message']['content']
 
 
 
-def answer_reply_generate(MODEL, username, subject, unit, unit_description, question, question_description, student_question):
+
+def answer_reply_generate(MODEL, username, user_prefer_language,subject, unit, unit_description, question, question_description, option_description,student_question, evaluation):
     response = openai.ChatCompletion.create(
         model=MODEL,
         messages=[
             {
                 "role": "system",
-                "content": f"You are a tutor specialized in the subject {subject}, assisting students with their studies. Your student, {username}, is currently working on unit {unit}, described as '{unit_description}'. They are focused on the following question: '{question_description}', and have encountered difficulties. Provide a detailed and specific answer to their question without addressing unrelated content."
+                "content": f"Answer in the user's preferred language. {user_prefer_language}. You must translate the following standards as an answer if the user's preferred language is not English."
+                           f"You are a tutor specialized in the subject {subject}, assisting students with their studies. Your student, {username}, is currently working on unit {unit}, described as '{unit_description}'. They are focused on the following question: '{question_description} and option :{option_description}', and have encountered difficulties. Provide a detailed and specific answer to their question without addressing unrelated content. Answer in the user's preferred language. {user_prefer_language}"
+                           f"Consider their learning style evaluation of {evaluation}. "
             },
             {
                 "role": "user",
@@ -88,20 +96,21 @@ def answer_reply_generate(MODEL, username, subject, unit, unit_description, ques
 
 # This function uses the OpenAI GPT model to generate a reply,
 # where the model plays the role of a tutor evaluating a student's essay.
-def writing_reply_generate(MODEL, username, essay_topic, essay_content, essay_language, evaluation):
+def writing_reply_generate(MODEL, username, user_prefer_language, essay_topic, essay_content, essay_language, evaluation):
     # Call the OpenAI API to generate a response.
     response = openai.ChatCompletion.create(
         model=MODEL,
         messages=[
             {
                 "role": "system",
-                "content": f"You are a tutor specialized in evaluating student essays written in {essay_language}. You are assessing an essay by {username}, following these guidelines and {evaluation}: \
+                "content": f"Answer in the user's preferred language. {user_prefer_language}. You must translate the following standards as an answer if the user's preferred language is not English."
+                           f"You are a tutor specialized in evaluating student essays written in {essay_language}. You are assessing an essay by {username}, following these guidelines and {evaluation}: \
                             1. Content (7 points): Address the topic accurately and comprehensively.<br />\
                             2. Organization (3 points): Include a clear introduction, body, and conclusion.<br />\
                             3. Grammar and Vocabulary (3 points): Use correct grammar and sophisticated vocabulary.<br />\
                             4. Creativity (2 points): Provide a unique perspective or insights about the topic.<br />\
                             5. Language Usage (5 points): Write appropriately in {essay_language}.<br />\
-                            Provide a score for each criteria and an overall score. Focus on these criteria and avoid unrelated content."
+                            Provide a score for each criteria and an overall score. Focus on these criteria and avoid unrelated content. "
             },
             {
                 "role": "user",
@@ -164,8 +173,23 @@ def process_feedback_request():
     # Retrieve the parameters from the URL
 
     username = request.json.get('username')
+
+    user_prefer_language = request.json.get('user_prefer_language')
+    print("User preferred language:", user_prefer_language)  # Add this line
+    subject = request.json.get('subject_name')
+
     test_score = request.json.get('test_score')
+
+
+
     unit_description = request.json.get('unit_description')
+
+    all_question_description = request.json.get('all_question_description')
+
+    all_question_option_description = request.json.get('all_question_option_description')
+
+    wrong_answer_number = request.json.get('wrong_answer_number')
+
     learning_activist = request.json.get('activist')
     learning_reflector = request.json.get('reflector')
     learning_theorist = request.json.get('theorist')
@@ -182,7 +206,7 @@ def process_feedback_request():
         return 'Username or test score not provided', 400
 
     # Generate a reply
-    reply = feedback_reply_generate(MODEL, username, test_score,unit_description, evaluation)
+    reply = feedback_reply_generate(MODEL, username, user_prefer_language, all_question_description, all_question_option_description, wrong_answer_number, subject, test_score, unit_description, evaluation)
     return reply  # Return the reply as the response
 
 
@@ -193,19 +217,35 @@ def process_question_request():
     # 获取学生的问题和上下文信息
 
     username = request.json.get('username')
+
+    user_prefer_language = request.json.get('user_prefer_language')
+
     subject = request.json.get('subject')
     unit = request.json.get('unit')
     unit_description = request.json.get('unit_description')
     question = request.json.get('question')
     question_description = request.json.get('question_description')
+    option_description = request.json.get('option_description')
     student_question = request.json.get('student_question')
 
+    learning_activist = request.json.get('activist')
+    learning_reflector = request.json.get('reflector')
+    learning_theorist = request.json.get('theorist')
+    learning_pragmatist = request.json.get('pragmatist')
+
+    if learning_activist is None and learning_reflector is None and learning_theorist is None and learning_pragmatist is None:
+        evaluation = " "
+
+    else:
+        evaluation = assess_learning_style(learning_activist, learning_reflector, learning_theorist,
+                                           learning_pragmatist)
+
     # Check if username or test_score is None
-    if username is None or student_question is None or subject is None or unit is None or unit_description is None or question is None or question_description is None:
+    if username is None or student_question is None or subject is None or unit is None or unit_description is None or question is None or question_description is None or option_description is None:
         return 'Username or user question not provided', 400
 
     # Generate a reply
-    reply = answer_reply_generate(MODEL, username, subject, unit, unit_description, question, question_description, student_question)
+    reply = answer_reply_generate(MODEL, username, user_prefer_language,subject, unit, unit_description, question, question_description, option_description,student_question , evaluation)
 
 
     return reply  # Return the reply as the response
@@ -220,8 +260,13 @@ def process_writing_request():
     # Retrieve the parameters from the incoming request.
 
     username = request.json.get('username')
+
+    user_prefer_language = request.json.get('user_prefer_language')
+
     essay_topic = request.json.get('essay_topic')
     essay_content = request.json.get('essay_content')
+
+
     essay_language = request.json.get('essay_subject')  # 注意，这里我保留了您原来的键名 'essay_subject'
 
     learning_activist = request.json.get('activist')
@@ -240,7 +285,7 @@ def process_writing_request():
         return 'Username, essay topic, or essay content not provided', 400
 
     # Generate a response using the writing_reply_generate function.
-    reply = writing_reply_generate(MODEL, username, essay_topic, essay_content,essay_language, evaluation)
+    reply = writing_reply_generate(MODEL, username,user_prefer_language, essay_topic, essay_content,essay_language, evaluation)
 
     # Return the generated reply as the response.
     return reply

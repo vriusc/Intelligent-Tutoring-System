@@ -1,6 +1,7 @@
 import './Unit.css'
 import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
 import {
+  getAllSubjects,
   getLearningStyle,
   getOptions,
   getQuestionsByUnitId,
@@ -37,6 +38,7 @@ const Unit = () => {
   const [finished, setFinished] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [learningStyle, setLearningStyle] = useState({})
+  const [subject, setSubject] = useState({})
 
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -48,14 +50,16 @@ const Unit = () => {
       getStudent(studentId),
       getOptions({ size: 1000 }),
       getStudentUnit({ studentId, unitId: data.unitId }),
-      getLearningStyle({ studentId })
+      getLearningStyle({ studentId }),
+      getAllSubjects({ subjectId: data.subjectId })
     ]).then((response) => {
-      console.log('Student, Options, Student-unit, LearningStyle', response)
+      console.log('Student, Options, Student-unit, LearningStyle, Subject', response)
       console.log('Unit', data)
       settingStudents(response[0])
       settingOptions(response[1])
       settingStudentUnit(response[2])
       settingLearningStyle(response[3])
+      settingSubject(response[4])
     })
   }, [studentId])
 
@@ -89,6 +93,13 @@ const Unit = () => {
       setFinished(content[0].isfinished === 1)
     } else {
       setStudentUnit({ studentId, unitId: data.unitId, isfinished: 0 })
+    }
+  }
+
+  const settingSubject = (response) => {
+    const { content } = response.data
+    if (content && content.length > 0) {
+      setSubject(content[0])
     }
   }
 
@@ -184,11 +195,11 @@ const Unit = () => {
   const settingFeedback = () => {
     const { username } = student
     const { activist, reflector, theorist, pragmatist } = learningStyle
-
     return {
       username,
       test_score: 0,
       unit_description: data.text_description || '',
+      subject: subject.subjectName,
       activist: activist.toString(),
       reflector: reflector.toString(),
       theorist: theorist.toString(),
@@ -204,6 +215,21 @@ const Unit = () => {
       unit: data.unitName,
       unit_description: data.description
     }
+  }
+
+  const settingQuestOptions = () => {
+    console.log('May help', answersList)
+    const questOpt = []
+    questions.forEach((quest) => {
+      const { questionOrder, question, description, questionId } = quest.questions
+      questOpt.push({
+        questionOrder,
+        question,
+        description,
+        options: myOptions(questOptions, questionId)
+      })
+    })
+    return questOpt
   }
 
   const goNext = () => {
@@ -298,6 +324,7 @@ const Unit = () => {
                   onReset={closeModal}
                   onNext={goNext}
                   feedback={settingFeedback()}
+                  questionOptions={settingQuestOptions()}
                 />
               )}
             </>

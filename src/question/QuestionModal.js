@@ -60,7 +60,7 @@ const GPTQuestionModal = (args) => {
   const getOptionsDesc = () => {
     let optionToSend = ''
     options.forEach((opt, index) => {
-      optionToSend += `${letter[index].code}) '${opt.description || ''}'`
+      optionToSend += `${letter[index].code}) '${opt.description || ''}' `
     })
     return optionToSend
   }

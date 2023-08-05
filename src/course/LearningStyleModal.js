@@ -1,9 +1,12 @@
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { postLearningStyle } from '../lib/tutoring-client'
 
 const LearningStyleModal = (args) => {
   const navigate = useNavigate()
-  const { openModal, setOpenModal } = args
+  const { t } = useTranslation()
+  const { openModal, setOpenModal, studentId } = args
 
   const OnYes = () => {
     setOpenModal(false)
@@ -11,20 +14,33 @@ const LearningStyleModal = (args) => {
   }
 
   const OnNo = () => {
-    setOpenModal(false)
+    const newLearningStyle = {
+      activist: 0,
+      reflector: 0,
+      theorist: 0,
+      pragmatist: 0,
+      studentId
+    }
+    postLearningStyle(newLearningStyle)
+      .then(() => {
+        setOpenModal(false)
+      })
+      .catch(() => {
+        setOpenModal(false)
+      })
   }
 
   return (
     <Modal isOpen={openModal} centered>
-      <ModalHeader>Learning Style</ModalHeader>
-      <ModalBody>Do you want do Learning Style Questionnaire?</ModalBody>
+      <ModalHeader>{t('learning_style_quest')}</ModalHeader>
+      <ModalBody>{t('learning_style_question')}</ModalBody>
       <ModalFooter>
         <div className="Modal-bottom" style={{ justifyContent: 'space-evenly' }}>
           <Button color="success" onClick={OnYes}>
-            Yes
+            {t('yes')}
           </Button>
           <Button color="danger" onClick={OnNo}>
-            No
+            {t('no')}
           </Button>
         </div>
       </ModalFooter>

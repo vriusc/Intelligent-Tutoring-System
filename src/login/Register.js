@@ -13,6 +13,7 @@ import {
 } from 'reactstrap'
 import { registerStudent } from '../lib/tutoring-client'
 import './Login.css'
+import { useTranslation } from 'react-i18next'
 
 const RegisterBtn = () => {
   const [newStudent, setNewStudent] = useState({ username: '', email: '', password: '' })
@@ -22,6 +23,8 @@ const RegisterBtn = () => {
   const [isUsernameValid, setIsUsernameValid] = useState(true)
   const [isEmailValid, setIsEmailValid] = useState(true)
   const [isPassValid, setIsPassValid] = useState(true)
+
+  const { t } = useTranslation()
 
   const toggle = () => setModal(!modal)
 
@@ -82,24 +85,24 @@ const RegisterBtn = () => {
   return (
     <>
       <Button color="secondary" block onClick={toggle}>
-        REGISTER
+        {t('register')}
       </Button>
       <Alert className="Success-register" color="success" isOpen={successRegister}>
-        Student registered successfully
+        {t('student_register_success')}
       </Alert>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Student registration</ModalHeader>
+        <ModalHeader toggle={toggle}>{t('student_registration')}</ModalHeader>
         <ModalBody>
           <Alert color="danger" isOpen={!!errorRegister} toggle={() => setErrorRegister('')}>
             {errorRegister}
           </Alert>
           <Form>
             <FormGroup>
-              <Label for="username">Username</Label>
+              <Label for="username">{t('username')}</Label>
               <Input
                 id="username"
                 name="username"
-                placeholder="Unique username"
+                placeholder={t('unique_username')}
                 value={newStudent.username}
                 onChange={(e) => setNewStudent({ ...newStudent, username: e.target.value })}
                 onBlur={(e) => usernameValidation(e.target.value)}
@@ -107,16 +110,16 @@ const RegisterBtn = () => {
               />
               {!isUsernameValid && (
                 <Alert color="danger" className="Register-validation">
-                  Enter a valid username, please.
+                  {t('enter_valid_username')}
                 </Alert>
               )}
             </FormGroup>
             <FormGroup>
-              <Label for="email">Email</Label>
+              <Label for="email">{t('email')}</Label>
               <Input
                 id="email"
                 name="email"
-                placeholder="Student email"
+                placeholder={t('student_email')}
                 type="email"
                 value={newStudent.email}
                 onChange={(e) => setNewStudent({ ...newStudent, email: e.target.value })}
@@ -125,16 +128,16 @@ const RegisterBtn = () => {
               />
               {!isEmailValid && (
                 <Alert color="danger" className="Register-validation">
-                  Enter a valid email, please.
+                  {t('enter_valid_email')}
                 </Alert>
               )}
             </FormGroup>
             <FormGroup>
-              <Label for="password">Password</Label>
+              <Label for="password">{t('password')}</Label>
               <Input
                 id="password"
                 name="password"
-                placeholder="Password"
+                placeholder={t('password')}
                 type="password"
                 value={newStudent.password}
                 onChange={(e) => setNewStudent({ ...newStudent, password: e.target.value })}
@@ -142,12 +145,12 @@ const RegisterBtn = () => {
               />
               {!isPassValid && (
                 <Alert color="warning" className="Register-validation">
-                  <p>Password needs:</p>
+                  <p>{`${t('password_need')}:`}</p>
                   <ul>
-                    <li>At least one lowercase letter.</li>
-                    <li>At least one uppercase letter.</li>
-                    <li>At least one digit.</li>
-                    <li>Minimum length of 8 characters.</li>
+                    <li>{t('one_lowercase')}</li>
+                    <li>{t('one_uppercase')}</li>
+                    <li>{t('one_digit')}</li>
+                    <li>{t('min_8_char')}</li>
                   </ul>
                 </Alert>
               )}
@@ -156,10 +159,10 @@ const RegisterBtn = () => {
         </ModalBody>
         <ModalFooter>
           <Button disabled={disableButton()} onClick={handleRegister}>
-            Register
+            {t('register_low')}
           </Button>
           <Button outline onClick={handleCancel}>
-            Cancel
+            {t('cancel')}
           </Button>
         </ModalFooter>
       </Modal>

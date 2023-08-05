@@ -1,6 +1,7 @@
 import './Unit.css'
 import { Navigate, useLoaderData, useNavigate } from 'react-router-dom'
 import {
+  getAllSubjects,
   getLearningStyle,
   getOptions,
   getQuestionsByUnitId,
@@ -15,6 +16,7 @@ import YoutubePlater from './YoutubePlayer'
 import { Badge, Button } from 'reactstrap'
 import Question from '../question/Question'
 import ScoreModal from './ScoreModal'
+import { useTranslation } from 'react-i18next'
 
 export async function loader({ params }) {
   const unit = await getUnitById(params.unitId)
@@ -36,8 +38,10 @@ const Unit = () => {
   const [finished, setFinished] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const [learningStyle, setLearningStyle] = useState({})
+  const [subject, setSubject] = useState({})
 
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { data } = useLoaderData().unit
   const studentSubjectId = useLoaderData().studentSubjectId
 
@@ -46,14 +50,16 @@ const Unit = () => {
       getStudent(studentId),
       getOptions({ size: 1000 }),
       getStudentUnit({ studentId, unitId: data.unitId }),
-      getLearningStyle({ studentId })
+      getLearningStyle({ studentId }),
+      getAllSubjects({ subjectId: data.subjectId })
     ]).then((response) => {
-      console.log('Student, Options, Student-unit, LearningStyle', response)
+      console.log('Student, Options, Student-unit, LearningStyle, Subject', response)
       console.log('Unit', data)
       settingStudents(response[0])
       settingOptions(response[1])
       settingStudentUnit(response[2])
       settingLearningStyle(response[3])
+      settingSubject(response[4])
     })
   }, [studentId])
 
@@ -87,6 +93,13 @@ const Unit = () => {
       setFinished(content[0].isfinished === 1)
     } else {
       setStudentUnit({ studentId, unitId: data.unitId, isfinished: 0 })
+    }
+  }
+
+  const settingSubject = (response) => {
+    const { content } = response.data
+    if (content && content.length > 0) {
+      setSubject(content[0])
     }
   }
 
@@ -173,7 +186,7 @@ const Unit = () => {
   const lastAnswerReview = () => {
     const newStudentUnit = {
       ...studentUnit,
-      isfinished: answersList.some((answer) => !answer.isCorrect) ? 0 : 1
+      isfinished: getScore() < 8 ? 0 : 1
     }
     setStudentUnit(newStudentUnit)
     setOpenModal(true)
@@ -182,11 +195,11 @@ const Unit = () => {
   const settingFeedback = () => {
     const { username } = student
     const { activist, reflector, theorist, pragmatist } = learningStyle
-
     return {
       username,
       test_score: 0,
       unit_description: data.text_description || '',
+      subject: subject.subjectName,
       activist: activist.toString(),
       reflector: reflector.toString(),
       theorist: theorist.toString(),
@@ -199,9 +212,24 @@ const Unit = () => {
 
     return {
       username,
-      unit: data.unitId.toString(),
+      unit: data.unitName,
       unit_description: data.description
     }
+  }
+
+  const settingQuestOptions = () => {
+    console.log('May help', answersList)
+    const questOpt = []
+    questions.forEach((quest) => {
+      const { questionOrder, question, description, questionId } = quest.questions
+      questOpt.push({
+        questionOrder,
+        question,
+        description,
+        options: myOptions(questOptions, questionId)
+      })
+    })
+    return questOpt
   }
 
   const goNext = () => {
@@ -220,11 +248,11 @@ const Unit = () => {
         <div className="Unit Unit-flex">
           <div className="Unit-title mb-4">
             <Button color="info" onClick={() => goBack()}>
-              Back to Unit list
+              {t('back_unit_list')}
             </Button>
-            <h3>Unit Lesson</h3>
+            <h3>{t('unit_lesson')}</h3>
           </div>
-          <h5>Description</h5>
+          <h5>{t('description')}</h5>
           <p>{data.description}</p>
           <div className="Unit-video">
             {/* <iframe width="420" height="315" src={data.materials_path}></iframe> */}
@@ -236,13 +264,13 @@ const Unit = () => {
             hidden={showQuestions}
             onClick={() => goToQuestions()}
           >
-            Go to questions
+            {t('go_to_questions')}
           </Button>
           {showQuestions && (
             <>
               {questions.length > 0 && (
                 <h4 className="mt-5" style={{ alignSelf: 'center' }}>
-                  Questions
+                  {t('questions')}
                 </h4>
               )}
               {data.text && (
@@ -266,13 +294,13 @@ const Unit = () => {
               ))}
               {questions.length === 0 && (
                 <h3 style={{ alignSelf: 'center', marginTop: '2em' }}>
-                  <Badge color="info">Sorry we are creating the questions for this unit</Badge>
+                  <Badge color="info">{t('no_questions_in_unit')}</Badge>
                 </h3>
               )}
               <div className="Btn-row-unit">
                 {onReview && (
                   <Button className="Unit-btn" color="danger" onClick={() => resetQuestions()}>
-                    Restart
+                    {t('restart')}
                   </Button>
                 )}
                 {!onReview && (
@@ -282,7 +310,7 @@ const Unit = () => {
                     disabled={questions.length === 0}
                     onClick={() => reviewQuestions()}
                   >
-                    Submit
+                    {t('submit')}
                   </Button>
                 )}
               </div>
@@ -296,6 +324,7 @@ const Unit = () => {
                   onReset={closeModal}
                   onNext={goNext}
                   feedback={settingFeedback()}
+                  questionOptions={settingQuestOptions()}
                 />
               )}
             </>

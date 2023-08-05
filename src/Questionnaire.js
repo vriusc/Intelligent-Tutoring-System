@@ -10,9 +10,11 @@ import {
 } from './lib/tutoring-client'
 import { getLearningQuestionnaire } from './lib/local-client'
 import { Alert, Button, Input, Label } from 'reactstrap'
+import { useTranslation } from 'react-i18next'
 
 const LearningQuestion = (args) => {
   const { question: quest, questionnaire, setQuestionare } = args
+  const { t } = useTranslation()
 
   const handleRadioBtn = (event) => {
     const newQuestionnaire = questionnaire.map((searchQuest) => {
@@ -35,7 +37,7 @@ const LearningQuestion = (args) => {
             checked={quest.answer === 'agree'}
             onChange={handleRadioBtn}
           />
-          <span style={{ marginLeft: '5px' }}>Agree</span>
+          <span style={{ marginLeft: '5px' }}>{t('agree')}</span>
         </Label>
         <Label>
           <Input
@@ -45,7 +47,7 @@ const LearningQuestion = (args) => {
             checked={quest.answer === 'disagree'}
             onChange={handleRadioBtn}
           />
-          <span style={{ marginLeft: '5px' }}>Disagree</span>
+          <span style={{ marginLeft: '5px' }}>{t('disagree')}</span>
         </Label>
       </div>
     </div>
@@ -55,6 +57,7 @@ const LearningQuestion = (args) => {
 const Questionnaire = () => {
   const studentId = localStorage.getItem('studentId')
   const navigate = useNavigate()
+  const { t } = useTranslation()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -64,7 +67,6 @@ const Questionnaire = () => {
   const [learningStyle, setLearningStyle] = useState({})
   const [showAlert, setShowAlert] = useState(false)
 
-  const description = `There is no time limit to this questionnaire. It will probably take you 10-15 minutes. The accuracy of the results depends on how honest you can be. There are no right or wrong answers. If you agree more than you disagree with a statement choose the option agree. If you disagree more than you agree choose the option disagree. Be sure to mark each item with either agree or desagree. When you have completed the questionnaire, continue by selecting 'End Questionnaire'`
   const scoreList = {
     activist: {
       list: [2, 4, 6, 10, 17, 23, 24, 32, 34, 38, 40, 43, 45, 48, 58, 64, 71, 72, 74, 79],
@@ -182,8 +184,8 @@ const Questionnaire = () => {
       <Header user={student} subjectCount="1" />
       <div className="Container">
         <div className="Home">
-          <h2>Learning Styles Questionnaire</h2>
-          <p>{description}</p>
+          <h2>{t('learning_style_quest')}</h2>
+          <p>{t('learning_style_description')}</p>
           <div className="Quest-container">
             {questionnaire.length &&
               questionnaire.map((quest) => (
@@ -203,7 +205,7 @@ const Questionnaire = () => {
               isOpen={showAlert}
               style={{ alignSelf: 'center', margin: 0, padding: '8px 15px' }}
             >
-              Questionnaire updated successfully
+              {t('learning_style_update_success')}
             </Alert>
             <Button
               color="success"
@@ -211,7 +213,7 @@ const Questionnaire = () => {
               disabled={questionnaire.some((quest) => quest.answer === 'none')}
               onClick={() => onFinishQuestionnaire()}
             >
-              END QUESTIONNAIRE
+              {t('learning_style_finis_btn')}
             </Button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-// export const baseURL = 'http://tomato.vprofile.tomatokillerucd.com/gpt/reply/'
+// export const baseURL = 'http://a364101939e1e4c9fb080d08df4119cb-906c9105a3303ad2.elb.us-east-1.amazonaws.com/gpt'
+// export const baseURL = 'http://tomato.vprofile.tomatokillerucd.com/gpt'
 // export const baseURL = 'http://localhost:8082/api'
 export const baseURL = '/gpt'
 

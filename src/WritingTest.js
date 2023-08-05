@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Header from './element/Header'
 import { Button, Card, CardTitle, CardBody, CardText, FormGroup, Input, Label } from 'reactstrap'
 import { postGPTEssay } from './lib/gpt-client'
+import { useTranslation } from 'react-i18next'
 
 const WritingTest = () => {
   const studentId = localStorage.getItem('studentId')
@@ -12,7 +13,11 @@ const WritingTest = () => {
   }
 
   const [student, setStudent] = useState({})
-  const [essay, setEssay] = useState({ essay_topic: '', essay_content: '' })
+  const [essay, setEssay] = useState({
+    essay_topic: '',
+    essay_content: '',
+    essay_subject: 'English'
+  })
   const [gptAnswer, setGptAnswer] = useState('')
   const [learningStyle, setLearningStyle] = useState({})
   const [loadingFeedback, setLoadingFeedback] = useState(false)
@@ -20,6 +25,15 @@ const WritingTest = () => {
   const [feedbackError, setFeedbackError] = useState(false)
 
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
+
+  const subjectOptionsList = [
+    { code: 'en', value: 'English', text: 'English' },
+    { code: 'es', value: 'Spanish', text: 'Español' },
+    { code: 'zh', value: 'Mandarin', text: '国语 [國語] ' },
+    { code: 'fr', value: 'French', text: 'Français' },
+    { code: 'it', value: 'Italian', text: 'Italiano' }
+  ]
 
   useEffect(() => {
     Promise.all([getStudent(studentId), getLearningStyle({ studentId })]).then((response) => {
@@ -45,17 +59,22 @@ const WritingTest = () => {
     }
   }
 
+  const getLanguage = (code) => {
+    const languageOpt = subjectOptionsList.find((opt) => opt.code === code)
+    return languageOpt.value
+  }
+
   const submitEssay = () => {
     const { username } = student
     const { activist, reflector, theorist, pragmatist } = learningStyle
     const params = {
       ...essay,
       username: username,
-      essay_subject: 'English',
       activist: activist.toString(),
       reflector: reflector.toString(),
       theorist: theorist.toString(),
-      pragmatist: pragmatist.toString()
+      pragmatist: pragmatist.toString(),
+      user_prefer_language: getLanguage(i18n.language)
     }
     setGptAnswer('')
     setLoadingFeedback(true)
@@ -95,37 +114,53 @@ const WritingTest = () => {
 
   return (
     <>
-      <Header user={student} subjectCount={1} title="Writing Test" />
+      <Header user={student} subjectCount={1} title={t('writing_test')} />
       <div className="Course-container">
         <div className="Course Final-body">
           <div className="Final-test-title">
             <div style={{ display: 'flex' }}>
               <Button color="info" onClick={() => goBack()}>
-                Go to my Courses
+                {t('back_my_courses')}
               </Button>
               <Button style={{ marginLeft: '10px' }} color="info" onClick={() => goHome()}>
-                Find Courses
+                {t('find_a_course')}
               </Button>
             </div>
-            <h3>Writing Test</h3>
+            <h3>{t('writing_test')}</h3>
           </div>
-          <h5 style={{ marginTop: '10px' }}>
-            Write a small essay from any favorite topic that you have.
-          </h5>
+          <h5 style={{ marginTop: '10px' }}>{t('writing_test_description')}</h5>
           {!onFeedback && (
             <Form>
+              <div className="Course-body">
+                <FormGroup style={{ flex: 2, marginRight: '5px' }}>
+                  <Label for="essay_topic">{`${t('topic')}:`}</Label>
+                  <Input
+                    id="essay_topic"
+                    name="essay_topic"
+                    placeholder={t('essay_topic')}
+                    value={essay.essay_topic}
+                    onChange={(e) => setEssay({ ...essay, essay_topic: e.target.value })}
+                  />
+                </FormGroup>
+                <FormGroup style={{ flex: 1, marginLeft: '5px' }}>
+                  <Label for="essay_subject">{`${t('subject')}:`}</Label>
+                  <Input
+                    id="essay_subject"
+                    name="essay_subject"
+                    type="select"
+                    value={essay.essay_subject}
+                    onChange={(e) => setEssay({ ...essay, essay_subject: e.target.value })}
+                  >
+                    {subjectOptionsList.map((subOption, index) => (
+                      <option key={index} value={subOption.value}>
+                        {subOption.text}
+                      </option>
+                    ))}
+                  </Input>
+                </FormGroup>
+              </div>
               <FormGroup>
-                <Label for="essay_topic">Topic:</Label>
-                <Input
-                  id="essay_topic"
-                  name="essay_topic"
-                  placeholder="Essay Topic"
-                  value={essay.essay_topic}
-                  onChange={(e) => setEssay({ ...essay, essay_topic: e.target.value })}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="essay_content">Essay:</Label>
+                <Label for="essay_content">{`${t('essay')}:`}</Label>
                 <Input
                   id="essay_content"
                   name="essay_content"
@@ -141,11 +176,11 @@ const WritingTest = () => {
             <Card color="light" style={{ marginTop: '1em' }}>
               <CardBody>
                 <CardTitle tag="h5">Feedback</CardTitle>
-                {loadingFeedback && <CardText>Loading feedback...</CardText>}
+                {loadingFeedback && <CardText>{t('loading_feedback')}</CardText>}
                 {!loadingFeedback && gptAnswer && (
                   <CardText dangerouslySetInnerHTML={{ __html: gptAnswer }} />
                 )}
-                {!loadingFeedback && feedbackError && <CardText>Something went wrong</CardText>}
+                {!loadingFeedback && feedbackError && <CardText>{t('error_feedback')}</CardText>}
               </CardBody>
             </Card>
           )}
@@ -157,7 +192,7 @@ const WritingTest = () => {
                 onClick={submitEssay}
                 disabled={!isComplete()}
               >
-                Submit
+                {t('submit')}
               </Button>
             )}
             {onFeedback && (
@@ -167,7 +202,7 @@ const WritingTest = () => {
                 onClick={tryAgain}
                 disabled={loadingFeedback}
               >
-                Try Again
+                {t('try_again')}
               </Button>
             )}
           </div>

@@ -5,11 +5,15 @@ import { useState } from 'react'
 import { getSubjectsById, loginStudent } from '../lib/tutoring-client'
 import { useNavigate } from 'react-router-dom'
 import RegisterBtn from './Register'
+import LanguageSelector from '../Language'
+import { useTranslation } from 'react-i18next'
 
 const Login = () => {
   const [loginForm, setLoginForm] = useState({ usernameOrEmail: '', password: '' })
   const [errorMessage, setErrorMessage] = useState()
+
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const handleLogIn = () => {
     const result = loginStudent(loginForm)
@@ -51,7 +55,7 @@ const Login = () => {
           id="username"
           name="usernameOrEmail"
           type="text"
-          placeholder="Username or Email"
+          placeholder={t('username_or_email')}
           value={loginForm.email}
           onChange={(e) => setLoginForm({ ...loginForm, usernameOrEmail: e.target.value })}
         />
@@ -60,14 +64,17 @@ const Login = () => {
           id="passwrod"
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder={t('password')}
           value={loginForm.password}
           onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
         />
         <Button color="secondary" block onClick={handleLogIn}>
-          LOG IN
+          {t('log_in')}
         </Button>
         <RegisterBtn />
+        <div style={{ marginTop: '15px' }}>
+          <LanguageSelector />
+        </div>
       </div>
     </div>
   )

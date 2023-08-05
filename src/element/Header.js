@@ -21,11 +21,14 @@ import {
   NavbarToggler
 } from 'reactstrap'
 import { updatePassword } from '../lib/tutoring-client'
+import { useTranslation } from 'react-i18next'
+import LanguageSelector from '../Language'
 
 const Header = (student) => {
   const { user, subjectCount, title } = student
-  const [collapsed, setCollapsed] = useState(true)
   const navigate = useNavigate()
+  const { t } = useTranslation()
+  const [collapsed, setCollapsed] = useState(true)
   const [resetPass, setResetPass] = useState(false)
   const [updatePass, setUpdatePass] = useState({
     username: '',
@@ -79,50 +82,53 @@ const Header = (student) => {
           className={title ? 'me-2' : 'me-auto'}
           href={subjectCount > 0 ? '/courses' : '/'}
         >
-          Intelligent Tutoring System
+          {t('its_title')}
         </NavbarBrand>
         <NavbarText className="me-auto" hidden={!title}>{` - ${title}`}</NavbarText>
-        <NavbarText className="me-2">Hello {user.username}</NavbarText>
+        <NavbarText className="me-2">{`${t('hello')} ${user.username}`}</NavbarText>
+        <NavbarText className="me-3">
+          <LanguageSelector />
+        </NavbarText>
         <NavbarToggler className="me-2" onClick={toggleNavbar} />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem hidden={subjectCount === 0 || subjectCount === null}>
               <NavLink href="#" onClick={() => navigate('/courses')}>
-                My Course
+                {t('my_courses')}
               </NavLink>
             </NavItem>
-            <NavItem hidden={subjectCount === 0 || subjectCount === null}>
+            <NavItem>
               <NavLink href="#" onClick={() => navigate('/writingTest')}>
-                Writing Test
+                {t('writing_test')}
               </NavLink>
             </NavItem>
             <NavItem hidden={subjectCount === 0 || subjectCount === null}>
               <NavLink href="#" onClick={() => navigate('/questionnaire')}>
-                Learning Style Questionnaire
+                {t('learning_style_quest')}
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={handleResetPass}>
-                Reset Password
+                {t('reset_password')}
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="#" onClick={handleLogout}>
-                LOG OUT
+                {t('log_out')}
               </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
       <Modal isOpen={resetPass} toggle={handleModalCancel}>
-        <ModalHeader toggle={handleModalCancel}>Reset password</ModalHeader>
+        <ModalHeader toggle={handleModalCancel}>{t('reset_password')}</ModalHeader>
         <ModalBody>
           <Alert color="danger" isOpen={!!updateError} toggle={() => setUpdateError('')}>
             {updateError}
           </Alert>
           <Form>
             <FormGroup>
-              <Label for="resetUsername">Username</Label>
+              <Label for="resetUsername">{t('username')}</Label>
               <Input
                 id="resetUsername"
                 name="username"
@@ -132,7 +138,7 @@ const Header = (student) => {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="resetEmail">Email</Label>
+              <Label for="resetEmail">{t('email')}</Label>
               <Input
                 id="resetEmail"
                 name="email"
@@ -143,22 +149,22 @@ const Header = (student) => {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="currentPassword">Current password</Label>
+              <Label for="currentPassword">{t('current_password')}</Label>
               <Input
                 id="currentPassword"
                 name="password"
-                placeholder="Current password"
+                placeholder={t('current_password')}
                 type="password"
                 value={updatePass.currentPassword}
                 onChange={(e) => setUpdatePass({ ...updatePass, currentPassword: e.target.value })}
               />
             </FormGroup>
             <FormGroup>
-              <Label for="newPassword">New password</Label>
+              <Label for="newPassword">{t('new_password')}</Label>
               <Input
                 id="newPassword"
                 name="password"
-                placeholder="New password"
+                placeholder={t('new_password')}
                 type="password"
                 value={updatePass.newPassword}
                 onChange={(e) => setUpdatePass({ ...updatePass, newPassword: e.target.value })}
@@ -167,9 +173,9 @@ const Header = (student) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={handleUpdate}>Update password</Button>
+          <Button onClick={handleUpdate}>{t('update_password')}</Button>
           <Button outline onClick={handleModalCancel}>
-            Cancel
+            {t('cancel')}
           </Button>
         </ModalFooter>
       </Modal>

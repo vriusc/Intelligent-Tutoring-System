@@ -1,4 +1,15 @@
 {
   "its_title": "Sistema de tutoria Inteligente",
-  "hello": "Hola"
+  "hello": "Hola",
+  "my_courses": "Mis Cursos",
+  "writing_test": "Examen Escrito",
+  "learning_style_quest": "Questionario de estilo de aprendizaje",
+  "reset_password": "Restablecer Contraseña",
+  "log_out": "CERRAR SESION",
+  "username": "Nombre de usuario",
+  "email": "Correo electronico",
+  "current_password": "Contraseña actual",
+  "new_password": "Nueva Contraseña",
+  "update_password": "Actualiza Contraseña",
+  "cancel": "Cancelar"
 }

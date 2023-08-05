@@ -94,5 +94,6 @@
   "result": "Result",
   "option": "Option",
   "explanation": "Explanation",
-  "subject": "Subject"
+  "subject": "Subject",
+  "score": "Score"
 }

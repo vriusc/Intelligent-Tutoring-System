@@ -93,7 +93,7 @@ const ScoreModal = (args) => {
 
   return (
     <Modal isOpen={isOpen} size="lg" centered>
-      <ModalHeader>{loadingFeedback ? 'Score' : `Score: ${score}`}</ModalHeader>
+      <ModalHeader>{loadingFeedback ? t('score') : `${t('score')}: ${score}`}</ModalHeader>
       <ModalBody>
         {score === 10 && !loadingFeedback && <Alert color="success">{t('congrats')}</Alert>}
         {loadingFeedback && <Alert color="dark">{t('loading_score')}</Alert>}

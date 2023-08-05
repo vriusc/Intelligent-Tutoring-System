@@ -59,9 +59,9 @@ const HistoryTable = (args) => {
       <Table dark>
         <thead>
           <tr>
-            <th>Result</th>
-            <th>Option</th>
-            <th>Explanation</th>
+            <th>{t('result')}</th>
+            <th>{t('option')}</th>
+            <th>{t('explanation')}</th>
             {/* <th></th> */}
           </tr>
         </thead>

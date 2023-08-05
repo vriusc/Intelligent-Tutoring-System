@@ -76,7 +76,7 @@ const CoursesList = () => {
       <div className="Course-container">
         <div className="Course">
           <div className="Course-title">
-            <h3>My Courses list</h3>
+            <h3>{t('my_course_list')}</h3>
             <Button color="info" onClick={() => navigate('/')}>
               {t('find_a_course')}
             </Button>

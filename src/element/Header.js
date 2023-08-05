@@ -153,7 +153,7 @@ const Header = (student) => {
               <Input
                 id="currentPassword"
                 name="password"
-                placeholder="Current password"
+                placeholder={t('current_password')}
                 type="password"
                 value={updatePass.currentPassword}
                 onChange={(e) => setUpdatePass({ ...updatePass, currentPassword: e.target.value })}
@@ -164,7 +164,7 @@ const Header = (student) => {
               <Input
                 id="newPassword"
                 name="password"
-                placeholder="New password"
+                placeholder={t('new_password')}
                 type="password"
                 value={updatePass.newPassword}
                 onChange={(e) => setUpdatePass({ ...updatePass, newPassword: e.target.value })}

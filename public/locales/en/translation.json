@@ -36,6 +36,7 @@
   "disagree": "Disagree",
   "back_my_courses": "Back to My Courses",
   "find_a_course": "Find a Course",
+  "my_course_list": "My Courses list",
   "writing_test_description": "Write a small essay from any favorite topic that you have.",
   "topic": "Topic",
   "essay_topic": "Essay Topic",
@@ -88,5 +89,9 @@
   "keep_practice": "Keep practicing",
   "correct_answer_upper": "CORRECT ANSWER",
   "incorrect_answer_upper": "INCORRECT ANSWER",
-  "all_good": "All good"
+  "all_good": "All good",
+  "table": "Table",
+  "result": "Result",
+  "option": "Option",
+  "explanation": "Explanation"
 }

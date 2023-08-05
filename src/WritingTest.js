@@ -13,7 +13,11 @@ const WritingTest = () => {
   }
 
   const [student, setStudent] = useState({})
-  const [essay, setEssay] = useState({ essay_topic: '', essay_content: '' })
+  const [essay, setEssay] = useState({
+    essay_topic: '',
+    essay_content: '',
+    essay_subject: 'English'
+  })
   const [gptAnswer, setGptAnswer] = useState('')
   const [learningStyle, setLearningStyle] = useState({})
   const [loadingFeedback, setLoadingFeedback] = useState(false)
@@ -21,7 +25,15 @@ const WritingTest = () => {
   const [feedbackError, setFeedbackError] = useState(false)
 
   const navigate = useNavigate()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
+  const subjectOptionsList = [
+    { code: 'en', value: 'English', text: 'English' },
+    { code: 'es', value: 'Spanish', text: 'Español' },
+    { code: 'zh', value: 'Mandarin', text: '国语 [國語] ' },
+    { code: 'fr', value: 'French', text: 'Français' },
+    { code: 'it', value: 'Italian', text: 'Italiano' }
+  ]
 
   useEffect(() => {
     Promise.all([getStudent(studentId), getLearningStyle({ studentId })]).then((response) => {
@@ -47,17 +59,22 @@ const WritingTest = () => {
     }
   }
 
+  const getLanguage = (code) => {
+    const languageOpt = subjectOptionsList.find((opt) => opt.code === code)
+    return languageOpt.value
+  }
+
   const submitEssay = () => {
     const { username } = student
     const { activist, reflector, theorist, pragmatist } = learningStyle
     const params = {
       ...essay,
       username: username,
-      essay_subject: 'English',
       activist: activist.toString(),
       reflector: reflector.toString(),
       theorist: theorist.toString(),
-      pragmatist: pragmatist.toString()
+      pragmatist: pragmatist.toString(),
+      user_prefer_language: getLanguage(i18n.language)
     }
     setGptAnswer('')
     setLoadingFeedback(true)
@@ -114,16 +131,34 @@ const WritingTest = () => {
           <h5 style={{ marginTop: '10px' }}>{t('writing_test_description')}</h5>
           {!onFeedback && (
             <Form>
-              <FormGroup>
-                <Label for="essay_topic">{`${t('topic')}:`}</Label>
-                <Input
-                  id="essay_topic"
-                  name="essay_topic"
-                  placeholder={t('essay_topic')}
-                  value={essay.essay_topic}
-                  onChange={(e) => setEssay({ ...essay, essay_topic: e.target.value })}
-                />
-              </FormGroup>
+              <div className="Course-body">
+                <FormGroup style={{ flex: 2, marginRight: '5px' }}>
+                  <Label for="essay_topic">{`${t('topic')}:`}</Label>
+                  <Input
+                    id="essay_topic"
+                    name="essay_topic"
+                    placeholder={t('essay_topic')}
+                    value={essay.essay_topic}
+                    onChange={(e) => setEssay({ ...essay, essay_topic: e.target.value })}
+                  />
+                </FormGroup>
+                <FormGroup style={{ flex: 1, marginLeft: '5px' }}>
+                  <Label for="essay_subject">{`${t('subject')}:`}</Label>
+                  <Input
+                    id="essay_subject"
+                    name="essay_subject"
+                    type="select"
+                    value={essay.essay_subject}
+                    onChange={(e) => setEssay({ ...essay, essay_subject: e.target.value })}
+                  >
+                    {subjectOptionsList.map((subOption, index) => (
+                      <option key={index} value={subOption.value}>
+                        {subOption.text}
+                      </option>
+                    ))}
+                  </Input>
+                </FormGroup>
+              </div>
               <FormGroup>
                 <Label for="essay_content">{`${t('essay')}:`}</Label>
                 <Input

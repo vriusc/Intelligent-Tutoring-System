@@ -2,9 +2,11 @@ import { Alert, Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'react
 import { useEffect, useState } from 'react'
 import { postStudentUnit, putStudentUnit } from '../lib/tutoring-client'
 import { postGPTFeedback } from '../lib/gpt-client'
+import { useTranslation } from 'react-i18next'
 
 const ScoreModal = (args) => {
   const { score, isOpen, finished, studentUnit, setStudentUnit, onReset, onNext, feedback } = args
+  const { t } = useTranslation()
 
   const [loadingFeedback, setLoadingFeedback] = useState(true)
   const [gptFeedback, setGPTFeedback] = useState('')
@@ -50,8 +52,8 @@ const ScoreModal = (args) => {
     <Modal isOpen={isOpen} size="lg" centered>
       <ModalHeader>{loadingFeedback ? 'Score' : `Score: ${score}`}</ModalHeader>
       <ModalBody>
-        {score === 10 && !loadingFeedback && <Alert color="success">Congratulations!!</Alert>}
-        {loadingFeedback && <Alert color="dark">Loading score...</Alert>}
+        {score === 10 && !loadingFeedback && <Alert color="success">{t('congrats')}</Alert>}
+        {loadingFeedback && <Alert color="dark">{t('loading_score')}</Alert>}
         {!loadingFeedback && gptFeedback && (
           <Alert color={score >= 8 ? 'light' : score >= 4 ? 'warning' : 'danger'}>
             {gptFeedback}
@@ -62,7 +64,7 @@ const ScoreModal = (args) => {
             <Alert color={score >= 8 ? 'light' : score >= 4 ? 'warning' : 'danger'}>
               {`Your score is ${score}`}
             </Alert>
-            <Alert color="danger">No feedback available</Alert>
+            <Alert color="danger">${'no_feedback'}</Alert>
           </>
         )}
       </ModalBody>
@@ -70,17 +72,17 @@ const ScoreModal = (args) => {
         <div className="Modal-bottom">
           {loadingFeedback && (
             <Button color="info" disabled={true}>
-              Loading...
+              {t('loading')}
             </Button>
           )}
           {!loadingFeedback && studentUnit.isfinished === 1 && (
             <Button color="success" onClick={() => onNext()} disabled={loadingFeedback}>
-              Next Unit
+              {t('next_unit')}
             </Button>
           )}
           {!loadingFeedback && studentUnit.isfinished !== 1 && (
             <Button color="warning" onClick={() => onReset()} disabled={loadingFeedback}>
-              Try again
+              {t('try_again')}
             </Button>
           )}
         </div>

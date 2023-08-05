@@ -12,6 +12,7 @@ import MultiQuestPictureText from './MultiQuestPictureText'
 import MultiQuestAudioText from './MultiQuestAudioText'
 import MultiQuestAudioPicture from './MultiQuestAudioPicture'
 import GPTQuestionModal from './QuestionModal'
+import { useTranslation } from 'react-i18next'
 
 const Question = (args) => {
   const {
@@ -28,6 +29,8 @@ const Question = (args) => {
     subjectId
   } = args
   const { questions: quest } = question
+  const { t } = useTranslation()
+
   const [optSelected, setOptSelected] = useState(null)
   const [optMultple, setOptMultple] = useState([])
   const [isCorrect, setIsCorrect] = useState(2)
@@ -107,7 +110,7 @@ const Question = (args) => {
         {`${number}. ${quest.question}`}
         {review && (
           <Badge style={{ marginLeft: '5px' }} color="info" href="#" onClick={() => openQuestGPT()}>
-            Ask me
+            {t('ask_me')}
           </Badge>
         )}
       </h5>
@@ -216,9 +219,9 @@ const Question = (args) => {
         />
       )}
       {review && isCorrect == 0 && (
-        <Alert color="danger">{quest.explanation || errorText || 'Your answer is incorrect'}</Alert>
+        <Alert color="danger">{quest.explanation || errorText || t('incorrect_answer')}</Alert>
       )}
-      {review && isCorrect == 1 && <Alert>Correct Answer!</Alert>}
+      {review && isCorrect == 1 && <Alert>{t('correct_answer')}</Alert>}
     </div>
   )
 }

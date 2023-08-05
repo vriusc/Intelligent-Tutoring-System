@@ -11,5 +11,22 @@
   "current_password": "Contraseña actual",
   "new_password": "Nueva Contraseña",
   "update_password": "Actualiza Contraseña",
-  "cancel": "Cancelar"
+  "cancel": "Cancelar",
+  "username_or_email": "Nombre de usuario o Correo electronico",
+  "password": "Contraseña",
+  "log_in": "INICIAR SESION",
+  "register": "REGISTRO",
+  "register_low": "Registro",
+  "student_register_success": "Estudiante registrado exitosamente",
+  "student_registration": "Registo de estudiante",
+  "unique_username": "Nombre de usuario unico",
+  "enter_valid_username": "Introduzca un nombre de usuario válido, por favor.",
+  "student_email": "Correo electronico estudiantil",
+  "enter_valid_email": "Introduzca un correo electronico válido, por favor.",
+  "password_need": "La contraseña necesita",
+
+  "one_lowercase": "Al menos una letra minúscula.",
+  "one_uppercase": "La menos una legra mayuscula.",
+  "one_digit": "Al menos un digito.",
+  "min_8_char": "Un mínimo de 8 caracteres."
 }

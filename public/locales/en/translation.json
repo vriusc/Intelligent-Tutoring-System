@@ -12,5 +12,20 @@
   "new_password": "New password",
   "update_password": "Update password",
   "cancel": "Cancel",
-  "username_or_email": "Username or Email"
+  "username_or_email": "Username or Email",
+  "password": "Password",
+  "log_in": "LOG IN",
+  "register": "REGISTER",
+  "register_low": "Register",
+  "student_register_success": "Student registered successfully",
+  "student_registration": "Student registration",
+  "unique_username": "Unique username",
+  "enter_valid_username": "Enter a valid username, please.",
+  "student_email": "Student email",
+  "enter_valid_email": "Enter a valid email, please.",
+  "password_need": "Password needs",
+  "one_lowercase": "At least one lowercase letter.",
+  "one_uppercase": "At least one uppercase letter.",
+  "one_digit": "At least one digit.",
+  "min_8_char": "Minimum length of 8 characters."
 }

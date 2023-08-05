@@ -22,6 +22,7 @@ import {
 } from 'reactstrap'
 import { updatePassword } from '../lib/tutoring-client'
 import { useTranslation } from 'react-i18next'
+import LanguageSelector from '../Language'
 
 const Header = (student) => {
   const { user, subjectCount, title } = student
@@ -85,12 +86,15 @@ const Header = (student) => {
         </NavbarBrand>
         <NavbarText className="me-auto" hidden={!title}>{` - ${title}`}</NavbarText>
         <NavbarText className="me-2">{`${t('hello')} ${user.username}`}</NavbarText>
+        <NavbarText className="me-3">
+          <LanguageSelector />
+        </NavbarText>
         <NavbarToggler className="me-2" onClick={toggleNavbar} />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem hidden={subjectCount === 0 || subjectCount === null}>
               <NavLink href="#" onClick={() => navigate('/courses')}>
-                {t('my_course')}
+                {t('my_courses')}
               </NavLink>
             </NavItem>
             <NavItem hidden={subjectCount === 0 || subjectCount === null}>

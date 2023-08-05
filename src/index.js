@@ -8,24 +8,6 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-http-backend'
 
-// const resources = [{
-//   en: {
-//     translation: '/locales/en/translation.json'
-//   },
-//   es: {
-//     translation: '/locales/es/translation.json'
-//   },
-//   zh: {
-//     translation: '/locales/zh/translation.json'
-//   },
-//   fr: {
-//     translation: '/locales/fr/translation.json'
-//   },
-//   it: {
-//     translation: '/locales/it/translation.json'
-//   }
-// }]
-
 i18n
   .use(Backend)
   .use(initReactI18next)

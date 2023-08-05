@@ -1,10 +1,29 @@
 import './Question.css'
 import audiExample from '../assets/question2_audio.mp3'
 import { Input, Label } from 'reactstrap'
+import { useEffect, useState } from 'react'
 
 const MultiQuestAudioText = (args) => {
   const { audio, options, handleCheckBoxBtn, optSelected, disabled } = args
   const isYouTube = audio.search('youtube') >= 0
+  const [newOptions, setNewOptions] = useState([])
+
+  useEffect(() => {
+    setNewOptions(shuffleOptions(options))
+  }, [])
+
+  const shuffleOptions = (list) => {
+    let newList = []
+    list.forEach((item) => {
+      const flag = Math.floor(Math.random() * 10) + 1
+      if (flag % 2 === 0) {
+        newList = [...newList, item]
+      } else {
+        newList = [item, ...newList]
+      }
+    })
+    return newList
+  }
 
   return (
     <>
@@ -22,7 +41,7 @@ const MultiQuestAudioText = (args) => {
         </audio>
       )}
       <div className="Options-list">
-        {options.map((currentOptions) => (
+        {newOptions.map((currentOptions) => (
           <div key={currentOptions.optionId}>
             <Input
               type="checkbox"

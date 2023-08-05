@@ -304,6 +304,27 @@ INSERT INTO test.questions (question_id, question, question_type_id, picture_pat
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (33, 'Who cannot benefit from this special deal?', 1, null, null, null, 3, 'B', 'Who cannot benefit from this special deal?');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (34, 'Choose the picture of sunglasses.', 2, null, null, null, 4, 'B', 'Choose the picture of sunglasses.');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (35, 'Bob purchased a subscription to this on 3rd Oct, 2004. Which date is the subcription no longer valid?', 1, null, null, null, 5, 'B', 'The subscription starts on 3rd October and is valid for 12 months. Give me the expiration date and the order of month in a year.');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (36, '"Table" in Spanish', 1, null, null, null, 1, 'A table in Spanish is called "mesa."', 'Table in Spanish?
+A) Metal
+B) Mesa
+C) Meta
+D) Melodía
+and explain why');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (37, 'Choose what you hear.', 4, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/spanish_g.mp3', 2, 'Audio of "g" in spanish.', 'It\'s an audio of "g" in spanish. ');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (38, 'What\'s in this picture?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/bread.jpeg', null, null, 3, 'This is a picture of "bread", "bread" in Spanish is "pan"', '"Choose \'bread\' in Spanish":
+
+A) Pan
+B) Peso
+C) Perro
+D) Piso
+and explain why');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (39, 'Choose what you hear.', 5, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/spanish_ll.mp3', 4, 'Audio of "LL" in spanish.', 'It\'s an audio of "ll" in spanish. ');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (40, 'Choose what you hear.', 4, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/spanish_ch.mp3', 5, 'Audio of "ch" in spanish.', 'It\'s an audio of "ch" in spanish. ');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (41, 'What color is shown in the picture below?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/yellow.png', null, null, 1, '"yellow"', 'It\'s a yellow picture.');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (42, 'What color snow is?', 1, null, null, null, 2, '"white"', 'What color snow is?');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (43, 'Choose what you hear.', 5, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/pink.mp3', 3, '"pink"', 'The audio plays "pink".');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (44, 'Choose what you hear.', 10, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/blue_purple.mp3', 4, '"blue" "purple"', 'The audio plays "red and blue make purple".');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (45, 'Choose the option(s) that describes the picture.', 8, 'https://tomatolearning.s3.amazonaws.com/picture/apple.png', null, null, 5, '"red" "apple" "green" "brown"', 'It\'s a picture of apple, there are red, green and brown color in the picture.');
 
 
 

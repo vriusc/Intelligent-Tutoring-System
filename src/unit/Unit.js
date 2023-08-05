@@ -186,7 +186,7 @@ const Unit = () => {
   const lastAnswerReview = () => {
     const newStudentUnit = {
       ...studentUnit,
-      isfinished: answersList.some((answer) => !answer.isCorrect) ? 0 : 1
+      isfinished: getScore() < 8 ? 0 : 1
     }
     setStudentUnit(newStudentUnit)
     setOpenModal(true)

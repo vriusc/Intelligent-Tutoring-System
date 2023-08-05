@@ -118,14 +118,14 @@ const ScoreModal = (args) => {
               {t('loading')}
             </Button>
           )}
-          {!loadingFeedback && studentUnit.isfinished === 1 && (
-            <Button color="success" onClick={() => onNext()} disabled={loadingFeedback}>
-              {t('next_unit')}
-            </Button>
-          )}
-          {!loadingFeedback && studentUnit.isfinished !== 1 && (
+          {!loadingFeedback && score <= 8 && (
             <Button color="warning" onClick={() => onReset()} disabled={loadingFeedback}>
               {t('try_again')}
+            </Button>
+          )}
+          {!loadingFeedback && score >= 8 && (
+            <Button color="success" onClick={() => onNext()} disabled={loadingFeedback}>
+              {t('next_unit')}
             </Button>
           )}
         </div>

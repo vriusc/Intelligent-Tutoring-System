@@ -4,7 +4,7 @@ import { Input, Label } from 'reactstrap'
 
 const MultiQuestAudioText = (args) => {
   const { audio, options, handleCheckBoxBtn, optSelected, disabled } = args
-  const isYouTube = audio.search('youtube')
+  const isYouTube = audio.search('youtube') >= 0
 
   return (
     <>

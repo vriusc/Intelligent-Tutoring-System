@@ -4,7 +4,7 @@ import audiExample from '../assets/question2_audio.mp3'
 
 const QuestionAudioPicture = (args) => {
   const { audio, options, handleRadioBtn, optSelected, disabled } = args
-  const isYouTube = audio.search('youtube')
+  const isYouTube = audio.search('youtube') >= 0
 
   const getName = (name) => {
     const splitName = name.split('/')

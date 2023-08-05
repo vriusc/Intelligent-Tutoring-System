@@ -201,7 +201,7 @@ const Unit = () => {
 
     return {
       username,
-      unit: data.unitId.toString(),
+      unit: data.unitName,
       unit_description: data.description
     }
   }

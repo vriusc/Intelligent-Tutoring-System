@@ -121,6 +121,7 @@ const Question = (args) => {
           question={quest}
           questModal={questModal}
           subjectId={subjectId}
+          options={options}
         />
       )}
       {quest.questionTypeId === 1 && (

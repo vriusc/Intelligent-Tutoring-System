@@ -14,10 +14,12 @@ import {
   CardTitle
 } from 'reactstrap'
 import LearningStyleModal from './LearningStyleModal'
+import { useTranslation } from 'react-i18next'
 
 const CoursesList = () => {
   const studentId = localStorage.getItem('studentId')
   const navigate = useNavigate()
+  const { t } = useTranslation()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -69,14 +71,14 @@ const CoursesList = () => {
 
   return (
     <>
-      <Header user={student} subjectCount={subjects.length} title="Courses" />
+      <Header user={student} subjectCount={subjects.length} title={t('my_courses')} />
       <LearningStyleModal openModal={openModal} setOpenModal={setOpenModal} />
       <div className="Course-container">
         <div className="Course">
           <div className="Course-title">
             <h3>My Courses list</h3>
             <Button color="info" onClick={() => navigate('/')}>
-              Find a course
+              {t('find_a_course')}
             </Button>
           </div>
           <div className="Course-body">
@@ -93,6 +95,7 @@ const CoursesList = () => {
 const CourseCard = (args) => {
   const { studentSubject } = args
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const goToCourse = (studentSubject) => {
     const { studentSubjectId } = studentSubject
@@ -101,7 +104,7 @@ const CourseCard = (args) => {
 
   const btnText = (studentSubject) => {
     const { progress } = studentSubject
-    return progress > 0 ? (progress === 100 ? 'REVIEW' : 'CONTINUE') : 'START'
+    return progress > 0 ? (progress === 100 ? t('review') : t('continue')) : t('start')
   }
 
   const progressColor = (studentSubject) => {
@@ -119,7 +122,7 @@ const CourseCard = (args) => {
       <CardBody className="Card-body">
         <div className="mb-3 mt-2">
           <CardSubtitle className="mb-2 text-muted" tag="h6">
-            Description
+            {t('description')}
           </CardSubtitle>
           <CardText>{studentSubject.subject.description}</CardText>
         </div>

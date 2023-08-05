@@ -9,10 +9,13 @@ import {
 } from '../lib/tutoring-client'
 import { useEffect, useState } from 'react'
 import { Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
+import { useTranslation } from 'react-i18next'
 
 const Home = () => {
   const studentId = localStorage.getItem('studentId')
   const navigate = useNavigate()
+  const { t } = useTranslation()
+
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -89,7 +92,7 @@ const Home = () => {
       <div className="Container">
         <div className="Home">
           <div className="Home-head">
-            <h2>What do you want to learn today?</h2>
+            <h2>{t('what_to_learn')}</h2>
             <div>
               {studentSubjectList.length > 1 && (
                 <Button
@@ -97,7 +100,7 @@ const Home = () => {
                   color="success"
                   onClick={() => goToCoursesList()}
                 >
-                  My Courses
+                  {t('my_courses')}
                 </Button>
               )}
             </div>
@@ -118,7 +121,7 @@ const Home = () => {
           )}
           {subjectSelected && (
             <>
-              <h2 style={{ paddingTop: '50px' }}>Which level do you want to start?</h2>
+              <h2 style={{ paddingTop: '50px' }}>{t('which_level_start')}</h2>
               <div className="Level-list">
                 {contentList.map((content) => {
                   if (content.subjectName === subjectSelected) {
@@ -129,9 +132,11 @@ const Home = () => {
                           <CardText>{content.description}</CardText>
                         </CardBody>
                         {isSubscribed(content) ? (
-                          <Button onClick={() => goToCourse(content)}>CONTINUE COURSE</Button>
+                          <Button onClick={() => goToCourse(content)}>
+                            {t('continue_course')}
+                          </Button>
                         ) : (
-                          <Button onClick={() => joinSubject(content)}>JOIN COURSE</Button>
+                          <Button onClick={() => joinSubject(content)}>{t('join_course')}</Button>
                         )}
                       </Card>
                     )

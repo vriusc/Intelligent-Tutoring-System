@@ -97,7 +97,7 @@ const Header = (student) => {
                 {t('my_courses')}
               </NavLink>
             </NavItem>
-            <NavItem hidden={subjectCount === 0 || subjectCount === null}>
+            <NavItem>
               <NavLink href="#" onClick={() => navigate('/writingTest')}>
                 {t('writing_test')}
               </NavLink>

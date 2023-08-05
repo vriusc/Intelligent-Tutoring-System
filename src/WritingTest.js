@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Header from './element/Header'
 import { Button, Card, CardTitle, CardBody, CardText, FormGroup, Input, Label } from 'reactstrap'
 import { postGPTEssay } from './lib/gpt-client'
+import { useTranslation } from 'react-i18next'
 
 const WritingTest = () => {
   const studentId = localStorage.getItem('studentId')
@@ -20,6 +21,7 @@ const WritingTest = () => {
   const [feedbackError, setFeedbackError] = useState(false)
 
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   useEffect(() => {
     Promise.all([getStudent(studentId), getLearningStyle({ studentId })]).then((response) => {
@@ -101,31 +103,29 @@ const WritingTest = () => {
           <div className="Final-test-title">
             <div style={{ display: 'flex' }}>
               <Button color="info" onClick={() => goBack()}>
-                Go to my Courses
+                {t('back_my_courses')}
               </Button>
               <Button style={{ marginLeft: '10px' }} color="info" onClick={() => goHome()}>
-                Find Courses
+                {t('find_a_course')}
               </Button>
             </div>
-            <h3>Writing Test</h3>
+            <h3>{t('writing_test')}</h3>
           </div>
-          <h5 style={{ marginTop: '10px' }}>
-            Write a small essay from any favorite topic that you have.
-          </h5>
+          <h5 style={{ marginTop: '10px' }}>{t('writing_test_description')}</h5>
           {!onFeedback && (
             <Form>
               <FormGroup>
-                <Label for="essay_topic">Topic:</Label>
+                <Label for="essay_topic">{`${t('topic')}:`}</Label>
                 <Input
                   id="essay_topic"
                   name="essay_topic"
-                  placeholder="Essay Topic"
+                  placeholder={t('essay_topic')}
                   value={essay.essay_topic}
                   onChange={(e) => setEssay({ ...essay, essay_topic: e.target.value })}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="essay_content">Essay:</Label>
+                <Label for="essay_content">{`${t('essay')}:`}</Label>
                 <Input
                   id="essay_content"
                   name="essay_content"
@@ -141,11 +141,11 @@ const WritingTest = () => {
             <Card color="light" style={{ marginTop: '1em' }}>
               <CardBody>
                 <CardTitle tag="h5">Feedback</CardTitle>
-                {loadingFeedback && <CardText>Loading feedback...</CardText>}
+                {loadingFeedback && <CardText>{t('loading_feedback')}</CardText>}
                 {!loadingFeedback && gptAnswer && (
                   <CardText dangerouslySetInnerHTML={{ __html: gptAnswer }} />
                 )}
-                {!loadingFeedback && feedbackError && <CardText>Something went wrong</CardText>}
+                {!loadingFeedback && feedbackError && <CardText>{t('error_feedback')}</CardText>}
               </CardBody>
             </Card>
           )}
@@ -157,7 +157,7 @@ const WritingTest = () => {
                 onClick={submitEssay}
                 disabled={!isComplete()}
               >
-                Submit
+                {t('submit')}
               </Button>
             )}
             {onFeedback && (
@@ -167,7 +167,7 @@ const WritingTest = () => {
                 onClick={tryAgain}
                 disabled={loadingFeedback}
               >
-                Try Again
+                {t('try_again')}
               </Button>
             )}
           </div>

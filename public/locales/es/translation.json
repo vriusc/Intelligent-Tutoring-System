@@ -24,7 +24,6 @@
   "student_email": "Correo electronico estudiantil",
   "enter_valid_email": "Introduzca un correo electronico válido, por favor.",
   "password_need": "La contraseña necesita",
-
   "one_lowercase": "Al menos una letra minúscula.",
   "one_uppercase": "La menos una legra mayuscula.",
   "one_digit": "Al menos un digito.",

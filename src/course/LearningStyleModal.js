@@ -1,8 +1,10 @@
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const LearningStyleModal = (args) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { openModal, setOpenModal } = args
 
   const OnYes = () => {
@@ -16,15 +18,15 @@ const LearningStyleModal = (args) => {
 
   return (
     <Modal isOpen={openModal} centered>
-      <ModalHeader>Learning Style</ModalHeader>
-      <ModalBody>Do you want do Learning Style Questionnaire?</ModalBody>
+      <ModalHeader>{t('learning_style_quest')}</ModalHeader>
+      <ModalBody>{t('learning_style_question')}</ModalBody>
       <ModalFooter>
         <div className="Modal-bottom" style={{ justifyContent: 'space-evenly' }}>
           <Button color="success" onClick={OnYes}>
-            Yes
+            {t('yes')}
           </Button>
           <Button color="danger" onClick={OnNo}>
-            No
+            {t('no')}
           </Button>
         </div>
       </ModalFooter>

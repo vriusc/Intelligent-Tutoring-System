@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import Header from '../element/Header'
 import { Badge, Button, Card, CardBody, CardText, CardTitle } from 'reactstrap'
 import { BsFillCheckCircleFill } from 'react-icons/bs'
+import { useTranslation } from 'react-i18next'
 
 export async function loader({ params }) {
   const studentSubject = await getStudentSubjectById(params.courseId)
@@ -21,6 +22,7 @@ export async function loader({ params }) {
 const Course = () => {
   const studentId = localStorage.getItem('studentId')
   const navigate = useNavigate()
+  const { t } = useTranslation()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -94,15 +96,15 @@ const Course = () => {
         <div className="Course">
           <div className="Course-title">
             <h3>
-              Units list
+              {t('unit_list')}
               {currentUnit === -1 && (
                 <Badge style={{ marginLeft: '10px' }} color="success">
-                  Completed
+                  {t('completed')}
                 </Badge>
               )}
             </h3>
             <Button color="info" onClick={() => navigate('/courses')}>
-              Back to My Courses
+              {t('back_my_courses')}
             </Button>
           </div>
           <div className="Units-list">
@@ -119,10 +121,11 @@ const Course = () => {
                     {checkFinish(unit) ? (
                       <>
                         <h4 style={{ color: 'green', marginRight: '10px' }}>
-                          Finished <BsFillCheckCircleFill />
+                          {`${t('finished')} `}
+                          <BsFillCheckCircleFill />
                         </h4>
                         <Button color="warning" onClick={() => goToHistory(unit)}>
-                          HISTORY
+                          {t('history')}
                         </Button>
                       </>
                     ) : (
@@ -131,7 +134,7 @@ const Course = () => {
                         disabled={!unit.materials_path || unit.unitId !== currentUnit}
                         onClick={() => goToUnit(unit)}
                       >
-                        START
+                        {t('start')}
                       </Button>
                     )}
                   </div>

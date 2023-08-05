@@ -365,6 +365,16 @@ INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALU
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (33, 33, 7);
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (34, 34, 7);
 INSERT INTO `question_units` (`question_unit_id`, `question_id`, `unit_id`) VALUES (35, 35, 7);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (36, 36, 31);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (37, 37, 31);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (38, 38, 31);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (39, 39, 31);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (40, 40, 31);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (41, 41, 32);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (42, 42, 32);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (43, 43, 32);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (44, 44, 32);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (45, 45, 32);
 
 
 

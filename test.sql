@@ -521,4 +521,24 @@ INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `orde
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (138, 35, '11th Nov', 1, 2, '11th Nov');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (139, 35, '23rd Apr', 0, 3, '23rd Apr');
 INSERT INTO `options` (`option_id`, `question_id`, `option`, `is_correct`, `order_number`, `description`) VALUES (140, 35, '7th May', 0, 4, '7th May');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (141, 36, 'Metal', 0, 1, 'Metal means "material"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (142, 36, 'Mesa', 1, 2, 'Mesa means "table"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (143, 36, 'Meta', 0, 3, 'Meta means "goal" or "objective');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (144, 36, 'Melodía', 0, 4, 'Melodía means "melody" or "tune"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (145, 37, 'W/w', 0, 1, 'W/w');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (146, 37, 'H/h', 0, 2, 'H/h');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (147, 37, 'G/g', 1, 3, 'G/g');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (148, 37, 'V/v', 0, 4, 'V/v');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (149, 38, 'Pan', 1, 1, ' "Pan," is the correct translation for "bread" in Spanish.');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (150, 38, 'Peso', 0, 2, '"Peso," means "weight" in Spanish.');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (151, 38, 'Perro', 0, 3, '"Perro," means "dog" in Spanish.');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (152, 38, 'Piso', 0, 4, '"Piso," means "floor" or "apartment" in Spanish.');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (153, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_J.png', 0, 1, 'J/j');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (154, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_Ñ.png', 0, 2, 'Ñ/ñ');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (155, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_L.png', 0, 3, 'L/l');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (156, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_LL.png', 1, 4, 'LL/ll');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (157, 40, 'LL/ll', 0, 1, 'LL/ll');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (158, 40, 'CH/ch', 2, 2, 'CH/ch');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (159, 40, 'Ñ/ñ', 0, 3, 'Ñ/ñ');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (160, 40, 'J/j', 0, 4, 'J/j');
 

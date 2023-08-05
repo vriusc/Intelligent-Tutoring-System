@@ -72,7 +72,7 @@ const CoursesList = () => {
   return (
     <>
       <Header user={student} subjectCount={subjects.length} title={t('my_courses')} />
-      <LearningStyleModal openModal={openModal} setOpenModal={setOpenModal} />
+      <LearningStyleModal openModal={openModal} setOpenModal={setOpenModal} studentId={studentId} />
       <div className="Course-container">
         <div className="Course">
           <div className="Course-title">

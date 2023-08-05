@@ -1,11 +1,12 @@
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { postLearningStyle } from '../lib/tutoring-client'
 
 const LearningStyleModal = (args) => {
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { openModal, setOpenModal } = args
+  const { openModal, setOpenModal, studentId } = args
 
   const OnYes = () => {
     setOpenModal(false)
@@ -13,7 +14,20 @@ const LearningStyleModal = (args) => {
   }
 
   const OnNo = () => {
-    setOpenModal(false)
+    const newLearningStyle = {
+      activist: 0,
+      reflector: 0,
+      theorist: 0,
+      pragmatist: 0,
+      studentId
+    }
+    postLearningStyle(newLearningStyle)
+      .then(() => {
+        setOpenModal(false)
+      })
+      .catch(() => {
+        setOpenModal(false)
+      })
   }
 
   return (

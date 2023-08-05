@@ -255,11 +255,11 @@ INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (2, 't
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (3, 'picture_text');
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (4, 'audio_text');
 INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (5, 'audio_picture');
-INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (6, 'muti_text_text');
-INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (7, 'muti_text_picture');
-INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (8, 'muti_picture_text');
-INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (9, 'muti_audio_text');
-INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (10, 'muti_audio_picture');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (6, 'multi_text_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (7, 'multi_text_picture');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (8, 'multi_picture_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (9, 'multi_audio_text');
+INSERT INTO `question_types` (`question_type_id`, `question_type`) VALUES (10, 'multi_audio_picture');
 
 # insert into questions table
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (1, 'What\'s the CAPITAL letter for "t"? ', 1, null, null, null, 1, 'The capital letter for "t" is "T"', 'What\'s the CAPITAL letter for "t"? ');
@@ -320,7 +320,7 @@ D) Piso
 and explain why');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (39, 'Choose what you hear.', 5, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/spanish_ll.mp3', 4, 'Audio of "LL" in spanish.', 'It\'s an audio of "ll" in spanish. ');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (40, 'Choose what you hear.', 4, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/spanish_ch.mp3', 5, 'Audio of "ch" in spanish.', 'It\'s an audio of "ch" in spanish. ');
-INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (41, 'What color is shown in the picture below?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/yellow.png', null, null, 1, '"yellow"', 'It\'s a yellow picture.');
+INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (41, 'What color is shown in the picture below?', 3, 'https://tomatolearning.s3.amazonaws.com/picture/yellow.png', null, null, 1, '"amarillo"', 'It\'s a yellow picture.');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (42, 'What color snow is?', 1, null, null, null, 2, '"white"', 'What color snow is?');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (43, 'Choose what you hear.', 5, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/pink.mp3', 3, '"pink"', 'The audio plays "pink".');
 INSERT INTO test.questions (question_id, question, question_type_id, picture_path, video_path, audio_path, question_order, explanation, description) VALUES (44, 'Choose what you hear.', 10, null, null, 'https://tomatolearning.s3.amazonaws.com/audio/blue_purple.mp3', 4, '"blue" "purple"', 'The audio plays "red and blue make purple".');

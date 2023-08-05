@@ -91,7 +91,7 @@ const Course = () => {
 
   return (
     <>
-      <Header user={student} subjectCount={1} title="My units" />
+      <Header user={student} subjectCount={1} title={t('my_units')} />
       <div className="Course-container">
         <div className="Course">
           <div className="Course-title">

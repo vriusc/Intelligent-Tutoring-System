@@ -97,7 +97,7 @@ const WritingTest = () => {
 
   return (
     <>
-      <Header user={student} subjectCount={1} title="Writing Test" />
+      <Header user={student} subjectCount={1} title={t('writing_test')} />
       <div className="Course-container">
         <div className="Course Final-body">
           <div className="Final-test-title">

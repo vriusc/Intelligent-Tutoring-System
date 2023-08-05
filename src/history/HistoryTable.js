@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react'
 import { getRecordList } from '../lib/tutoring-client'
 import { Table } from 'reactstrap'
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
+import { useTranslation } from 'react-i18next'
 
 const HistoryTable = (args) => {
   const { studentId, questionId } = args
+  const { t } = useTranslation()
   const [records, setRecords] = useState([])
   const [currentPage, setCurrentPage] = useState(0)
   const [totalPages, setTotalPages] = useState(1)
@@ -19,13 +21,13 @@ const HistoryTable = (args) => {
   }, [currentPage])
 
   const isItCorrect = (options) => {
-    return options.isCorrect === 1 ? 'CORRECT ANSWER' : 'WRONG ANSWER'
+    return options.isCorrect === 1 ? t('correct_answer_upper') : t('incorrect_answer_upper')
   }
 
   const displayExplanation = (options, questions) => {
     const { isCorrect } = options
-    const answer = questions.explanation || 'Wrong option'
-    return isCorrect === 1 ? 'All good' : answer
+    const answer = questions.explanation || t('incorrect_answer')
+    return isCorrect === 1 ? t('all_good') : answer
   }
 
   const OptionsDisplay = (args) => {

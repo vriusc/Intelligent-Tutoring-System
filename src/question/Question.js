@@ -93,9 +93,9 @@ const Question = (args) => {
     } else {
       setIsCorrect(0)
       if (correctCount === 0) {
-        setErrorText('All the answers are wrong')
+        setErrorText(t('all_wrong'))
       } else if (totalCount > correctCount && correctCount > 0) {
-        setErrorText('You have partially right')
+        setErrorText(t('partially_right'))
       }
     }
   }

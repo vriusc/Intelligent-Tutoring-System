@@ -57,6 +57,7 @@
   "no": "No",
   "restart": "Restart",
   "unit_list": "Unit list",
+  "my_units": "My units",
   "completed": "Completed",
   "finished": "Finished",
   "wrong_video_alert": "Ops there is something wrong with the video!",
@@ -64,6 +65,7 @@
   "unit_lesson": "Unit Lesson",
   "go_to_questions": "Go to questions",
   "questions": "Questions",
+  "question": "Question",
   "no_questions_in_unit": "Sorry we are creating the questions for this unit",
   "congrats": "Congratulations!!",
   "loading_score": "Loading score...",
@@ -72,6 +74,8 @@
   "next_unit": "Next unit",
   "ask_me": "Ask me",
   "incorrect_answer": "Your answer is incorrect",
+  "all_wrong": "All the answers are wrong",
+  "partially_right": "You have partially right",
   "correct_answer": "Correct Answer!",
   "welcome_to_buddy": "Welcome! to ITS Buddy",
   "ask_question": "Ask anything related to the question",
@@ -79,5 +83,10 @@
   "response": "Response",
   "loading_response": "Loading response...",
   "send": "Send",
-  "back": "Back"
+  "back": "Back",
+  "history_low": "History",
+  "keep_practice": "Keep practicing",
+  "correct_answer_upper": "CORRECT ANSWER",
+  "incorrect_answer_upper": "INCORRECT ANSWER",
+  "all_good": "All good"
 }

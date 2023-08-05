@@ -7,6 +7,7 @@ import HistoryTable from './HistoryTable'
 import Question from '../question/Question'
 import { styled } from 'styled-components'
 import { Button } from 'reactstrap'
+import { useTranslation } from 'react-i18next'
 
 const TitleComponent = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ export async function loader({ params }) {
 const History = () => {
   const studentId = localStorage.getItem('studentId')
   const navigate = useNavigate()
+  const { t } = useTranslation()
   if (!studentId) {
     return <Navigate replace to="/login" />
   }
@@ -99,13 +101,13 @@ const History = () => {
       <div className="History-container">
         <div className="History History-flex">
           <TitleComponent>
-            <h3 style={{ alignSelf: 'center' }}>{`${unit.unitName}: History`}</h3>
+            <h3 style={{ alignSelf: 'center' }}>{`${unit.unitName}: ${'history_low'}`}</h3>
             <div>
               <Button style={{ marginRight: '5px' }} color="info" onClick={() => goToCourse()}>
-                Unit list
+                {t('unit_list')}
               </Button>
               <Button color="success" style={{ alignSelf: 'center' }} onClick={() => goToUnit()}>
-                Keep practicing
+                {t('keep_practice')}
               </Button>
             </div>
           </TitleComponent>
@@ -114,7 +116,7 @@ const History = () => {
               <h5>{`${index + 1}. ${question.questions.question}`}</h5>
               <h6>Table:</h6>
               <HistoryTable studentId={studentId} questionId={question.questionId} />
-              <h6>Question:</h6>
+              <h6>{`${t('question')}:`}</h6>
               <Question
                 question={question}
                 options={myOptions(optionsList, question.questionId)}
@@ -138,7 +140,7 @@ const History = () => {
             color="info"
             onClick={() => goToCourse()}
           >
-            Back to Unit list
+            {t('back_unit_list')}
           </Button>
         </div>
       </div>

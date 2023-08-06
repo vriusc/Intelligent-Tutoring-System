@@ -395,6 +395,14 @@ INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES 
 INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (53, 53, 34);
 INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (54, 54, 34);
 INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (55, 55, 34);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (56, 56, 35);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (57, 57, 35);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (58, 58, 35);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (59, 59, 35);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (60, 60, 35);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (61, 61, 36);
+INSERT INTO test.question_units (question_unit_id, question_id, unit_id) VALUES (62, 62, 36);
+
 
 
 

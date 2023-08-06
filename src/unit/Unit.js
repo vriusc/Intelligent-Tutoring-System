@@ -218,7 +218,6 @@ const Unit = () => {
   }
 
   const settingQuestOptions = () => {
-    console.log('May help', answersList)
     const questOpt = []
     questions.forEach((quest) => {
       const { questionOrder, question, description, questionId } = quest.questions

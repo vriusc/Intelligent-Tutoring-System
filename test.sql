@@ -591,4 +591,23 @@ INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_nu
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (198, 50, 'Gorila', 0, 2, '"Gorila" means gorilla in Spanish.');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (199, 50, 'Ganso', 0, 3, '"Ganso" means goose in Spanish.');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (200, 50, 'Jirafa', 1, 4, '"Jirafa" means giraffe in Spanish.');
-
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (201, 51, 'ventitre', 0, 1, 'wrong spelling - should be "veintitrés"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (202, 51, 'veintitrés', 1, 2, 'correct spelling');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (203, 51, 'vientitres', 0, 3, 'wrong spelling - should be "veintitrés"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (204, 51, 'veintrés', 0, 4, 'wrong spelling - should be "veintitrés"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (205, 52, '17', 1, 1, '17');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (206, 52, '45', 0, 2, '45');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (207, 52, '67', 0, 3, '67');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (208, 52, '47', 0, 4, '47');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (209, 53, '35', 1, 1, '35');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (210, 53, '48', 0, 2, '48');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (211, 53, '25', 1, 3, '25');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (212, 53, '58', 0, 4, '58');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (213, 54, '3', 0, 1, '3');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (214, 54, '5', 0, 2, '5');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (215, 54, '0', 1, 3, '0');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (216, 54, '8', 0, 4, '8');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (217, 55, 'cieno', 0, 1, 'wrong spelling - should be "cien"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (218, 55, 'cient', 0, 2, 'wrong spelling - should be "cien"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (219, 55, 'one hundroed', 0, 3, 'wrong spelling - should be "cien"');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (220, 55, 'cien', 1, 4, 'correct spelling');

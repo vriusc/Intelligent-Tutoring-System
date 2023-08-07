@@ -572,7 +572,7 @@ INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_nu
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (155, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_L.png', 0, 3, 'L/l');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (156, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_LL.png', 1, 4, 'LL/ll');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (157, 40, 'LL/ll', 0, 1, 'LL/ll');
-INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (158, 40, 'CH/ch', 2, 2, 'CH/ch');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (158, 40, 'CH/ch', 1, 2, 'CH/ch');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (159, 40, 'Ñ/ñ', 0, 3, 'Ñ/ñ');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (160, 40, 'J/j', 0, 4, 'J/j');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (161, 41, 'Rojo', 0, 1, 'Rojo means red in Spanish');

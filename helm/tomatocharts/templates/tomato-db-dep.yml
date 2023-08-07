@@ -28,8 +28,8 @@ spec:
            value: Souvenir
         resources:
           requests:
-            cpu: 750m
-            memory: 750Mi
+            cpu: 1
+            memory: 1Gi
 
       nodeSelector:
         topology.kubernetes.io/zone: us-east-1a

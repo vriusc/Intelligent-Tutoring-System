@@ -568,7 +568,7 @@ INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_nu
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (151, 38, 'Perro', 0, 3, '"Perro," means "dog" in Spanish.');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (152, 38, 'Piso', 0, 4, '"Piso," means "floor" or "apartment" in Spanish.');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (153, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_J.png', 0, 1, 'J/j');
-INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (154, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_Ñ.png', 0, 2, 'Ñ/ñ');
+INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (154, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_N.png', 0, 2, 'Ñ/ñ');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (155, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_L.png', 0, 3, 'L/l');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (156, 39, 'https://tomatolearning.s3.amazonaws.com/option/spanish_LL.png', 1, 4, 'LL/ll');
 INSERT INTO test.options (option_id, question_id, `option`, is_correct, order_number, description) VALUES (157, 40, 'LL/ll', 0, 1, 'LL/ll');

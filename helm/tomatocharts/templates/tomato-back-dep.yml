@@ -21,7 +21,7 @@ spec:
           httpGet:
             path: /api/learningStyle/1
             port: 8080
-          initialDelaySeconds: 120
+          initialDelaySeconds: 90
           periodSeconds: 30
         ports:
         - name: tback-port

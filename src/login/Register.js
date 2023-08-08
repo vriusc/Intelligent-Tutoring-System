@@ -26,8 +26,15 @@ const RegisterBtn = () => {
 
   const { t } = useTranslation()
 
+  /**
+   *  Open or close the register modal
+   */
   const toggle = () => setModal(!modal)
 
+  /**
+   * Validate the text from the Inputs and creates the new user if it does not exist
+   * otherwise opens a warning message
+   */
   const handleRegister = () => {
     setIsUsernameValid(newStudent.username)
     setIsEmailValid(newStudent.email)
@@ -46,6 +53,9 @@ const RegisterBtn = () => {
     }
   }
 
+  /**
+   * Clean the data in the Modal and close it
+   */
   const handleCancel = () => {
     setNewStudent({ username: '', email: '', password: '' })
     setErrorRegister('')
@@ -56,6 +66,10 @@ const RegisterBtn = () => {
     toggle()
   }
 
+  /**
+   * Disable the register button in case of any validation fails
+   * @returns {boolean}
+   */
   const disableButton = () => {
     return (
       newStudent.username.trim() === '' ||
@@ -67,16 +81,32 @@ const RegisterBtn = () => {
     )
   }
 
+  /**
+   * Validates the username without empty spaces, any funny character or less than 4 characters
+   * @param username - string
+   */
   const usernameValidation = (username) => {
     const usernameRegex = /^[a-zA-Z0-9_-]{4,}$/
     setIsUsernameValid(usernameRegex.test(username))
   }
 
+  /**
+   * Validates the structure of the email
+   * @param email - string email format
+   */
   const emailValidation = (email) => {
     const emailRegex = /^\S+@\S+\.\S+$/
     setIsEmailValid(emailRegex.test(email))
   }
 
+  /**
+   * Validates the password with:
+   * - Min 8 characters,
+   * - At least one lowercase
+   * - At least one uppercase
+   * - At least one character
+   * @param password - string
+   */
   const passwordValidation = (password) => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/
     setIsPassValid(passwordRegex.test(password))

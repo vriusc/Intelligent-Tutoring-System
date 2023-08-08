@@ -41,6 +41,10 @@ const Home = () => {
     })
   }, [studentId])
 
+  /**
+   * Setting up the student data into "student" state
+   * @param response - response from API
+   */
   const settingStudents = (response) => {
     const { data } = response
     if (data) {
@@ -48,6 +52,10 @@ const Home = () => {
     }
   }
 
+  /**
+   * Setting up the subject list into "contentList" and "subjectList" state
+   * @param response
+   */
   const settingSubjects = (response) => {
     const { content } = response.data
     const mySubject = []
@@ -63,6 +71,10 @@ const Home = () => {
     setSubjectList(mySubject)
   }
 
+  /**
+   * Join the Subject to the Student
+   * @param currentContent - Object
+   */
   const joinSubject = (currentContent) => {
     console.log('joining', currentContent)
     const { subjectId } = currentContent
@@ -71,10 +83,19 @@ const Home = () => {
     })
   }
 
+  /**
+   * Check the current subscriptions of the Student with the courses
+   * @param subjectId - Subject ID
+   * @returns {boolean} - TRUE if the student has subscribed to the course
+   */
   const isSubscribed = ({ subjectId }) => {
     return studentSubjectList.some((studentSub) => studentSub.subjectId === subjectId)
   }
 
+  /**
+   * Navigate to an specific course
+   * @param subjectId
+   */
   const goToCourse = ({ subjectId }) => {
     const studentSubject = studentSubjectList.find(
       (studentSub) => studentSub.subjectId === subjectId
@@ -82,6 +103,9 @@ const Home = () => {
     navigate(`/courses/${studentSubject.studentSubjectId}`)
   }
 
+  /**
+   * Navigates to My courses page
+   */
   const goToCoursesList = () => {
     navigate('/courses')
   }

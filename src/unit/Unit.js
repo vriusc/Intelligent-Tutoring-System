@@ -63,6 +63,10 @@ const Unit = () => {
     })
   }, [studentId])
 
+  /**
+   * Setting up the student data into "student" state
+   * @param response - response from API
+   */
   const settingStudents = (response) => {
     const { data } = response
     if (data) {
@@ -70,6 +74,10 @@ const Unit = () => {
     }
   }
 
+  /**
+   * Setting up the Options list data into "questionOptions" state
+   * @param response - response from API
+   */
   const settingOptions = (response) => {
     const { content } = response.data
     if (content) {
@@ -77,6 +85,10 @@ const Unit = () => {
     }
   }
 
+  /**
+   * Setting up the learning style data into "learningStyle" state
+   * @param response - response from API
+   */
   const settingLearningStyle = (response) => {
     const { data } = response
     if (data?.content.length) {
@@ -86,6 +98,10 @@ const Unit = () => {
     }
   }
 
+  /**
+   * Setting up the student_unit data into "studentUnit" state
+   * @param response - response from API
+   */
   const settingStudentUnit = (response) => {
     const { content } = response.data
     if (content && content.length) {
@@ -96,6 +112,10 @@ const Unit = () => {
     }
   }
 
+  /**
+   * Setting up the subject data into "subject" state
+   * @param response
+   */
   const settingSubject = (response) => {
     const { content } = response.data
     if (content && content.length > 0) {
@@ -103,6 +123,9 @@ const Unit = () => {
     }
   }
 
+  /**
+   * opens the question list and gets the question list into "questions" state
+   */
   const goToQuestions = () => {
     getQuestionsByUnitId(data.unitId).then((response) => {
       const data = response.data.content
@@ -113,10 +136,22 @@ const Unit = () => {
     })
   }
 
+  /**
+   * Filter the all the options that belongs to a questionId
+   * @param thisOptions - Option list that has to be filtered
+   * @param questionId - Question ID
+   * @returns optionList[] - optionList array
+   */
   const myOptions = (thisOptions, questionId) => {
     return [...thisOptions.filter((option) => option.questionId === questionId)]
   }
 
+  /**
+   * Start the review of the questions on the Unit
+   * - Check one by one question
+   * - Setting up all the info into the "answerList" state
+   * - Opens the modal for Score
+   */
   const reviewQuestions = async () => {
     try {
       setOnReview(true)
@@ -146,20 +181,34 @@ const Unit = () => {
     }
   }
 
+  /**
+   * Restart the questions after the submittion allows to change the answers
+   */
   const resetQuestions = () => {
     setOnReview(false)
     setAnswersList(answersList.map((answer) => ({ ...answer, myOptions: [] })))
   }
 
+  /**
+   * Close the Score Modal
+   */
   const closeModal = () => {
     setOpenModal(false)
   }
 
+  /**
+   * Gets the score of the Questions answered
+   * @returns {number} - score number from 0 to 10
+   */
   const getScore = () => {
     const correctList = [...answersList.filter((answer) => answer.isCorrect)]
     return (correctList.length * 10) / answersList.length
   }
 
+  /**
+   * Setting up the state answerList with all the options correct answers
+   * @param list - list of Questions
+   */
   const createAnswerList = (list) => {
     const newAnswerList = list.map((quest) => {
       const options = myOptions(questOptions, quest.questionId).filter((opt) => opt.isCorrect)
@@ -174,6 +223,11 @@ const Unit = () => {
     setAnswersList(newAnswerList)
   }
 
+  /**
+   * Check if the options selected is correct or no
+   * @param quest - Question object
+   * @returns {boolean|*|boolean} - TRUE: if the options selected is correct
+   */
   const checkCorrectQuest = (quest) => {
     if (quest.myOptions.length > 0) {
       const allCorrect = !quest.myOptions.some((opt) => opt.isCorrect !== 1)
@@ -183,6 +237,9 @@ const Unit = () => {
     }
   }
 
+  /**
+   * One step ahead of the review, where it gets the score and opens the Score modal
+   */
   const lastAnswerReview = () => {
     const newStudentUnit = {
       ...studentUnit,
@@ -192,6 +249,10 @@ const Unit = () => {
     setOpenModal(true)
   }
 
+  /**
+   * Setting up info for the question-feedback consultation to the AI
+   * @returns {{activist: string, test_score: number, reflector: string, subject: subjectName, unit_description: string, theorist: string, pragmatist: string, username}}
+   */
   const settingFeedback = () => {
     const { username } = student
     const { activist, reflector, theorist, pragmatist } = learningStyle
@@ -207,6 +268,10 @@ const Unit = () => {
     }
   }
 
+  /**
+   * Setting up info for the scoreModal consultion to the AI
+   * @returns {{unit: *, unit_description, username}}
+   */
   const settingModal = () => {
     const { username } = student
 
@@ -217,6 +282,10 @@ const Unit = () => {
     }
   }
 
+  /**
+   * Sending the Question options to Score Modal
+   * @returns {*[]}
+   */
   const settingQuestOptions = () => {
     const questOpt = []
     questions.forEach((quest) => {
@@ -231,11 +300,17 @@ const Unit = () => {
     return questOpt
   }
 
+  /**
+   * Close score modal and navigate to the current Course
+   */
   const goNext = () => {
     setOpenModal(false)
     goBack()
   }
 
+  /**
+   * Navigate the current course
+   */
   const goBack = () => {
     navigate(`/courses/${studentSubjectId}`)
   }

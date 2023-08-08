@@ -50,6 +50,10 @@ const History = () => {
     })
   }, [])
 
+  /**
+   * Setting up the student data into "student" state
+   * @param response - response from API
+   */
   const settingStudents = (response) => {
     const { data } = response
     if (data) {
@@ -57,11 +61,19 @@ const History = () => {
     }
   }
 
+  /**
+   * Setting up the Question list data into "questionList" state
+   * @param response - response from API
+   */
   const settingQuestions = (response) => {
     const { content } = response.data
     setQuestionList(content)
   }
 
+  /**
+   * Setting up the Options list data into "optionList" state
+   * @param response - response from API
+   */
   const settingOptions = (response) => {
     const { content } = response.data
     if (content) {
@@ -69,10 +81,21 @@ const History = () => {
     }
   }
 
+  /**
+   * Filter the all the options that belongs to a questionId
+   * @param thisOptions - Option list that has to be filtered
+   * @param questionId - Question ID
+   * @returns optionList[] - optionList array
+   */
   const myOptions = (thisOptions, questionId) => {
     return [...thisOptions.filter((option) => option.questionId === questionId)]
   }
 
+  /**
+   * Finds the correct option that belongs to a specific Question
+   * @param questionId - Question ID
+   * @returns {*} - option Object
+   */
   const findCorrectOption = (questionId) => {
     const optionSelected = optionsList.find(
       (option) => option.questionId === questionId && option.isCorrect === 1
@@ -80,6 +103,11 @@ const History = () => {
     return optionSelected.optionId
   }
 
+  /**
+   * Finds the correct options for Multiple Question/Answer
+   * @param questionId - Question ID
+   * @returns {optionsList[]} - option List
+   */
   const findGroupOptions = (questionId) => {
     const optionsSelected = optionsList.filter(
       (option) => option.questionId === questionId && option.isCorrect === 1
@@ -87,10 +115,16 @@ const History = () => {
     return [...optionsSelected.map((opt) => opt.optionId)]
   }
 
+  /**
+   * Navigate to Unit
+   */
   const goToUnit = () => {
     navigate(`/courses/${studentSubjectId}/unit/${unit.unitId}`)
   }
 
+  /**
+   * Navigate to My Courses
+   */
   const goToCourse = () => {
     navigate(`/courses/${studentSubjectId}`)
   }

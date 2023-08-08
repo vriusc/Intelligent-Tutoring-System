@@ -46,6 +46,11 @@ const Question = (args) => {
     }
   }, [radioSelected, multiSelected])
 
+  /**
+   * Manage the Radio button selection
+   * @param event - event from the Input
+   * @param currentOption - Current option selected
+   */
   const handleRadioBtn = (event, currentOption) => {
     const answerOptionID = parseInt(event.target.value)
     setOptSelected(answerOptionID)
@@ -60,6 +65,10 @@ const Question = (args) => {
     setAnswersList(answerList)
   }
 
+  /**
+   * Manage the Multiple selection button
+   * @param event - event from the Input
+   */
   const handleCheckBoxBtn = (event) => {
     const selected = parseInt(event.target.value)
     let multipleArray = []
@@ -82,6 +91,10 @@ const Question = (args) => {
     setAnswersList(answerList)
   }
 
+  /**
+   * Manage the multiple error message in case there is no feedback from the API
+   * @param list
+   */
   const multipleErrorReview = (list) => {
     const totalCount = options.filter((opt) => opt.isCorrect === 1).length
     const correctCount = list.filter((id) => {
@@ -100,6 +113,9 @@ const Question = (args) => {
     }
   }
 
+  /**
+   * Open the AI Question Modal
+   */
   const openQuestGPT = () => {
     setGPTModal(true)
   }

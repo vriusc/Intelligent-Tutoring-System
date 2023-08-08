@@ -38,19 +38,34 @@ const Header = (student) => {
   })
   const [updateError, setUpdateError] = useState()
 
+  /**
+   * Toggle the Navbar
+   */
   const toggleNavbar = () => setCollapsed(!collapsed)
+  /**
+   * Toggle the reset password modal
+   */
   const toggleModal = () => setResetPass(!resetPass)
 
+  /**
+   * Navigate to the login page and remove all local storage
+   */
   const handleLogout = () => {
     localStorage.clear()
     navigate('/login')
   }
 
+  /**
+   * Clean the info for the reset password and open the modal
+   */
   const handleResetPass = () => {
     setUpdatePass({ ...updatePass, username: user.username, email: user.email })
     toggleModal()
   }
 
+  /**
+   * Clean the info for the reset password and close the modal
+   */
   const handleModalCancel = () => {
     setUpdatePass({
       username: '',
@@ -61,6 +76,9 @@ const Header = (student) => {
     toggleModal()
   }
 
+  /**
+   * updates the information on the reset password and send it to the API for the resetting
+   */
   const handleUpdate = () => {
     updatePassword(updatePass)
       .then((response) => {

@@ -46,6 +46,10 @@ const CoursesList = () => {
       })
   }, [studentId])
 
+  /**
+   * Setting up the student data into "student" state
+   * @param response - response from API
+   */
   const settingStudents = (response) => {
     const { data } = response
     if (data) {
@@ -53,6 +57,10 @@ const CoursesList = () => {
     }
   }
 
+  /**
+   * Setting up the subject data into "subject" state
+   * @param response - response from API
+   */
   const settingSubjects = (response) => {
     const { data } = response
     if (data) {
@@ -60,6 +68,10 @@ const CoursesList = () => {
     }
   }
 
+  /**
+   * Setting up the learning style data into "learningStyle" state and opens a modal
+   * @param response - response from API
+   */
   const settingLearningStyle = (response) => {
     const { data } = response
     if (data.content.length) {
@@ -97,16 +109,36 @@ const CourseCard = (args) => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
+  /**
+   * Navigate to the Course list
+   * @param studentSubject - student_subject object
+   */
   const goToCourse = (studentSubject) => {
     const { studentSubjectId } = studentSubject
     navigate(`/courses/${studentSubjectId}`)
   }
 
+  /**
+   * According to the progress, display the text on the button to go the course
+   * - REVIEW: Progress is 100%
+   * - CONTINUE: Progress is less than 100% and more than 0%
+   * - START: Progress is 0%
+   * @param studentSubject - student_subject object
+   * @returns Button Text - String
+   */
   const btnText = (studentSubject) => {
     const { progress } = studentSubject
     return progress > 0 ? (progress === 100 ? t('review') : t('continue')) : t('start')
   }
 
+  /**
+   * According to the progress, sets the color of the progress Label
+   * - Success: color green if the progress is 100%
+   * - Warning: color yellow if the progress is less than 100% and more than 0%
+   * - Danger: color red of the progress is 0%
+   * @param studentSubject - student_subject object
+   * @returns {string} - color
+   */
   const progressColor = (studentSubject) => {
     const { progress } = studentSubject
     return progress > 0 ? (progress === 100 ? 'success' : 'warning') : 'danger'

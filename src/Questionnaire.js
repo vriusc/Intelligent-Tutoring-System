@@ -67,6 +67,7 @@ const Questionnaire = () => {
   const [learningStyle, setLearningStyle] = useState({})
   const [showAlert, setShowAlert] = useState(false)
 
+  // Score list answers and total on this
   const scoreList = {
     activist: {
       list: [2, 4, 6, 10, 17, 23, 24, 32, 34, 38, 40, 43, 45, 48, 58, 64, 71, 72, 74, 79],
@@ -99,6 +100,10 @@ const Questionnaire = () => {
     })
   }, [studentId])
 
+  /**
+   * Setting up the student data into "student" state
+   * @param response - response from API
+   */
   const settingStudents = (response) => {
     const { data } = response
     if (data) {
@@ -106,6 +111,10 @@ const Questionnaire = () => {
     }
   }
 
+  /**
+   * Setting up the questio for the learning style questionnaire  into "questionnaire" state
+   * @param response - response from API
+   */
   const settingQuestionare = (response) => {
     const { data } = response
     if (data) {
@@ -113,6 +122,10 @@ const Questionnaire = () => {
     }
   }
 
+  /**
+   * Setting up the learning style data into "learningStyle" state
+   * @param response - response from API
+   */
   const settingLearningStyle = (response) => {
     const { data } = response
     if (data.content.length) {
@@ -120,6 +133,9 @@ const Questionnaire = () => {
     }
   }
 
+  /**
+   * Setting up of the questions answer and sending to learning style API
+   */
   const onFinishQuestionnaire = () => {
     // To Continue
     const { activist, reflector, theorist, pragmatist } = score
@@ -173,6 +189,11 @@ const Questionnaire = () => {
     }
   }
 
+  /**
+   * Calculates the total answers related to a specific behaviour on the learning style
+   * @param scoreObject - object
+   * @returns number - quantity of agree related to that object
+   */
   const filterListTotal = (scoreObject) => {
     return scoreObject.list.filter((item) =>
       questionnaire.some((quest) => quest.id === item && quest.answer === 'agree')

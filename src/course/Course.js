@@ -41,6 +41,10 @@ const Course = () => {
     })
   }, [studentId])
 
+  /**
+   * Setting up the student data into "student" state
+   * @param response - response from API
+   */
   const settingStudents = (response) => {
     const { data } = response
     if (data) {
@@ -48,27 +52,49 @@ const Course = () => {
     }
   }
 
+  /**
+   * Setting up the student_unit list into "unitSolved" state
+   * @param response - response from API
+   */
   const settingStudentUnit = (response) => {
     const { content } = response.data
     setUnitsSolved(content)
   }
 
+  /**
+   * Navigates to the specific unit
+   * @param unit - object
+   */
   const goToUnit = (unit) => {
     const { unitId } = unit
     const { studentSubjectId } = studentSubject
     navigate(`/courses/${studentSubjectId}/unit/${unitId}`)
   }
 
+  /**
+   * Navigates to the specific history unit
+   * @param unit - object
+   */
   const goToHistory = (unit) => {
     const { unitId } = unit
     const { studentSubjectId } = studentSubject
     navigate(`/courses/${studentSubjectId}/history/${unitId}`)
   }
 
+  /**
+   * Review if the unit is finished
+   * @param unit - Object
+   * @returns {boolean}- TRUE if the unit is been finished
+   */
   const checkFinish = (unit) => {
     return unitsSolved.some((solve) => solve.unitId === unit.unitId && solve.isfinished === 1)
   }
 
+  /**
+   * Check the units finished and calculate the progress,
+   * then it updates the progress into the student_subject API
+   * @param solvedList
+   */
   const checkSubjectProgress = (solvedList) => {
     console.log(studentSubject, solvedList, unitList)
     const total = unitList.length

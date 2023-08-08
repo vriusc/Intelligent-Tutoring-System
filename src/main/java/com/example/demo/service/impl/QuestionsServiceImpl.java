@@ -12,7 +12,7 @@ import org.springframework.data.domain.PageImpl;
 import javax.annotation.Resource;
 
 /**
- * (Questions)表服务实现类
+ * (Questions) table services implement class
  *
  * @author qianyongru
  * @since 2023-06-23 08:55:36
@@ -23,10 +23,10 @@ public class QuestionsServiceImpl implements QuestionsService {
     private QuestionsDao questionsDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param questionId 主键
-     * @return 实例对象
+     * @param questionId primary key
+     * @return entity
      */
     @Override
     public Questions queryById(Integer questionId) {
@@ -34,11 +34,11 @@ public class QuestionsServiceImpl implements QuestionsService {
     }
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param questions 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param questions query condition
+     * @param pageRequest page request
+     * @return entity list
      */
     @Override
     public Page<Questions> queryByPage(Questions questions, Pageable pageRequest) {
@@ -47,10 +47,10 @@ public class QuestionsServiceImpl implements QuestionsService {
     }
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param questions 实例对象
-     * @return 实例对象
+     * @param questions entity
+     * @return entity
      */
     @Override
     public Questions insert(Questions questions) {
@@ -59,10 +59,10 @@ public class QuestionsServiceImpl implements QuestionsService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param questions 实例对象
-     * @return 实例对象
+     * @param questions entity
+     * @return entity
      */
     @Override
     public Questions update(Questions questions) {
@@ -71,10 +71,10 @@ public class QuestionsServiceImpl implements QuestionsService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param questionId 主键
-     * @return 是否成功
+     * @param questionId primary key
+     * @return boolean
      */
     @Override
     public boolean deleteById(Integer questionId) {

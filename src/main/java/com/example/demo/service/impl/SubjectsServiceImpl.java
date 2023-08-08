@@ -11,7 +11,7 @@ import org.springframework.data.domain.PageImpl;
 import javax.annotation.Resource;
 
 /**
- * (Subjects)表服务实现类
+ * (Subjects) table services implement class
  *
  * @author qianyongru
  * @since 2023-06-22 06:24:38
@@ -22,10 +22,10 @@ public class SubjectsServiceImpl implements SubjectsService {
     private SubjectsDao subjectsDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param subjectId 主键
-     * @return 实例对象
+     * @param subjectId primary key
+     * @return object
      */
     @Override
     public Subjects queryById(Integer subjectId) {
@@ -33,11 +33,11 @@ public class SubjectsServiceImpl implements SubjectsService {
     }
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param subjects 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param subjects       query condition
+     * @param pageRequest      page request
+     * @return object list
      */
     @Override
     public Page<Subjects> queryByPage(Subjects subjects, Pageable pageRequest) {
@@ -46,10 +46,10 @@ public class SubjectsServiceImpl implements SubjectsService {
     }
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param subjects 实例对象
-     * @return 实例对象
+     * @param subjects object
+     * @return object
      */
     @Override
     public Subjects insert(Subjects subjects) {
@@ -58,10 +58,10 @@ public class SubjectsServiceImpl implements SubjectsService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param subjects 实例对象
-     * @return 实例对象
+     * @param subjects object
+     * @return object
      */
     @Override
     public Subjects update(Subjects subjects) {
@@ -70,10 +70,10 @@ public class SubjectsServiceImpl implements SubjectsService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param subjectId 主键
-     * @return 是否成功
+     * @param subjectId primary key
+     * @return boolean
      */
     @Override
     public boolean deleteById(Integer subjectId) {

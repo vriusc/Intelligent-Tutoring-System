@@ -12,7 +12,7 @@ import org.springframework.data.domain.PageImpl;
 import javax.annotation.Resource;
 
 /**
- * (QuestionUnits)表服务实现类
+ * (QuestionUnits) table services implement class
  *
  * @author qianyongru
  * @since 2023-06-23 09:31:50
@@ -23,10 +23,10 @@ public class QuestionUnitsServiceImpl implements QuestionUnitsService {
     private QuestionUnitsDao questionUnitsDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param questionUnitId 主键
-     * @return 实例对象
+     * @param questionUnitId primary key
+     * @return entity
      */
     @Override
     public QuestionUnits queryById(Integer questionUnitId) {
@@ -34,11 +34,11 @@ public class QuestionUnitsServiceImpl implements QuestionUnitsService {
     }
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param questionUnits 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param questionUnits  query condition
+     * @param pageRequest    page request
+     * @return entity list
      */
     @Override
     public Page<QuestionUnits> queryByPage(QuestionUnits questionUnits, Pageable pageRequest) {
@@ -47,10 +47,10 @@ public class QuestionUnitsServiceImpl implements QuestionUnitsService {
     }
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param questionUnits 实例对象
-     * @return 实例对象
+     * @param questionUnits entity
+     * @return entity
      */
     @Override
     public QuestionUnits insert(QuestionUnits questionUnits) {
@@ -59,10 +59,10 @@ public class QuestionUnitsServiceImpl implements QuestionUnitsService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param questionUnits 实例对象
-     * @return 实例对象
+     * @param questionUnits entity
+     * @return entity
      */
     @Override
     public QuestionUnits update(QuestionUnits questionUnits) {
@@ -71,10 +71,10 @@ public class QuestionUnitsServiceImpl implements QuestionUnitsService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param questionUnitId 主键
-     * @return 是否成功
+     * @param questionUnitId primary key
+     * @return boolean
      */
     @Override
     public boolean deleteById(Integer questionUnitId) {

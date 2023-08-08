@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * (Units)表服务实现类
+ * (Units) table services implement class
  *
  * @author qianyongru
  * @since 2023-06-22 20:46:33
@@ -23,10 +23,10 @@ public class UnitsServiceImpl implements UnitsService {
     private UnitsDao unitsDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param unitId 主键
-     * @return 实例对象
+     * @param unitId primary key
+     * @return object
      */
     @Override
     public Units queryById(Integer unitId) {
@@ -34,11 +34,11 @@ public class UnitsServiceImpl implements UnitsService {
     }
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param units 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param units  condition
+     * @param pageRequest page request
+     * @return object list
      */
     @Override
     public Page<Units> queryByPage(Units units, PageRequest pageRequest) {
@@ -47,10 +47,10 @@ public class UnitsServiceImpl implements UnitsService {
     }
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param units 实例对象
-     * @return 实例对象
+     * @param units object
+     * @return object
      */
     @Override
     public Units insert(Units units) {
@@ -59,10 +59,10 @@ public class UnitsServiceImpl implements UnitsService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param units 实例对象
-     * @return 实例对象
+     * @param units object
+     * @return object
      */
     @Override
     public Units update(Units units) {
@@ -71,10 +71,10 @@ public class UnitsServiceImpl implements UnitsService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param unitId 主键
-     * @return 是否成功
+     * @param unitId primary key
+     * @return boolean
      */
     @Override
     public boolean deleteById(Integer unitId) {
@@ -82,10 +82,10 @@ public class UnitsServiceImpl implements UnitsService {
     }
 
     /**
-     * 通过subjectId查询数据
+     * query By subject id
      *
-     * @param subjectID 主键
-     * @return 操作结果
+     * @param subjectID Primary key
+     * @return object list
      */
     @Override
     public List<Units> queryBySubjectId(Integer subjectID) {

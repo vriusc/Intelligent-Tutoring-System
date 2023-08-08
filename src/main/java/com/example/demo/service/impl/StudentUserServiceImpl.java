@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * (StudentUser)表服务实现类
+ * (StudentUser) table services implement class
  *
  * @author qianyongru
  * @since 2023-06-21 06:36:40
@@ -21,10 +21,10 @@ public class StudentUserServiceImpl implements StudentUserService {
     private StudentUserDao studentUserDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param id 主键
-     * @return 实例对象
+     * @param id primary key
+     * @return entity
      */
     @Override
     public StudentUser queryById(Integer id) {
@@ -33,10 +33,10 @@ public class StudentUserServiceImpl implements StudentUserService {
 
 
     /**
-     * 用户注册
+     * add new data
      *
-     * @param studentUser 实例对象
-     * @return 实例对象
+     * @param studentUser entity
+     * @return entity
      */
     @Override
     public StudentUser insert(StudentUser studentUser) {
@@ -57,11 +57,11 @@ public class StudentUserServiceImpl implements StudentUserService {
     }
 
     /**
-     * 用户登陆
+     * user login
      *
-     * @param usernameOrEmail 用户名或邮箱
-     * @param password        密码
-     * @return 实例对象
+     * @param usernameOrEmail username or email
+     * @param password password
+     * @return entity
      */
     @Override
     public StudentUser login(String usernameOrEmail, String password) {
@@ -101,10 +101,10 @@ public class StudentUserServiceImpl implements StudentUserService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param studentUser 实例对象
-     * @return 实例对象
+     * @param studentUser entity
+     * @return entity
      */
     @Override
     public StudentUser update(StudentUser studentUser) {
@@ -113,10 +113,10 @@ public class StudentUserServiceImpl implements StudentUserService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param id 主键
-     * @return 是否成功
+     * @param id primary key
+     * @return boolean
      */
     @Override
     public boolean deleteById(Integer id) {

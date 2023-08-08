@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import javax.annotation.Resource;
 
 /**
- * (Options)表服务实现类
+ * (Options) table services implement class
  *
  * @author qianyongru
  * @since 2023-06-23 10:58:28
@@ -21,10 +21,10 @@ public class OptionsServiceImpl implements OptionsService {
     private OptionsDao optionsDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param optionId 主键
-     * @return 实例对象
+     * @param optionId primary key
+     * @return entity
      */
     @Override
     public Options queryById(Integer optionId) {
@@ -32,11 +32,11 @@ public class OptionsServiceImpl implements OptionsService {
     }
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param options 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param options condition
+     * @param pageRequest page request
+     * @return entity list
      */
     @Override
     public Page<Options> queryByPage(Options options, Pageable pageRequest) {
@@ -45,10 +45,10 @@ public class OptionsServiceImpl implements OptionsService {
     }
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param options 实例对象
-     * @return 实例对象
+     * @param options entity
+     * @return entity
      */
     @Override
     public Options insert(Options options) {
@@ -57,10 +57,10 @@ public class OptionsServiceImpl implements OptionsService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param options 实例对象
-     * @return 实例对象
+     * @param options entity
+     * @return entity
      */
     @Override
     public Options update(Options options) {
@@ -69,10 +69,10 @@ public class OptionsServiceImpl implements OptionsService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param optionId 主键
-     * @return 是否成功
+     * @param optionId primary key
+     * @return boolean
      */
     @Override
     public boolean deleteById(Integer optionId) {

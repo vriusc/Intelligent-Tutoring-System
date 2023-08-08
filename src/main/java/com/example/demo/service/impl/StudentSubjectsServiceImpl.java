@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * (StudentSubjects)表服务实现类
+ * (StudentSubjects) table services implement class
  *
  * @author qianyongru
  * @since 2023-06-22 06:25:52
@@ -23,10 +23,10 @@ public class StudentSubjectsServiceImpl implements StudentSubjectsService {
     private StudentSubjectsDao studentSubjectsDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param studentSubjectId 主键
-     * @return 实例对象
+     * @param studentSubjectId primary key
+     * @return object
      */
     @Override
     public StudentSubjects queryById(Integer studentSubjectId) {
@@ -34,11 +34,11 @@ public class StudentSubjectsServiceImpl implements StudentSubjectsService {
     }
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param studentSubjects 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param studentSubjects condition
+     * @param pageRequest page request
+     * @return object list
      */
     @Override
     public Page<StudentSubjects> queryByPage(StudentSubjects studentSubjects, PageRequest pageRequest) {
@@ -47,10 +47,10 @@ public class StudentSubjectsServiceImpl implements StudentSubjectsService {
     }
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param studentSubjects 实例对象
-     * @return 实例对象
+     * @param studentSubjects object
+     * @return object
      */
     @Override
     public StudentSubjects insert(StudentSubjects studentSubjects) {
@@ -59,10 +59,10 @@ public class StudentSubjectsServiceImpl implements StudentSubjectsService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param studentSubjects 实例对象
-     * @return 实例对象
+     * @param studentSubjects object
+     * @return object
      */
     @Override
     public StudentSubjects update(StudentSubjects studentSubjects) {
@@ -71,10 +71,10 @@ public class StudentSubjectsServiceImpl implements StudentSubjectsService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param studentSubjectId 主键
-     * @return 是否成功
+     * @param studentSubjectId primary key
+     * @return boolean
      */
     @Override
     public boolean deleteById(Integer studentSubjectId) {
@@ -82,10 +82,10 @@ public class StudentSubjectsServiceImpl implements StudentSubjectsService {
     }
 
     /**
-     * 通过学生id查询
+     * query By studentId
      *
-     * @param studentId 学生id
-     * @return 实例对象
+     * @param studentId primary key
+     * @return object list
      */
     @Override
     public List<StudentSubjects> queryByStudentId(Integer studentId) {

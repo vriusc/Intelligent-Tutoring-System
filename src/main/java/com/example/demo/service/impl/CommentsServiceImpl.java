@@ -10,9 +10,9 @@ import org.springframework.data.domain.PageImpl;
 import javax.annotation.Resource;
 
 /**
- * (Comments)表服务实现类
+ * (Comments) table services implement class
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-07-08 05:07:47
  */
 @Service("commentsService")
@@ -21,10 +21,10 @@ public class CommentsServiceImpl implements CommentsService {
     private CommentsDao commentsDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param commentId 主键
-     * @return 实例对象
+     * @param commentId primary key
+     * @return entity
      */
     @Override
     public Comments queryById(Integer commentId) {
@@ -32,11 +32,11 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param comments 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param comments query condition
+     * @param pageRequest page request
+     * @return entity list
      */
     @Override
     public Page<Comments> queryByPage(Comments comments, Pageable pageRequest) {
@@ -44,11 +44,12 @@ public class CommentsServiceImpl implements CommentsService {
         return new PageImpl<>(this.commentsDao.queryAllByLimit(comments, pageRequest), pageRequest, total);
     }
 
+
     /**
-     * 新增数据
+     * add new data
      *
-     * @param comments 实例对象
-     * @return 实例对象
+     * @param comments entity
+     * @return entity
      */
     @Override
     public Comments insert(Comments comments) {
@@ -58,10 +59,10 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param comments 实例对象
-     * @return 实例对象
+     * @param comments entity
+     * @return entity
      */
     @Override
     public Comments update(Comments comments) {
@@ -70,10 +71,10 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param commentId 主键
-     * @return 是否成功
+     * @param commentId primary key
+     * @return success or not
      */
     @Override
     public boolean deleteById(Integer commentId) {

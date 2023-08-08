@@ -12,9 +12,9 @@ import org.springframework.data.domain.PageImpl;
 import javax.annotation.Resource;
 
 /**
- * (LearningStyle)表服务实现类
+ * (LearningStyle) table services implement class
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-07-08 04:19:23
  */
 @Service("learningStyleService")
@@ -23,10 +23,10 @@ public class LearningStyleServiceImpl implements LearningStyleService {
     private LearningStyleDao learningStyleDao;
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param learningStyleId 主键
-     * @return 实例对象
+     * @param learningStyleId primary key
+     * @return entity
      */
     @Override
     public LearningStyle queryById(Integer learningStyleId) {
@@ -34,11 +34,11 @@ public class LearningStyleServiceImpl implements LearningStyleService {
     }
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param learningStyle 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param learningStyle  query condition
+     * @param pageRequest    page request
+     * @return entity list
      */
     @Override
     public Page<LearningStyle> queryByPage(LearningStyle learningStyle, Pageable pageRequest) {
@@ -47,10 +47,10 @@ public class LearningStyleServiceImpl implements LearningStyleService {
     }
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param learningStyle 实例对象
-     * @return 实例对象
+     * @param learningStyle entity
+     * @return entity
      */
     @Override
     public LearningStyle insert(LearningStyle learningStyle) {
@@ -59,10 +59,10 @@ public class LearningStyleServiceImpl implements LearningStyleService {
     }
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param learningStyle 实例对象
-     * @return 实例对象
+     * @param learningStyle entity
+     * @return entity
      */
     @Override
     public LearningStyle update(LearningStyle learningStyle) {
@@ -71,10 +71,10 @@ public class LearningStyleServiceImpl implements LearningStyleService {
     }
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param learningStyleId 主键
-     * @return 是否成功
+     * @param learningStyleId primary key
+     * @return boolean
      */
     @Override
     public boolean deleteById(Integer learningStyleId) {

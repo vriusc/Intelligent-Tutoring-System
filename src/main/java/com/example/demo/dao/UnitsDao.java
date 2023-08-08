@@ -7,70 +7,70 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * (Units)表数据库访问层
+ * (Units) table dao
  *
- * @author makejava
+ * @author   qianyongru
  * @since 2023-06-22 20:46:33
  */
 @Mapper
 public interface UnitsDao {
 
     /**
-     * 通过ID查询单条数据
+     * query by id
      *
-     * @param unitId 主键
-     * @return 实例对象
+     * @param unitId primary key
+     * @return object
      */
     Units queryById(Integer unitId);
 
     /**
-     * 查询指定行数据
+     * query all by limit
      *
-     * @param units 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
+     * @param units condition
+     * @param pageable pageable
+     * @return List<Units>
      */
     List<Units> queryAllByLimit(Units units, @Param("pageable") Pageable pageable);
 
     /**
-     * 统计总行数
+     * query count
      *
-     * @param units 查询条件
-     * @return 总行数
+     * @param units condition
+     * @return row
      */
     long count(Units units);
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param units 实例对象
-     * @return 影响行数
+     * @param units entity
+     * @return row
      */
     int insert(Units units);
 
 
     /**
-     * 修改数据
+     * add batch
      *
-     * @param units 实例对象
-     * @return 影响行数
+     * @param units List<Units> entities
+     * @return row
      */
     int update(Units units);
 
     /**
-     * 通过主键删除数据
+     * add or update batch
      *
-     * @param unitId 主键
-     * @return 影响行数
+     * @param unitId primary key
+     * @return row
      */
     int deleteById(Integer unitId);
 
 
     /**
-     * 通过subjectId查找对应全部数据
+     * update data
      *
-     * @param subjectId 主键
-     * @return 对象列表
+     * @param subjectId primary key
+     * @return row
      */
     List<Units> queryBySubjectId(Integer subjectId);
 

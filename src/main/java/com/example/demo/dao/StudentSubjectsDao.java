@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * (StudentSubjects)表数据库访问层
+ * (StudentSubjects) table dao
  *
  * @author qianyongru
  * @since 2023-06-22 06:25:52
@@ -16,68 +16,68 @@ import java.util.List;
 public interface StudentSubjectsDao {
 
     /**
-     * 通过ID查询单条数据
+     * query by id
      *
-     * @param studentSubjectId 主键
-     * @return 实例对象
+     * @param studentSubjectId primary key
+     * @return object
      */
     StudentSubjects queryById(Integer studentSubjectId);
 
     /**
-     * 查询指定行数据
+     * query all by limit
      *
-     * @param studentSubjects 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
+     * @param studentSubjects condition
+     * @param pageable pageable
+     * @return List<StudentSubjects>
      */
     List<StudentSubjects> queryAllByLimit(StudentSubjects studentSubjects, @Param("pageable") Pageable pageable);
 
     /**
-     * 统计总行数
+     * query count
      *
-     * @param studentSubjects 查询条件
-     * @return 总行数
+     * @param studentSubjects condition
+     * @return long
      */
     long count(StudentSubjects studentSubjects);
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param studentSubjects 实例对象
-     * @return 影响行数
+     * @param studentSubjects entity
+     * @return row
      */
     int insert(StudentSubjects studentSubjects);
 
     /**
-     * 批量新增数据（MyBatis原生foreach方法）
+     * add batch
      *
-     * @param entities List<StudentSubjects> 实例对象列表
-     * @return 影响行数
+     * @param entities List<StudentSubjects> entities
+     * @return row
      */
     int insertBatch(@Param("entities") List<StudentSubjects> entities);
 
     /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
+     * add or update batch
      *
-     * @param entities List<StudentSubjects> 实例对象列表
-     * @return 影响行数
-     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
+     * @param entities List<StudentSubjects> entities
+     * @return row
+     * @throws org.springframework.jdbc.BadSqlGrammarException if the SQL is malformed
      */
     int insertOrUpdateBatch(@Param("entities") List<StudentSubjects> entities);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param studentSubjects 实例对象
-     * @return 影响行数
+     * @param studentSubjects entity
+     * @return row
      */
     int update(StudentSubjects studentSubjects);
 
     /**
-     * 通过主键删除数据
+     * delete by id
      *
-     * @param studentSubjectId 主键
-     * @return 影响行数
+     * @param studentSubjectId primary key
+     * @return row
      */
     int deleteById(Integer studentSubjectId);
 

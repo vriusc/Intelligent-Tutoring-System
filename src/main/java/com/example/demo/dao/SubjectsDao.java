@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * (Subjects)表数据库访问层
+ * (Subjects) table dao
  *
  * @author qianyongru
  * @since 2023-06-22 06:24:38
@@ -16,68 +16,68 @@ import java.util.List;
 public interface SubjectsDao {
 
     /**
-     * 通过ID查询单条数据
+     * query by id
      *
-     * @param subjectId 主键
-     * @return 实例对象
+     * @param subjectId primary key
+     * @return object
      */
     Subjects queryById(Integer subjectId);
 
     /**
-     * 查询指定行数据
+     * query all by limit
      *
-     * @param subjects 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
+     * @param subjects condition
+     * @param pageable pageable
+     * @return List<Subjects>
      */
     List<Subjects> queryAllByLimit(@Param("subjects") Subjects subjects, @Param("pageable") Pageable pageable);
 
     /**
-     * 统计总行数
+     * query count
      *
-     * @param subjects 查询条件
-     * @return 总行数
+     * @param subjects condition
+     * @return long
      */
     long count(Subjects subjects);
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param subjects 实例对象
-     * @return 影响行数
+     * @param subjects entity
+     * @return row
      */
     int insert(Subjects subjects);
 
     /**
-     * 批量新增数据（MyBatis原生foreach方法）
+     * add batch
      *
-     * @param entities List<Subjects> 实例对象列表
-     * @return 影响行数
+     * @param entities List<Subjects> entities
+     * @return row
      */
     int insertBatch(@Param("entities") List<Subjects> entities);
 
     /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
+     * add or update batch
      *
-     * @param entities List<Subjects> 实例对象列表
-     * @return 影响行数
-     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
+     * @param entities List<Subjects> entities
+     * @return row
+     * @throws org.springframework.jdbc.BadSqlGrammarException if the SQL is malformed
      */
     int insertOrUpdateBatch(@Param("entities") List<Subjects> entities);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param subjects 实例对象
-     * @return 影响行数
+     * @param subjects entity
+     * @return row
      */
     int update(Subjects subjects);
 
     /**
-     * 通过主键删除数据
+     * delete by id
      *
-     * @param subjectId 主键
-     * @return 影响行数
+     * @param subjectId primary key
+     * @return row
      */
     int deleteById(Integer subjectId);
 

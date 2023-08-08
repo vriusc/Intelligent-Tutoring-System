@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * (QuestionTypes)表数据库访问层
+ * (QuestionTypes) table dao
  *
  * @author qianyongru
  * @since 2023-06-23 08:12:09
@@ -16,68 +16,68 @@ import java.util.List;
 public interface QuestionTypesDao {
 
     /**
-     * 通过ID查询单条数据
+     * query by id
      *
-     * @param questionTypeId 主键
-     * @return 实例对象
+     * @param questionTypeId primary key
+     * @return entity
      */
     QuestionTypes queryById(Integer questionTypeId);
 
     /**
-     * 查询指定行数据
+     * query all by limit
      *
-     * @param questionTypes 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
+     * @param questionTypes condition
+     * @param pageable pageable
+     * @return List<QuestionTypes>
      */
     List<QuestionTypes> queryAllByLimit(@Param("questionTypes") QuestionTypes questionTypes, @Param("pageable") Pageable pageable);
 
     /**
-     * 统计总行数
+     * query count
      *
-     * @param questionTypes 查询条件
-     * @return 总行数
+     * @param questionTypes condition
+     * @return long
      */
     long count(QuestionTypes questionTypes);
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param questionTypes 实例对象
-     * @return 影响行数
+     * @param questionTypes entity
+     * @return row
      */
     int insert(QuestionTypes questionTypes);
 
     /**
-     * 批量新增数据（MyBatis原生foreach方法）
+     * add batch
      *
-     * @param entities List<QuestionTypes> 实例对象列表
-     * @return 影响行数
+     * @param entities List<QuestionTypes> entities
+     * @return row
      */
     int insertBatch(@Param("entities") List<QuestionTypes> entities);
 
     /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
+     * add or update batch
      *
-     * @param entities List<QuestionTypes> 实例对象列表
-     * @return 影响行数
-     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
+     * @param entities List<QuestionTypes> entities
+     * @return row
+     * @throws org.springframework.jdbc.BadSqlGrammarException if the SQL is malformed
      */
     int insertOrUpdateBatch(@Param("entities") List<QuestionTypes> entities);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param questionTypes 实例对象
-     * @return 影响行数
+     * @param questionTypes entity
+     * @return row
      */
     int update(QuestionTypes questionTypes);
 
     /**
-     * 通过主键删除数据
+     * delete by id
      *
-     * @param questionTypeId 主键
-     * @return 影响行数
+     * @param questionTypeId primary key
+     * @return row
      */
     int deleteById(Integer questionTypeId);
 

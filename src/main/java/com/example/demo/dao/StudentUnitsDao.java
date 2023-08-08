@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * (StudentUnits)表数据库访问层
+ * (StudentUnits) table dao
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-07-17 11:52:24
  */
 

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * (StudentUser)表数据库访问层
+ * (StudentUser) table dao
  *
  * @author qianyongru
  * @since 2023-06-21 06:36:40
@@ -15,72 +15,72 @@ import java.util.List;
 @Mapper
 public interface StudentUserDao {
     /**
-     * 通过ID查询单条数据
+     * query by id
      *
-     * @param id 主键
-     * @return 实例对象
+     * @param id primary key
+     * @return object
      */
     StudentUser queryById(Integer id);
 
     /**
-     * 新增数据
+     * 查询所有数据
      *
-     * @param studentUser 实例对象
-     * @return 影响行数
+     * @param studentUser object
+     * @return List<StudentUser>
      */
 
     int insert(StudentUser studentUser);
 
     /**
-     * 查询指定行数据
+     * insert batch
      *
-     * @param studentUser 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
+     * @param studentUser List<StudentUser>
+     * @param pageable pageable
+     * @return row
      */
     List<StudentUser> queryAllByLimit(StudentUser studentUser, @Param("pageable") Pageable pageable);
 
     /**
-     * 修改数据
+     * query count
      *
-     * @param studentUser 实例对象
-     * @return 影响行数
+     * @param studentUser object
+     * @return long
      */
     int update(StudentUser studentUser);
 
     /**
-     * 通过主键删除数据
+     * update data
      *
-     * @param id 主键
-     * @return 影响行数
+     * @param id primary key
+     * @return row
      */
     int deleteById(Integer id);
 
     /**
-     * 查询用户名是否存在
+     * delete by primary key
      *
-     * @param username 用户名
+     * @param username username
      * @return username
      */
     String queryByUsername(String username);
 
     /**
-     * 查询邮箱是否存在
+     * delete by primary key
      *
-     * @param email 邮箱
+     * @param email email
      * @return email
      */
     String queryByEmail(String email);
 
 
     /**
-     * @param username 用户名
+     * @param  username username
      * @return 用户对象
      */
     StudentUser findByUsername(String username);
 
     /**
-     * @param email 邮箱
+     * @param email email
      * @return 用户对象
      */
 

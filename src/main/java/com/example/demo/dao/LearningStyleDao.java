@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * (LearningStyle)表数据库访问层
+ * (LearningStyle) table dao
  *
  * @author qianyongru
  * @since 2023-07-08 04:19:23
@@ -16,68 +16,68 @@ import java.util.List;
 public interface LearningStyleDao {
 
     /**
-     * 通过ID查询单条数据
+     * query by id
      *
-     * @param learningStyleId 主键
-     * @return 实例对象
+     * @param learningStyleId primary key
+     * @return object
      */
     LearningStyle queryById(Integer learningStyleId);
 
     /**
-     * 查询指定行数据
+     * query all by limit
      *
-     * @param learningStyle 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
+     * @param learningStyle condition
+     * @param pageable pageable
+     * @return List<LearningStyle>
      */
     List<LearningStyle> queryAllByLimit(@Param("learningStyle") LearningStyle learningStyle, @Param("pageable") Pageable pageable);
 
     /**
-     * 统计总行数
+     * query count
      *
-     * @param learningStyle 查询条件
-     * @return 总行数
+     * @param learningStyle condition
+     * @return long
      */
     long count(LearningStyle learningStyle);
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param learningStyle 实例对象
-     * @return 影响行数
+     * @param learningStyle entity
+     * @return rows
      */
     int insert(LearningStyle learningStyle);
 
     /**
-     * 批量新增数据（MyBatis原生foreach方法）
+     * add batch
      *
-     * @param entities List<LearningStyle> 实例对象列表
-     * @return 影响行数
+     * @param entities List<LearningStyle> entities
+     * @return rows
      */
     int insertBatch(@Param("entities") List<LearningStyle> entities);
 
     /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
+     * add or update batch
      *
-     * @param entities List<LearningStyle> 实例对象列表
-     * @return 影响行数
-     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
+     * @param entities List<LearningStyle> entities
+     * @return rows
+     * @throws org.springframework.jdbc.BadSqlGrammarException if the SQL is malformed
      */
     int insertOrUpdateBatch(@Param("entities") List<LearningStyle> entities);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param learningStyle 实例对象
-     * @return 影响行数
+     * @param learningStyle entity
+     * @return rows
      */
     int update(LearningStyle learningStyle);
 
     /**
-     * 通过主键删除数据
+     * delete by id
      *
-     * @param learningStyleId 主键
-     * @return 影响行数
+     * @param learningStyleId primary key
+     * @return rows
      */
     int deleteById(Integer learningStyleId);
 

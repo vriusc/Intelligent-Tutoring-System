@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
- * (Record)表数据库访问层
+ * (Record) table dao
  *
  * @author qianyongru
  * @since 2023-06-23 19:27:35
@@ -16,68 +16,68 @@ import java.util.List;
 public interface RecordDao {
 
     /**
-     * 通过ID查询单条数据
+     * query by id
      *
-     * @param recordId 主键
-     * @return 实例对象
+     * @param recordId primary key
+     * @return object
      */
     Record queryById(Integer recordId);
 
     /**
-     * 查询指定行数据
+     * query all by limit
      *
-     * @param record 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
+     * @param record condition
+     * @param pageable pageable
+     * @return List<Record>
      */
     List<Record> queryAllByLimit(@Param("record") Record record, @Param("pageable") Pageable pageable);
 
     /**
-     * 统计总行数
+     * query count
      *
-     * @param record 查询条件
-     * @return 总行数
+     * @param record condition
+     * @return long
      */
     long count(Record record);
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param record 实例对象
-     * @return 影响行数
+     * @param record entity
+     * @return row
      */
     int insert(Record record);
 
     /**
-     * 批量新增数据（MyBatis原生foreach方法）
+     * add batch
      *
-     * @param entities List<Record> 实例对象列表
-     * @return 影响行数
+     * @param entities List<Record> entities
+     * @return row
      */
     int insertBatch(@Param("entities") List<Record> entities);
 
     /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
+     * add or update batch
      *
-     * @param entities List<Record> 实例对象列表
-     * @return 影响行数
-     * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
+     * @param entities List<Record> entities
+     * @return row
+     * @throws org.springframework.jdbc.BadSqlGrammarException if the SQL is malformed
      */
     int insertOrUpdateBatch(@Param("entities") List<Record> entities);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param record 实例对象
-     * @return 影响行数
+     * @param record entity
+     * @return row
      */
     int update(Record record);
 
     /**
-     * 通过主键删除数据
+     * delete by id
      *
-     * @param recordId 主键
-     * @return 影响行数
+     * @param recordId primary key
+     * @return row
      */
     int deleteById(Integer recordId);
 

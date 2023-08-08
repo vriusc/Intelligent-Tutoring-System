@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * (QuestionUnits)表控制层
+ * (QuestionUnits) controller
  *
  * @author qianyongru
  * @since 2023-06-23 09:31:50
@@ -21,17 +21,17 @@ import javax.annotation.Resource;
 @RequestMapping("/api/questionUnits")
 public class QuestionUnitsController {
     /**
-     * 服务对象
+     * questionUnitsService
      */
     @Resource
     private QuestionUnitsService questionUnitsService;
 
     /**
-     * 分页查询
+     * page query
      *
-     * @param questionUnits 筛选条件
-     * @param pageable      分页对象
-     * @return 查询结果
+     * @param questionUnits condition
+     * @param pageable     pageable
+     * @return Page<QuestionUnits>
      */
     @GetMapping
     public ResponseEntity<Page<QuestionUnits>> queryByPage(QuestionUnits questionUnits, Pageable pageable) {
@@ -39,10 +39,10 @@ public class QuestionUnitsController {
     }
 
     /**
-     * 通过主键查询单条数据
+     * query by id
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id primary key
+     * @return query result
      */
     @GetMapping("{id}")
     public ResponseEntity<QuestionUnits> queryById(@PathVariable("id") Integer id) {
@@ -50,10 +50,10 @@ public class QuestionUnitsController {
     }
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param questionUnits 实体
-     * @return 新增结果
+     * @param questionUnits entity
+     * @return add result
      */
     @PostMapping
     public ResponseEntity<QuestionUnits> add(QuestionUnits questionUnits) {
@@ -61,10 +61,10 @@ public class QuestionUnitsController {
     }
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param questionUnits 实体
-     * @return 编辑结果
+     * @param questionUnits entity
+     * @return edit result
      */
     @PutMapping
     public ResponseEntity<QuestionUnits> edit(QuestionUnits questionUnits) {
@@ -72,10 +72,10 @@ public class QuestionUnitsController {
     }
 
     /**
-     * 删除数据
+     * delete by id
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return delete result
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {

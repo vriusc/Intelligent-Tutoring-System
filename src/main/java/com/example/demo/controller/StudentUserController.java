@@ -16,21 +16,21 @@ import javax.annotation.Resource;
  * @author qianyongru
  * @since 2023-06-21 06:36:40
  */
-//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/studentUser")
 public class StudentUserController {
     /**
-     * 服务对象
+     *
+     * studentUserService
      */
     @Resource
     private StudentUserService studentUserService;
 
     /**
-     * 通过主键查询单条数据
+     * page query
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id condition
+     * @return Page<StudentUser>
      */
     @GetMapping("{id}")
     public ResponseEntity<StudentUser> queryById(@PathVariable("id") Integer id) {
@@ -38,22 +38,22 @@ public class StudentUserController {
     }
 
     /**
-     * 注册
+     * register
      *
-     * @param studentUser 实体
-     * @return 注册
+     * @param studentUser entity
+     * @return register result
      */
     @PostMapping("/register")
     public ResponseEntity<RegisterResponseDTO> add(@RequestBody StudentUser studentUser) {
 
-        // 对密码进行bcrypt加密
+        // Encrypt passwords with bcrypt
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(studentUser.getPassword());
         studentUser.setPassword(encodedPassword);
 
         this.studentUserService.insert(studentUser);
 
-        // 将StudentUser转换为RegisterResponseDTO
+        // transform entity to dto
         RegisterResponseDTO responseDTO = new RegisterResponseDTO();
         BeanUtils.copyProperties(studentUser, responseDTO);
         responseDTO.setId(studentUser.getId());
@@ -63,45 +63,45 @@ public class StudentUserController {
     }
 
     /**
-     * 登录
+     * login
      *
-     * @param loginRequest 登录请求
-     * @return 登录结果
+     * @param loginRequest login request
+     * @return login result
      */
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequest) {
         String usernameOrEmail = loginRequest.getUsernameOrEmail();
         String password = loginRequest.getPassword();
 
-        // 调用登录服务进行身份验证和生成令牌等操作
+        // Calling the login service to perform operations such as authentication and token generation
         try {
             StudentUser user=studentUserService.login(usernameOrEmail, password);
             Integer studentId=user.getId();
 
-            // 登录成功，创建登录响应对象
+            // Login successful, create login response object
             LoginResponseDTO responseDTO = new LoginResponseDTO();
             responseDTO.setStudentId(studentId);
             responseDTO.setToken("generated_token");
             responseDTO.setMessage("Login successful");
 
-            // 返回登录成功的响应
+            // return login response
             return ResponseEntity.ok(responseDTO);
         } catch (RuntimeException e) {
-            // 登录失败，创建失败响应对象
+            // Login failed, create login response object
             LoginResponseDTO responseDTO = new LoginResponseDTO();
             responseDTO.setToken(null);
             responseDTO.setMessage("Login failed: " + e.getMessage());
 
-            // 返回登录失败的响应
+            // return failure response
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseDTO);
         }
     }
 
     /**
-     * 修改密码
+     * change password
      *
-     * @param request 修改密码请求
-     * @return 修改结果
+     * @param request change password request
+     * @return change password result
      */
 
     @PostMapping("/password")
@@ -115,10 +115,10 @@ public class StudentUserController {
     }
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param studentUser 实体
-     * @return 编辑结果
+     * @param studentUser entity
+     * @return edit result
      */
     @PutMapping
     public ResponseEntity<StudentUser> edit(StudentUser studentUser) {
@@ -126,10 +126,10 @@ public class StudentUserController {
     }
 
     /**
-     * 删除数据
+     * delete by id
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return delete result
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {

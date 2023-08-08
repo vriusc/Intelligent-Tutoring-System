@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * (Options)表控制层
+ * (Options) controller
  *
  * @author qianyongru
  * @since 2023-06-23 10:58:28
@@ -20,17 +20,17 @@ import javax.annotation.Resource;
 @RequestMapping("/api/options")
 public class OptionsController {
     /**
-     * 服务对象
+     * optionsService
      */
     @Resource
     private OptionsService optionsService;
 
     /**
-     * 分页查询
+     * page query
      *
-     * @param options 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param options condition
+     * @param pageRequest pageRequest
+     * @return Page<Options>
      */
     @GetMapping
     public ResponseEntity<Page<Options>> queryByPage(Options options, Pageable pageRequest) {
@@ -38,10 +38,10 @@ public class OptionsController {
     }
 
     /**
-     * 通过主键查询单条数据
+     * query by id
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id id
+     * @return Options
      */
     @GetMapping("{id}")
     public ResponseEntity<Options> queryById(@PathVariable("id") Integer id) {
@@ -49,10 +49,10 @@ public class OptionsController {
     }
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param options 实体
-     * @return 新增结果
+     * @param options entity
+     * @return Options
      */
     @PostMapping
     public ResponseEntity<Options> add(Options options) {
@@ -60,10 +60,10 @@ public class OptionsController {
     }
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param options 实体
-     * @return 编辑结果
+     * @param options entity
+     * @return Options
      */
     @PutMapping
     public ResponseEntity<Options> edit(Options options) {
@@ -71,10 +71,10 @@ public class OptionsController {
     }
 
     /**
-     * 删除数据
+     * delete by id
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return Boolean
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {

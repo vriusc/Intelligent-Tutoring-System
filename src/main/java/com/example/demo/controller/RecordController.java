@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * (Record)表控制层
+ * (Record) controller
  *
  * @author qianyongru
  * @since 2023-06-23 19:27:35
@@ -20,17 +20,17 @@ import javax.annotation.Resource;
 @RequestMapping("/api/record")
 public class RecordController {
     /**
-     * 服务对象
+     * recordService
      */
     @Resource
     private RecordService recordService;
 
     /**
-     * 分页查询
+     * page query
      *
-     * @param record 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param record condition
+     * @param pageRequest pageRequest
+     * @return Page<Record>
      */
     @GetMapping
     public ResponseEntity<Page<Record>> queryByPage(Record record, Pageable pageRequest) {
@@ -38,10 +38,10 @@ public class RecordController {
     }
 
     /**
-     * 通过主键查询单条数据
+     * query by id
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id primary key
+     * @return Record
      */
     @GetMapping("{id}")
     public ResponseEntity<Record> queryById(@PathVariable("id") Integer id) {
@@ -49,10 +49,10 @@ public class RecordController {
     }
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param record 实体
-     * @return 新增结果
+     * @param record entity
+     * @return Record
      */
     @PostMapping
     public ResponseEntity<Record> add(@RequestBody Record record) {
@@ -61,10 +61,10 @@ public class RecordController {
     }
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param record 实体
-     * @return 编辑结果
+     * @param record entity
+     * @return Record
      */
     @PutMapping
     public ResponseEntity<Record> edit(@RequestBody Record record) {
@@ -72,10 +72,10 @@ public class RecordController {
     }
 
     /**
-     * 删除数据
+     * delete by id
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return Boolean
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {

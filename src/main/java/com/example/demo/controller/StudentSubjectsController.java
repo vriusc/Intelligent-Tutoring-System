@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * (StudentSubjects)表控制层
+ * (StudentSubjects) controller
  *
  * @author qianyongru
  * @since 2023-06-22 06:25:52
@@ -24,9 +24,6 @@ import java.util.List;
 public class StudentSubjectsController {
 
 
-    /**
-     * 服务对象
-     */
     @Resource
     private StudentSubjectsService studentSubjectsService;
 
@@ -35,7 +32,10 @@ public class StudentSubjectsController {
     @Resource
     private SubjectsServiceImpl subjectsService;
 
-    // 在这里添加convertToDTO方法
+
+    /**
+     * studentSubjects
+     */
     private StudentSubjectsDTO convertToDTO(StudentSubjects studentSubjects, RegisterResponseDTO studentDTO, Subjects subject) {
         StudentSubjectsDTO dto = new StudentSubjectsDTO();
         dto.setStudentSubjectId(studentSubjects.getStudentSubjectId());
@@ -49,11 +49,11 @@ public class StudentSubjectsController {
     }
 
     /**
-     * 分页查询
+     * query all data
      *
-     * @param studentSubjects 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param studentSubjects condition
+     * @param pageRequest    pageRequest
+     * @return Page<StudentSubjects>
      */
     @GetMapping
     public ResponseEntity<Page<StudentSubjects>> queryByPage(StudentSubjects studentSubjects, PageRequest pageRequest) {
@@ -62,10 +62,10 @@ public class StudentSubjectsController {
 
 
     /**
-     * 通过主键查询单条数据
+     * query all data
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id condition
+     * @return Page<StudentSubjects>
      */
     @GetMapping("{id}")
     public ResponseEntity<StudentSubjects> queryById(@PathVariable("id") Integer id) {
@@ -73,10 +73,10 @@ public class StudentSubjectsController {
     }
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param studentSubjects 实体
-     * @return 新增结果
+     * @param studentSubjects entity
+     * @return StudentSubjects
      */
     @PostMapping("/add")
     public ResponseEntity<StudentSubjectsDTO> add(@RequestBody StudentSubjects studentSubjects) {
@@ -106,10 +106,10 @@ public class StudentSubjectsController {
 
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param studentSubjects 实体
-     * @return 编辑结果
+     * @param studentSubjects entity
+     * @return StudentSubjects
      */
     @PutMapping
     public ResponseEntity<StudentSubjects> edit(@RequestBody StudentSubjects studentSubjects) {
@@ -117,10 +117,10 @@ public class StudentSubjectsController {
     }
 
     /**
-     * 删除数据
+     * delete by id
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return Boolean
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {

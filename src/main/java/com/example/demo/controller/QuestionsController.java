@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * (Questions)表控制层
+ * (Questions) controller
  *
  * @author qianyongru
  * @since 2023-06-23 08:55:36
@@ -20,17 +20,17 @@ import javax.annotation.Resource;
 @RequestMapping("/api/questions")
 public class QuestionsController {
     /**
-     * 服务对象
+     * questionsService
      */
     @Resource
     private QuestionsService questionsService;
 
     /**
-     * 分页查询
+     * page query
      *
-     * @param questions 筛选条件
-     * @param pageable      分页对象
-     * @return 查询结果
+     * @param questions condition
+     * @param pageable  pageable
+     * @return Page<Questions>
      */
     @GetMapping
     public ResponseEntity<Page<Questions>> queryByPage(Questions questions, Pageable pageable) {
@@ -38,10 +38,10 @@ public class QuestionsController {
     }
 
     /**
-     * 通过主键查询单条数据
+     * query by id
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id primary key
+     * @return query result
      */
     @GetMapping("{id}")
     public ResponseEntity<Questions> queryById(@PathVariable("id") Integer id) {
@@ -49,10 +49,10 @@ public class QuestionsController {
     }
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param questions 实体
-     * @return 新增结果
+     * @param questions entity
+     * @return add result
      */
     @PostMapping
     public ResponseEntity<Questions> add(Questions questions) {
@@ -60,10 +60,10 @@ public class QuestionsController {
     }
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param questions 实体
-     * @return 编辑结果
+     * @param questions entity
+     * @return edit result
      */
     @PutMapping
     public ResponseEntity<Questions> edit(Questions questions) {
@@ -71,10 +71,10 @@ public class QuestionsController {
     }
 
     /**
-     * 删除数据
+     * delete by id
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return delete result
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {

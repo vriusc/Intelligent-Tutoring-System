@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * (LearningStyle)表控制层
+ * (LearningStyle) controller
  *
  * @author qianyongru
  * @since 2023-07-08 04:19:23
@@ -20,17 +20,17 @@ import javax.annotation.Resource;
 @RequestMapping("/api/learningStyle")
 public class LearningStyleController {
     /**
-     * 服务对象
+     * learningStyle service
      */
     @Resource
     private LearningStyleService learningStyleService;
 
     /**
-     * 分页查询
+     * page query
      *
-     * @param learningStyle 筛选条件
-     * @param pageable      分页对象
-     * @return 查询结果
+     * @param learningStyle condition
+     * @param pageable      pageable
+     * @return  Page<LearningStyle>
      */
     @GetMapping
     public ResponseEntity<Page<LearningStyle>> queryByPage(LearningStyle learningStyle, Pageable pageable) {
@@ -38,10 +38,10 @@ public class LearningStyleController {
     }
 
     /**
-     * 通过主键查询单条数据
+     * query by id
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id primary key
+     * @return query result
      */
     @GetMapping("{id}")
     public ResponseEntity<LearningStyle> queryById(@PathVariable("id") Integer id) {
@@ -49,10 +49,10 @@ public class LearningStyleController {
     }
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param learningStyle 实体
-     * @return 新增结果
+     * @param learningStyle entity
+     * @return add result
      */
     @PostMapping
     public ResponseEntity<LearningStyle> add(@RequestBody LearningStyle learningStyle) {
@@ -60,10 +60,10 @@ public class LearningStyleController {
     }
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param learningStyle 实体
-     * @return 编辑结果
+     * @param learningStyle entity
+     * @return edit result
      */
     @PutMapping
     public ResponseEntity<LearningStyle> edit(@RequestBody LearningStyle learningStyle) {
@@ -71,10 +71,10 @@ public class LearningStyleController {
     }
 
     /**
-     * 删除数据
+     * delete by id
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return delete result
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {

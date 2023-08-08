@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     /**
-     * 全局异常处理
+     * exception handler
      *
      * @author qianyongru
      * @since 2023-06-23 15:58:28

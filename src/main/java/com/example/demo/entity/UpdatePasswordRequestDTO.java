@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 /**
- * (UpdatePasswordRequestDTO)实体类
+ * (UpdatePasswordRequestDTO) entityDTO
  *
  * @author qianyongru
  * @since 2023-06-23 06:45:38

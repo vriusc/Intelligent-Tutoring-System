@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * (QuestionUnits)实体类
+ * (QuestionUnits) entity
  *
  * @author qianyongru
  * @since 2023-06-23 09:31:50

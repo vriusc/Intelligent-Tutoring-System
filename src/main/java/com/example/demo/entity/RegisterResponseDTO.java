@@ -3,7 +3,7 @@ import lombok.Data;
 
 
 /**
- * (RegisterResponseDTO)实体类
+ * (RegisterResponseDTO) entityDTO
  *
  * @author qianyongru
  * @since 2023-06-23 19:56:35

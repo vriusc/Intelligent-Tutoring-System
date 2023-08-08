@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 /**
- * (StudentSubjectsDTO)实体类
+ * (StudentSubjectsDTO) entityDTO
  *
  * @author qianyongru
  * @since 2023-06-22 10:25:52

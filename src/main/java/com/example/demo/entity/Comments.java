@@ -6,9 +6,9 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * (Comments)实体类
+ * (Comments) entity
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-07-08 05:07:47
  */
 @Data

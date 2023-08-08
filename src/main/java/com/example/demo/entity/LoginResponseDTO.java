@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import lombok.Data;
 
 /**
- * (LoginResponseDTO)实体类
+ * (LoginResponseDTO) entityDTO
  *
  * @author qianyongru
  * @since 2023-06-23 19:50:35

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * (LearningStyle)实体类
+ * (LearningStyle) entity
  *
  * @author makejava
  * @since 2023-07-08 04:19:23

@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * (QuestionUnits)表服务接口
+ * (QuestionUnits) table services interface
  *
  * @author qianyongru
  * @since 2023-06-23 09:31:50
@@ -13,43 +13,43 @@ import org.springframework.data.domain.Pageable;
 public interface QuestionUnitsService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param questionUnitId 主键
-     * @return 实例对象
+     * @param questionUnitId primary key
+     * @return entity
      */
     QuestionUnits queryById(Integer questionUnitId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param questionUnits 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param questionUnits  condition
+     * @param pageRequest page request
+     * @return entity list
      */
     Page<QuestionUnits> queryByPage(QuestionUnits questionUnits, Pageable pageRequest);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param questionUnits 实例对象
-     * @return 实例对象
+     * @param questionUnits entity
+     * @return entity
      */
     QuestionUnits insert(QuestionUnits questionUnits);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param questionUnits 实例对象
-     * @return 实例对象
+     * @param questionUnits entity
+     * @return entity
      */
     QuestionUnits update(QuestionUnits questionUnits);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param questionUnitId 主键
-     * @return 是否成功
+     * @param questionUnitId primary key
+     * @return boolean
      */
     boolean deleteById(Integer questionUnitId);
 

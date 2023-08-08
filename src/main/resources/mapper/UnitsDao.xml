@@ -12,7 +12,7 @@
         <result property="text" column="text" jdbcType="VARCHAR"/>
         <result property="text_description" column="text_description" jdbcType="LONGVARCHAR"/>
 
-        <!-- 关联Subjects对象 -->
+        <!-- Subjects Entity -->
         <association property="subject" javaType="com.example.demo.entity.Subjects">
             <id property="subjectId" column="subject_id"/>
             <result property="subjectName" column="subject_name"/>
@@ -22,7 +22,7 @@
 
     </resultMap>
 
-    <!--查询单个-->
+    <!--query by id-->
     <select id="queryById" resultMap="UnitsMap">
         select
           unit_id, unit_name, subject_id, description, units_order, materials_path,text, text_description
@@ -30,7 +30,7 @@
         where unit_id = #{unitId}
     </select>
 
-    <!--查询指定行数据-->
+    <!--query all-->
     <select id="queryAllByLimit" resultMap="UnitsMap">
         select
           unit_id, unit_name, subject_id, description, units_order, materials_path,text, text_description
@@ -64,7 +64,7 @@
         limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
-    <!--统计总行数-->
+    <!--count-->
     <select id="count" resultType="java.lang.Long">
         select count(1)
         from Units
@@ -90,7 +90,7 @@
         </where>
     </select>
 
-    <!--根据subjectId查询-->
+    <!--query by subject id-->
     <select id="queryBySubjectId" resultType="com.example.demo.entity.Units">
         select
             u.unit_id as unitId,
@@ -110,7 +110,7 @@
         where u.subject_id = #{subjectId}
     </select>
 
-    <!--新增所有列-->
+    <!-- insert -->
     <insert id="insert" keyProperty="unitId" useGeneratedKeys="true">
         insert into test.Units(unit_name, subject_id, description, units_order, materials_path, text, text_description)
         values (#{unitName}, #{subjectId}, #{description}, #{unitOrder}, #{materials_path}, #{text}, #{text_description})
@@ -118,7 +118,7 @@
 
 
 
-    <!--通过主键修改数据-->
+    <!-- update -->
     <update id="update">
         update Units
         <set>
@@ -141,7 +141,7 @@
         where unit_id = #{unitId}
     </update>
 
-    <!--通过主键删除-->
+    <!-- delete-->
     <delete id="deleteById">
         delete from Units where unit_id = #{unitId}
     </delete>

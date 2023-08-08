@@ -4,7 +4,7 @@ import com.example.demo.entity.StudentUser;
 
 
 /**
- * (StudentUser)表服务接口
+ * (StudentUser) table services interface
  *
  * @author qianyongru
  * @since 2023-06-21 06:36:40
@@ -12,53 +12,53 @@ import com.example.demo.entity.StudentUser;
 public interface StudentUserService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param id 主键
-     * @return 实例对象
+     * @param id primary key
+     * @return entity
      */
     StudentUser queryById(Integer id);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param studentUser 实例对象
-     * @return 实例对象
+     * @param studentUser entity
+     * @return entity
      */
     StudentUser insert(StudentUser studentUser);
 
     /**
-     * 用户登陆
+     * user login
      *
-     * @param usernameOrEmail 用户名或邮箱
-     * @param password 密码
-     * @return 实例对象
+     * @param usernameOrEmail email or username
+     * @param password password
+     * @return entity
      */
 
     StudentUser login(String usernameOrEmail, String password);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param studentUser 实例对象
-     * @return 实例对象
+     * @param studentUser entity
+     * @return entity
      */
     StudentUser update(StudentUser studentUser);
 
     /**
-     * 更新密码
+     * change password
      *
-     * @param username 用户名
-     * @param email 邮箱
-     * @param currentPassword 当前密码
-     * @param newPassword 新密码
+     * @param username username
+     * @param email email
+     * @param currentPassword password
+     * @param newPassword new password
      */
     void updatePassword(String username, String email, String currentPassword, String newPassword);
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param id 主键
-     * @return 是否成功
+     * @param id primary key
+     * @return boolean
      */
     boolean deleteById(Integer id);
 

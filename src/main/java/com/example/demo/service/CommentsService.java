@@ -5,51 +5,51 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * (Comments)表服务接口
+ * (Comments) table services interface
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-07-08 05:07:47
  */
 public interface CommentsService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param commentId 主键
-     * @return 实例对象
+     * @param commentId primary key
+     * @return entity
      */
     Comments queryById(Integer commentId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param comments 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param comments query condition
+     * @param pageRequest page request
+     * @return entity list
      */
     Page<Comments> queryByPage(Comments comments, Pageable pageRequest);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param comments 实例对象
-     * @return 实例对象
+     * @param comments entity
+     * @return entity
      */
     Comments insert(Comments comments);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param comments 实例对象
-     * @return 实例对象
+     * @param comments entity
+     * @return entity
      */
     Comments update(Comments comments);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param commentId 主键
-     * @return 是否成功
+     * @param commentId primary key
+     * @return boolean
      */
     boolean deleteById(Integer commentId);
 

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * (Subjects)表服务接口
+ * (Subjects) table services interface
  *
  * @author qianyongru
  * @since 2023-06-22 06:24:38
@@ -14,43 +14,43 @@ import org.springframework.data.domain.Pageable;
 public interface SubjectsService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param subjectId 主键
-     * @return 实例对象
+     * @param subjectId primary key
+     * @return entity
      */
     Subjects queryById(Integer subjectId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param subjects 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param subjects condition
+     * @param pageRequest  page request
+     * @return entity list
      */
     Page<Subjects> queryByPage(Subjects subjects, Pageable pageRequest);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param subjects 实例对象
-     * @return 实例对象
+     * @param subjects entity
+     * @return entity
      */
     Subjects insert(Subjects subjects);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param subjects 实例对象
-     * @return 实例对象
+     * @param subjects entity
+     * @return entity
      */
     Subjects update(Subjects subjects);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param subjectId 主键
-     * @return 是否成功
+     * @param subjectId primary key
+     * @return boolean
      */
     boolean deleteById(Integer subjectId);
 

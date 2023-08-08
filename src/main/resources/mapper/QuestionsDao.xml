@@ -19,7 +19,7 @@
     </association>
     </resultMap>
 
-    <!--查询单个-->
+    <!--query By id-->
     <select id="queryById" resultMap="QuestionsMap">
         select
             q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,q.description,
@@ -29,7 +29,7 @@
         where q.question_id = #{questionId}
     </select>
 
-    <!--查询所有并分页-->
+    <!--query all-->
     <select id="queryAllByLimit" resultMap="QuestionsMap">
         select
         q.question_id, q.question, q.question_type_id, q.picture_path, q.video_path, q.audio_path, q.question_order, q.explanation,q.description,
@@ -68,7 +68,7 @@
         limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
-    <!--统计总行数-->
+    <!--count-->
     <select id="count" resultType="java.lang.Long">
         select count(1)
         from questions
@@ -100,7 +100,7 @@
         </where>
     </select>
 
-    <!--新增所有列-->
+    <!--insert-->
     <insert id="insert" keyProperty="questionId" useGeneratedKeys="true">
         insert into questions(question, question_type_id, picture_path, video_path, audio_path, question_order, explanation,description)
         values (#{question}, #{questionTypeId}, #{picturePath}, #{videoPath}, #{audioPath}, #{questionOrder}, #{explanation},#{description})
@@ -130,7 +130,7 @@
         explanation = values(explanation)
     </insert>
 
-    <!--通过主键修改数据-->
+    <!--update-->
     <update id="update">
         update questions
         <set>
@@ -162,7 +162,7 @@
         where question_id = #{questionId}
     </update>
 
-    <!--通过主键删除-->
+    <!--delete-->
     <delete id="deleteById">
         delete from questions where question_id = #{questionId}
     </delete>

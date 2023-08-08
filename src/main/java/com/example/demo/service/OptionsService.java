@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * (Options)表服务接口
+ * (Options) table services interface
  *
  * @author qianyongru
  * @since 2023-06-23 10:58:28
@@ -13,43 +13,43 @@ import org.springframework.data.domain.Pageable;
 public interface OptionsService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param optionId 主键
-     * @return 实例对象
+     * @param optionId primary key
+     * @return entity
      */
     Options queryById(Integer optionId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param options 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param options condition
+     * @param pageRequest page request
+     * @return entity list
      */
     Page<Options> queryByPage(Options options, Pageable pageRequest);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param options 实例对象
-     * @return 实例对象
+     * @param options entity
+     * @return entity
      */
     Options insert(Options options);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param options 实例对象
-     * @return 实例对象
+     * @param options entity
+     * @return entity
      */
     Options update(Options options);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param optionId 主键
-     * @return 是否成功
+     * @param optionId primary key
+     * @return boolean
      */
     boolean deleteById(Integer optionId);
 

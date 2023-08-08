@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import java.util.List;
 
 /**
- * (Units)表服务接口
+ * (Units) table services interface
  *
  * @author qianyongru
  * @since 2023-06-22 20:46:33
@@ -15,51 +15,51 @@ import java.util.List;
 public interface UnitsService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param unitId 主键
-     * @return 实例对象
+     * @param unitId primary key
+     * @return entity
      */
     Units queryById(Integer unitId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param units 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param units condition
+     * @param pageRequest page request
+     * @return entity list
      */
     Page<Units> queryByPage(Units units, PageRequest pageRequest);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param units 实例对象
-     * @return 实例对象
+     * @param units entity
+     * @return entity
      */
     Units insert(Units units);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param units 实例对象
-     * @return 实例对象
+     * @param units entity
+     * @return entity
      */
     Units update(Units units);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param unitId 主键
-     * @return 是否成功
+     * @param unitId primary key
+     * @return boolean
      */
     boolean deleteById(Integer unitId);
 
     /**
-     * 通过subjectId查询数据
+     * query By subject id
      *
-     * @param subjectID 主键
-     * @return 操作结果
+     * @param subjectID primary key
+     * @return entity list
      */
     List<Units> queryBySubjectId(Integer subjectID);
 

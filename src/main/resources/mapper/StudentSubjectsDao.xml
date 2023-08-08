@@ -8,7 +8,7 @@
         <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
         <result property="progress" column="progress" jdbcType="INTEGER"/>
 
-        <!-- 关联StudentUser对象 -->
+        <!-- StudentUser entity -->
         <association property="student" javaType="com.example.demo.entity.StudentUser">
             <id property="id" column="student_id"/>
             <result property="username" column="username"/>
@@ -16,7 +16,7 @@
             <result property="email" column="email"/>
         </association>
 
-        <!-- 关联Subjects对象 -->
+        <!-- Subjects entity -->
         <association property="subject" javaType="com.example.demo.entity.Subjects">
             <id property="subjectId" column="subject_id"/>
             <result property="subjectName" column="subject_name"/>
@@ -25,7 +25,7 @@
         </association>
     </resultMap>
 
-    <!--查询单个-->
+    <!--query by id-->
     <select id="queryById" resultMap="StudentSubjectsMap">
         select
           student_subject_id, student_id, subject_id, progress
@@ -33,7 +33,7 @@
         where student_subject_id = #{studentSubjectId}
     </select>
 
-    <!--查询指定行数据-->
+    <!--query all-->
     <select id="queryAllByLimit" resultMap="StudentSubjectsMap">
         select
           student_subject_id, student_id, subject_id, progress
@@ -55,7 +55,7 @@
         limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
-    <!--统计总行数-->
+    <!--count-->
     <select id="count" resultType="java.lang.Long">
         select count(1)
         from student_subjects
@@ -76,7 +76,7 @@
     </select>
 
 
-    <!--新增所有列-->
+    <!--insert-->
     <insert id="insert" keyProperty="studentSubjectId" useGeneratedKeys="true">
         insert into student_subjects(student_id, subject_id, progress)
         values (#{studentId}, #{subjectId}, #{progress})
@@ -102,7 +102,7 @@
         progress = values(progress)
     </insert>
 
-    <!--通过主键修改数据-->
+    <!--update-->
     <update id="update">
         update student_subjects
         <set>
@@ -119,7 +119,7 @@
         where student_subject_id = #{studentSubjectId}
     </update>
 
-    <!--通过主键删除-->
+    <!--delete-->
     <delete id="deleteById">
         delete from student_subjects where student_subject_id = #{studentSubjectId}
     </delete>

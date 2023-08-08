@@ -5,51 +5,51 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * (LearningStyle)表服务接口
+ * (LearningStyle) table services interface
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-07-08 04:19:23
  */
 public interface LearningStyleService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param learningStyleId 主键
-     * @return 实例对象
+     * @param learningStyleId primary key
+     * @return entity
      */
     LearningStyle queryById(Integer learningStyleId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param learningStyle 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param learningStyle  query condition
+     * @param pageRequest page request
+     * @return entity list
      */
     Page<LearningStyle> queryByPage(LearningStyle learningStyle, Pageable pageRequest);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param learningStyle 实例对象
-     * @return 实例对象
+     * @param learningStyle entity
+     * @return entity
      */
     LearningStyle insert(LearningStyle learningStyle);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param learningStyle 实例对象
-     * @return 实例对象
+     * @param learningStyle entity
+     * @return entity
      */
     LearningStyle update(LearningStyle learningStyle);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param learningStyleId 主键
-     * @return 是否成功
+     * @param learningStyleId  primary key
+     * @return boolean
      */
     boolean deleteById(Integer learningStyleId);
 

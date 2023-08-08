@@ -9,7 +9,7 @@
         <result property="email" column="email" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <!--查询单个-->
+    <!--query by id-->
     <select id="queryById" resultMap="StudentUserMap">
         select
           id, username, password, email
@@ -17,13 +17,13 @@
         where id = #{id}
     </select>
 
-    <!--新增所有列-->
+    <!--insert-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into test.student_user(username, password, email)
         values (#{username}, #{password}, #{email})
     </insert>
 
-    <!--查询指定行数据-->
+    <!--query all-->
     <select id="queryAllByLimit" resultMap="StudentUserMap">
         select
           id, username, password, email
@@ -45,18 +45,21 @@
         limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
+    <!--query by username-->
     <select id="queryByUsername" resultType="java.lang.String">
         select username
         from test.student_user
         where username = #{username}
     </select>
 
+    <!--query by email-->
     <select id="queryByEmail" resultType="java.lang.String">
         select email
         from test.student_user
         where email = #{email}
     </select>
 
+    <!--find bu username-->
     <select id="findByUsername" resultType="com.example.demo.entity.StudentUser">
         select
           id, username, password, email
@@ -64,6 +67,7 @@
         where username = #{username}
     </select>
 
+    <!--find by email-->
     <select id="findByEmail" resultType="com.example.demo.entity.StudentUser">
         select
           id, username, password, email
@@ -71,7 +75,7 @@
         where email = #{email}
     </select>
 
-    <!--通过主键修改数据-->
+    <!--update-->
     <update id="update">
         update student_user
         <set>
@@ -88,7 +92,7 @@
         where id = #{id}
     </update>
 
-    <!--通过主键删除-->
+    <!--delete-->
     <delete id="deleteById">
         delete from student_user where id = #{id}
     </delete>

@@ -5,51 +5,51 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * (StudentUnits)表服务接口
+ * (StudentUnits) table services interface
  *
- * @author makejava
+ * @author qianyongru
  * @since 2023-07-17 11:52:24
  */
 public interface StudentUnitsService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param studentUnitId 主键
-     * @return 实例对象
+     * @param studentUnitId primary key
+     * @return entity
      */
     StudentUnits queryById(Integer studentUnitId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param studentUnits 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param studentUnits   query condition
+     * @param pageRequest  page request
+     * @return entity list
      */
     Page<StudentUnits> queryByPage(StudentUnits studentUnits, Pageable pageRequest);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param studentUnits 实例对象
-     * @return 实例对象
+     * @param studentUnits entity
+     * @return entity
      */
     StudentUnits insert(StudentUnits studentUnits);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param studentUnits 实例对象
-     * @return 实例对象
+     * @param studentUnits entity
+     * @return entity
      */
     StudentUnits update(StudentUnits studentUnits);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param studentUnitId 主键
-     * @return 是否成功
+     * @param studentUnitId primary key
+     * @return  boolean
      */
     boolean deleteById(Integer studentUnitId);
 

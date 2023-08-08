@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import java.util.List;
 
 /**
- * (StudentSubjects)表服务接口
+ * (StudentSubjects) table services interface
  *
  * @author qianyongru
  * @since 2023-06-22 06:25:52
@@ -15,53 +15,53 @@ import java.util.List;
 public interface StudentSubjectsService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param studentSubjectId 主键
-     * @return 实例对象
+     * @param studentSubjectId primary key
+     * @return entity
      */
     StudentSubjects queryById(Integer studentSubjectId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param studentSubjects 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param studentSubjects condition
+     * @param pageRequest page request
+     * @return entity list
      */
     Page<StudentSubjects> queryByPage(StudentSubjects studentSubjects, PageRequest pageRequest);
 
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param studentSubjects 实例对象
-     * @return 实例对象
+     * @param studentSubjects entity
+     * @return entity
      */
     StudentSubjects insert(StudentSubjects studentSubjects);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param studentSubjects 实例对象
-     * @return 实例对象
+     * @param studentSubjects entity
+     * @return entity
      */
     StudentSubjects update(StudentSubjects studentSubjects);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param studentSubjectId 主键
-     * @return 是否成功
+     * @param studentSubjectId primary key
+     * @return boolean
      */
     boolean deleteById(Integer studentSubjectId);
 
 
     /**
-     * 通过学生id查询
+     * query By studentId
      *
-     * @param studentId 学生id
-     * @return 实例对象
+     * @param studentId primary key
+     * @return entity list
      */
 
     List<StudentSubjects> queryByStudentId(Integer studentId);

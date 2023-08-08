@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- * (Record)表服务接口
+ * (Record) table services interface
  *
  * @author qianyongru
  * @since 2023-06-23 19:27:35
@@ -13,43 +13,43 @@ import org.springframework.data.domain.Pageable;
 public interface RecordService {
 
     /**
-     * 通过ID查询单条数据
+     * query By id
      *
-     * @param recordId 主键
-     * @return 实例对象
+     * @param recordId primary key
+     * @return entity
      */
     Record queryById(Integer recordId);
 
     /**
-     * 分页查询
+     * query By limit
      *
-     * @param record 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param record condition
+     * @param pageRequest page request
+     * @return entity list
      */
     Page<Record> queryByPage(Record record, Pageable pageRequest);
 
     /**
-     * 新增数据
+     * add new data
      *
-     * @param record 实例对象
-     * @return 实例对象
+     * @param record entity
+     * @return entity
      */
     Record insert(Record record);
 
     /**
-     * 修改数据
+     * update data
      *
-     * @param record 实例对象
-     * @return 实例对象
+     * @param record entity
+     * @return entity
      */
     Record update(Record record);
 
     /**
-     * 通过主键删除数据
+     * delete By id
      *
-     * @param recordId 主键
-     * @return 是否成功
+     * @param recordId primary key
+     * @return boolean
      */
     boolean deleteById(Integer recordId);
 

@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 
 
 /**
- * (Subjects)表控制层
+ * (Subjects) controller
  *
  * @author qianyongru
  * @since 2023-06-22 06:24:38
@@ -22,19 +22,19 @@ import javax.annotation.Resource;
 @RequestMapping("/api/subjects")
 public class SubjectsController {
     /**
-     * 服务对象
+     * subjectsService
      */
     @Resource
     private SubjectsService subjectsService;
 
 
     /**
-     * 分页查询所有可科目
+     * page query
      *
-     * @param subjects 筛选条件
-     * @param page      页码
-     * @param size      每页条数
-     * @return 查询结果
+     * @param subjects condition
+     * @param page      page
+     * @param size      size
+     * @return Page<Subjects>
      */
     @GetMapping("/queryAllSubjects")
     public Page<Subjects> getAllSubjects(
@@ -46,11 +46,11 @@ public class SubjectsController {
     }
 
     /**
-     * 分页查询
+     * page query
      *
-     * @param subjects 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param subjects condition
+     * @param pageRequest pageRequest
+     * @return Page<Subjects>
      */
     @GetMapping
     public ResponseEntity<Page<Subjects>> queryByPage(Subjects subjects, Pageable pageRequest) {
@@ -60,10 +60,10 @@ public class SubjectsController {
 
 
     /**
-     * 通过主键查询单条数据
+     * query by id
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id primary key
+     * @return query result
      */
     @GetMapping("{id}")
     public ResponseEntity<Subjects> queryById(@PathVariable("id") Integer id) {
@@ -71,10 +71,10 @@ public class SubjectsController {
     }
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param subjects 实体
-     * @return 新增结果
+     * @param subjects entity
+     * @return add result
      */
     @PostMapping
     public ResponseEntity<Subjects> add(Subjects subjects) {
@@ -82,10 +82,10 @@ public class SubjectsController {
     }
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param subjects 实体
-     * @return 编辑结果
+     * @param subjects entity
+     * @return edit result
      */
     @PutMapping
     public ResponseEntity<Subjects> edit(Subjects subjects) {
@@ -93,10 +93,10 @@ public class SubjectsController {
     }
 
     /**
-     * 删除数据
+     * delete by id
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return delete result
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {

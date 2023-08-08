@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * (Units)表控制层
+ * (Units) controller
  *
  * @author qianyongru
  * @since 2023-06-22 20:46:33
@@ -21,17 +21,17 @@ import java.util.List;
 @RequestMapping("/api/units")
 public class UnitsController {
     /**
-     * 服务对象
+     * unitsService
      */
     @Resource
     private UnitsService unitsService;
 
     /**
-     * 分页查询
+     * page query
      *
-     * @param units 筛选条件
-     * @param pageRequest      分页对象
-     * @return 查询结果
+     * @param units condition
+     * @param pageRequest pageRequest
+     * @return Page<Units>
      */
     @GetMapping
     public ResponseEntity<Page<Units>> queryByPage(Units units, PageRequest pageRequest) {
@@ -39,10 +39,10 @@ public class UnitsController {
     }
 
     /**
-     * 通过主键查询单条数据
+     * page query
      *
-     * @param id 主键
-     * @return 单条数据
+     * @param id condition
+     * @return Page<Units>
      */
     @GetMapping("{id}")
     public ResponseEntity<Units> queryById(@PathVariable("id") Integer id) {
@@ -50,10 +50,10 @@ public class UnitsController {
     }
 
     /**
-     * 新增数据
+     * add data
      *
-     * @param units 实体
-     * @return 新增结果
+     * @param units entity
+     * @return add result
      */
     @PostMapping
     public ResponseEntity<Units> add(@RequestBody Units units) {
@@ -61,10 +61,10 @@ public class UnitsController {
     }
 
     /**
-     * 编辑数据
+     * edit data
      *
-     * @param units 实体
-     * @return 编辑结果
+     * @param units entity
+     * @return edit result
      */
     @PutMapping
     public ResponseEntity<Units> edit(Units units) {
@@ -72,10 +72,10 @@ public class UnitsController {
     }
 
     /**
-     * 删除数据
+     * delete data
      *
-     * @param id 主键
-     * @return 删除是否成功
+     * @param id primary key
+     * @return delete result
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Integer id) {
@@ -83,10 +83,10 @@ public class UnitsController {
     }
 
     /**
-     * 通过subjectId查询数据
+     * query by subjectId
      *
-     * @param subjectId 主键
-     * @return 查询结果
+     * @param subjectId primary key
+     * @return query result
      */
     @GetMapping("subject/{subjectId}")
     public ResponseEntity<List<Units>> queryBySubjectId(@PathVariable("subjectId") Integer subjectId) {

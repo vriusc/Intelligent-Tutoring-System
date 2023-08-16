@@ -1,9 +1,15 @@
 from cryptography.fernet import Fernet
 import configparser
-import  openai
+import openai
 
 class OpenAI_Config:
     def __init__(self, encryption_key, encrypted_file_path, model_name):
+        """
+        Initialize the OpenAI_Config class.
+        :param encryption_key: The encryption key used to decrypt the configuration file.
+        :param encrypted_file_path: The path to the encrypted configuration file.
+        :param model_name: The name of the OpenAI GPT model to use.
+        """
         self.key = encryption_key
         self.encrypted_file_path = encrypted_file_path
         self.model_name = model_name
@@ -13,17 +19,20 @@ class OpenAI_Config:
         self._read_and_decrypt_config()
 
     def _read_and_decrypt_config(self):
-        # 使用密钥创建Fernet密码器
+        """
+        Read the encrypted configuration file, decrypt it, and store the API key and organization ID as class variables.
+        """
+        # Create a Fernet cipher suite using the provided encryption key
         cipher_suite = Fernet(self.key)
 
-        # 读取加密文件
+        # Read the encrypted file
         with open(self.encrypted_file_path, 'rb') as file:
             cipher_text = file.read()
 
-        # 解密数据
+        # Decrypt the data
         decrypted_data = cipher_suite.decrypt(cipher_text)
 
-        # 使用ConfigParser解析解密后的数据
+        # Use ConfigParser to parse the decrypted data
         config = configparser.ConfigParser()
         config.read_string(decrypted_data.decode())
 
@@ -31,14 +40,19 @@ class OpenAI_Config:
         self.openai_organization = config['openai']['organization']
 
     def initialize_openai(self):
-        # 初始化OpenAI库
+        """
+        Initialize the OpenAI library with the decrypted API key and organization ID.
+        """
+        # Set the OpenAI library's organization and API key
         openai.organization = self.openai_organization
         openai.api_key = self.openai_api_key
 
-# 使用方法：
-key = b'PoLE4TnSm2Ys9QBeiNDJGuTkrl5NWap_He29jGQB3J8='
-encrypted_file_path = 'encrypted_config.ini'
-model_name = "gpt-3.5-turbo"
+# Usage：
+# Define the encryption key, encrypted file path, and model name
+# key = b'PoLE4TnSm2Ys9QBeiNDJGuTkrl5NWap_He29jGQB3J8='
+# encrypted_file_path = 'encrypted_config.ini'
+# model_name = "gpt-3.5-turbo"
 
-config_handler = OpenAI_Config(key, encrypted_file_path, model_name)
-config_handler.initialize_openai()
+# Create an instance of the OpenAI_Config class and initialize OpenAI
+# config_handler = OpenAI_Config(key, encrypted_file_path, model_name)
+# config_handler.initialize_openai()

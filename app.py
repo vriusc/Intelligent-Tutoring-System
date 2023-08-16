@@ -1,145 +1,40 @@
-# Import the necessary libraries
-import openai
-from flask import Flask, request
+# Import the necessary libraries for the Flask API and JSON handling
+from flask import Flask, request, jsonify
 
-# Initialize OpenAI API key and model
-from cryptography.fernet import Fernet
-import configparser
+# Import the custom classes for handling OpenAI's API and utility functions
+from OpenAI_GPT_Tutor import OpenAI_GPT_Tutor
+from OpenAI_Utilities import OpenAI_Utilities
 
-
-
-# 你之前保存的密钥
+# Define the encryption key, encrypted configuration file path, and model name for initializing OpenAI
 key = b'PoLE4TnSm2Ys9QBeiNDJGuTkrl5NWap_He29jGQB3J8='
-
-# 使用密钥创建Fernet密码器
-cipher_suite = Fernet(key)
-
-# 读取加密文件
-with open('encrypted_config.ini', 'rb') as file:
-    cipher_text = file.read()
-
-# 解密数据
-decrypted_data = cipher_suite.decrypt(cipher_text)
-
-# 使用ConfigParser解析解密后的数据
-config = configparser.ConfigParser()
-config.read_string(decrypted_data.decode())
-
-openai_api_key = config['openai']['api_key']
-openai_organization = config['openai']['organization']
-
-# 初始化OpenAI库
-openai.organization = openai_organization
-openai.api_key = openai_api_key
-
-
+encrypted_file_path = 'encrypted_config.ini'
 MODEL = "gpt-3.5-turbo"
 
+# Initialize the OpenAI configuration with the given key, encrypted file path, and model
+OpenAI_Utilities.initialize_openai(key, encrypted_file_path, MODEL)
 
-
-# Initialize Flask app
+# Initialize the Flask application
 app = Flask(__name__)
 
 
-# Function to generate response from OpenAI GPT model
-def feedback_reply_generate(MODEL, username, user_prefer_language, all_question_description, all_question_option_description, wrong_answer_number, subject, test_score, unit_description, evaluation):
-    print(user_prefer_language)
+# Define a function to assess the learning style of a student based on their scores
+def assess_learning_style(learning_activist, learning_reflector, learning_theorist, learning_pragmatist):
+    """
+    Assess the learning style based on the provided scores.
 
-    response = openai.ChatCompletion.create(
-        model=MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": f"Answer in the user's preferred language. {user_prefer_language}. You must translate the following standards as an answer if the user's preferred language is not English."
-                f"You are a language tutor providing feedback to your student, {username}. "
-                f"Assess their performance in a test on {subject}, focusing on their score of {test_score} in the unit '{unit_description}'. "
-                f"Consider the specific questions: {all_question_description}, and the options provided: {all_question_option_description}. "
-                f"Take note of the wrong answers: {wrong_answer_number}. "
-                f"Consider their learning style evaluation of {evaluation}. "
-                f"Provide concise feedback without using a formal letter format. Focus on the specific details of the test and avoid unrelated content."
-            },
-            {
-                "role": "user",
-                "content": f"The student scored {test_score} in the test on {unit_description}.(Assuming a max score on all questions is five)"
-            },
-        ],
-        temperature=0.7,
-    )
-    return response['choices'][0]['message']['content']
-
-
-
-
-def answer_reply_generate(MODEL, username, user_prefer_language,subject, unit, unit_description, question, question_description, option_description,student_question, evaluation):
-    response = openai.ChatCompletion.create(
-        model=MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": f"Answer in the user's preferred language. {user_prefer_language}. You must translate the following standards as an answer if the user's preferred language is not English."
-                           f"You are a tutor specialized in the subject {subject}, assisting students with their studies. Your student, {username}, is currently working on unit {unit}, described as '{unit_description}'. They are focused on the following question: '{question_description} and option :{option_description}', and have encountered difficulties. Provide a detailed and specific answer to their question without addressing unrelated content. Answer in the user's preferred language. {user_prefer_language}"
-                           f"Consider their learning style evaluation of {evaluation}. "
-            },
-            {
-                "role": "user",
-                "content": f"The student is stuck on the following question: '{question}'. They are asking: '{student_question}'"
-            },
-        ],
-        temperature=0.7,
-    )
-    return response['choices'][0]['message']['content']
-
-
-
-
-
-
-# This function uses the OpenAI GPT model to generate a reply,
-# where the model plays the role of a tutor evaluating a student's essay.
-def writing_reply_generate(MODEL, username, user_prefer_language, essay_topic, essay_content, essay_language, evaluation):
-    # Call the OpenAI API to generate a response.
-    response = openai.ChatCompletion.create(
-        model=MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": f"Answer in the user's preferred language. {user_prefer_language}. You must translate the following standards as an answer if the user's preferred language is not English."
-                           f"You are a tutor specialized in evaluating student essays written in {essay_language}. You are assessing an essay by {username}, following these guidelines and {evaluation}: \
-                            1. Content (7 points): Address the topic accurately and comprehensively.<br />\
-                            2. Organization (3 points): Include a clear introduction, body, and conclusion.<br />\
-                            3. Grammar and Vocabulary (3 points): Use correct grammar and sophisticated vocabulary.<br />\
-                            4. Creativity (2 points): Provide a unique perspective or insights about the topic.<br />\
-                            5. Language Usage (5 points): Write appropriately in {essay_language}.<br />\
-                            Provide a score for each criteria and an overall score. Focus on these criteria and avoid unrelated content. "
-            },
-            {
-                "role": "user",
-                "content": f"Here's the essay topic and content: {essay_topic} and {essay_content}"
-            },
-        ],
-        temperature=0.7,
-    )
-
-    # Extract the original response
-    original_response = response['choices'][0]['message']['content']
-
-    # Break the original response into paragraphs based on your specific criteria
-    paragraphs = original_response.split('\n')
-
-    # Concatenate the paragraphs with HTML line break tag
-    formatted_response = "<br />".join(paragraphs)
-
-    return formatted_response
-
-
-def assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist):
-    # 获取学生的学习风格分数
+    :param learning_activist: Score for the Activist learning style.
+    :param learning_reflector: Score for the Reflector learning style.
+    :param learning_theorist: Score for the Theorist learning style.
+    :param learning_pragmatist: Score for the Pragmatist learning style.
+    :return: A string representing the learning style evaluation.
+    """
+    # Convert the learning style scores to integers
     learning_activist = int(learning_activist)
     learning_reflector = int(learning_reflector)
     learning_theorist = int(learning_theorist)
     learning_pragmatist = int(learning_pragmatist)
 
-    # 定义学习风格
+    # Determine the predominant learning style based on the scores
     learning_style = "Mixed"
     max_score = max(learning_activist, learning_reflector, learning_theorist, learning_pragmatist)
     if max_score == learning_activist:
@@ -151,7 +46,7 @@ def assess_learning_style(learning_activist,learning_reflector,learning_theorist
     elif max_score == learning_pragmatist:
         learning_style = "Pragmatist"
 
-    # 为学生提供基于其学习风格的评价
+    # Provide an evaluation based on the identified learning style
     evaluation = f"The learning style seems to be predominantly {learning_style}."
     if learning_style == "Activist":
         evaluation += " The student learns best by doing and enjoys new experiences and challenges."
@@ -165,29 +60,39 @@ def assess_learning_style(learning_activist,learning_reflector,learning_theorist
     return evaluation
 
 
+# Define a function to validate the parameters and check for missing values
+def validate_params(params):
+    """
+    Validate the parameters to check for missing values.
+
+    :param params: A dictionary containing the parameters to be validated.
+    :return: A tuple containing a boolean indicating the validation result and an error message if validation failed.
+    """
+    # Check for missing or None parameters
+    missing_params = [key for key, value in params.items() if value is None]
+    if missing_params:
+        error_message = f"Missing required parameters: {', '.join(missing_params)}"
+        return False, error_message
+    return True, None
 
 
-# Route for GPT feedback reply
-@app.route('/gpt/feedback', methods=['Post'])
-def process_feedback_request():
+
+# Define a Flask route for processing feedback requests
+@app.route('/gpt/feedback', methods=['POST'])
+def process_feedback_request_with_validation():
+    """
+        Process the feedback request and return the feedback generated by the OpenAI model.
+
+        :return: A JSON object containing the feedback or an error message.
+        """
     # Retrieve the parameters from the URL
-
     username = request.json.get('username')
-
     user_prefer_language = request.json.get('user_prefer_language')
-    print("User preferred language:", user_prefer_language)  # Add this line
     subject = request.json.get('subject_name')
-
     test_score = request.json.get('test_score')
-
-
-
     unit_description = request.json.get('unit_description')
-
     all_question_description = request.json.get('all_question_description')
-
     all_question_option_description = request.json.get('all_question_option_description')
-
     wrong_answer_number = request.json.get('wrong_answer_number')
 
     learning_activist = request.json.get('activist')
@@ -195,31 +100,38 @@ def process_feedback_request():
     learning_theorist = request.json.get('theorist')
     learning_pragmatist = request.json.get('pragmatist')
 
-    if learning_activist is None and learning_reflector is None and learning_theorist is None and learning_pragmatist is None:
-        evaluation = " "
+    evaluation = assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist)
 
-    else:
-        evaluation = assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist)
+    # Validate the required parameters
+    is_valid, error_message = validate_params({
+        'username': username,
+        'user_prefer_language': user_prefer_language,
+        'subject': subject,
+        'test_score': test_score,
+        'unit_description': unit_description,
+        'all_question_description': all_question_description,
+        'all_question_option_description': all_question_option_description,
+        'wrong_answer_number': wrong_answer_number,
+        'evaluation': evaluation,
+    })
+    if not is_valid:
+        return jsonify({"error": error_message}), 400  # Return 400 Bad Request if validation fails
 
-    # Check if username or test_score is None
-    if username is None or test_score is None or unit_description is None:
-        return 'Username or test score not provided', 400
+    # Create an instance of the OpenAI_GPT_Tutor class
+    tutor = OpenAI_GPT_Tutor(MODEL)
 
     # Generate a reply
-    reply = feedback_reply_generate(MODEL, username, user_prefer_language, all_question_description, all_question_option_description, wrong_answer_number, subject, test_score, unit_description, evaluation)
+    reply = tutor.feedback_reply_generate(username, user_prefer_language, all_question_description, all_question_option_description, wrong_answer_number, subject, test_score, unit_description, evaluation)
+
     return reply  # Return the reply as the response
 
 
-
-# Route for GPT feedback reply
-@app.route('/gpt/question', methods = ['Post'])
-def process_question_request():
-    # 获取学生的问题和上下文信息
-
+# Define a Flask route for processing question requests
+@app.route('/gpt/question', methods=['POST'])
+def process_question_request_with_validation():
+    # Retrieve the parameters from the URL
     username = request.json.get('username')
-
     user_prefer_language = request.json.get('user_prefer_language')
-
     subject = request.json.get('subject')
     unit = request.json.get('unit')
     unit_description = request.json.get('unit_description')
@@ -233,66 +145,68 @@ def process_question_request():
     learning_theorist = request.json.get('theorist')
     learning_pragmatist = request.json.get('pragmatist')
 
-    if learning_activist is None and learning_reflector is None and learning_theorist is None and learning_pragmatist is None:
-        evaluation = " "
+    evaluation = assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist)
 
-    else:
-        evaluation = assess_learning_style(learning_activist, learning_reflector, learning_theorist,
-                                           learning_pragmatist)
+    # Validate the required parameters
+    is_valid, error_message = validate_params({
+        'username': username,
+        'user_prefer_language': user_prefer_language,
+        'subject': subject,
+        'unit': unit,
+        'unit_description': unit_description,
+        'question': question,
+        'question_description': question_description,
+        'option_description': option_description,
+        'student_question': student_question,
+        'evaluation': evaluation,
+    })
+    if not is_valid:
+        return jsonify({"error": error_message}), 400  # Return 400 Bad Request if validation fails
 
-    # Check if username or test_score is None
-    if username is None or student_question is None or subject is None or unit is None or unit_description is None or question is None or question_description is None or option_description is None:
-        return 'Username or user question not provided', 400
+    # Create an instance of the OpenAI_GPT_Tutor class
+    tutor = OpenAI_GPT_Tutor(MODEL)
 
     # Generate a reply
-    reply = answer_reply_generate(MODEL, username, user_prefer_language,subject, unit, unit_description, question, question_description, option_description,student_question , evaluation)
-
+    reply = tutor.answer_reply_generate(username, user_prefer_language,subject, unit, unit_description, question, question_description, option_description,student_question, evaluation)
 
     return reply  # Return the reply as the response
 
 
-
-
-
-# This route processes incoming requests to evaluate an essay.
-@app.route('/gpt/writting', methods=['Post'])
-def process_writing_request():
-    # Retrieve the parameters from the incoming request.
+# Define a Flask route for processing essay requests
+@app.route('/gpt/writting', methods=['POST'])
+def process_writing_request_with_validation():
+    # Retrieve the parameters from the URL
 
     username = request.json.get('username')
-
     user_prefer_language = request.json.get('user_prefer_language')
-
     essay_topic = request.json.get('essay_topic')
     essay_content = request.json.get('essay_content')
+    essay_language = request.json.get('essay_subject')
 
-
-    essay_language = request.json.get('essay_subject')  # 注意，这里我保留了您原来的键名 'essay_subject'
 
     learning_activist = request.json.get('activist')
     learning_reflector = request.json.get('reflector')
     learning_theorist = request.json.get('theorist')
     learning_pragmatist = request.json.get('pragmatist')
 
-    if learning_activist is None and learning_reflector is None and learning_theorist is None and learning_pragmatist is None:
-        evaluation = " "
+    evaluation = assess_learning_style(learning_activist,learning_reflector,learning_theorist,learning_pragmatist)
 
-    else:
-        evaluation = assess_learning_style(learning_activist, learning_reflector, learning_theorist, learning_pragmatist)
+    # Validate the required parameters
+    is_valid, error_message = validate_params({
+        'username': username,
+        'user_prefer_language': user_prefer_language,
+        'essay_topic': essay_topic,
+        'essay_content': essay_content,
+        'essay_language': essay_language,
+        'evaluation': evaluation,
+    })
+    if not is_valid:
+        return jsonify({"error": error_message}), 400  # Return 400 Bad Request if validation fails
 
-    # Check if any necessary parameters are missing.
-    if username is None or essay_content is None or essay_topic is None:
-        return 'Username, essay topic, or essay content not provided', 400
+    # Create an instance of the OpenAI_GPT_Tutor class
+    tutor = OpenAI_GPT_Tutor(MODEL)
 
-    # Generate a response using the writing_reply_generate function.
-    reply = writing_reply_generate(MODEL, username,user_prefer_language, essay_topic, essay_content,essay_language, evaluation)
+    # Generate a reply
+    reply = tutor.writing_reply_generate(username, user_prefer_language, essay_topic, essay_content, essay_language, evaluation)
 
-    # Return the generated reply as the response.
-    return reply
-
-
-
-
-# Run the Flask app
-if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    return reply  # Return the reply as the response

@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://tomatodb:3306/test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     #url: jdbc:mysql://localhost:3306/test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
-    username: root
+    username: admin
     password: Souvenir
     #password: Souvenir0104
     #password: '@best42~!'
